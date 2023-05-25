@@ -97,9 +97,9 @@ contract CookieNFT is ERC721 {
         string memory _nftName = string(abi.encodePacked("CookieNFT1"));
         string memory _image = string(abi.encodePacked(
             "https://ipfs.io/ipfs/QmWn8CP5AnqmPU2zKWZesk6EFhzk5zj72mdDQEaTPmwezF/",
-            Strings.toString(_tokenId)));
+            Strings.toString(_tokenId),".png"));
         string memory _animation = string(abi.encodePacked(
-            "QmRjmYtyqetZgvmijsP1tKDD5dJG61vYFxThKBrUYXNZ4k?seed=",
+            "https://ipfs.io/ipfs/QmRjmYtyqetZgvmijsP1tKDD5dJG61vYFxThKBrUYXNZ4k?seed=",
             Strings.toString(_tokenId)));
         
 

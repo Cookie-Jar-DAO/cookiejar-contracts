@@ -167,4 +167,15 @@ contract AccountRegistryTest is PRBTest {
             )
         );
     }
+
+    function testCookieNftTokenURI() public {
+        (
+            ,
+            ,
+            uint256 tokenId
+        ) = testCookieMint();
+
+        tokenCollection.tokenURI(tokenId);
+
+    }
 }
