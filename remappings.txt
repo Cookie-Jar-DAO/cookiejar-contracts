@@ -14,4 +14,5 @@ zodiac/=lib/zodiac/contracts/
 @daohaus/baal-contracts/contracts/=lib/Baal/contracts
 @gnosis.pm/zodiac/contracts/=lib/zodiac/contracts
 @gnosis.pm/safe-contracts/contracts/=lib/safe-contracts/contracts
+@prb/test/=lib/prb-test/src
 
