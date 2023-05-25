@@ -62,7 +62,6 @@ contract CookieNFT is ERC721 {
             ""
         );
         cookieJar = CookieJarFactory(cookieJarSummoner).summonCookieJar(
-            '{"type":"list6551", "title":"Cookie NFT", "title":"Cookie Util NFT"}',
             cookieJarImp,
             abi.encode(
                 account,
@@ -70,7 +69,8 @@ contract CookieNFT is ERC721 {
                 cookieAmount,
                 cookieToken,
                 allowList
-            )
+            ),
+            '{"type":"list6551", "title":"Cookie NFT", "title":"Cookie Util NFT"}'
         );
 
         CookieJarCore(cookieJar).transferOwnership(account);

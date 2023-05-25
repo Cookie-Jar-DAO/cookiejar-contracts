@@ -5,7 +5,7 @@ import { Script } from "forge-std/Script.sol";
 
 import { CookieJarFactory } from "src/factory/CookieJarFactory.sol";
 import { CookieNFT } from "src/ERC6551/nft/CookieNFT.sol";
-import { ListCookieJar6551 } from "src/ERC6551/ListCookieJar6551.sol";
+import { ImpCookieJar6551 } from "src/ERC6551/ImpCookieJar6551.sol";
 
 import { AccountERC6551 } from "src/ERC6551/erc6551/ERC6551Module.sol";
 import { AccountRegistry } from "src/ERC6551/erc6551/ERC6551Registry.sol";
@@ -34,7 +34,7 @@ contract DeployCookieJar6551 is Script {
     function run() public {
         vm.startBroadcast(deployer);
 
-        listCookieJar = address(new ListCookieJar6551());
+        listCookieJar = address(new ImpCookieJar6551());
 
         cookieJarFactory = address(new CookieJarFactory());
 

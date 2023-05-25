@@ -7,7 +7,7 @@ import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 
 import {CookieJarCore} from "src/core/CookieJarCore.sol";
 import {GiverZodiac} from "src/core/givers/GiverZodiac.sol";
-import {IPoster} from "Baal/Interfaces/IPoster.sol";
+import {IPoster} from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
 import {FactoryFriendly} from "@gnosis.pm/zodiac/contracts/factory/FactoryFriendly.sol";
 
 abstract contract ZodiacCookieJar is GiverZodiac, CookieJarCore {
