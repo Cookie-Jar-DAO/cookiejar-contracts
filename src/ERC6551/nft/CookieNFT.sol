@@ -48,9 +48,9 @@ contract CookieNFT is ERC721 {
 
         account = IRegistry(erc6551Reg).createAccount(address(this), tokenId);
         cookieJar = CookieJarFactory(cookieJarSummoner).summonCookieJar(
-            "{\"type\":\"list\", \"title\":\"Cookie NFT\", \"title\":\"Cookie Util NFT\"}",
             cookieJarImp,
-            abi.encode(account, periodLength, cookieAmount, cookieToken, allowList)
+            abi.encode(account, periodLength, cookieAmount, cookieToken, allowList),
+            "{\"type\":\"list\", \"title\":\"Cookie NFT\", \"title\":\"Cookie Util NFT\"}"
         );
 
         CookieJarCore(cookieJar).transferOwnership(account);

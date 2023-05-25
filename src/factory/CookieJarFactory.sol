@@ -10,7 +10,7 @@ import {CookieJarCore} from "src/core/CookieJarCore.sol";
 contract CookieJarFactory is Ownable {
     ModuleProxyFactory internal moduleProxyFactory;
 
-    event SummonCookieJar(address cookieJar, string jarType, bytes initializer);
+    event SummonCookieJar(address cookieJar, bytes initializer, string details);
 
     /*solhint-disable no-empty-blocks*/
     constructor() {}
@@ -20,17 +20,17 @@ contract CookieJarFactory is Ownable {
         moduleProxyFactory = ModuleProxyFactory(_moduleProxyFactory);
     }
 
-    function summonCookieJar(string memory details, address singleton, bytes memory initializer)
+    function summonCookieJar(address _singleton, bytes memory _initializer, string memory _details)
         public
         returns (address)
     {
         //TODO CookieJarCore can be an interface?
-        CookieJarCore cookieJar = CookieJarCore(Clones.clone(singleton));
-        cookieJar.setUp(initializer);
+        CookieJarCore cookieJar = CookieJarCore(Clones.clone(_singleton));
+        cookieJar.setUp(_initializer);
 
         CookieJarCore(cookieJar).transferOwnership(msg.sender);
 
-        emit SummonCookieJar(address(cookieJar), details, initializer);
+        emit SummonCookieJar(address(cookieJar), _initializer, _details);
 
         //TODO do we need to return the address?
         return address(cookieJar);
@@ -41,6 +41,6 @@ contract CookieJarFactory is Ownable {
     {
         CookieJarCore _cookieJar = CookieJarCore(moduleProxyFactory.deployModule(_singleton, _initializer, _saltNonce));
 
-        emit SummonCookieJar(address(_cookieJar), _details, _initializer);
+        emit SummonCookieJar(address(_cookieJar), _initializer, _details);
     }
 }

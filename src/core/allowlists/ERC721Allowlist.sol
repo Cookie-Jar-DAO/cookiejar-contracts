@@ -6,7 +6,7 @@ import {IERC721} from "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 contract ERC721Allowlist {
     address public erc721Addr;
 
-    function setUpAllowlist(bytes memory _initializationParams) public {
+    function setUp(bytes memory _initializationParams) public virtual {
         (,,,, address _erc721addr) = abi.decode(_initializationParams, (address, uint256, uint256, address, address));
 
         erc721Addr = _erc721addr;

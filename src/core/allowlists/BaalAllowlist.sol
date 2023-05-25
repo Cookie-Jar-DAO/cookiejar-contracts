@@ -10,7 +10,7 @@ contract BaalAllowlist {
     bool public useShares;
     bool public useLoot;
 
-    function setUpAllowlist(bytes memory _initializationParams) public {
+    function setUp(bytes memory _initializationParams) public virtual {
         (,,,, address _dao, uint256 _threshold, bool _useShares, bool _useLoot) =
             abi.decode(_initializationParams, (address, uint256, uint256, address, address, uint256, bool, bool));
 

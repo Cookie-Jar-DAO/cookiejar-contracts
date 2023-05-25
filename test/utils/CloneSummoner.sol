@@ -45,51 +45,51 @@ contract CloneSummoner is Test {
 
     function getBaalCookieJar(bytes memory initParams) public returns (BaalCookieJarHarnass) {
         vm.recordLogs();
-        cookieJarFactory.summonCookieJar("Baal", address(baalCookieJarImplementation), initParams);
+        cookieJarFactory.summonCookieJar(address(baalCookieJarImplementation), initParams, "Baal");
 
         Vm.Log[] memory entries = vm.getRecordedLogs();
-        assertEq(entries.length, 3);
-        assertEq(entries[2].topics[0], keccak256("SummonCookieJar(address,string,bytes)"));
-        return BaalCookieJarHarnass(abi.decode(entries[2].data, (address)));
+        assertEq(entries.length, 5);
+        assertEq(entries[4].topics[0], keccak256("SummonCookieJar(address,bytes,string)"));
+        return BaalCookieJarHarnass(abi.decode(entries[4].data, (address)));
     }
 
     function getERC20CookieJar(bytes memory initParams) public returns (ERC20CookieJarHarnass) {
         vm.recordLogs();
-        cookieJarFactory.summonCookieJar("ERC20", address(erc20CookieJarImplementation), initParams);
+        cookieJarFactory.summonCookieJar(address(erc20CookieJarImplementation), initParams, "ERC20");
 
         Vm.Log[] memory entries = vm.getRecordedLogs();
-        assertEq(entries.length, 3);
-        assertEq(entries[2].topics[0], keccak256("SummonCookieJar(address,string,bytes)"));
-        return ERC20CookieJarHarnass(abi.decode(entries[2].data, (address)));
+        assertEq(entries.length, 5);
+        assertEq(entries[4].topics[0], keccak256("SummonCookieJar(address,bytes,string)"));
+        return ERC20CookieJarHarnass(abi.decode(entries[4].data, (address)));
     }
 
     function getERC721CookieJar(bytes memory initParams) public returns (ERC721CookieJarHarnass) {
         vm.recordLogs();
-        cookieJarFactory.summonCookieJar("ERC721", address(erc721CookieJarImplementation), initParams);
+        cookieJarFactory.summonCookieJar(address(erc721CookieJarImplementation), initParams, "ERC721");
 
         Vm.Log[] memory entries = vm.getRecordedLogs();
-        assertEq(entries.length, 3);
-        assertEq(entries[2].topics[0], keccak256("SummonCookieJar(address,string,bytes)"));
-        return ERC721CookieJarHarnass(abi.decode(entries[2].data, (address)));
+        assertEq(entries.length, 5);
+        assertEq(entries[4].topics[0], keccak256("SummonCookieJar(address,bytes,string)"));
+        return ERC721CookieJarHarnass(abi.decode(entries[4].data, (address)));
     }
 
     function getListCookieJar(bytes memory initParams) public returns (ListCookieJarHarnass) {
         vm.recordLogs();
-        cookieJarFactory.summonCookieJar("List", address(listCookieJarImplementation), initParams);
+        cookieJarFactory.summonCookieJar(address(listCookieJarImplementation), initParams, "List");
 
         Vm.Log[] memory entries = vm.getRecordedLogs();
-        assertEq(entries.length, 3);
-        assertEq(entries[2].topics[0], keccak256("SummonCookieJar(address,string,bytes)"));
-        return ListCookieJarHarnass(abi.decode(entries[2].data, (address)));
+        assertEq(entries.length, 5);
+        assertEq(entries[4].topics[0], keccak256("SummonCookieJar(address,bytes,string)"));
+        return ListCookieJarHarnass(abi.decode(entries[4].data, (address)));
     }
 
     function getOpenCookieJar(bytes memory initParams) public returns (OpenCookieJarHarnass) {
         vm.recordLogs();
-        cookieJarFactory.summonCookieJar("Open", address(openCookieJarImplementation), initParams);
+        cookieJarFactory.summonCookieJar(address(openCookieJarImplementation), initParams, "Open");
 
         Vm.Log[] memory entries = vm.getRecordedLogs();
-        assertEq(entries.length, 3);
-        assertEq(entries[2].topics[0], keccak256("SummonCookieJar(address,string,bytes)"));
-        return OpenCookieJarHarnass(abi.decode(entries[2].data, (address)));
+        assertEq(entries.length, 5);
+        assertEq(entries[4].topics[0], keccak256("SummonCookieJar(address,bytes,string)"));
+        return OpenCookieJarHarnass(abi.decode(entries[4].data, (address)));
     }
 }

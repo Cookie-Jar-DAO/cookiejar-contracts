@@ -23,10 +23,6 @@ abstract contract CookieJar6551 is Giver6551, CookieJarCore {
         (address payable _target) = abi.decode(_initializationParams, (address));
 
         target = AccountERC6551(_target);
-
-        __Ownable_init();
-
-        emit Setup(_initializationParams);
     }
 
     /**
