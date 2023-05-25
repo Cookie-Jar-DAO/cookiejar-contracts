@@ -7,3 +7,6 @@
 [submodule "lib/Baal"]
 	path = lib/Baal
 	url = https://github.com/HausDAO/Baal
+[submodule "lib/zodiac"]
+	path = lib/zodiac
+	url = https://github.com/gnosis/zodiac
