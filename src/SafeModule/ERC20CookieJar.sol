@@ -5,9 +5,9 @@ import {ERC20Allowlist} from "src/core/allowlists/ERC20Allowlist.sol";
 import {ZodiacCookieJar} from "src/SafeModule/ZodiacCookieJar.sol";
 
 contract ZodiacERC20CookieJar is ERC20Allowlist, ZodiacCookieJar {
-    function setUp(bytes memory _initializationParams) public override initializer {
+    function setUp(bytes memory _initializationParams) public override(ERC20Allowlist, ZodiacCookieJar) initializer {
         ZodiacCookieJar.setUp(_initializationParams);
-        ERC20Allowlist.setUpAllowlist(_initializationParams);
+        ERC20Allowlist.setUp(_initializationParams);
     }
 
     function isAllowList(address user) internal view override returns (bool) {

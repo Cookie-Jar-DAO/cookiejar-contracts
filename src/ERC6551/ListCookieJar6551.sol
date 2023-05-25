@@ -5,9 +5,9 @@ import {CookieJar6551} from "./CookieJar6551.sol";
 import {MappedAllowlist} from "src/core/allowlists/MappedAllowlist.sol";
 
 contract ListCookieJar6551 is MappedAllowlist, CookieJar6551 {
-    function setUp(bytes memory _initializationParams) public override initializer {
+    function setUp(bytes memory _initializationParams) public override(CookieJar6551, MappedAllowlist) initializer {
         CookieJar6551.setUp(_initializationParams);
-        MappedAllowlist.setUpAllowlist(_initializationParams);
+        MappedAllowlist.setUp(_initializationParams);
     }
 
     function isAllowList(address user) internal view override returns (bool) {

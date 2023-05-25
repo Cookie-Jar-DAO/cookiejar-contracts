@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity 0.8.19;
 
+
 contract MappedAllowlist {
     mapping(address allowed => bool exists) public allowList;
 
-    function setUpAllowlist(bytes memory _initializationParams) public {
+    function setUp(bytes memory _initializationParams) public virtual {
         (,,,, address[] memory _allowList) =
             abi.decode(_initializationParams, (address, uint256, uint256, address, address[]));
 
