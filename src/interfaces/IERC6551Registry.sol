@@ -2,9 +2,29 @@
 pragma solidity ^0.8.19;
 
 interface IRegistry {
-    event AccountCreated(address account, address indexed tokenContract, uint256 indexed tokenId);
+    event AccountCreated(
+        address account,
+        address implementation,
+        uint256 chainId,
+        address tokenContract,
+        uint256 tokenId,
+        uint256 salt
+    );
 
-    function createAccount(address tokenContract, uint256 tokenId) external returns (address);
+    function createAccount(
+        address implementation,
+        uint256 chainId,
+        address tokenContract,
+        uint256 tokenId,
+        uint256 seed,
+        bytes calldata initData
+    ) external returns (address);
 
-    function account(address tokenContract, uint256 tokenId) external view returns (address);
+    function account(
+        address implementation,
+        uint256 chainId,
+        address tokenContract,
+        uint256 tokenId,
+        uint256 salt
+    ) external view returns (address);
 }

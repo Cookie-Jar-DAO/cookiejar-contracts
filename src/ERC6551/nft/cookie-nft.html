@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <title>Pandoras Jar</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      #cookie-canvas {
+        position: absolute;
+
+      }
+      canvas {
+        border: 1px solid #000;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="cookie-canvas"></canvas>
+    <script>
+      // https://github.com/davidbau/seedrandom
+      !(function (f, a, c) {
+        var s,
+          l = 256,
+          p = "random",
+          d = c.pow(l, 6),
+          g = c.pow(2, 52),
+          y = 2 * g,
+          h = l - 1;
+        function n(n, t, r) {
+          function e() {
+            for (var n = u.g(6), t = d, r = 0; n < g; )
+              (n = (n + r) * l), (t *= l), (r = u.g(1));
+            for (; y <= n; ) (n /= 2), (t /= 2), (r >>>= 1);
+            return (n + r) / t;
+          }
+          var o = [],
+            i = j(
+              (function n(t, r) {
+                var e,
+                  o = [],
+                  i = typeof t;
+                if (r && "object" == i)
+                  for (e in t)
+                    try {
+                      o.push(n(t[e], r - 1));
+                    } catch (n) {}
+                return o.length ? o : "string" == i ? t : t + "\0";
+              })(
+                (t = 1 == t ? { entropy: !0 } : t || {}).entropy
+                  ? [n, S(a)]
+                  : null == n
+                  ? (function () {
+                      try {
+                        var n;
+                        return (
+                          s && (n = s.randomBytes)
+                            ? (n = n(l))
+                            : ((n = new Uint8Array(l)),
+                              (f.crypto || f.msCrypto).getRandomValues(n)),
+                          S(n)
+                        );
+                      } catch (n) {
+                        var t = f.navigator,
+                          r = t && t.plugins;
+                        return [+new Date(), f, r, f.screen, S(a)];
+                      }
+                    })()
+                  : n,
+                3
+              ),
+              o
+            ),
+            u = new m(o);
+          return (
+            (e.int32 = function () {
+              return 0 | u.g(4);
+            }),
+            (e.quick = function () {
+              return u.g(4) / 4294967296;
+            }),
+            (e.double = e),
+            j(S(u.S), a),
+            (
+              t.pass ||
+              r ||
+              function (n, t, r, e) {
+                return (
+                  e &&
+                    (e.S && v(e, u),
+                    (n.state = function () {
+                      return v(u, {});
+                    })),
+                  r ? ((c[p] = n), t) : n
+                );
+              }
+            )(e, i, "global" in t ? t.global : this == c, t.state)
+          );
+        }
+        function m(n) {
+          var t,
+            r = n.length,
+            u = this,
+            e = 0,
+            o = (u.i = u.j = 0),
+            i = (u.S = []);
+          for (r || (n = [r++]); e < l; ) i[e] = e++;
+          for (e = 0; e < l; e++)
+            (i[e] = i[(o = h & (o + n[e % r] + (t = i[e])))]), (i[o] = t);
+          (u.g = function (n) {
+            for (var t, r = 0, e = u.i, o = u.j, i = u.S; n--; )
+              (t = i[(e = h & (e + 1))]),
+                (r =
+                  r * l + i[h & ((i[e] = i[(o = h & (o + t))]) + (i[o] = t))]);
+            return (u.i = e), (u.j = o), r;
+          })(l);
+        }
+        function v(n, t) {
+          return (t.i = n.i), (t.j = n.j), (t.S = n.S.slice()), t;
+        }
+        function j(n, t) {
+          for (var r, e = n + "", o = 0; o < e.length; )
+            t[h & o] = h & ((r ^= 19 * t[h & o]) + e.charCodeAt(o++));
+          return S(t);
+        }
+        function S(n) {
+          return String.fromCharCode.apply(0, n);
+        }
+        if ((j(c.random(), a), "object" == typeof module && module.exports)) {
+          module.exports = n;
+          try {
+            s = require("crypto");
+          } catch (n) {}
+        } else
+          "function" == typeof define && define.amd
+            ? define(function () {
+                return n;
+              })
+            : (c["seed" + p] = n);
+      })("undefined" != typeof self ? self : this, [], Math);
+    </script>
+    <script>
+      const canvas = document.getElementById("cookie-canvas");
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = 1000;
+      canvas.height = 1000;
+
+      colors = [
+        "hsl(39, 77%, 83%)",
+        "hsl(39, 67%, 70%)",
+        "hsl(38, 74%, 31%)",
+        "hsl(4, 30%, 11%)",
+        "hsl(340, 82%, 52%)",
+        "hsl(291, 64%, 42%)",
+        "hsl(262, 52%, 47%)",
+        "hsl(231, 48%, 48%)",
+        "hsl(207, 90%, 54%)",
+        "hsl(199, 98%, 48%)",
+        "hsl(187, 100%, 42%)",
+        "hsl(174, 100%, 29%)",
+        "hsl(122, 39%, 49%)",
+        "hsl(88, 50%, 53%)",
+        "hsl(66, 70%, 54%)",
+        "hsl(54, 100%, 62%)",
+        "hsl(45, 100%, 51%)",
+        "hsl(36, 100%, 50%)",
+        "hsl(14, 100%, 57%)",
+        "hsl(16, 25%, 38%)",
+      ];
+      class Chips {
+        constructor(x, y, size) {
+          this.x = x;
+          this.y = y;
+          this.size = size;
+          this.numChips = 6;
+        }
+        draw() {
+          for (let i = 0; i < this.numChips; i++) {
+            let randomSize = Math.floor((Math.random() * this.size) / 10 + 1);
+            let chipSize = randomSize;
+            let xoffset = Math.floor((Math.random() * this.size) / 2 + 2);
+            xoffset *= Math.round(Math.random()) ? 1 : -1;
+            let chipX = this.x + xoffset;
+            let yoffset = Math.floor((Math.random() * this.size) / 2 + 2);
+            yoffset *= Math.round(Math.random()) ? 1 : -1;
+            let chipY = this.y + yoffset;
+
+            ctx.beginPath();
+            ctx.fillStyle = "#221308";
+            ctx.arc(chipX, chipY, chipSize, 0, 2 * Math.PI);
+            ctx.fill();
+          }
+        }
+      }
+
+
+      class Cookie {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+          this.color = colors[Math.floor(Math.random() * colors.length)];
+          this.speedX = Math.random() * 4 - 2;
+          this.speedY = Math.random() * 4 - 2;
+          this.maxSize = Math.random() * 30 + 15;
+          this.size = Math.random() * 1 + 2;
+          this.vs = Math.random() * 0.2 + 0.05;
+          this.angleX = Math.random() * 6.2;
+          this.vax = Math.random() * 0.2 + 0.05;
+          this.angleY = Math.random() * 6.2;
+          this.vay = Math.random() * 0.6 - 0.3;
+          this.lightness = 10;
+        }
+        update() {
+          this.x += this.speedX + Math.sin(this.angleX);
+          this.y += this.speedY + Math.sin(this.angleY);
+          this.size += this.vs;
+          this.angleX += this.vax;
+          this.angleY += this.vay;
+
+          if (this.lightness < 70) this.lightness += 0.25;
+
+          if (this.size < this.maxSize) {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            this.color = this.color.replace(
+              /\[\d+\]\%\)/g,
+              `${this.lightness}%)`
+            );
+            ctx.strokeStyle = this.color;
+            ctx.fillStyle = this.color;
+            ctx.fill();
+            ctx.stroke();
+
+            // draw as animation
+            requestAnimationFrame(() => this.update());
+            // draw as static
+            //this.update();
+          } else {
+            const chips = new Chips(this.x, this.y, this.size);
+            chips.draw();
+          }
+        }
+      }
+
+
+      function getSeedFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const seedParam = urlParams.get("seed");
+        return seedParam ? parseInt(seedParam) : 420;
+      }
+
+      // draws a cookie explosion on the canvas
+      function drawCookie() {
+        
+        const seed = getSeedFromURL()+1000;
+        Math.seedrandom(seed);
+
+        const x = Math.random() * canvas.width / 2 + canvas.width / 4;
+        const y = Math.random() * canvas.height / 2 + canvas.height / 4;
+
+        const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+        gradient.addColorStop(0, "#221308");
+        gradient.addColorStop(1, "red");
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.beginPath();
+        const cookieStampSize = canvas.width / 8;
+        const cookieStampX = canvas.width / 6;
+        const cookieStampY = canvas.height / 6;
+        ctx.arc(cookieStampX, cookieStampY, cookieStampSize, 0, Math.PI * 2);
+        const color = colors[Math.floor(Math.random() * colors.length)];;
+        ctx.strokeStyle = color;
+        ctx.fillStyle = color;
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+        const achips = new Chips(cookieStampX, cookieStampY, cookieStampSize);
+        achips.draw();
+
+
+        for (let i = 0; i < 15; i++) {
+          const cookie = new Cookie(
+            x,
+            y
+          );
+          cookie.update();
+        }
+      }
+
+      drawCookie();
+    </script>
+  </body>
+</html>
