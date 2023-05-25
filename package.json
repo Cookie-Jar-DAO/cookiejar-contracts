@@ -11,6 +11,8 @@
   },
   "scripts": {
     "clean": "rimraf ./build",
-    "lint": "forge fmt"
+    "lint": "forge fmt",
+    "docs": "forge doc",
+    "docs:serve": "forge doc --serve --port 4000"
   }
 }
