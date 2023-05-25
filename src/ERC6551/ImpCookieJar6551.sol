@@ -30,8 +30,8 @@ contract ImpCookieJar6551 is CookieJarCore, Giver6551 {
         return Giver6551.giveCookie(cookieMonster, amount, cookieToken);
     }
 
-    function isAllowList() internal view override returns (bool) {
-        return allowList[msg.sender];
+    function isAllowList(address account) internal view override returns (bool) {
+        return allowList[account];
     }
 
     function setAllowList(

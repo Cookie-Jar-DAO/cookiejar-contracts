@@ -137,7 +137,6 @@ contract AccountRegistryTest is PRBTest {
 
         vm.prank(vm.addr(2));
         ImpCookieJar6551(cookieJar).reachInJar(vm.addr(2), "test");
-        console.logUint(account.balance);
         // new balance should be 1 eth minus cookie amount
         assertEq(account.balance, 1e18 - 1e16);
     }

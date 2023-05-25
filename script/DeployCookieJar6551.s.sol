@@ -39,7 +39,7 @@ contract DeployCookieJar6551 is Script {
         cookieJarFactory = address(new CookieJarFactory());
 
         accountImp = address(new AccountERC6551());
-        registry = address(new AccountRegistry(accountImp));
+        registry = address(new AccountRegistry());
 
         nft = address(
             new CookieNFT(
