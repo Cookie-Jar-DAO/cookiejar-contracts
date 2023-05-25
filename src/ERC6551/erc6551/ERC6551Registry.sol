@@ -1,89 +1,82 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.19;
 
+import {Create2} from "@openzeppelin/contracts/utils/Create2.sol";
+
+import "src/lib/ERC6551BytecodeLib.sol";
+
 import "src/interfaces/IERC6551Registry.sol";
-import "src/lib/MinimalProxyStore.sol";
-import "./ERC6551Registry.sol";
+import "src/interfaces/IERC6551.sol";
+import "src/ERC6551/erc6551/ERC6551Registry.sol";
 
 /**
  * @title A registry for token bound accounts
  * @dev Determines the address for each token bound account and performs deployment of accounts
- * @author Jayden Windle (jaydenwindle)
+ * @author https://github.com/ethereum/EIPs/pull/6551/files
  */
+
 contract AccountRegistry is IRegistry {
-    /**
-     * @dev Address of the account implementation
-     */
-    address public immutable implementation;
+    error InitializationFailed();
 
-    constructor(address _implementation) {
-        implementation = _implementation;
+    function createAccount(
+        address implementation,
+        uint256 chainId,
+        address tokenContract,
+        uint256 tokenId,
+        uint256 salt,
+        bytes calldata initData
+    ) external returns (address) {
+        bytes memory code = ERC6551BytecodeLib.getCreationCode(
+            implementation,
+            chainId,
+            tokenContract,
+            tokenId,
+            salt
+        );
+
+        address _account = Create2.computeAddress(
+            bytes32(salt),
+            keccak256(code)
+        );
+
+        if (_account.code.length != 0) return _account;
+
+        emit AccountCreated(
+            _account,
+            implementation,
+            chainId,
+            tokenContract,
+            tokenId,
+            salt
+        );
+
+        _account = Create2.deploy(0, bytes32(salt), code);
+
+        if (initData.length != 0) {
+            (bool success, ) = _account.call(initData);
+            if (!success) revert InitializationFailed();
+        }
+
+        return _account;
     }
 
-    /**
-     * @dev Creates the account for an ERC721 token. Will revert if account has already been deployed
-     *
-     * @param chainId the chainid of the network the ERC721 token exists on
-     * @param tokenCollection the contract address of the ERC721 token which will control the deployed account
-     * @param tokenId the token ID of the ERC721 token which will control the deployed account
-     * @return The address of the deployed ccount
-     */
-    function createAccount(uint256 chainId, address tokenCollection, uint256 tokenId) external returns (address) {
-        return _createAccount(chainId, tokenCollection, tokenId);
-    }
+    function account(
+        address implementation,
+        uint256 chainId,
+        address tokenContract,
+        uint256 tokenId,
+        uint256 salt
+    ) external view returns (address) {
+        bytes32 bytecodeHash = keccak256(
+            ERC6551BytecodeLib.getCreationCode(
+                implementation,
+                chainId,
+                tokenContract,
+                tokenId,
+                salt
+            )
+        );
 
-    /**
-     * @dev Deploys the account for an ERC721 token. Will revert if account has already been deployed
-     *
-     * @param tokenCollection the contract address of the ERC721 token which will control the deployed account
-     * @param tokenId the token ID of the ERC721 token which will control the deployed account
-     * @return The address of the deployed account
-     */
-    function createAccount(address tokenCollection, uint256 tokenId) external returns (address) {
-        return _createAccount(block.chainid, tokenCollection, tokenId);
-    }
-
-    /**
-     * @dev Gets the address of the account for an ERC721 token. If account is
-     * not yet deployed, returns the address it will be deployed to
-     *
-     * @param chainId the chainid of the network the ERC721 token exists on
-     * @param tokenCollection the address of the ERC721 token contract
-     * @param tokenId the tokenId of the ERC721 token that controls the account
-     * @return The account address
-     */
-    function account(uint256 chainId, address tokenCollection, uint256 tokenId) external view returns (address) {
-        return _account(chainId, tokenCollection, tokenId);
-    }
-
-    /**
-     * @dev Gets the address of the account for an ERC721 token. If account is
-     * not yet deployed, returns the address it will be deployed to
-     *
-     * @param tokenCollection the address of the ERC721 token contract
-     * @param tokenId the tokenId of the ERC721 token that controls the account
-     * @return The account address
-     */
-    function account(address tokenCollection, uint256 tokenId) external view returns (address) {
-        return _account(block.chainid, tokenCollection, tokenId);
-    }
-
-    function _createAccount(uint256 chainId, address tokenCollection, uint256 tokenId) internal returns (address) {
-        bytes memory encodedTokenData = abi.encode(chainId, tokenCollection, tokenId);
-        bytes32 salt = keccak256(encodedTokenData);
-        address accountProxy = MinimalProxyStore.cloneDeterministic(implementation, encodedTokenData, salt);
-
-        emit AccountCreated(accountProxy, tokenCollection, tokenId);
-
-        return accountProxy;
-    }
-
-    function _account(uint256 chainId, address tokenCollection, uint256 tokenId) internal view returns (address) {
-        bytes memory encodedTokenData = abi.encode(chainId, tokenCollection, tokenId);
-        bytes32 salt = keccak256(encodedTokenData);
-
-        address accountProxy = MinimalProxyStore.predictDeterministicAddress(implementation, encodedTokenData, salt);
-
-        return accountProxy;
+        return Create2.computeAddress(bytes32(salt), bytecodeHash);
     }
 }

@@ -9,15 +9,16 @@ import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 
 import {PRBTest} from "@prb/test/PRBTest.sol";
 import {StdCheats} from "forge-std/StdCheats.sol";
-import {AccountERC6551} from "src/ERC6551/erc6551/ERC6551Module.sol";
+
 import {ERC20Mintable} from "test/utils/ERC20Mintable.sol";
 import {IPoster} from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
 import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 
-import {AccountRegistry} from "src/ERC6551/erc6551/ERC6551Registry.sol";
+import {IAccount} from "src/interfaces/IERC6551.sol";
 import {IRegistry} from "src/interfaces/IERC6551Registry.sol";
+import {AccountRegistry} from "src/ERC6551/erc6551/ERC6551Registry.sol";
+import {AccountERC6551} from "src/ERC6551/erc6551/ERC6551Module.sol";
 import {MinimalReceiver} from "src/lib/MinimalReceiver.sol";
-import {MinimalProxyStore} from "src/lib/MinimalProxyStore.sol";
 
 import {ERC20Mintable} from "test/utils/ERC20Mintable.sol";
 
@@ -27,10 +28,6 @@ import {MockReverter} from "test/utils/MockReverter.sol";
 
 import {MockERC721} from "test/utils/MockERC721.sol";
 
-import {IAccount} from "src/interfaces/IERC6551.sol";
-
-import "forge-std/console.sol";
-
 contract AccountTest is PRBTest {
     AccountERC6551 public implementation;
     AccountRegistry public accountRegistry;
@@ -39,7 +36,7 @@ contract AccountTest is PRBTest {
 
     function setUp() public {
         implementation = new AccountERC6551();
-        accountRegistry = new AccountRegistry(address(implementation));
+        accountRegistry = new AccountRegistry();
         tokenCollection = new MockERC721();
     }
 
@@ -50,7 +47,14 @@ contract AccountTest is PRBTest {
         tokenCollection.mint(user1, tokenId);
         assertEq(tokenCollection.ownerOf(tokenId), user1);
 
-        address accountAddress = accountRegistry.createAccount(address(tokenCollection), tokenId);
+        address accountAddress = accountRegistry.createAccount(
+            address(implementation),
+            block.chainid,
+            address(tokenCollection),
+            tokenId,
+            101,
+            ""
+        );
 
         vm.deal(accountAddress, 1 ether);
 
@@ -79,7 +83,14 @@ contract AccountTest is PRBTest {
         tokenCollection.mint(user1, tokenId);
         assertEq(tokenCollection.ownerOf(tokenId), user1);
 
-        address accountAddress = accountRegistry.createAccount(address(tokenCollection), tokenId);
+        address accountAddress = accountRegistry.createAccount(
+            address(implementation),
+            block.chainid,
+            address(tokenCollection),
+            tokenId,
+            101,
+            ""
+        );
 
         vm.deal(accountAddress, 1 ether);
 
@@ -106,7 +117,14 @@ contract AccountTest is PRBTest {
         tokenCollection.mint(user1, tokenId);
         assertEq(tokenCollection.ownerOf(tokenId), user1);
 
-        address accountAddress = accountRegistry.createAccount(address(tokenCollection), tokenId);
+        address accountAddress = accountRegistry.createAccount(
+            address(implementation),
+            block.chainid,
+            address(tokenCollection),
+            tokenId,
+            101,
+            ""
+        );
 
         AccountERC6551 account = AccountERC6551(payable(accountAddress));
 
@@ -120,13 +138,22 @@ contract AccountTest is PRBTest {
         assertEq(returnValue1, IERC1271.isValidSignature.selector);
     }
 
-    function testMessageVerificationForUnauthorizedUser(uint256 tokenId) public {
+    function testMessageVerificationForUnauthorizedUser(
+        uint256 tokenId
+    ) public {
         address user1 = vm.addr(1);
 
         tokenCollection.mint(user1, tokenId);
         assertEq(tokenCollection.ownerOf(tokenId), user1);
 
-        address accountAddress = accountRegistry.createAccount(address(tokenCollection), tokenId);
+        address accountAddress = accountRegistry.createAccount(
+            address(implementation),
+            block.chainid,
+            address(tokenCollection),
+            tokenId,
+            101,
+            ""
+        );
 
         AccountERC6551 account = AccountERC6551(payable(accountAddress));
 
@@ -146,16 +173,25 @@ contract AccountTest is PRBTest {
         tokenCollection.mint(user1, tokenId);
         assertEq(tokenCollection.ownerOf(tokenId), user1);
 
-        address accountAddress = accountRegistry.createAccount(address(tokenCollection), tokenId);
+        address accountAddress = accountRegistry.createAccount(
+            address(implementation),
+            block.chainid,
+            address(tokenCollection),
+            tokenId,
+            101,
+            ""
+        );
 
         vm.deal(accountAddress, 1 ether);
+
+        assertEq(tokenCollection.ownerOf(tokenId), user1);
 
         AccountERC6551 account = AccountERC6551(payable(accountAddress));
 
         // cannot be locked for more than 365 days
         vm.prank(user1);
         vm.expectRevert(AccountERC6551.ExceedsMaxLockTime.selector);
-        account.lock(block.timestamp + 366 days); // todo added block.timestamp + 366 days
+        account.lock(block.timestamp + 366 days);
 
         // lock account for 10 days
         uint256 unlockTimestamp = block.timestamp + 10 days;
@@ -172,7 +208,9 @@ contract AccountTest is PRBTest {
         // fallback calls should revert if account is locked
         vm.prank(user1);
         vm.expectRevert(AccountERC6551.AccountLocked.selector);
-        (bool success, bytes memory result) = accountAddress.call(abi.encodeWithSignature("customFunction()"));
+        (bool success, bytes memory result) = accountAddress.call(
+            abi.encodeWithSignature("customFunction()")
+        );
 
         // silence unused variable compiler warnings
         success;
@@ -184,6 +222,7 @@ contract AccountTest is PRBTest {
         account.setExecutor(vm.addr(1337));
 
         // lock calls should revert if account is locked
+
         vm.prank(user1);
         vm.expectRevert(AccountERC6551.AccountLocked.selector);
         account.lock(0);
@@ -207,7 +246,10 @@ contract AccountTest is PRBTest {
         bytes32 hashAfterUnlock = keccak256("This is a signed message");
         (uint8 v2, bytes32 r2, bytes32 s2) = vm.sign(1, hashAfterUnlock);
         bytes memory signature2 = abi.encodePacked(r2, s2, v2);
-        bytes4 returnValue1 = account.isValidSignature(hashAfterUnlock, signature2);
+        bytes4 returnValue1 = account.isValidSignature(
+            hashAfterUnlock,
+            signature2
+        );
         assertEq(returnValue1, IERC1271.isValidSignature.selector);
     }
 
@@ -217,7 +259,14 @@ contract AccountTest is PRBTest {
         tokenCollection.mint(user1, tokenId);
         assertEq(tokenCollection.ownerOf(tokenId), user1);
 
-        address accountAddress = accountRegistry.createAccount(address(tokenCollection), tokenId);
+        address accountAddress = accountRegistry.createAccount(
+            address(implementation),
+            block.chainid,
+            address(tokenCollection),
+            tokenId,
+            101,
+            ""
+        );
 
         vm.deal(accountAddress, 1 ether);
 
@@ -226,14 +275,18 @@ contract AccountTest is PRBTest {
         MockExecutor mockExecutor = new MockExecutor();
 
         // calls succeed with noop if executor is undefined
-        (bool success, bytes memory result) = accountAddress.call(abi.encodeWithSignature("customFunction()"));
+        (bool success, bytes memory result) = accountAddress.call(
+            abi.encodeWithSignature("customFunction()")
+        );
         assertEq(success, true);
         assertEq(result, "");
 
         // calls succeed with noop if executor is EOA
         vm.prank(user1);
         account.setExecutor(vm.addr(1337));
-        (bool success1, bytes memory result1) = accountAddress.call(abi.encodeWithSignature("customFunction()"));
+        (bool success1, bytes memory result1) = accountAddress.call(
+            abi.encodeWithSignature("customFunction()")
+        );
         assertEq(success1, true);
         assertEq(result1, "");
 
@@ -246,7 +299,10 @@ contract AccountTest is PRBTest {
         assertEq(account.isAuthorized(user1), true);
         assertEq(account.isAuthorized(address(mockExecutor)), true);
 
-        assertEq(account.isValidSignature(bytes32(0), ""), IERC1271.isValidSignature.selector);
+        assertEq(
+            account.isValidSignature(bytes32(0), ""),
+            IERC1271.isValidSignature.selector
+        );
 
         // execution module handles fallback calls
         assertEq(MockExecutor(accountAddress).customFunction(), 12_345);
@@ -263,7 +319,14 @@ contract AccountTest is PRBTest {
         tokenCollection.mint(user1, tokenId);
         assertEq(tokenCollection.ownerOf(tokenId), user1);
 
-        address accountAddress = accountRegistry.createAccount(address(tokenCollection), tokenId);
+        address accountAddress = accountRegistry.createAccount(
+            address(implementation),
+            block.chainid,
+            address(tokenCollection),
+            tokenId,
+            101,
+            ""
+        );
 
         vm.deal(accountAddress, 1 ether);
 
@@ -288,7 +351,14 @@ contract AccountTest is PRBTest {
         tokenCollection.mint(user1, tokenId);
         assertEq(tokenCollection.ownerOf(tokenId), user1);
 
-        address accountAddress = accountRegistry.createAccount(address(tokenCollection), tokenId);
+        address accountAddress = accountRegistry.createAccount(
+            address(implementation),
+            block.chainid,
+            address(tokenCollection),
+            tokenId,
+            101,
+            ""
+        );
 
         vm.deal(accountAddress, 1 ether);
 
@@ -298,11 +368,15 @@ contract AccountTest is PRBTest {
 
         vm.prank(user1);
         vm.expectRevert(MockReverter.MockError.selector);
-        account.executeCall(payable(address(mockReverter)), 0, abi.encodeWithSignature("fail()"));
+        account.executeCall(
+            payable(address(mockReverter)),
+            0,
+            abi.encodeWithSignature("fail()")
+        );
     }
 
     function testAccountOwnerIsNullIfContextNotSet() public {
-        address accountClone = Clones.clone(accountRegistry.implementation());
+        address accountClone = Clones.clone(address(implementation));
 
         assertEq(AccountERC6551(payable(accountClone)).owner(), address(0));
     }
@@ -314,22 +388,38 @@ contract AccountTest is PRBTest {
         tokenCollection.mint(user1, tokenId);
         assertEq(tokenCollection.ownerOf(tokenId), user1);
 
-        address accountAddress = accountRegistry.createAccount(address(tokenCollection), tokenId);
+        address accountAddress = accountRegistry.createAccount(
+            address(implementation),
+            block.chainid,
+            address(tokenCollection),
+            tokenId,
+            101,
+            ""
+        );
 
         vm.deal(accountAddress, 1 ether);
 
         AccountERC6551 account = AccountERC6551(payable(accountAddress));
 
         assertEq(account.supportsInterface(type(IAccount).interfaceId), true);
-        assertEq(account.supportsInterface(type(IERC1155Receiver).interfaceId), true);
+        assertEq(
+            account.supportsInterface(type(IERC1155Receiver).interfaceId),
+            true
+        );
         assertEq(account.supportsInterface(type(IERC165).interfaceId), true);
-        assertEq(account.supportsInterface(IERC1271.isValidSignature.selector), false);
+        assertEq(
+            account.supportsInterface(IERC1271.isValidSignature.selector),
+            false
+        );
 
         MockExecutor mockExecutor = new MockExecutor();
 
         vm.prank(user1);
         account.setExecutor(address(mockExecutor));
 
-        assertEq(account.supportsInterface(IERC1271.isValidSignature.selector), true);
+        assertEq(
+            account.supportsInterface(IERC1271.isValidSignature.selector),
+            true
+        );
     }
 }

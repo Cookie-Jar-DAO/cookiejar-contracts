@@ -24,11 +24,18 @@ contract CookieNFT is ERC721 {
 
     Counters.Counter private _tokenIdCounter;
 
-    event AccountCreated(address account, address indexed cookieJar, uint256 indexed tokenId);
+    event AccountCreated(
+        address account,
+        address indexed cookieJar,
+        uint256 indexed tokenId
+    );
 
-    constructor(address _erc6551Reg, address _erc6551Imp, address _cookieJarSummoner, address _cookieJarImp)
-        ERC721("CookieJar", "COOKIE")
-    {
+    constructor(
+        address _erc6551Reg,
+        address _erc6551Imp,
+        address _cookieJarSummoner,
+        address _cookieJarImp
+    ) ERC721("CookieJar", "COOKIE") {
         erc6551Reg = _erc6551Reg;
         erc6551Imp = _erc6551Imp;
         cookieJarSummoner = _cookieJarSummoner;
@@ -46,11 +53,24 @@ contract CookieNFT is ERC721 {
         _tokenIdCounter.increment();
         _mint(to, tokenId);
 
-        account = IRegistry(erc6551Reg).createAccount(address(this), tokenId);
+        account = IRegistry(erc6551Reg).createAccount(
+            erc6551Imp,
+            block.chainid,
+            address(this),
+            tokenId,
+            block.timestamp,
+            ""
+        );
         cookieJar = CookieJarFactory(cookieJarSummoner).summonCookieJar(
+            '{"type":"list6551", "title":"Cookie NFT", "title":"Cookie Util NFT"}',
             cookieJarImp,
-            abi.encode(account, periodLength, cookieAmount, cookieToken, allowList),
-            "{\"type\":\"list\", \"title\":\"Cookie NFT\", \"title\":\"Cookie Util NFT\"}"
+            abi.encode(
+                account,
+                periodLength,
+                cookieAmount,
+                cookieToken,
+                allowList
+            )
         );
 
         CookieJarCore(cookieJar).transferOwnership(account);
