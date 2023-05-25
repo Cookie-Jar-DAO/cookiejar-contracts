@@ -1,0 +1,16 @@
+{
+  "name": "cookiejar-contracts",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "https://github.com/bitbeckers/cookiejar-contracts",
+  "author": "bitbeckers <code@bitbeckers.com>",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "rimraf": "^5.0.1"
+  },
+  "scripts": {
+    "clean": "rimraf ./build",
+    "lint": "forge fmt"
+  }
+}

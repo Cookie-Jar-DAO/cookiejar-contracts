@@ -1,0 +1,10 @@
+Baal/=lib/Baal/contracts/
+ds-test/=lib/forge-std/lib/ds-test/src/
+erc4626-tests/=lib/openzeppelin-contracts-upgradeable/lib/erc4626-tests/
+forge-std/=lib/forge-std/src/
+openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/
+openzeppelin-contracts/=lib/openzeppelin-contracts/
+openzeppelin/=lib/openzeppelin-contracts-upgradeable/contracts/
+safe-contracts/=lib/safe-contracts/contracts/
+sstore2/=lib/sstore2/contracts/
+zodiac/=lib/zodiac/contracts/
