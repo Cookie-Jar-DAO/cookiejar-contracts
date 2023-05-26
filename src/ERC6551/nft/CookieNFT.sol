@@ -6,6 +6,8 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/introspection/IERC165.sol";
 import "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol";
 
+import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+
 import {IRegistry} from "src/interfaces/IERC6551Registry.sol";
 import {CookieJarFactory} from "src/factory/CookieJarFactory.sol";
 import {CookieJarCore} from "src/core/CookieJarCore.sol";
@@ -25,6 +27,15 @@ contract CookieNFT is ERC721 {
     uint256 public cap = 20;
 
     Counters.Counter private _tokenIdCounter;
+
+    struct Cookie {
+        address cookieJar;
+        uint256 periodLength;
+        uint256 cookieAmount;
+        address cookieToken;
+    }
+
+    mapping(uint256 => Cookie) public cookies;
 
     event AccountCreated(
         address account,
@@ -55,8 +66,8 @@ contract CookieNFT is ERC721 {
             _tokenIdCounter.current() <= cap,
             "CookieNFT: cap reached, no more cookies"
         );
-        tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
+        tokenId = _tokenIdCounter.current();
         _mint(to, tokenId);
 
         account = IRegistry(erc6551Reg).createAccount(
@@ -82,7 +93,40 @@ contract CookieNFT is ERC721 {
         CookieJarCore(cookieJar).transferOwnership(account);
         AccountERC6551(payable(account)).setExecutorInit(cookieJar);
 
+        cookies[tokenId] = Cookie(
+            cookieJar,
+            periodLength,
+            cookieAmount,
+            cookieToken
+        );
+
         emit AccountCreated(account, cookieJar, tokenId);
+    }
+
+    function _cookieBalance(uint256 tokenId) internal view returns (uint256) {
+        if(cookies[tokenId].cookieToken == address(0)) {
+            return address(this).balance;
+        } else {
+            return ERC20(cookies[tokenId].cookieToken).balanceOf(
+                cookies[tokenId].cookieJar
+            );
+        }
+    }
+
+    function _cookieDecimal(uint256 tokenId) internal view returns (uint256) {
+        if(cookies[tokenId].cookieToken == address(0)) {
+            return 18;
+        } else {
+            return ERC20(cookies[tokenId].cookieToken).decimals();
+        }
+    }
+
+    function _cookieSymbol(uint256 tokenId) internal view returns (string memory) {
+        if(cookies[tokenId].cookieToken == address(0)) {
+            return "eth";
+        } else {
+            return ERC20(cookies[tokenId].cookieToken).symbol();
+        }
     }
 
     /**  Constructs the tokenURI, separated out from the public function as its a big function.
@@ -91,7 +135,7 @@ contract CookieNFT is ERC721 {
      */
     function _constructTokenURI(uint256 _tokenId)
         internal
-        pure
+        view
         returns (string memory)
     {
         string memory _nftName = string(abi.encodePacked("CookieNFT1"));
@@ -99,8 +143,19 @@ contract CookieNFT is ERC721 {
             "https://ipfs.io/ipfs/QmWn8CP5AnqmPU2zKWZesk6EFhzk5zj72mdDQEaTPmwezF/",
             Strings.toString(_tokenId),".png"));
         string memory _animation = string(abi.encodePacked(
-            "https://ipfs.io/ipfs/QmRjmYtyqetZgvmijsP1tKDD5dJG61vYFxThKBrUYXNZ4k?seed=",
-            Strings.toString(_tokenId)));
+            "https://ipfs.io/ipfs/QmdYY8XKVDvEezJsjfBxFFzf37EZPpQrT85A1648Aomufh?seed=",
+            Strings.toString(_tokenId),
+            "&balance=",
+            Strings.toString(_cookieBalance(_tokenId)),
+            "&period=",
+            Strings.toString(cookies[_tokenId].periodLength),
+            "&amount=",
+            Strings.toString(cookies[_tokenId].cookieAmount),
+            "&symbol=",
+            _cookieSymbol(_tokenId),
+            "&decimals=",
+            Strings.toString(_cookieDecimal(_tokenId))
+            ));
         
 
         return
