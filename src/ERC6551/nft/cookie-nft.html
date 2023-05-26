@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta charset="utf-8" />
     <title>Pandoras Jar</title>
@@ -12,15 +11,40 @@
       }
       #cookie-canvas {
         position: absolute;
-
       }
       canvas {
         border: 1px solid #000;
+      }
+      .info-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1000px;
+        height: 1000px;
+      }
+      #text-container {
+        position: relative;
+        top: 25%;
+        left: 25%;
+        font-family: "Roboto", sans-serif;
+        font-size: 2rem;
+        font-weight: 900;
+        color: #fff;
+        text-shadow: 0 0 10px #000;
+        text-align: center;
+        background-color: hsla(240, 100%, 1%, 0.8);
+        width: 50%;
+        height: 50%;
       }
     </style>
   </head>
   <body>
     <canvas id="cookie-canvas"></canvas>
+    <div class="info-wrapper">
+      <div id="text-container">
+        <h1 id="text">Pandora's Jar</h1>
+      </div>
+    </div>
     <script>
       // https://github.com/davidbau/seedrandom
       !(function (f, a, c) {
@@ -172,6 +196,7 @@
         "hsl(14, 100%, 57%)",
         "hsl(16, 25%, 38%)",
       ];
+
       class Chips {
         constructor(x, y, size) {
           this.x = x;
@@ -197,7 +222,6 @@
           }
         }
       }
-
 
       class Cookie {
         constructor(x, y) {
@@ -247,21 +271,42 @@
         }
       }
 
-
+      // this uses the tokenId to seed the random function
       function getSeedFromURL() {
         const urlParams = new URLSearchParams(window.location.search);
         const seedParam = urlParams.get("seed");
         return seedParam ? parseInt(seedParam) : 420;
       }
 
+      function getJarInfoFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const balanceParam = urlParams.get("balance");
+        const cookieAmountParam = urlParams.get("amount");
+        const cookiePeriodParam = urlParams.get("period");
+        const cookieSymbolParam = urlParams.get("symbol");
+        const cookieDecimalsParam = urlParams.get("decimals");
+        return {
+          balanceParam: balanceParam ? parseInt(balanceParam) : 0,
+          cookieAmountParam: cookieAmountParam
+            ? parseInt(cookieAmountParam)
+            : 0,
+          cookiePeriodParam: cookiePeriodParam
+            ? parseInt(cookiePeriodParam)
+            : 0,
+          cookieSymbolParam: cookieSymbolParam ? cookieSymbolParam : "COOKIE",
+          cookieDecimalsParam: cookieDecimalsParam
+            ? parseInt(cookieDecimalsParam)
+            : 18,
+        };
+      }
+
       // draws a cookie explosion on the canvas
       function drawCookie() {
-        
-        const seed = getSeedFromURL()+1000;
+        const seed = getSeedFromURL() + 1000;
         Math.seedrandom(seed);
 
-        const x = Math.random() * canvas.width / 2 + canvas.width / 4;
-        const y = Math.random() * canvas.height / 2 + canvas.height / 4;
+        const x = (Math.random() * canvas.width) / 2 + canvas.width / 4;
+        const y = (Math.random() * canvas.height) / 2 + canvas.height / 4;
 
         const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
         gradient.addColorStop(0, "#221308");
@@ -274,7 +319,7 @@
         const cookieStampX = canvas.width / 6;
         const cookieStampY = canvas.height / 6;
         ctx.arc(cookieStampX, cookieStampY, cookieStampSize, 0, Math.PI * 2);
-        const color = colors[Math.floor(Math.random() * colors.length)];;
+        const color = colors[Math.floor(Math.random() * colors.length)];
         ctx.strokeStyle = color;
         ctx.fillStyle = color;
         ctx.fill();
@@ -283,15 +328,32 @@
         const achips = new Chips(cookieStampX, cookieStampY, cookieStampSize);
         achips.draw();
 
+        const cookieParams = getJarInfoFromURL();
+        const numburst = cookieParams.balanceParam / cookieParams.cookieAmountParam + 1;
 
-        for (let i = 0; i < 15; i++) {
-          const cookie = new Cookie(
-            x,
-            y
-          );
+        for (let i = 0; i < numburst; i++) {
+          const cookie = new Cookie(x, y);
           cookie.update();
         }
       }
+
+      const cookieParams = getJarInfoFromURL();
+      var div = document.getElementById("text-container");
+      console.log(div);
+      info = document.createElement("p");
+      info.innerHTML = `Balance: ${
+        cookieParams.balanceParam / 10 ** cookieParams.cookieDecimalsParam
+      } <br>`;
+      info.innerHTML += `Cookie Symbol: ${cookieParams.cookieSymbolParam} <br>`;
+      info.innerHTML += `Cookie Amount: ${
+        cookieParams.cookieAmountParam / 10 ** cookieParams.cookieDecimalsParam
+      }`;
+      div.append(info);
+      cookiesLeft = document.createElement("h2");
+      cookiesLeft.innerHTML = ` ${
+        cookieParams.balanceParam / cookieParams.cookieAmountParam
+      }`;
+      div.append(cookiesLeft);
 
       drawCookie();
     </script>
