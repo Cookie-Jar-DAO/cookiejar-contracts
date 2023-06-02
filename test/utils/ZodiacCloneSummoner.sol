@@ -54,9 +54,10 @@ contract ZodiacCloneSummoner is Test {
         cookieJarFactory.summonCookieJar(address(baalCookieJarImplementation), initParams, "Baal");
 
         Vm.Log[] memory entries = vm.getRecordedLogs();
-        assertEq(entries.length, 5);
-        assertEq(entries[4].topics[0], keccak256("SummonCookieJar(address,bytes,string)"));
-        return ZodiacBaalCookieJarHarnass(abi.decode(entries[4].data, (address)));
+        
+        assertEq(entries.length, 7);
+        assertEq(entries[6].topics[0], keccak256("SummonCookieJar(address,bytes,string)"));
+        return ZodiacBaalCookieJarHarnass(abi.decode(entries[6].data, (address)));
     }
 
     function getERC20CookieJar(bytes memory initParams) public returns (ZodiacERC20CookieJarHarnass) {
@@ -64,9 +65,9 @@ contract ZodiacCloneSummoner is Test {
         cookieJarFactory.summonCookieJar(address(erc20CookieJarImplementation), initParams, "ERC20");
 
         Vm.Log[] memory entries = vm.getRecordedLogs();
-        assertEq(entries.length, 5);
-        assertEq(entries[4].topics[0], keccak256("SummonCookieJar(address,bytes,string)"));
-        return ZodiacERC20CookieJarHarnass(abi.decode(entries[4].data, (address)));
+        assertEq(entries.length, 7);
+        assertEq(entries[6].topics[0], keccak256("SummonCookieJar(address,bytes,string)"));
+        return ZodiacERC20CookieJarHarnass(abi.decode(entries[6].data, (address)));
     }
 
     function getERC721CookieJar(bytes memory initParams) public returns (ZodiacERC721CookieJarHarnass) {
@@ -74,9 +75,9 @@ contract ZodiacCloneSummoner is Test {
         cookieJarFactory.summonCookieJar(address(erc721CookieJarImplementation), initParams, "ERC721");
 
         Vm.Log[] memory entries = vm.getRecordedLogs();
-        assertEq(entries.length, 5);
-        assertEq(entries[4].topics[0], keccak256("SummonCookieJar(address,bytes,string)"));
-        return ZodiacERC721CookieJarHarnass(abi.decode(entries[4].data, (address)));
+        assertEq(entries.length, 7);
+        assertEq(entries[6].topics[0], keccak256("SummonCookieJar(address,bytes,string)"));
+        return ZodiacERC721CookieJarHarnass(abi.decode(entries[6].data, (address)));
     }
 
     function getListCookieJar(bytes memory initParams) public returns (ZodiacListCookieJarHarnass) {
@@ -84,9 +85,9 @@ contract ZodiacCloneSummoner is Test {
         cookieJarFactory.summonCookieJar(address(listCookieJarImplementation), initParams, "List");
 
         Vm.Log[] memory entries = vm.getRecordedLogs();
-        assertEq(entries.length, 5);
-        assertEq(entries[4].topics[0], keccak256("SummonCookieJar(address,bytes,string)"));
-        return ZodiacListCookieJarHarnass(abi.decode(entries[4].data, (address)));
+        assertEq(entries.length, 7);
+        assertEq(entries[6].topics[0], keccak256("SummonCookieJar(address,bytes,string)"));
+        return ZodiacListCookieJarHarnass(abi.decode(entries[6].data, (address)));
     }
 
     function getOpenCookieJar(bytes memory initParams) public returns (ZodiacOpenCookieJarHarnass) {
@@ -94,8 +95,8 @@ contract ZodiacCloneSummoner is Test {
         cookieJarFactory.summonCookieJar(address(openCookieJarImplementation), initParams, "Open");
 
         Vm.Log[] memory entries = vm.getRecordedLogs();
-        assertEq(entries.length, 5);
-        assertEq(entries[4].topics[0], keccak256("SummonCookieJar(address,bytes,string)"));
-        return ZodiacOpenCookieJarHarnass(abi.decode(entries[4].data, (address)));
+        assertEq(entries.length, 7);
+        assertEq(entries[6].topics[0], keccak256("SummonCookieJar(address,bytes,string)"));
+        return ZodiacOpenCookieJarHarnass(abi.decode(entries[6].data, (address)));
     }
 }

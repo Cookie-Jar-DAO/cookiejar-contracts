@@ -22,7 +22,7 @@ contract ListCookieJarTest is ZodiacCloneSummoner {
     string internal reason = "CookieJar: Testing";
 
     event Setup(bytes initializationParams);
-    event GiveCookie(address indexed cookieMonster, uint256 amount, uint256 fee);
+    event GiveCookie(address indexed cookieMonster, uint256 amount);
 
     function setUp() public virtual {
         address[] memory allowList = new address[](2);
@@ -66,7 +66,7 @@ contract ListCookieJarTest is ZodiacCloneSummoner {
         cookieToken.mint(address(testAvatar), cookieAmount);
 
         vm.expectEmit(true, false, false, true);
-        emit GiveCookie(alice, cookieAmount, cookieAmount / 100);
+        emit GiveCookie(alice, cookieAmount);
         cookieJar.reachInJar(reason);
     }
 }

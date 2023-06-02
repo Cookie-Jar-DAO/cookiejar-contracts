@@ -23,7 +23,7 @@ contract ERC721CookieJarTest is ZodiacCloneSummoner {
     string internal reason = "CookieJar: Testing";
 
     event Setup(bytes initializationParams);
-    event GiveCookie(address indexed cookieMonster, uint256 amount, uint256 fee);
+    event GiveCookie(address indexed cookieMonster, uint256 amount);
 
     function setUp() public virtual {
         // address _safeTarget,
@@ -66,7 +66,7 @@ contract ERC721CookieJarTest is ZodiacCloneSummoner {
         // Alice puts her hand in the jar
         vm.startPrank(alice);
         vm.expectEmit(false, false, false, true);
-        emit GiveCookie(alice, cookieAmount, cookieAmount / 100);
+        emit GiveCookie(alice, cookieAmount);
         cookieJar.reachInJar(reason);
     }
 }

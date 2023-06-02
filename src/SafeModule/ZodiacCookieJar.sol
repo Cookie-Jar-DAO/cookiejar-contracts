@@ -10,12 +10,7 @@ import {GiverZodiac} from "src/core/givers/GiverZodiac.sol";
 import {IPoster} from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
 import {FactoryFriendly} from "@gnosis.pm/zodiac/contracts/factory/FactoryFriendly.sol";
 
-abstract contract ZodiacCookieJar is GiverZodiac, CookieJarCore {
-    /// @custom:oz-upgrades-unsafe-allow constructor
-    constructor() {
-        _disableInitializers();
-    }
-
+contract ZodiacCookieJar is CookieJarCore, GiverZodiac {
     /**
      * @notice Sets up the contract with the given initialization parameters.
      * @dev The initialization parameters are decoded from a bytes array into the Safe target, period length, cookie
@@ -27,8 +22,18 @@ abstract contract ZodiacCookieJar is GiverZodiac, CookieJarCore {
      * An event is emitted with the initialization parameters.
      * @param _initializationParams The initialization parameters, encoded as a bytes array.
      */
-    function setUp(bytes memory _initializationParams) public virtual override(CookieJarCore, FactoryFriendly) {
+    function setUp(bytes memory _initializationParams)
+        public
+        virtual
+        override(CookieJarCore, FactoryFriendly)
+        initializer
+    {
+        (address _target) = abi.decode(_initializationParams, (address));
+
         CookieJarCore.setUp(_initializationParams);
+
+        setAvatar(_target);
+        setTarget(_target);
     }
 
     /**
@@ -75,5 +80,6 @@ abstract contract ZodiacCookieJar is GiverZodiac, CookieJarCore {
      */
     function giveCookie(address cookieMonster, uint256 amount) internal override {
         GiverZodiac.giveCookie(cookieMonster, amount, cookieToken);
+        emit GiveCookie(cookieMonster, amount);
     }
 }
