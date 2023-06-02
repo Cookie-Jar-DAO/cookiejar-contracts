@@ -41,8 +41,8 @@
     </style>
   </head>
   <body>
-    <canvas id="myCanvas"></canvas>
-    <div class="info-wrapper">
+    <canvas id="mainCanvas"></canvas>
+    <div id="info-wrapper" class="info-wrapper">
       <div id="text-container">
         <h1 id="text">Cookie Jar</h1>
       </div>
@@ -170,7 +170,7 @@
       })("undefined" != typeof self ? self : this, [], Math);
     </script>
     <script>
-      const canvas = document.getElementById("myCanvas");
+      const canvas = document.getElementById("mainCanvas");
       const ctx = canvas.getContext("2d");
 
       const seed = getSeedFromURL();
@@ -296,6 +296,9 @@
           ctx.closePath();
           const color = circle.color.replace(/[\d\.]+\)$/g, `${circle.alpha})`);
           ctx.fillStyle = color;
+          // gold stroke
+          ctx.strokeStyle = "rgba(255,215,0, 1)"
+          ctx.stroke();
           ctx.fill();
 
           circle.chips.forEach((chip) => {
@@ -325,6 +328,7 @@
 
       // *********** //
       var div = document.getElementById("text-container");
+      var wrapper = document.getElementById("info-wrapper");
       if (!cookieParams.cookieStatic) {
         info = document.createElement("p");
         info.innerHTML = `Balance: ${
@@ -344,17 +348,12 @@
       } else {
         // delete div;
         div.remove();
+        wrapper.remove();
         
       }
 
       animate();
 
-      canvas.addEventListener("click", function () {
-            const dataURL = canvas.toDataURL("image/png");
-            const newTab = window.open();
-            newTab.document.write('<img src="' + dataURL + '">');
-        });
-        
     </script>
   </body>
 </html>

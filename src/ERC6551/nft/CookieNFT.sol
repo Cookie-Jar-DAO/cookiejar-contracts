@@ -87,7 +87,7 @@ contract CookieNFT is ERC721 {
                 cookieToken,
                 allowList
             ),
-            '{"type":"CookieNFT1", "title":"Cookie NFT Gen 1", "description":"Gen1 Cookie"}'
+            '{"type":"6551", "title":"Cookie NFT Gen 1", "description":"Gen1 Cookie", "link":""}'
         );
 
         CookieJarCore(cookieJar).transferOwnership(account);
@@ -140,10 +140,10 @@ contract CookieNFT is ERC721 {
     {
         string memory _nftName = string(abi.encodePacked("CookieNFT1"));
         string memory _image = string(abi.encodePacked(
-            "https://ipfs.io/ipfs/QmWn8CP5AnqmPU2zKWZesk6EFhzk5zj72mdDQEaTPmwezF/",
+            "ipfs://Qme4HsmWQSmShQ3dDPZGD8A5kyTPceTEP5dVkWnsMHhC2Z/",
             Strings.toString(_tokenId),".png"));
         string memory _animation = string(abi.encodePacked(
-            "ipfs://QmTE41U14KCkjXDYwMb5QzEYkUZivdvo9oBXuKLmUJDddT?seed=",
+            "ipfs://QmUvndsEv47bpwH8dLr5j8Cn24fXRyZKZubx2oHUQU4n7Q?seed=",
             Strings.toString(_tokenId),
             "&balance=",
             Strings.toString(_cookieBalance(_tokenId)),
