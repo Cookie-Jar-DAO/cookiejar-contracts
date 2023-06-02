@@ -78,19 +78,24 @@ contract CookieNFT is ERC721 {
             block.timestamp,
             ""
         );
-        cookieJar = CookieJarFactory(cookieJarSummoner).summonCookieJar(
-            cookieJarImp,
+        bytes memory initializerParams =
             abi.encode(
                 account,
                 periodLength,
                 cookieAmount,
                 cookieToken,
-                allowList
-            ),
-            '{"type":"6551", "title":"Cookie NFT Gen 1", "description":"Gen1 Cookie", "link":""}'
+                allowList);
+        bytes memory initializer = abi.encodeWithSignature("setUp(bytes)", initializerParams);
+        string memory details = '{"type":"6551", "title":"Cookie NFT Gen 1", "description":"Gen1 Cookie", "link":""}';
+        uint256 saltNonce = 1_234_567_890;
+        cookieJar = CookieJarFactory(cookieJarSummoner).summonCookieJar(
+            cookieJarImp,
+            initializer,
+            details,
+            saltNonce
         );
 
-        CookieJarCore(cookieJar).transferOwnership(account);
+        // CookieJarCore(cookieJar).transferOwnership(account);
         AccountERC6551(payable(account)).setExecutorInit(cookieJar);
 
         cookies[tokenId] = Cookie(

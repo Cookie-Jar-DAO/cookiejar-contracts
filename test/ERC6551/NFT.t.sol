@@ -17,6 +17,8 @@ import {CookieJarCore} from "src/core/CookieJarCore.sol";
 import {CookieJarFactory} from "src/factory/CookieJarFactory.sol";
 import {ImpCookieJar6551} from "src/ERC6551/ImpCookieJar6551.sol";
 
+import {ModuleProxyFactory} from "@gnosis.pm/zodiac/contracts/factory/ModuleProxyFactory.sol";
+
 contract AccountRegistryTest is PRBTest {
     AccountERC6551 public implementation;
     AccountRegistry public accountRegistry;
@@ -26,12 +28,18 @@ contract AccountRegistryTest is PRBTest {
     ImpCookieJar6551 public listCookieJarImp;
     CookieNFT public tokenCollection;
 
+    ModuleProxyFactory public moduleProxyFactory;
+
     function setUp() public {
         implementation = new AccountERC6551();
         accountRegistry = new AccountRegistry();
 
         cookieJarSummoner = new CookieJarFactory();
         listCookieJarImp = new ImpCookieJar6551();
+
+        moduleProxyFactory = new ModuleProxyFactory();
+
+        cookieJarSummoner.setProxyFactory(address(moduleProxyFactory));
 
         tokenCollection = new CookieNFT(
             address(accountRegistry),

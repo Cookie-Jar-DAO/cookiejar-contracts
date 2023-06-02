@@ -43,6 +43,7 @@ contract CookieJarFactory is Ownable {
     // Mapping
     // 4. address[] _allowlist
 
+    // TODO: not used by NFT anymore, we can probably get rid of it
     function summonCookieJar(address _singleton, bytes memory _initializer, string memory _details)
         public
         returns (address)
@@ -51,7 +52,6 @@ contract CookieJarFactory is Ownable {
         CookieJarCore cookieJar = CookieJarCore(Clones.clone(_singleton));
         cookieJar.setUp(_initializer);
 
-        CookieJarCore(cookieJar).transferOwnership(msg.sender);
 
         emit SummonCookieJar(address(cookieJar), _initializer, _details);
 
@@ -61,9 +61,13 @@ contract CookieJarFactory is Ownable {
 
     function summonCookieJar(address _singleton, bytes memory _initializer, string memory _details, uint256 _saltNonce)
         public
-    {
-        CookieJarCore _cookieJar = CookieJarCore(moduleProxyFactory.deployModule(_singleton, _initializer, _saltNonce));
+        returns (address)
 
-        emit SummonCookieJar(address(_cookieJar), _initializer, _details);
+    {
+        CookieJarCore cookieJar = CookieJarCore(moduleProxyFactory.deployModule(_singleton, _initializer, _saltNonce));
+
+        emit SummonCookieJar(address(cookieJar), _initializer, _details);
+        return address(cookieJar);
+
     }
 }

@@ -39,7 +39,7 @@ abstract contract CookieJarCore is Initializable, OwnableUpgradeable, ICookieJar
      *  // TODO: add initializer to this contract
      */
     function setUp(bytes memory _initializationParams) public virtual {
-        (, uint256 _periodLength, uint256 _cookieAmount, address _cookieToken) =
+        (address account, uint256 _periodLength, uint256 _cookieAmount, address _cookieToken) =
             abi.decode(_initializationParams, (address, uint256, uint256, address));
 
         periodLength = _periodLength;
@@ -47,6 +47,7 @@ abstract contract CookieJarCore is Initializable, OwnableUpgradeable, ICookieJar
         cookieToken = _cookieToken;
 
         __Ownable_init();
+        transferOwnership(account);
 
         emit Setup(_initializationParams);
     }
