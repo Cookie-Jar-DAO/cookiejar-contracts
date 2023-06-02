@@ -3,6 +3,7 @@ pragma solidity 0.8.19;
 
 import {IBaalToken} from "@daohaus/baal-contracts/contracts/interfaces/IBaalToken.sol";
 import {IBaal} from "@daohaus/baal-contracts/contracts/interfaces/IBaal.sol";
+import "forge-std/console.sol";
 
 contract BaalAllowlist {
     address public dao;

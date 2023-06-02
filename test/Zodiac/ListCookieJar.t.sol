@@ -5,15 +5,15 @@ import {ERC20Mintable} from "test/utils/ERC20Mintable.sol";
 import {TestAvatar} from "@gnosis.pm/zodiac/contracts/test/TestAvatar.sol";
 import {IPoster} from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
 
-import {CloneSummoner, ListCookieJarHarnass} from "test/utils/CloneSummoner.sol";
+import {ZodiacCloneSummoner, ZodiacListCookieJarHarnass} from "test/utils/ZodiacCloneSummoner.sol";
 
-contract ListCookieJarTest is CloneSummoner {
+contract ListCookieJarTest is ZodiacCloneSummoner {
     address internal alice = makeAddr("alice");
     address internal bob = makeAddr("bob");
     address internal molochDAO = vm.addr(666);
     address internal testSafe = vm.addr(1337);
 
-    ListCookieJarHarnass internal cookieJar;
+    ZodiacListCookieJarHarnass internal cookieJar;
     ERC20Mintable internal cookieToken = new ERC20Mintable("Mock", "MCK");
     TestAvatar internal testAvatar = new TestAvatar();
 
@@ -22,7 +22,7 @@ contract ListCookieJarTest is CloneSummoner {
     string internal reason = "CookieJar: Testing";
 
     event Setup(bytes initializationParams);
-    event GiveCookie(address indexed cookieMonster, uint256 amount, uint256 fee);
+    event GiveCookie(address indexed cookieMonster, uint256 amount);
 
     function setUp() public virtual {
         address[] memory allowList = new address[](2);
@@ -66,7 +66,7 @@ contract ListCookieJarTest is CloneSummoner {
         cookieToken.mint(address(testAvatar), cookieAmount);
 
         vm.expectEmit(true, false, false, true);
-        emit GiveCookie(alice, cookieAmount, cookieAmount / 100);
+        emit GiveCookie(alice, cookieAmount);
         cookieJar.reachInJar(reason);
     }
 }

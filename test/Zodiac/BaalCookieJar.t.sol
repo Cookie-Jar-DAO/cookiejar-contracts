@@ -3,23 +3,16 @@ pragma solidity >=0.8.19 <0.9.0;
 
 import {IBaal} from "@daohaus/baal-contracts/contracts/interfaces/IBaal.sol";
 import {IBaalToken} from "@daohaus/baal-contracts/contracts/interfaces/IBaalToken.sol";
-import {ZodiacBaalCookieJar} from "src/SafeModule/BaalCookieJar.sol";
 import {ERC20} from "openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
 import {ERC20Mintable} from "test/utils/ERC20Mintable.sol";
 import {TestAvatar} from "@gnosis.pm/zodiac/contracts/test/TestAvatar.sol";
 import {IPoster} from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
 import {CookieJarFactory} from "src/factory/CookieJarFactory.sol";
 
-import {CloneSummoner} from "test/utils/CloneSummoner.sol";
+import {ZodiacCloneSummoner, ZodiacBaalCookieJarHarnass} from "test/utils/ZodiacCloneSummoner.sol";
 
-contract BaalCookieJarHarnass is ZodiacBaalCookieJar {
-    function exposed_isAllowList(address user) external view returns (bool) {
-        return isAllowList(user);
-    }
-}
-
-contract BaalCookieJarTest is CloneSummoner {
-    BaalCookieJarHarnass internal cookieJar;
+contract BaalCookieJarTest is ZodiacCloneSummoner {
+    ZodiacBaalCookieJarHarnass internal cookieJar;
 
     address internal alice = makeAddr("alice");
     address internal bob = makeAddr("bob");
@@ -36,20 +29,24 @@ contract BaalCookieJarTest is CloneSummoner {
     string internal reason = "BaalCookieJar: Testing";
 
     event Setup(bytes initializationParams);
-    event GiveCookie(address indexed cookieMonster, uint256 amount, uint256 fee);
+    event GiveCookie(address indexed cookieMonster, uint256 amount);
 
     function setUp() public virtual {
         vm.mockCall(molochDAO, abi.encodeWithSelector(IBaal.sharesToken.selector), abi.encode(sharesToken));
+        vm.mockCall(molochDAO, abi.encodeWithSelector(IBaal.lootToken.selector), abi.encode(lootToken));
         vm.mockCall(molochDAO, abi.encodeWithSelector(IBaal.target.selector), abi.encode(sharesToken));
 
-        // address _safeTarget,
-        // uint256 _periodLength,
-        // uint256 _cookieAmount,
-        // address _cookieToken,
-        // address _dao,
-        // uint256 _threshold,
-        // bool _useShares,
-        // bool _useLoot
+        //Cookie Jar init params
+        // 0. address safeAddress
+        // 1. uint256 _periodLength,
+        // 2. uint256 _cookieAmount,
+        // 3. address _cookieToken
+
+        // Baal
+        // 4. address _dao,
+        // 5. uint256 _threshold,
+        // 6. bool _useShares,
+        // 7. bool _useLoot
         bytes memory initParams =
             abi.encode(address(testAvatar), 3600, cookieAmount, address(cookieToken), molochDAO, 1, true, true);
 
@@ -62,10 +59,11 @@ contract BaalCookieJarTest is CloneSummoner {
     }
 
     function testIdentifyMolochMember() external {
-        vm.expectRevert();
-        cookieJar.exposed_isAllowList(msg.sender);
+        assertFalse(cookieJar.exposed_isAllowList(msg.sender));
 
         vm.mockCall(address(sharesToken), abi.encodeWithSelector(IBaalToken.balanceOf.selector), abi.encode(1));
+        vm.mockCall(address(lootToken), abi.encodeWithSelector(IBaalToken.balanceOf.selector), abi.encode(1));
+
         assertTrue(cookieJar.exposed_isAllowList(msg.sender));
     }
 
@@ -83,7 +81,7 @@ contract BaalCookieJarTest is CloneSummoner {
         // Alice puts her hand in the jar
         vm.startPrank(alice);
         vm.expectEmit(false, false, false, true);
-        emit GiveCookie(alice, cookieAmount, cookieAmount / 100);
+        emit GiveCookie(alice, cookieAmount);
         cookieJar.reachInJar(reason);
     }
 }
