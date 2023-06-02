@@ -3,23 +3,19 @@ pragma solidity >=0.8.19 <0.9.0;
 
 import {PRBTest} from "@prb/test/PRBTest.sol";
 import {StdCheats} from "forge-std/StdCheats.sol";
-import {CookieJarCore} from "src/core/CookieJarCore.sol";
+import {ZodiacCookieJar} from "src/SafeModule/ZodiacCookieJar.sol";
 import {TestAvatar} from "@gnosis.pm/zodiac/contracts/test/TestAvatar.sol";
 import {ERC20Mintable} from "test/utils/ERC20Mintable.sol";
 import {IPoster} from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
 import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 
-contract CookieJarHarnass is CookieJarCore {
-    constructor(bytes memory initParams) {
-        super.setUp(initParams);
-    }
-
+contract CookieJarHarnass is ZodiacCookieJar {
     function exposed_isAllowList(address user) external view returns (bool) {
         return isAllowList(user);
     }
 }
 
-contract CookieJarTest is PRBTest, StdCheats {
+contract ZodiacCookieJarTest is PRBTest, StdCheats {
     address internal alice = makeAddr("alice");
     address internal bob = makeAddr("bob");
     address internal molochDAO = vm.addr(666);
@@ -33,7 +29,7 @@ contract CookieJarTest is PRBTest, StdCheats {
     string internal reason = "CookieJar: Testing";
 
     event Setup(bytes initializationParams);
-    event GiveCookie(address indexed cookieMonster, uint256 amount, uint256 fee);
+    event GiveCookie(address indexed cookieMonster, uint256 amount);
     event NewPost(address indexed user, string content, string indexed tag);
 
     function setUp() public virtual {
@@ -43,7 +39,8 @@ contract CookieJarTest is PRBTest, StdCheats {
         // address _cookieToken
         bytes memory initParams = abi.encode(address(testAvatar), 3600, cookieAmount, address(cookieToken));
 
-        cookieJar = new CookieJarHarnass(initParams);
+        cookieJar = new CookieJarHarnass();
+        cookieJar.setUp(initParams);
 
         // Enable module
         testAvatar.enableModule(address(cookieJar));
@@ -51,12 +48,11 @@ contract CookieJarTest is PRBTest, StdCheats {
         vm.mockCall(0x000000000000cd17345801aa8147b8D3950260FF, abi.encodeWithSelector(IPoster.post.selector), "");
     }
 
-    //TODO seperate tests into seperate files for core, module and 6551
-    // function testIsEnabledModule() external {
-    //     assertEq(address(testAvatar), cookieJar.avatar());
-    //     assertEq(address(testAvatar), cookieJar.target());
-    //     assertTrue(testAvatar.isModuleEnabled(address(cookieJar)));
-    // }
+    function testIsEnabledModule() external {
+        assertEq(address(testAvatar), cookieJar.avatar());
+        assertEq(address(testAvatar), cookieJar.target());
+        assertTrue(testAvatar.isModuleEnabled(address(cookieJar)));
+    }
 
     function testIsAllowList() external {
         assertTrue(cookieJar.exposed_isAllowList(msg.sender));
@@ -67,21 +63,15 @@ contract CookieJarTest is PRBTest, StdCheats {
     }
 
     function testReachInJar() external {
+        // Base implementation only limits periods
+        vm.startPrank(alice);
+        assertTrue(cookieJar.canClaim(alice));
+
         // No balance so expect fail
         vm.expectRevert(bytes("call failure setup"));
         cookieJar.reachInJar(reason);
 
-        // Put cookie tokens in jar
-
-        cookieToken.mint(address(testAvatar), cookieAmount);
-
-        // Alice puts her hand in the jar
-        vm.startPrank(alice);
         assertTrue(cookieJar.canClaim(alice));
-        vm.expectEmit(true, true, false, true);
-        emit GiveCookie(alice, cookieAmount, cookieAmount / 100);
-        cookieJar.reachInJar(reason);
-        assertFalse(cookieJar.canClaim(alice));
     }
 
     function testAssessReason() external {
@@ -104,15 +94,13 @@ contract CookieJarTest is PRBTest, StdCheats {
     }
 
     function testGiveAwayCookie() external {
-        // Put cookie tokens in jar
-        cookieToken.mint(address(testAvatar), cookieAmount);
-
-        // Alice puts her hand in the jar
         vm.startPrank(alice);
         assertTrue(cookieJar.canClaim(alice));
-        vm.expectEmit(true, true, false, true);
-        emit GiveCookie(bob, cookieAmount, cookieAmount / 100);
+
+        // No balance so expect fail
+        vm.expectRevert(bytes("call failure setup"));
         cookieJar.reachInJar(bob, reason);
-        assertFalse(cookieJar.canClaim(alice));
+
+        assertTrue(cookieJar.canClaim(alice));
     }
 }

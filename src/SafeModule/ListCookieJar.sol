@@ -5,7 +5,7 @@ import {MappedAllowlist} from "src/core/allowlists/MappedAllowlist.sol";
 import {ZodiacCookieJar} from "src/SafeModule/ZodiacCookieJar.sol";
 
 contract ZodiacListCookieJar is MappedAllowlist, ZodiacCookieJar {
-    function setUp(bytes memory _initializationParams) public override(MappedAllowlist, ZodiacCookieJar) initializer {
+    function setUp(bytes memory _initializationParams) public override(MappedAllowlist, ZodiacCookieJar) {
         ZodiacCookieJar.setUp(_initializationParams);
         MappedAllowlist.setUp(_initializationParams);
     }

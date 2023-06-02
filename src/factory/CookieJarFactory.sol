@@ -20,6 +20,29 @@ contract CookieJarFactory is Ownable {
         moduleProxyFactory = ModuleProxyFactory(_moduleProxyFactory);
     }
 
+    //Cookie Jar init params
+    // 0. address safeAddress
+    // 1. uint256 _periodLength,
+    // 2. uint256 _cookieAmount,
+    // 3. address _cookieToken
+
+    // Baal
+    // 4. address _dao,
+    // 5. uint256 _threshold,
+    // 6. bool _useShares,
+    // 7. bool _useLoot
+
+    // ERC20
+    // 4. address _erc20addr,
+    // 5. uint256 _threshold
+
+    // ERC721
+    // 4. address _erc721addr,
+    // 5. uint256 _threshold
+
+    // Mapping
+    // 4. address[] _allowlist
+
     function summonCookieJar(address _singleton, bytes memory _initializer, string memory _details)
         public
         returns (address)
