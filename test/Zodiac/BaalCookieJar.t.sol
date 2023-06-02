@@ -3,23 +3,16 @@ pragma solidity >=0.8.19 <0.9.0;
 
 import {IBaal} from "@daohaus/baal-contracts/contracts/interfaces/IBaal.sol";
 import {IBaalToken} from "@daohaus/baal-contracts/contracts/interfaces/IBaalToken.sol";
-import {ZodiacBaalCookieJar} from "src/SafeModule/BaalCookieJar.sol";
 import {ERC20} from "openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
 import {ERC20Mintable} from "test/utils/ERC20Mintable.sol";
 import {TestAvatar} from "@gnosis.pm/zodiac/contracts/test/TestAvatar.sol";
 import {IPoster} from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
 import {CookieJarFactory} from "src/factory/CookieJarFactory.sol";
 
-import {CloneSummoner} from "test/utils/CloneSummoner.sol";
+import {ZodiacCloneSummoner, ZodiacBaalCookieJarHarnass} from "test/utils/ZodiacCloneSummoner.sol";
 
-contract BaalCookieJarHarnass is ZodiacBaalCookieJar {
-    function exposed_isAllowList(address user) external view returns (bool) {
-        return isAllowList(user);
-    }
-}
-
-contract BaalCookieJarTest is CloneSummoner {
-    BaalCookieJarHarnass internal cookieJar;
+contract BaalCookieJarTest is ZodiacCloneSummoner {
+    ZodiacBaalCookieJarHarnass internal cookieJar;
 
     address internal alice = makeAddr("alice");
     address internal bob = makeAddr("bob");

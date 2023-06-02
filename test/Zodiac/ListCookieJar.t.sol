@@ -1,25 +1,23 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.19 <0.9.0;
 
-import {CloneSummoner, ERC20CookieJarHarnass} from "test/utils/CloneSummoner.sol";
 import {ERC20Mintable} from "test/utils/ERC20Mintable.sol";
 import {TestAvatar} from "@gnosis.pm/zodiac/contracts/test/TestAvatar.sol";
 import {IPoster} from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
-import {ERC20} from "openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
 
-contract ERC20CookieJarTest is CloneSummoner {
-    ERC20CookieJarHarnass internal cookieJar;
+import {ZodiacCloneSummoner, ZodiacListCookieJarHarnass} from "test/utils/ZodiacCloneSummoner.sol";
 
+contract ListCookieJarTest is ZodiacCloneSummoner {
     address internal alice = makeAddr("alice");
     address internal bob = makeAddr("bob");
+    address internal molochDAO = vm.addr(666);
+    address internal testSafe = vm.addr(1337);
 
+    ZodiacListCookieJarHarnass internal cookieJar;
     ERC20Mintable internal cookieToken = new ERC20Mintable("Mock", "MCK");
     TestAvatar internal testAvatar = new TestAvatar();
 
-    ERC20 internal gatingERC20 = new ERC20("Gating", "GATE");
-
     uint256 internal cookieAmount = 2e6;
-    uint256 internal threshold = 420;
 
     string internal reason = "CookieJar: Testing";
 
@@ -27,16 +25,18 @@ contract ERC20CookieJarTest is CloneSummoner {
     event GiveCookie(address indexed cookieMonster, uint256 amount, uint256 fee);
 
     function setUp() public virtual {
+        address[] memory allowList = new address[](2);
+        allowList[0] = alice;
+        allowList[1] = bob;
+
         // address _safeTarget,
         // uint256 _periodLength,
         // uint256 _cookieAmount,
         // address _cookieToken,
-        // address _erc20addr,
-        // uint256 _threshold,
-        bytes memory initParams =
-            abi.encode(address(testAvatar), 3600, cookieAmount, address(cookieToken), address(gatingERC20), threshold);
+        // address[] _allowList,
+        bytes memory initParams = abi.encode(address(testAvatar), 3600, cookieAmount, address(cookieToken), allowList);
 
-        cookieJar = getERC20CookieJar(initParams);
+        cookieJar = getListCookieJar(initParams);
 
         // Enable module
         testAvatar.enableModule(address(cookieJar));
@@ -47,26 +47,25 @@ contract ERC20CookieJarTest is CloneSummoner {
     function testIsAllowed() external {
         assertFalse(cookieJar.exposed_isAllowList(msg.sender));
 
-        vm.mockCall(address(gatingERC20), abi.encodeWithSelector(ERC20.balanceOf.selector), abi.encode(threshold));
-        assertTrue(cookieJar.exposed_isAllowList(msg.sender));
+        assertTrue(cookieJar.exposed_isAllowList(alice));
     }
 
     function testReachInJar() external {
-        // No gating token balance so expect fail
+        // Anon puts their hand in the jar
         vm.expectRevert(bytes("not a member"));
         cookieJar.reachInJar(reason);
 
+        // Alice puts her hand in the jar
+        vm.startPrank(alice);
+
         // No cookie balance so expect fail
-        vm.mockCall(address(gatingERC20), abi.encodeWithSelector(ERC20.balanceOf.selector), abi.encode(threshold));
         vm.expectRevert(bytes("call failure setup"));
         cookieJar.reachInJar(reason);
 
         // Put cookie tokens in jar
         cookieToken.mint(address(testAvatar), cookieAmount);
 
-        // Alice puts her hand in the jar
-        vm.startPrank(alice);
-        vm.expectEmit(false, false, false, true);
+        vm.expectEmit(true, false, false, true);
         emit GiveCookie(alice, cookieAmount, cookieAmount / 100);
         cookieJar.reachInJar(reason);
     }

@@ -5,14 +5,14 @@ import {ERC20Mintable} from "test/utils/ERC20Mintable.sol";
 import {TestAvatar} from "@gnosis.pm/zodiac/contracts/test/TestAvatar.sol";
 import {IPoster} from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
 
-import {CloneSummoner, OpenCookieJarHarnass} from "test/utils/CloneSummoner.sol";
+import {ZodiacCloneSummoner, ZodiacOpenCookieJarHarnass} from "test/utils/ZodiacCloneSummoner.sol";
 
-contract OpenCookieJarTest is CloneSummoner {
+contract OpenCookieJarTest is ZodiacCloneSummoner {
     address internal alice = makeAddr("alice");
     address internal bob = makeAddr("bob");
     address internal molochDAO = vm.addr(666);
 
-    OpenCookieJarHarnass internal cookieJar;
+    ZodiacOpenCookieJarHarnass internal cookieJar;
     ERC20Mintable internal cookieToken = new ERC20Mintable("Mock", "MCK");
     TestAvatar internal testAvatar = new TestAvatar();
 

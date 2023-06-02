@@ -3,14 +3,18 @@ pragma solidity >=0.8.19 <0.9.0;
 
 import {PRBTest} from "@prb/test/PRBTest.sol";
 import {StdCheats} from "forge-std/StdCheats.sol";
-import {CookieJarCore} from "src/core/CookieJarCore.sol";
+import {ZodiacCookieJar} from "src/SafeModule/ZodiacCookieJar.sol";
 import {TestAvatar} from "@gnosis.pm/zodiac/contracts/test/TestAvatar.sol";
 import {ERC20Mintable} from "test/utils/ERC20Mintable.sol";
 import {IPoster} from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
 import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 
-contract CookieJarHarnass is CookieJarCore {
+contract CookieJarHarnass is ZodiacCookieJar {
     constructor(bytes memory initParams) {
+        setUp(initParams);
+    }
+
+    function setUp(bytes memory initParams) public override initializer {
         super.setUp(initParams);
     }
 
@@ -19,7 +23,7 @@ contract CookieJarHarnass is CookieJarCore {
     }
 }
 
-contract CookieJarTest is PRBTest, StdCheats {
+contract CookieJarZodiacTest is PRBTest, StdCheats {
     address internal alice = makeAddr("alice");
     address internal bob = makeAddr("bob");
     address internal molochDAO = vm.addr(666);
@@ -33,7 +37,7 @@ contract CookieJarTest is PRBTest, StdCheats {
     string internal reason = "CookieJar: Testing";
 
     event Setup(bytes initializationParams);
-    event GiveCookie(address indexed cookieMonster, uint256 amount, uint256 fee);
+    event GiveCookie(address indexed cookieMonster, uint256 amount);
     event NewPost(address indexed user, string content, string indexed tag);
 
     function setUp() public virtual {
@@ -52,11 +56,11 @@ contract CookieJarTest is PRBTest, StdCheats {
     }
 
     //TODO seperate tests into seperate files for core, module and 6551
-    // function testIsEnabledModule() external {
-    //     assertEq(address(testAvatar), cookieJar.avatar());
-    //     assertEq(address(testAvatar), cookieJar.target());
-    //     assertTrue(testAvatar.isModuleEnabled(address(cookieJar)));
-    // }
+    function testIsEnabledModule() external {
+        assertEq(address(testAvatar), cookieJar.avatar());
+        assertEq(address(testAvatar), cookieJar.target());
+        assertTrue(testAvatar.isModuleEnabled(address(cookieJar)));
+    }
 
     function testIsAllowList() external {
         assertTrue(cookieJar.exposed_isAllowList(msg.sender));
@@ -79,7 +83,7 @@ contract CookieJarTest is PRBTest, StdCheats {
         vm.startPrank(alice);
         assertTrue(cookieJar.canClaim(alice));
         vm.expectEmit(true, true, false, true);
-        emit GiveCookie(alice, cookieAmount, cookieAmount / 100);
+        emit GiveCookie(alice, cookieAmount);
         cookieJar.reachInJar(reason);
         assertFalse(cookieJar.canClaim(alice));
     }
@@ -110,8 +114,8 @@ contract CookieJarTest is PRBTest, StdCheats {
         // Alice puts her hand in the jar
         vm.startPrank(alice);
         assertTrue(cookieJar.canClaim(alice));
-        vm.expectEmit(true, true, false, true);
-        emit GiveCookie(bob, cookieAmount, cookieAmount / 100);
+        vm.expectEmit(true, true, false, false);
+        emit GiveCookie(bob, cookieAmount);
         cookieJar.reachInJar(bob, reason);
         assertFalse(cookieJar.canClaim(alice));
     }
