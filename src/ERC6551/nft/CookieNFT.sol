@@ -38,9 +38,9 @@ contract CookieNFT is ERC721 {
     mapping(uint256 => Cookie) public cookies;
 
     event AccountCreated(
-        address account,
+        address indexed account,
         address indexed cookieJar,
-        uint256 indexed tokenId
+        uint256 tokenId
     );
 
     constructor(
@@ -143,7 +143,7 @@ contract CookieNFT is ERC721 {
             "https://ipfs.io/ipfs/QmWn8CP5AnqmPU2zKWZesk6EFhzk5zj72mdDQEaTPmwezF/",
             Strings.toString(_tokenId),".png"));
         string memory _animation = string(abi.encodePacked(
-            "https://ipfs.io/ipfs/QmdYY8XKVDvEezJsjfBxFFzf37EZPpQrT85A1648Aomufh?seed=",
+            "ipfs://QmTE41U14KCkjXDYwMb5QzEYkUZivdvo9oBXuKLmUJDddT?seed=",
             Strings.toString(_tokenId),
             "&balance=",
             Strings.toString(_cookieBalance(_tokenId)),

@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-    <title>Pandoras Jar</title>
+    <title>Cookie JAR NFT</title>
     <style>
       * {
         margin: 0;
@@ -19,8 +18,8 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 1000px;
-        height: 1000px;
+        width: 800px;
+        height: 800px;
       }
       #text-container {
         position: relative;
@@ -36,13 +35,16 @@
         width: 50%;
         height: 50%;
       }
+      h2 {
+        font-size: 10rem;
+      }
     </style>
   </head>
   <body>
-    <canvas id="cookie-canvas"></canvas>
+    <canvas id="myCanvas"></canvas>
     <div class="info-wrapper">
       <div id="text-container">
-        <h1 id="text">Pandora's Jar</h1>
+        <h1 id="text">Cookie Jar</h1>
       </div>
     </div>
     <script>
@@ -168,110 +170,86 @@
       })("undefined" != typeof self ? self : this, [], Math);
     </script>
     <script>
-      const canvas = document.getElementById("cookie-canvas");
+      const canvas = document.getElementById("myCanvas");
       const ctx = canvas.getContext("2d");
 
-      canvas.width = 1000;
-      canvas.height = 1000;
+      const seed = getSeedFromURL();
+      Math.seedrandom(seed);
 
-      colors = [
-        "hsl(39, 77%, 83%)",
-        "hsl(39, 67%, 70%)",
-        "hsl(38, 74%, 31%)",
-        "hsl(4, 30%, 11%)",
-        "hsl(340, 82%, 52%)",
-        "hsl(291, 64%, 42%)",
-        "hsl(262, 52%, 47%)",
-        "hsl(231, 48%, 48%)",
-        "hsl(207, 90%, 54%)",
-        "hsl(199, 98%, 48%)",
-        "hsl(187, 100%, 42%)",
-        "hsl(174, 100%, 29%)",
-        "hsl(122, 39%, 49%)",
-        "hsl(88, 50%, 53%)",
-        "hsl(66, 70%, 54%)",
-        "hsl(54, 100%, 62%)",
-        "hsl(45, 100%, 51%)",
-        "hsl(36, 100%, 50%)",
-        "hsl(14, 100%, 57%)",
-        "hsl(16, 25%, 38%)",
+      const cookieParams = getJarInfoFromURL();
+
+      // Set canvas size
+      canvas.width = 800;
+      canvas.height = 800;
+
+      const circleSize = 40;
+      const gridSize = 10;
+      const animationSpeeds = [
+        2, 2, 2, 0.001, 0.003, 0.004, 0.005, 0.006, 0.007, 0.008, 0.009, 0.01,
+        0.02, 0.03, 0.04,
       ];
 
-      class Chips {
-        constructor(x, y, size) {
-          this.x = x;
-          this.y = y;
-          this.size = size;
-          this.numChips = 6;
-        }
-        draw() {
-          for (let i = 0; i < this.numChips; i++) {
-            let randomSize = Math.floor((Math.random() * this.size) / 10 + 1);
-            let chipSize = randomSize;
-            let xoffset = Math.floor((Math.random() * this.size) / 2 + 2);
-            xoffset *= Math.round(Math.random()) ? 1 : -1;
-            let chipX = this.x + xoffset;
-            let yoffset = Math.floor((Math.random() * this.size) / 2 + 2);
-            yoffset *= Math.round(Math.random()) ? 1 : -1;
-            let chipY = this.y + yoffset;
+      colors = [
+        "rgba(245, 222, 178, 0.1)",
+        "rgba(230, 194, 127, 0.1)",
+        "rgba(138, 95, 21, 0.1)",
+        "rgba(36, 21,  20, 0.1)",
+        "rgba(233, 32, 99, 0.1)",
+        "rgba(155, 39, 176, 0.1)",
+        "rgba(103, 58, 182, 0.1)",
+        "rgba(64, 81, 181, 0.1)",
+        "rgba(32, 148, 243, 0.1)",
+        "rgba(2, 166, 242, 0.1)",
+        "rgba(0, 189, 214, 0.1)",
+        "rgba(0, 148, 133, 0.1)",
+        "rgba(76, 174, 79, 0.1)",
+        "rgba(139, 195, 75, 0.1)",
+        "rgba(203, 220, 56, 0.1)",
+        "rgba(255, 236, 61, 0.1)",
+        "rgba(255, 193, 5, 0.1)",
+        "rgba(255, 153, 0, 0.1)",
+        "rgba(255, 87, 36, 0.1)",
+      ];
 
-            ctx.beginPath();
-            ctx.fillStyle = "#221308";
-            ctx.arc(chipX, chipY, chipSize, 0, 2 * Math.PI);
-            ctx.fill();
+      // Create circles
+      const circles = [];
+
+      for (let i = 0; i < gridSize; i++) {
+        for (let j = 0; j < gridSize; j++) {
+          const chips = [];
+          const numChips = 4;
+          const animationSpeed =
+            animationSpeeds[Math.floor(Math.random() * animationSpeeds.length)];
+          const color = colors[Math.floor(Math.random() * colors.length)];
+
+          for (let k = 0; k < numChips; k++) {
+            const xd = Math.round(Math.random()) ? 1 : -1;
+            const yd = Math.round(Math.random()) ? 1 : -1;
+            const xo = Math.floor((Math.random() * circleSize) / 2 + 1) * xd;
+            const yo = Math.floor((Math.random() * circleSize) / 2 + 1) * yd;
+            const chip = {
+              x: i * circleSize * 2 + circleSize + xo,
+              y: j * circleSize * 2 + circleSize + yo,
+              size: Math.floor((Math.random() * circleSize) / 10 + 1),
+              alpha: 0,
+              speed: animationSpeed,
+              color: colors[Math.floor(Math.random() * colors.length)],
+            };
+            chips.push(chip);
           }
+
+          const circle = {
+            x: i * circleSize * 2 + circleSize,
+            y: j * circleSize * 2 + circleSize,
+            alpha: 0,
+            speed: animationSpeed,
+            color: color,
+            chips: chips,
+          };
+          circles.push(circle);
         }
       }
 
-      class Cookie {
-        constructor(x, y) {
-          this.x = x;
-          this.y = y;
-          this.color = colors[Math.floor(Math.random() * colors.length)];
-          this.speedX = Math.random() * 4 - 2;
-          this.speedY = Math.random() * 4 - 2;
-          this.maxSize = Math.random() * 30 + 15;
-          this.size = Math.random() * 1 + 2;
-          this.vs = Math.random() * 0.2 + 0.05;
-          this.angleX = Math.random() * 6.2;
-          this.vax = Math.random() * 0.2 + 0.05;
-          this.angleY = Math.random() * 6.2;
-          this.vay = Math.random() * 0.6 - 0.3;
-          this.lightness = 10;
-        }
-        update() {
-          this.x += this.speedX + Math.sin(this.angleX);
-          this.y += this.speedY + Math.sin(this.angleY);
-          this.size += this.vs;
-          this.angleX += this.vax;
-          this.angleY += this.vay;
-
-          if (this.lightness < 70) this.lightness += 0.25;
-
-          if (this.size < this.maxSize) {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            this.color = this.color.replace(
-              /\[\d+\]\%\)/g,
-              `${this.lightness}%)`
-            );
-            ctx.strokeStyle = this.color;
-            ctx.fillStyle = this.color;
-            ctx.fill();
-            ctx.stroke();
-
-            // draw as animation
-            requestAnimationFrame(() => this.update());
-            // draw as static
-            //this.update();
-          } else {
-            const chips = new Chips(this.x, this.y, this.size);
-            chips.draw();
-          }
-        }
-      }
-
-      // this uses the tokenId to seed the random function
       function getSeedFromURL() {
         const urlParams = new URLSearchParams(window.location.search);
         const seedParam = urlParams.get("seed");
@@ -285,6 +263,7 @@
         const cookiePeriodParam = urlParams.get("period");
         const cookieSymbolParam = urlParams.get("symbol");
         const cookieDecimalsParam = urlParams.get("decimals");
+        const cookieStaticParam = urlParams.get("static");
         return {
           balanceParam: balanceParam ? parseInt(balanceParam) : 0,
           cookieAmountParam: cookieAmountParam
@@ -293,20 +272,17 @@
           cookiePeriodParam: cookiePeriodParam
             ? parseInt(cookiePeriodParam)
             : 0,
-          cookieSymbolParam: cookieSymbolParam ? cookieSymbolParam : "COOKIE",
+          cookieSymbolParam: cookieSymbolParam ? cookieSymbolParam : "ETH",
           cookieDecimalsParam: cookieDecimalsParam
             ? parseInt(cookieDecimalsParam)
             : 18,
+          cookieStatic: cookieStaticParam ? cookieStaticParam : false,
         };
       }
 
-      // draws a cookie explosion on the canvas
-      function drawCookie() {
-        const seed = getSeedFromURL() + 1000;
-        Math.seedrandom(seed);
-
-        const x = (Math.random() * canvas.width) / 2 + canvas.width / 4;
-        const y = (Math.random() * canvas.height) / 2 + canvas.height / 4;
+      // Animation loop
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
         gradient.addColorStop(0, "#221308");
@@ -314,48 +290,71 @@
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        ctx.beginPath();
-        const cookieStampSize = canvas.width / 8;
-        const cookieStampX = canvas.width / 6;
-        const cookieStampY = canvas.height / 6;
-        ctx.arc(cookieStampX, cookieStampY, cookieStampSize, 0, Math.PI * 2);
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        ctx.strokeStyle = color;
-        ctx.fillStyle = color;
-        ctx.fill();
-        ctx.stroke();
-        ctx.closePath();
-        const achips = new Chips(cookieStampX, cookieStampY, cookieStampSize);
-        achips.draw();
+        circles.forEach((circle) => {
+          ctx.beginPath();
+          ctx.arc(circle.x, circle.y, circleSize, 0, 2 * Math.PI);
+          ctx.closePath();
+          const color = circle.color.replace(/[\d\.]+\)$/g, `${circle.alpha})`);
+          ctx.fillStyle = color;
+          ctx.fill();
 
-        const cookieParams = getJarInfoFromURL();
-        const numburst = cookieParams.balanceParam / cookieParams.cookieAmountParam + 1;
+          circle.chips.forEach((chip) => {
+            ctx.beginPath();
+            ctx.fillStyle = `rgba(0, 0, 0, ${circle.alpha})`;
+            ctx.arc(chip.x, chip.y, chip.size, 0, 2 * Math.PI);
+            ctx.fill();
+          });
 
-        for (let i = 0; i < numburst; i++) {
-          const cookie = new Cookie(x, y);
-          cookie.update();
-        }
+          // Update alpha value
+          if (circle.speed == 2) {
+            circle.alpha = 1;
+          } else {
+            cookieParams.cookieStatic
+              ? (circle.alpha = 0)
+              : (circle.alpha += circle.speed);
+            // circle.alpha += circle.speed;
+            // circle.alpha = 0;
+          }
+          if (circle.alpha > 1 || circle.alpha < 0) {
+            circle.speed *= -1; // Reverse speed if alpha exceeds limits
+          }
+        });
+
+        requestAnimationFrame(animate);
       }
 
-      const cookieParams = getJarInfoFromURL();
+      // *********** //
       var div = document.getElementById("text-container");
-      console.log(div);
-      info = document.createElement("p");
-      info.innerHTML = `Balance: ${
-        cookieParams.balanceParam / 10 ** cookieParams.cookieDecimalsParam
-      } <br>`;
-      info.innerHTML += `Cookie Symbol: ${cookieParams.cookieSymbolParam} <br>`;
-      info.innerHTML += `Cookie Amount: ${
-        cookieParams.cookieAmountParam / 10 ** cookieParams.cookieDecimalsParam
-      }`;
-      div.append(info);
-      cookiesLeft = document.createElement("h2");
-      cookiesLeft.innerHTML = ` ${
-        cookieParams.balanceParam / cookieParams.cookieAmountParam
-      }`;
-      div.append(cookiesLeft);
+      if (!cookieParams.cookieStatic) {
+        info = document.createElement("p");
+        info.innerHTML = `Balance: ${
+          cookieParams.balanceParam / 10 ** cookieParams.cookieDecimalsParam
+        } <br>`;
+        info.innerHTML += `Cookie Symbol: ${cookieParams.cookieSymbolParam} <br>`;
+        info.innerHTML += `Cookie Amount: ${
+          cookieParams.cookieAmountParam /
+          10 ** cookieParams.cookieDecimalsParam
+        }`;
+        div.append(info);
+        cookiesLeft = document.createElement("h2");
+        cookiesLeft.innerHTML = ` ${
+            cookieParams.cookieAmountParam && cookieParams.balanceParam / cookieParams.cookieAmountParam
+        }`;
+        div.append(cookiesLeft);
+      } else {
+        // delete div;
+        div.remove();
+        
+      }
 
-      drawCookie();
+      animate();
+
+      canvas.addEventListener("click", function () {
+            const dataURL = canvas.toDataURL("image/png");
+            const newTab = window.open();
+            newTab.document.write('<img src="' + dataURL + '">');
+        });
+        
     </script>
   </body>
 </html>
