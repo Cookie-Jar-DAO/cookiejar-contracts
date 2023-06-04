@@ -1,0 +1,1208 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title></title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="book.css">
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item "><a href="index.html">Home</a></li><li class="chapter-item affix "><li class="part-title">src</li><li class="chapter-item "><a href="src/ERC6551/index.html">❱ ERC6551</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/ERC6551/erc6551/index.html">❱ erc6551</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/ERC6551/erc6551/ERC6551Module.sol/contract.AccountERC6551.html">AccountERC6551</a></li><li class="chapter-item "><a href="src/ERC6551/erc6551/ERC6551Registry.sol/contract.AccountRegistry.html">AccountRegistry</a></li></ol></li><li class="chapter-item "><a href="src/ERC6551/nft/index.html">❱ nft</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/ERC6551/nft/CookieNFT.sol/contract.CookieNFT.html">CookieNFT</a></li></ol></li><li class="chapter-item "><a href="src/ERC6551/ImpCookieJar6551.sol/contract.ImpCookieJar6551.html">ImpCookieJar6551</a></li></ol></li><li class="chapter-item "><a href="src/SafeModule/index.html">❱ SafeModule</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/SafeModule/BaalCookieJar.sol/contract.ZodiacBaalCookieJar.html">ZodiacBaalCookieJar</a></li><li class="chapter-item "><a href="src/SafeModule/ERC20CookieJar.sol/contract.ZodiacERC20CookieJar.html">ZodiacERC20CookieJar</a></li><li class="chapter-item "><a href="src/SafeModule/ERC721CookieJar.sol/contract.ZodiacERC721CookieJar.html">ZodiacERC721CookieJar</a></li><li class="chapter-item "><a href="src/SafeModule/ListCookieJar.sol/contract.ZodiacListCookieJar.html">ZodiacListCookieJar</a></li><li class="chapter-item "><a href="src/SafeModule/OpenCookieJar.sol/contract.ZodiacOpenCookieJar.html">ZodiacOpenCookieJar</a></li><li class="chapter-item "><a href="src/SafeModule/ZodiacCookieJar.sol/contract.ZodiacCookieJar.html">ZodiacCookieJar</a></li></ol></li><li class="chapter-item "><a href="src/core/index.html">❱ core</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/core/allowlists/index.html">❱ allowlists</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/core/allowlists/BaalAllowlist.sol/contract.BaalAllowlist.html">BaalAllowlist</a></li><li class="chapter-item "><a href="src/core/allowlists/ERC20Allowlist.sol/contract.ERC20Allowlist.html">ERC20Allowlist</a></li><li class="chapter-item "><a href="src/core/allowlists/ERC721Allowlist.sol/contract.ERC721Allowlist.html">ERC721Allowlist</a></li><li class="chapter-item "><a href="src/core/allowlists/MappedAllowlist.sol/contract.MappedAllowlist.html">MappedAllowlist</a></li></ol></li><li class="chapter-item "><a href="src/core/givers/index.html">❱ givers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/core/givers/Giver6551.sol/abstract.Giver6551.html">Giver6551</a></li><li class="chapter-item "><a href="src/core/givers/GiverZodiac.sol/abstract.GiverZodiac.html">GiverZodiac</a></li></ol></li><li class="chapter-item "><a href="src/core/CookieJarCore.sol/abstract.CookieJarCore.html">CookieJarCore</a></li></ol></li><li class="chapter-item "><a href="src/factory/index.html">❱ factory</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/factory/CookieJarFactory.sol/contract.CookieJarFactory.html">CookieJarFactory</a></li></ol></li><li class="chapter-item "><a href="src/interfaces/index.html">❱ interfaces</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/interfaces/ICookieJar.sol/interface.ICookieJar.html">ICookieJar</a></li><li class="chapter-item "><a href="src/interfaces/IERC6551.sol/interface.IAccount.html">IAccount</a></li><li class="chapter-item "><a href="src/interfaces/IERC6551Registry.sol/interface.IRegistry.html">IRegistry</a></li></ol></li><li class="chapter-item "><a href="src/lib/index.html">❱ lib</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="src/lib/Base64.sol/library.Base64.html">Base64</a></li><li class="chapter-item "><a href="src/lib/CookieUtils.sol/library.CookieUtils.html">CookieUtils</a></li><li class="chapter-item "><a href="src/lib/ERC6551AccountLib.sol/library.ERC6551AccountLib.html">ERC6551AccountLib</a></li><li class="chapter-item "><a href="src/lib/ERC6551BytecodeLib.sol/library.ERC6551BytecodeLib.html">ERC6551BytecodeLib</a></li><li class="chapter-item "><a href="src/lib/MinimalReceiver.sol/contract.MinimalReceiver.html">MinimalReceiver</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/bitbeckers/cookiejar-contracts" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <div style="break-before: page; page-break-before: always;"></div><h1 id="contents"><a class="header" href="#contents">Contents</a></h1>
+<ul>
+<li><a href="src/ERC6551//src/ERC6551/erc6551">erc6551</a></li>
+<li><a href="src/ERC6551//src/ERC6551/nft">nft</a></li>
+<li><a href="src/ERC6551/ImpCookieJar6551.sol/contract.ImpCookieJar6551.html">ImpCookieJar6551</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-1"><a class="header" href="#contents-1">Contents</a></h1>
+<ul>
+<li><a href="src/ERC6551/erc6551/ERC6551Module.sol/contract.AccountERC6551.html">AccountERC6551</a></li>
+<li><a href="src/ERC6551/erc6551/ERC6551Registry.sol/contract.AccountRegistry.html">AccountRegistry</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="accounterc6551"><a class="header" href="#accounterc6551">AccountERC6551</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/ERC6551/erc6551/ERC6551Module.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+IERC165, IERC1271, <a href="src/ERC6551/erc6551/ERC6551Module.sol//src/interfaces/IERC6551.sol/interface.IAccount.html">IAccount</a>, <a href="src/ERC6551/erc6551/ERC6551Module.sol//src/lib/MinimalReceiver.sol/contract.MinimalReceiver.html">MinimalReceiver</a>, Initializable</p>
+<p><strong>Author:</strong>
+Jayden Windle (jaydenwindle)</p>
+<h2 id="state-variables"><a class="header" href="#state-variables">State Variables</a></h2>
+<h3 id="unlocktimestamp"><a class="header" href="#unlocktimestamp">unlockTimestamp</a></h3>
+<p><em>Timestamp at which Account will unlock</em></p>
+<pre><code class="language-solidity">uint256 public unlockTimestamp;
+</code></pre>
+<h3 id="executor"><a class="header" href="#executor">executor</a></h3>
+<p><em>Mapping from owner address to executor address</em></p>
+<pre><code class="language-solidity">mapping(address =&gt; address) public executor;
+</code></pre>
+<h2 id="functions"><a class="header" href="#functions">Functions</a></h2>
+<h3 id="constructor"><a class="header" href="#constructor">constructor</a></h3>
+<pre><code class="language-solidity">constructor();
+</code></pre>
+<h3 id="onlyunlocked"><a class="header" href="#onlyunlocked">onlyUnlocked</a></h3>
+<p><em>Ensures execution can only continue if the account is not locked</em></p>
+<pre><code class="language-solidity">modifier onlyUnlocked();
+</code></pre>
+<h3 id="fallback"><a class="header" href="#fallback">fallback</a></h3>
+<p><em>If account is unlocked and an executor is set, pass call to executor</em></p>
+<pre><code class="language-solidity">fallback(bytes calldata data) external payable onlyUnlocked returns (bytes memory result);
+</code></pre>
+<h3 id="executecall"><a class="header" href="#executecall">executeCall</a></h3>
+<p><em>Executes a transaction from the Account. Must be called by an account owner.</em></p>
+<pre><code class="language-solidity">function executeCall(address to, uint256 value, bytes calldata data)
+    external
+    payable
+    onlyUnlocked
+    returns (bytes memory result);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>to</code></td><td><code>address</code></td><td>Destination address of the transaction</td></tr>
+<tr><td><code>value</code></td><td><code>uint256</code></td><td>Ether value of the transaction</td></tr>
+<tr><td><code>data</code></td><td><code>bytes</code></td><td>Encoded payload of the transaction</td></tr>
+</tbody></table>
+</div>
+<h3 id="exec"><a class="header" href="#exec">exec</a></h3>
+<p><em>wrapper to align with zodiac.</em></p>
+<pre><code class="language-solidity">function exec(address to, uint256 value, bytes calldata data)
+    external
+    payable
+    onlyUnlocked
+    returns (bytes memory result);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>to</code></td><td><code>address</code></td><td>Destination address of the transaction</td></tr>
+<tr><td><code>value</code></td><td><code>uint256</code></td><td>Ether value of the transaction</td></tr>
+<tr><td><code>data</code></td><td><code>bytes</code></td><td>Encoded payload of the transaction</td></tr>
+</tbody></table>
+</div>
+<h3 id="executetrustedcall"><a class="header" href="#executetrustedcall">executeTrustedCall</a></h3>
+<p><em>Executes a transaction from the Account. Must be called by an authorized executor.</em></p>
+<pre><code class="language-solidity">function executeTrustedCall(address to, uint256 value, bytes calldata data)
+    external
+    payable
+    onlyUnlocked
+    returns (bytes memory result);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>to</code></td><td><code>address</code></td><td>Destination address of the transaction</td></tr>
+<tr><td><code>value</code></td><td><code>uint256</code></td><td>Ether value of the transaction</td></tr>
+<tr><td><code>data</code></td><td><code>bytes</code></td><td>Encoded payload of the transaction</td></tr>
+</tbody></table>
+</div>
+<h3 id="setexecutor"><a class="header" href="#setexecutor">setExecutor</a></h3>
+<p><em>Sets executor address for Account, allowing owner to use a custom implementation if they choose to.
+When the token controlling the account is transferred, the implementation address will reset</em></p>
+<pre><code class="language-solidity">function setExecutor(address _executionModule) external onlyUnlocked;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>_executionModule</code></td><td><code>address</code></td><td>the address of the execution module</td></tr>
+</tbody></table>
+</div>
+<h3 id="setexecutorinit"><a class="header" href="#setexecutorinit">setExecutorInit</a></h3>
+<pre><code class="language-solidity">function setExecutorInit(address _executionModule) external initializer;
+</code></pre>
+<h3 id="lock"><a class="header" href="#lock">lock</a></h3>
+<p><em>Locks Account, preventing transactions from being executed until a certain time</em></p>
+<pre><code class="language-solidity">function lock(uint256 _unlockTimestamp) external onlyUnlocked;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>_unlockTimestamp</code></td><td><code>uint256</code></td><td>timestamp when the account will become unlocked</td></tr>
+</tbody></table>
+</div>
+<h3 id="islocked"><a class="header" href="#islocked">isLocked</a></h3>
+<p><em>Returns Account lock status</em></p>
+<pre><code class="language-solidity">function isLocked() external view returns (bool);
+</code></pre>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>bool</code></td><td>true if Account is locked, false otherwise</td></tr>
+</tbody></table>
+</div>
+<h3 id="isauthorized"><a class="header" href="#isauthorized">isAuthorized</a></h3>
+<p><em>Returns true if caller is authorized to execute actions on this account</em></p>
+<pre><code class="language-solidity">function isAuthorized(address caller) external view returns (bool);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>caller</code></td><td><code>address</code></td><td>the address to query authorization for</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>bool</code></td><td>true if caller is authorized, false otherwise</td></tr>
+</tbody></table>
+</div>
+<h3 id="isvalidsignature"><a class="header" href="#isvalidsignature">isValidSignature</a></h3>
+<p><em>Implements EIP-1271 signature validation</em></p>
+<pre><code class="language-solidity">function isValidSignature(bytes32 hash, bytes memory signature) external view returns (bytes4 magicValue);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>hash</code></td><td><code>bytes32</code></td><td>Hash of the signed data</td></tr>
+<tr><td><code>signature</code></td><td><code>bytes</code></td><td>Signature to validate</td></tr>
+</tbody></table>
+</div>
+<h3 id="supportsinterface"><a class="header" href="#supportsinterface">supportsInterface</a></h3>
+<p><em>Implements EIP-165 standard interface detection</em></p>
+<pre><code class="language-solidity">function supportsInterface(bytes4 interfaceId) public view virtual override(IERC165, ERC1155Receiver) returns (bool);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>interfaceId</code></td><td><code>bytes4</code></td><td>the interfaceId to check support for</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>bool</code></td><td>true if the interface is supported, false otherwise</td></tr>
+</tbody></table>
+</div>
+<h3 id="owner"><a class="header" href="#owner">owner</a></h3>
+<p><em>Returns the owner of the token that controls this Account (public for Ownable compatibility)</em></p>
+<pre><code class="language-solidity">function owner() public view returns (address);
+</code></pre>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>address</code></td><td>the address of the Account owner</td></tr>
+</tbody></table>
+</div>
+<h3 id="token"><a class="header" href="#token">token</a></h3>
+<p><em>Returns information about the token that owns this account</em></p>
+<pre><code class="language-solidity">function token() public view returns (uint256 chainId, address tokenCollection, uint256 tokenId);
+</code></pre>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>chainId</code></td><td><code>uint256</code></td><td>the chainId of the  ERC721 token which owns this account</td></tr>
+<tr><td><code>tokenCollection</code></td><td><code>address</code></td><td>the contract address of the  ERC721 token which owns this account</td></tr>
+<tr><td><code>tokenId</code></td><td><code>uint256</code></td><td>the tokenId of the  ERC721 token which owns this account</td></tr>
+</tbody></table>
+</div>
+<h3 id="_context"><a class="header" href="#_context">_context</a></h3>
+<pre><code class="language-solidity">function _context() internal view returns (uint256 chainId, address tokenContract, uint256 tokenId);
+</code></pre>
+<h3 id="_call"><a class="header" href="#_call">_call</a></h3>
+<p><em>Executes a low-level call</em></p>
+<pre><code class="language-solidity">function _call(address to, uint256 value, bytes calldata data) internal returns (bytes memory result);
+</code></pre>
+<h2 id="events"><a class="header" href="#events">Events</a></h2>
+<h3 id="lockupdated"><a class="header" href="#lockupdated">LockUpdated</a></h3>
+<p><em>Emitted whenever the lock status of a account is updated</em></p>
+<pre><code class="language-solidity">event LockUpdated(uint256 timestamp);
+</code></pre>
+<h3 id="executorupdated"><a class="header" href="#executorupdated">ExecutorUpdated</a></h3>
+<p><em>Emitted whenever the executor for a account is updated</em></p>
+<pre><code class="language-solidity">event ExecutorUpdated(address owner, address executor);
+</code></pre>
+<h2 id="errors"><a class="header" href="#errors">Errors</a></h2>
+<h3 id="notauthorized"><a class="header" href="#notauthorized">NotAuthorized</a></h3>
+<pre><code class="language-solidity">error NotAuthorized();
+</code></pre>
+<h3 id="accountlocked"><a class="header" href="#accountlocked">AccountLocked</a></h3>
+<pre><code class="language-solidity">error AccountLocked();
+</code></pre>
+<h3 id="exceedsmaxlocktime"><a class="header" href="#exceedsmaxlocktime">ExceedsMaxLockTime</a></h3>
+<pre><code class="language-solidity">error ExceedsMaxLockTime();
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="accountregistry"><a class="header" href="#accountregistry">AccountRegistry</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/ERC6551/erc6551/ERC6551Registry.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+<a href="src/ERC6551/erc6551/ERC6551Registry.sol//src/interfaces/IERC6551Registry.sol/interface.IRegistry.html">IRegistry</a></p>
+<p><strong>Author:</strong>
+https://github.com/ethereum/EIPs/pull/6551/files</p>
+<p><em>Determines the address for each token bound account and performs deployment of accounts</em></p>
+<h2 id="functions-1"><a class="header" href="#functions-1">Functions</a></h2>
+<h3 id="createaccount"><a class="header" href="#createaccount">createAccount</a></h3>
+<pre><code class="language-solidity">function createAccount(
+    address implementation,
+    uint256 chainId,
+    address tokenContract,
+    uint256 tokenId,
+    uint256 salt,
+    bytes calldata initData
+) external returns (address);
+</code></pre>
+<h3 id="account"><a class="header" href="#account">account</a></h3>
+<pre><code class="language-solidity">function account(address implementation, uint256 chainId, address tokenContract, uint256 tokenId, uint256 salt)
+    external
+    view
+    returns (address);
+</code></pre>
+<h2 id="errors-1"><a class="header" href="#errors-1">Errors</a></h2>
+<h3 id="initializationfailed"><a class="header" href="#initializationfailed">InitializationFailed</a></h3>
+<pre><code class="language-solidity">error InitializationFailed();
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-2"><a class="header" href="#contents-2">Contents</a></h1>
+<ul>
+<li><a href="src/ERC6551/nft/CookieNFT.sol/contract.CookieNFT.html">CookieNFT</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cookienft"><a class="header" href="#cookienft">CookieNFT</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/ERC6551/nft/CookieNFT.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+ERC721</p>
+<h2 id="state-variables-1"><a class="header" href="#state-variables-1">State Variables</a></h2>
+<h3 id="erc6551reg"><a class="header" href="#erc6551reg">erc6551Reg</a></h3>
+<pre><code class="language-solidity">address public erc6551Reg;
+</code></pre>
+<h3 id="erc6551imp"><a class="header" href="#erc6551imp">erc6551Imp</a></h3>
+<pre><code class="language-solidity">address public erc6551Imp;
+</code></pre>
+<h3 id="cookiejarsummoner"><a class="header" href="#cookiejarsummoner">cookieJarSummoner</a></h3>
+<pre><code class="language-solidity">address public cookieJarSummoner;
+</code></pre>
+<h3 id="cookiejarimp"><a class="header" href="#cookiejarimp">cookieJarImp</a></h3>
+<pre><code class="language-solidity">address public cookieJarImp;
+</code></pre>
+<h3 id="cap"><a class="header" href="#cap">cap</a></h3>
+<pre><code class="language-solidity">uint256 public cap = 20;
+</code></pre>
+<h3 id="_tokenidcounter"><a class="header" href="#_tokenidcounter">_tokenIdCounter</a></h3>
+<pre><code class="language-solidity">Counters.Counter private _tokenIdCounter;
+</code></pre>
+<h3 id="cookies"><a class="header" href="#cookies">cookies</a></h3>
+<pre><code class="language-solidity">mapping(uint256 =&gt; Cookie) public cookies;
+</code></pre>
+<h2 id="functions-2"><a class="header" href="#functions-2">Functions</a></h2>
+<h3 id="constructor-1"><a class="header" href="#constructor-1">constructor</a></h3>
+<pre><code class="language-solidity">constructor(address _erc6551Reg, address _erc6551Imp, address _cookieJarSummoner, address _cookieJarImp)
+    ERC721(&quot;CookieJar Number 1&quot;, &quot;COOKIE1&quot;);
+</code></pre>
+<h3 id="cookiemint"><a class="header" href="#cookiemint">cookieMint</a></h3>
+<pre><code class="language-solidity">function cookieMint(
+    address to,
+    uint256 periodLength,
+    uint256 cookieAmount,
+    address cookieToken,
+    address[] memory allowList
+) public returns (address account, address cookieJar, uint256 tokenId);
+</code></pre>
+<h3 id="_cookiebalance"><a class="header" href="#_cookiebalance">_cookieBalance</a></h3>
+<pre><code class="language-solidity">function _cookieBalance(uint256 tokenId) internal view returns (uint256);
+</code></pre>
+<h3 id="_cookiedecimal"><a class="header" href="#_cookiedecimal">_cookieDecimal</a></h3>
+<pre><code class="language-solidity">function _cookieDecimal(uint256 tokenId) internal view returns (uint256);
+</code></pre>
+<h3 id="_cookiesymbol"><a class="header" href="#_cookiesymbol">_cookieSymbol</a></h3>
+<pre><code class="language-solidity">function _cookieSymbol(uint256 tokenId) internal view returns (string memory);
+</code></pre>
+<h3 id="_constructtokenuri"><a class="header" href="#_constructtokenuri">_constructTokenURI</a></h3>
+<p>Constructs the tokenURI, separated out from the public function as its a big function.
+Generates the json data URI
+param: _tokenId the tokenId</p>
+<pre><code class="language-solidity">function _constructTokenURI(uint256 _tokenId) internal view returns (string memory);
+</code></pre>
+<h3 id="tokenuri"><a class="header" href="#tokenuri">tokenURI</a></h3>
+<pre><code class="language-solidity">function tokenURI(uint256 _tokenId) public view override returns (string memory);
+</code></pre>
+<h2 id="events-1"><a class="header" href="#events-1">Events</a></h2>
+<h3 id="accountcreated"><a class="header" href="#accountcreated">AccountCreated</a></h3>
+<pre><code class="language-solidity">event AccountCreated(address indexed account, address indexed cookieJar, uint256 tokenId);
+</code></pre>
+<h2 id="structs"><a class="header" href="#structs">Structs</a></h2>
+<h3 id="cookie"><a class="header" href="#cookie">Cookie</a></h3>
+<pre><code class="language-solidity">struct Cookie {
+    address cookieJar;
+    uint256 periodLength;
+    uint256 cookieAmount;
+    address cookieToken;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="impcookiejar6551"><a class="header" href="#impcookiejar6551">ImpCookieJar6551</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/ERC6551/ImpCookieJar6551.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+<a href="src/ERC6551/ImpCookieJar6551.sol//src/core/CookieJarCore.sol/abstract.CookieJarCore.html">CookieJarCore</a>, <a href="src/ERC6551/ImpCookieJar6551.sol//src/core/givers/Giver6551.sol/abstract.Giver6551.html">Giver6551</a></p>
+<h2 id="state-variables-2"><a class="header" href="#state-variables-2">State Variables</a></h2>
+<h3 id="allowlist"><a class="header" href="#allowlist">allowList</a></h3>
+<pre><code class="language-solidity">mapping(address allowed =&gt; bool isAllowed) public allowList;
+</code></pre>
+<h2 id="functions-3"><a class="header" href="#functions-3">Functions</a></h2>
+<h3 id="setup"><a class="header" href="#setup">setUp</a></h3>
+<pre><code class="language-solidity">function setUp(bytes memory _initializationParams) public virtual override(CookieJarCore) initializer;
+</code></pre>
+<h3 id="givecookie"><a class="header" href="#givecookie">giveCookie</a></h3>
+<pre><code class="language-solidity">function giveCookie(address cookieMonster, uint256 amount) internal override(CookieJarCore);
+</code></pre>
+<h3 id="isallowlist"><a class="header" href="#isallowlist">isAllowList</a></h3>
+<pre><code class="language-solidity">function isAllowList(address account) internal view override returns (bool);
+</code></pre>
+<h3 id="setallowlist"><a class="header" href="#setallowlist">setAllowList</a></h3>
+<pre><code class="language-solidity">function setAllowList(address _address, bool _isAllowed) external onlyOwner;
+</code></pre>
+<h3 id="batchallowlist"><a class="header" href="#batchallowlist">batchAllowList</a></h3>
+<pre><code class="language-solidity">function batchAllowList(address[] memory _addresses, bool[] memory _isAlloweds) external onlyOwner;
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-3"><a class="header" href="#contents-3">Contents</a></h1>
+<ul>
+<li><a href="src/SafeModule/BaalCookieJar.sol/contract.ZodiacBaalCookieJar.html">ZodiacBaalCookieJar</a></li>
+<li><a href="src/SafeModule/ERC20CookieJar.sol/contract.ZodiacERC20CookieJar.html">ZodiacERC20CookieJar</a></li>
+<li><a href="src/SafeModule/ERC721CookieJar.sol/contract.ZodiacERC721CookieJar.html">ZodiacERC721CookieJar</a></li>
+<li><a href="src/SafeModule/ListCookieJar.sol/contract.ZodiacListCookieJar.html">ZodiacListCookieJar</a></li>
+<li><a href="src/SafeModule/OpenCookieJar.sol/contract.ZodiacOpenCookieJar.html">ZodiacOpenCookieJar</a></li>
+<li><a href="src/SafeModule/ZodiacCookieJar.sol/contract.ZodiacCookieJar.html">ZodiacCookieJar</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="zodiacbaalcookiejar"><a class="header" href="#zodiacbaalcookiejar">ZodiacBaalCookieJar</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/SafeModule/BaalCookieJar.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+<a href="src/SafeModule/BaalCookieJar.sol//src/core/allowlists/BaalAllowlist.sol/contract.BaalAllowlist.html">BaalAllowlist</a>, <a href="src/SafeModule/BaalCookieJar.sol//src/SafeModule/ZodiacCookieJar.sol/contract.ZodiacCookieJar.html">ZodiacCookieJar</a></p>
+<h2 id="functions-4"><a class="header" href="#functions-4">Functions</a></h2>
+<h3 id="setup-1"><a class="header" href="#setup-1">setUp</a></h3>
+<pre><code class="language-solidity">function setUp(bytes memory _initializationParams) public override(BaalAllowlist, ZodiacCookieJar);
+</code></pre>
+<h3 id="isallowlist-1"><a class="header" href="#isallowlist-1">isAllowList</a></h3>
+<pre><code class="language-solidity">function isAllowList(address user) internal view override returns (bool);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="zodiacerc20cookiejar"><a class="header" href="#zodiacerc20cookiejar">ZodiacERC20CookieJar</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/SafeModule/ERC20CookieJar.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+<a href="src/SafeModule/ERC20CookieJar.sol//src/core/allowlists/ERC20Allowlist.sol/contract.ERC20Allowlist.html">ERC20Allowlist</a>, <a href="src/SafeModule/ERC20CookieJar.sol//src/SafeModule/ZodiacCookieJar.sol/contract.ZodiacCookieJar.html">ZodiacCookieJar</a></p>
+<h2 id="functions-5"><a class="header" href="#functions-5">Functions</a></h2>
+<h3 id="setup-2"><a class="header" href="#setup-2">setUp</a></h3>
+<pre><code class="language-solidity">function setUp(bytes memory _initializationParams) public override(ERC20Allowlist, ZodiacCookieJar);
+</code></pre>
+<h3 id="isallowlist-2"><a class="header" href="#isallowlist-2">isAllowList</a></h3>
+<pre><code class="language-solidity">function isAllowList(address user) internal view override returns (bool);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="zodiacerc721cookiejar"><a class="header" href="#zodiacerc721cookiejar">ZodiacERC721CookieJar</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/SafeModule/ERC721CookieJar.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+<a href="src/SafeModule/ERC721CookieJar.sol//src/core/allowlists/ERC721Allowlist.sol/contract.ERC721Allowlist.html">ERC721Allowlist</a>, <a href="src/SafeModule/ERC721CookieJar.sol//src/SafeModule/ZodiacCookieJar.sol/contract.ZodiacCookieJar.html">ZodiacCookieJar</a></p>
+<h2 id="functions-6"><a class="header" href="#functions-6">Functions</a></h2>
+<h3 id="setup-3"><a class="header" href="#setup-3">setUp</a></h3>
+<pre><code class="language-solidity">function setUp(bytes memory _initializationParams) public override(ERC721Allowlist, ZodiacCookieJar);
+</code></pre>
+<h3 id="isallowlist-3"><a class="header" href="#isallowlist-3">isAllowList</a></h3>
+<pre><code class="language-solidity">function isAllowList(address user) internal view override returns (bool);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="zodiaclistcookiejar"><a class="header" href="#zodiaclistcookiejar">ZodiacListCookieJar</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/SafeModule/ListCookieJar.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+<a href="src/SafeModule/ListCookieJar.sol//src/core/allowlists/MappedAllowlist.sol/contract.MappedAllowlist.html">MappedAllowlist</a>, <a href="src/SafeModule/ListCookieJar.sol//src/SafeModule/ZodiacCookieJar.sol/contract.ZodiacCookieJar.html">ZodiacCookieJar</a></p>
+<h2 id="functions-7"><a class="header" href="#functions-7">Functions</a></h2>
+<h3 id="setup-4"><a class="header" href="#setup-4">setUp</a></h3>
+<pre><code class="language-solidity">function setUp(bytes memory _initializationParams) public override(MappedAllowlist, ZodiacCookieJar);
+</code></pre>
+<h3 id="isallowlist-4"><a class="header" href="#isallowlist-4">isAllowList</a></h3>
+<pre><code class="language-solidity">function isAllowList(address user) internal view override returns (bool);
+</code></pre>
+<h3 id="setallowlist-1"><a class="header" href="#setallowlist-1">setAllowList</a></h3>
+<pre><code class="language-solidity">function setAllowList(address _address, bool _isAllowed) external onlyOwner;
+</code></pre>
+<h3 id="batchallowlist-1"><a class="header" href="#batchallowlist-1">batchAllowList</a></h3>
+<pre><code class="language-solidity">function batchAllowList(address[] memory _addresses, bool[] memory _isAllowed) external onlyOwner;
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="zodiacopencookiejar"><a class="header" href="#zodiacopencookiejar">ZodiacOpenCookieJar</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/SafeModule/OpenCookieJar.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+<a href="src/SafeModule/OpenCookieJar.sol//src/SafeModule/ZodiacCookieJar.sol/contract.ZodiacCookieJar.html">ZodiacCookieJar</a></p>
+<h2 id="functions-8"><a class="header" href="#functions-8">Functions</a></h2>
+<h3 id="setup-5"><a class="header" href="#setup-5">setUp</a></h3>
+<pre><code class="language-solidity">function setUp(bytes memory _initializationParams) public override;
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="zodiaccookiejar"><a class="header" href="#zodiaccookiejar">ZodiacCookieJar</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/SafeModule/ZodiacCookieJar.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+<a href="src/SafeModule/ZodiacCookieJar.sol//src/core/CookieJarCore.sol/abstract.CookieJarCore.html">CookieJarCore</a>, <a href="src/SafeModule/ZodiacCookieJar.sol//src/core/givers/GiverZodiac.sol/abstract.GiverZodiac.html">GiverZodiac</a></p>
+<h2 id="functions-9"><a class="header" href="#functions-9">Functions</a></h2>
+<h3 id="setup-6"><a class="header" href="#setup-6">setUp</a></h3>
+<p>Sets up the contract with the given initialization parameters.</p>
+<p><em>The initialization parameters are decoded from a bytes array into the Safe target, period length, cookie
+amount, and cookie token.
+The Safe target is set as both the avatar and target for the module.  This means that the module cannot be
+chained in a series of modules.
+A check is done to ensure the cookie amount is greater than the percentage points constant.
+The period length, cookie amount, and cookie token are then set as per the parameters.
+An event is emitted with the initialization parameters.</em></p>
+<pre><code class="language-solidity">function setUp(bytes memory _initializationParams)
+    public
+    virtual
+    override(CookieJarCore, FactoryFriendly)
+    initializer;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>_initializationParams</code></td><td><code>bytes</code></td><td>The initialization parameters, encoded as a bytes array.</td></tr>
+</tbody></table>
+</div>
+<h3 id="reachinjar"><a class="header" href="#reachinjar">reachInJar</a></h3>
+<p>Allows a member to make a claim and provides a reason for the claim.</p>
+<p><em>Checks if the caller is a member and if the claim period is valid. If the requirements are met,
+it updates the last claim timestamp for the caller, gives a cookie to the caller, and posts the reason for the
+claim.
+This function can only be called by the member themselves, and not on behalf of others.</em></p>
+<pre><code class="language-solidity">function reachInJar(string calldata _reason) public override;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>_reason</code></td><td><code>string</code></td><td>The reason provided by the member for making the claim. This will be posted publicly.</td></tr>
+</tbody></table>
+</div>
+<h3 id="reachinjar-1"><a class="header" href="#reachinjar-1">reachInJar</a></h3>
+<p>Allows a member to make a claim on behalf of another address and provides a reason for the claim.</p>
+<p><em>Checks if the caller is a member and if the claim period is valid. If the requirements are met,
+it updates the last claim timestamp for the caller, gives a cookie to the specified address, and posts the reason
+for the claim.
+This function can be called by a member on behalf of another address, allowing for more flexible distribution.</em></p>
+<pre><code class="language-solidity">function reachInJar(address cookieMonster, string calldata _reason) public override;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>cookieMonster</code></td><td><code>address</code></td><td>The address to receive the cookie.</td></tr>
+<tr><td><code>_reason</code></td><td><code>string</code></td><td>The reason provided by the member for making the claim. This will be posted publicly.</td></tr>
+</tbody></table>
+</div>
+<h3 id="givecookie-1"><a class="header" href="#givecookie-1">giveCookie</a></h3>
+<p>Transfers the specified amount of cookies to a given address.</p>
+<p><em>Calculates the sustainability fee and deducts it from the amount. Then, depending on whether the cookie is
+an ERC20 token or ether, it executes the transfer operation. Finally, it emits a GiveCookie event.</em></p>
+<pre><code class="language-solidity">function giveCookie(address cookieMonster, uint256 amount) internal override;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>cookieMonster</code></td><td><code>address</code></td><td>The address to receive the cookie.</td></tr>
+<tr><td><code>amount</code></td><td><code>uint256</code></td><td>The amount of cookie to be transferred.</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="contents-4"><a class="header" href="#contents-4">Contents</a></h1>
+<ul>
+<li><a href="src/core//src/core/allowlists">allowlists</a></li>
+<li><a href="src/core//src/core/givers">givers</a></li>
+<li><a href="src/core/CookieJarCore.sol/abstract.CookieJarCore.html">CookieJarCore</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-5"><a class="header" href="#contents-5">Contents</a></h1>
+<ul>
+<li><a href="src/core/allowlists/BaalAllowlist.sol/contract.BaalAllowlist.html">BaalAllowlist</a></li>
+<li><a href="src/core/allowlists/ERC20Allowlist.sol/contract.ERC20Allowlist.html">ERC20Allowlist</a></li>
+<li><a href="src/core/allowlists/ERC721Allowlist.sol/contract.ERC721Allowlist.html">ERC721Allowlist</a></li>
+<li><a href="src/core/allowlists/MappedAllowlist.sol/contract.MappedAllowlist.html">MappedAllowlist</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="baalallowlist"><a class="header" href="#baalallowlist">BaalAllowlist</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/core/allowlists/BaalAllowlist.sol">Git Source</a></p>
+<h2 id="state-variables-3"><a class="header" href="#state-variables-3">State Variables</a></h2>
+<h3 id="dao"><a class="header" href="#dao">dao</a></h3>
+<pre><code class="language-solidity">address public dao;
+</code></pre>
+<h3 id="threshold"><a class="header" href="#threshold">threshold</a></h3>
+<pre><code class="language-solidity">uint256 public threshold;
+</code></pre>
+<h3 id="useshares"><a class="header" href="#useshares">useShares</a></h3>
+<pre><code class="language-solidity">bool public useShares;
+</code></pre>
+<h3 id="useloot"><a class="header" href="#useloot">useLoot</a></h3>
+<pre><code class="language-solidity">bool public useLoot;
+</code></pre>
+<h2 id="functions-10"><a class="header" href="#functions-10">Functions</a></h2>
+<h3 id="setup-7"><a class="header" href="#setup-7">setUp</a></h3>
+<pre><code class="language-solidity">function setUp(bytes memory _initializationParams) public virtual;
+</code></pre>
+<h3 id="_isallowlist"><a class="header" href="#_isallowlist">_isAllowList</a></h3>
+<pre><code class="language-solidity">function _isAllowList(address user) internal view returns (bool);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="erc20allowlist"><a class="header" href="#erc20allowlist">ERC20Allowlist</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/core/allowlists/ERC20Allowlist.sol">Git Source</a></p>
+<h2 id="state-variables-4"><a class="header" href="#state-variables-4">State Variables</a></h2>
+<h3 id="erc20addr"><a class="header" href="#erc20addr">erc20Addr</a></h3>
+<pre><code class="language-solidity">address public erc20Addr;
+</code></pre>
+<h3 id="threshold-1"><a class="header" href="#threshold-1">threshold</a></h3>
+<pre><code class="language-solidity">uint256 public threshold;
+</code></pre>
+<h2 id="functions-11"><a class="header" href="#functions-11">Functions</a></h2>
+<h3 id="setup-8"><a class="header" href="#setup-8">setUp</a></h3>
+<pre><code class="language-solidity">function setUp(bytes memory _initializationParams) public virtual;
+</code></pre>
+<h3 id="_isallowlist-1"><a class="header" href="#_isallowlist-1">_isAllowList</a></h3>
+<pre><code class="language-solidity">function _isAllowList(address user) internal view returns (bool);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="erc721allowlist"><a class="header" href="#erc721allowlist">ERC721Allowlist</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/core/allowlists/ERC721Allowlist.sol">Git Source</a></p>
+<h2 id="state-variables-5"><a class="header" href="#state-variables-5">State Variables</a></h2>
+<h3 id="erc721addr"><a class="header" href="#erc721addr">erc721Addr</a></h3>
+<pre><code class="language-solidity">address public erc721Addr;
+</code></pre>
+<h2 id="functions-12"><a class="header" href="#functions-12">Functions</a></h2>
+<h3 id="setup-9"><a class="header" href="#setup-9">setUp</a></h3>
+<pre><code class="language-solidity">function setUp(bytes memory _initializationParams) public virtual;
+</code></pre>
+<h3 id="_isallowlist-2"><a class="header" href="#_isallowlist-2">_isAllowList</a></h3>
+<pre><code class="language-solidity">function _isAllowList(address user) internal view returns (bool);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mappedallowlist"><a class="header" href="#mappedallowlist">MappedAllowlist</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/core/allowlists/MappedAllowlist.sol">Git Source</a></p>
+<h2 id="state-variables-6"><a class="header" href="#state-variables-6">State Variables</a></h2>
+<h3 id="allowlist-1"><a class="header" href="#allowlist-1">allowList</a></h3>
+<pre><code class="language-solidity">mapping(address allowed =&gt; bool exists) public allowList;
+</code></pre>
+<h2 id="functions-13"><a class="header" href="#functions-13">Functions</a></h2>
+<h3 id="setup-10"><a class="header" href="#setup-10">setUp</a></h3>
+<pre><code class="language-solidity">function setUp(bytes memory _initializationParams) public virtual;
+</code></pre>
+<h3 id="_isallowlist-3"><a class="header" href="#_isallowlist-3">_isAllowList</a></h3>
+<pre><code class="language-solidity">function _isAllowList(address user) internal view returns (bool);
+</code></pre>
+<h3 id="_setallowlist"><a class="header" href="#_setallowlist">_setAllowList</a></h3>
+<pre><code class="language-solidity">function _setAllowList(address _address, bool _isAllowed) internal;
+</code></pre>
+<h3 id="_batchallowlist"><a class="header" href="#_batchallowlist">_batchAllowList</a></h3>
+<pre><code class="language-solidity">function _batchAllowList(address[] memory _addresses, bool[] memory _isAlloweds) internal;
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-6"><a class="header" href="#contents-6">Contents</a></h1>
+<ul>
+<li><a href="src/core/givers/Giver6551.sol/abstract.Giver6551.html">Giver6551</a></li>
+<li><a href="src/core/givers/GiverZodiac.sol/abstract.GiverZodiac.html">GiverZodiac</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="giver6551"><a class="header" href="#giver6551">Giver6551</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/core/givers/Giver6551.sol">Git Source</a></p>
+<h2 id="state-variables-7"><a class="header" href="#state-variables-7">State Variables</a></h2>
+<h3 id="target"><a class="header" href="#target">target</a></h3>
+<pre><code class="language-solidity">address public target;
+</code></pre>
+<h3 id="perc_points"><a class="header" href="#perc_points">PERC_POINTS</a></h3>
+<p>The constant that represents percentage points for calculations.</p>
+<pre><code class="language-solidity">uint256 public constant PERC_POINTS = 1e6;
+</code></pre>
+<h3 id="sustainability_fee"><a class="header" href="#sustainability_fee">SUSTAINABILITY_FEE</a></h3>
+<p>The fee charged on each transaction, set at 1% (10,000 out of a million).</p>
+<pre><code class="language-solidity">uint256 public constant SUSTAINABILITY_FEE = 10_000;
+</code></pre>
+<h3 id="sustainability_addr"><a class="header" href="#sustainability_addr">SUSTAINABILITY_ADDR</a></h3>
+<p>The address for the sustainability fee.</p>
+<pre><code class="language-solidity">address public constant SUSTAINABILITY_ADDR = 0x4A9a27d614a74Ee5524909cA27bdBcBB7eD3b315;
+</code></pre>
+<h2 id="functions-14"><a class="header" href="#functions-14">Functions</a></h2>
+<h3 id="givecookie-2"><a class="header" href="#givecookie-2">giveCookie</a></h3>
+<pre><code class="language-solidity">function giveCookie(address cookieMonster, uint256 amount, address cookieToken) internal;
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="giverzodiac"><a class="header" href="#giverzodiac">GiverZodiac</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/core/givers/GiverZodiac.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+Module</p>
+<h2 id="state-variables-8"><a class="header" href="#state-variables-8">State Variables</a></h2>
+<h3 id="perc_points-1"><a class="header" href="#perc_points-1">PERC_POINTS</a></h3>
+<p>The constant that represents percentage points for calculations.</p>
+<pre><code class="language-solidity">uint256 public constant PERC_POINTS = 1e6;
+</code></pre>
+<h3 id="sustainability_fee-1"><a class="header" href="#sustainability_fee-1">SUSTAINABILITY_FEE</a></h3>
+<p>The fee charged on each transaction, set at 1% (10,000 out of a million).</p>
+<pre><code class="language-solidity">uint256 public constant SUSTAINABILITY_FEE = 10_000;
+</code></pre>
+<h3 id="sustainability_addr-1"><a class="header" href="#sustainability_addr-1">SUSTAINABILITY_ADDR</a></h3>
+<p>The address for the sustainability fee.</p>
+<pre><code class="language-solidity">address public constant SUSTAINABILITY_ADDR = 0x4A9a27d614a74Ee5524909cA27bdBcBB7eD3b315;
+</code></pre>
+<h2 id="functions-15"><a class="header" href="#functions-15">Functions</a></h2>
+<h3 id="givecookie-3"><a class="header" href="#givecookie-3">giveCookie</a></h3>
+<pre><code class="language-solidity">function giveCookie(address cookieMonster, uint256 amount, address cookieToken) internal;
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cookiejarcore"><a class="header" href="#cookiejarcore">CookieJarCore</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/core/CookieJarCore.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+Initializable, OwnableUpgradeable, <a href="src/core/CookieJarCore.sol//src/interfaces/ICookieJar.sol/interface.ICookieJar.html">ICookieJar</a></p>
+<h2 id="state-variables-9"><a class="header" href="#state-variables-9">State Variables</a></h2>
+<h3 id="poster_tag"><a class="header" href="#poster_tag">POSTER_TAG</a></h3>
+<p>The tag used for posts related to this contract.</p>
+<pre><code class="language-solidity">string public constant POSTER_TAG = &quot;CookieJar&quot;;
+</code></pre>
+<h3 id="poster_addr"><a class="header" href="#poster_addr">POSTER_ADDR</a></h3>
+<p>The address for the poster.</p>
+<pre><code class="language-solidity">address public constant POSTER_ADDR = 0x000000000000cd17345801aa8147b8D3950260FF;
+</code></pre>
+<h3 id="poster_uid"><a class="header" href="#poster_uid">POSTER_UID</a></h3>
+<p>The UID for the poster.</p>
+<pre><code class="language-solidity">string public POSTER_UID;
+</code></pre>
+<h3 id="cookieamount"><a class="header" href="#cookieamount">cookieAmount</a></h3>
+<p>The amount of &quot;cookie&quot; that can be claimed.</p>
+<pre><code class="language-solidity">uint256 public cookieAmount;
+</code></pre>
+<h3 id="cookietoken"><a class="header" href="#cookietoken">cookieToken</a></h3>
+<p>The address of the token that is being distributed.</p>
+<pre><code class="language-solidity">address public cookieToken;
+</code></pre>
+<h3 id="periodlength"><a class="header" href="#periodlength">periodLength</a></h3>
+<p>The length of the period between claims.</p>
+<pre><code class="language-solidity">uint256 public periodLength;
+</code></pre>
+<h3 id="claims"><a class="header" href="#claims">claims</a></h3>
+<pre><code class="language-solidity">mapping(address claimer =&gt; uint256 dateTime) public claims;
+</code></pre>
+<h2 id="functions-16"><a class="header" href="#functions-16">Functions</a></h2>
+<h3 id="setup-11"><a class="header" href="#setup-11">setUp</a></h3>
+<p>Sets up the contract with the given initialization parameters.</p>
+<p><em>The initialization parameters are decoded from a bytes array into the Safe target, period length, cookie
+amount, and cookie token.
+The Safe target is set as both the avatar and target for the module.  This means that the module cannot be
+chained in a series of modules.
+A check is done to ensure the cookie amount is greater than the percentage points constant.
+The period length, cookie amount, and cookie token are then set as per the parameters.
+An event is emitted with the initialization parameters.</em></p>
+<pre><code class="language-solidity">function setUp(bytes memory _initializationParams) public virtual;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>_initializationParams</code></td><td><code>bytes</code></td><td>The initialization parameters, encoded as a bytes array.</td></tr>
+</tbody></table>
+</div>
+<h3 id="reachinjar-2"><a class="header" href="#reachinjar-2">reachInJar</a></h3>
+<p>Allows a member to make a claim and provides a reason for the claim.</p>
+<p><em>Checks if the caller is a member and if the claim period is valid. If the requirements are met,
+it updates the last claim timestamp for the caller, gives a cookie to the caller, and posts the reason for the
+claim.
+This function can only be called by the member themselves, and not on behalf of others.</em></p>
+<pre><code class="language-solidity">function reachInJar(string calldata _reason) public virtual;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>_reason</code></td><td><code>string</code></td><td>The reason provided by the member for making the claim. This will be posted publicly.</td></tr>
+</tbody></table>
+</div>
+<h3 id="reachinjar-3"><a class="header" href="#reachinjar-3">reachInJar</a></h3>
+<p>Allows a member to make a claim on behalf of another address and provides a reason for the claim.</p>
+<p><em>Checks if the caller is a member and if the claim period is valid. If the requirements are met,
+it updates the last claim timestamp for the caller, gives a cookie to the specified address, and posts the reason
+for the claim.
+This function can be called by a member on behalf of another address, allowing for more flexible distribution.</em></p>
+<pre><code class="language-solidity">function reachInJar(address cookieMonster, string calldata _reason) public virtual;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>cookieMonster</code></td><td><code>address</code></td><td>The address to receive the cookie.</td></tr>
+<tr><td><code>_reason</code></td><td><code>string</code></td><td>The reason provided by the member for making the claim. This will be posted publicly.</td></tr>
+</tbody></table>
+</div>
+<h3 id="givecookie-4"><a class="header" href="#givecookie-4">giveCookie</a></h3>
+<p>Transfers the specified amount of cookies to a given address.</p>
+<p><em>Calculates the sustainability fee and deducts it from the amount. Then, depending on whether the cookie is
+an ERC20 token or ether, it executes the transfer operation. Finally, it emits a GiveCookie event.</em></p>
+<pre><code class="language-solidity">function giveCookie(address cookieMonster, uint256 amount) internal virtual;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>cookieMonster</code></td><td><code>address</code></td><td>The address to receive the cookie.</td></tr>
+<tr><td><code>amount</code></td><td><code>uint256</code></td><td>The amount of cookie to be transferred.</td></tr>
+</tbody></table>
+</div>
+<h3 id="assessreason"><a class="header" href="#assessreason">assessReason</a></h3>
+<p>Allows a member to assess the reason for a claim.</p>
+<p><em>The member can give a thumbs up or thumbs down to a claim reason. The assessment is posted to the Poster
+contract.</em></p>
+<pre><code class="language-solidity">function assessReason(string calldata _cookieUid, bool _isGood) public;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>_cookieUid</code></td><td><code>string</code></td><td>The unique identifier of the claim reason to be assessed.</td></tr>
+<tr><td><code>_isGood</code></td><td><code>bool</code></td><td>A boolean indicating whether the assessment is positive (true) or negative (false). { tag: CookieJar.&lt;jar_uid&gt;.reaction.&lt;cookie_uid&gt; content: &quot;...reason...&quot; }</td></tr>
+</tbody></table>
+</div>
+<h3 id="canclaim"><a class="header" href="#canclaim">canClaim</a></h3>
+<p>Checks if the caller is eligible to make a claim.</p>
+<p><em>Calls the isAllowList and isValidClaimPeriod functions to check if the caller is a member and within the
+valid claim period.</em></p>
+<pre><code class="language-solidity">function canClaim(address user) public view returns (bool allowed);
+</code></pre>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>allowed</code></td><td><code>bool</code></td><td>A boolean indicating whether the caller is eligible to make a claim.</td></tr>
+</tbody></table>
+</div>
+<h3 id="isallowlist-5"><a class="header" href="#isallowlist-5">isAllowList</a></h3>
+<p>INTERNAL  *</p>
+<p>Checks if the caller is a member.</p>
+<p><em>Always returns true in this contract, but is expected to be overridden in a derived contract.</em></p>
+<pre><code class="language-solidity">function isAllowList(address user) internal view virtual returns (bool);
+</code></pre>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>bool</code></td><td>A boolean indicating whether the caller is a member.</td></tr>
+</tbody></table>
+</div>
+<h3 id="isvalidclaimperiod"><a class="header" href="#isvalidclaimperiod">isValidClaimPeriod</a></h3>
+<p>Checks if the claim period for the caller is valid.</p>
+<p><em>Returns true if the current time minus the last claim time of the caller is greater than the period length,
+or if the caller has not made a claim yet (i.e., their last claim time is zero).</em></p>
+<pre><code class="language-solidity">function isValidClaimPeriod(address user) internal view returns (bool);
+</code></pre>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>bool</code></td><td>A boolean indicating whether the claim period for the caller is valid.</td></tr>
+</tbody></table>
+</div>
+<h3 id="postreason"><a class="header" href="#postreason">postReason</a></h3>
+<p>Posts the reason for a claim.</p>
+<p><em>Generates a unique identifier (uid) for the post using keccak256. Then, it calls the post function of the
+Poster contract.</em></p>
+<pre><code class="language-solidity">function postReason(string calldata _reason) internal;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>_reason</code></td><td><code>string</code></td><td>The reason provided by the member for making the claim. { tag: CookieJar.&lt;jar_uid&gt;.reason.&lt;cookie_uid&gt; content: &quot;...reason...&quot; }</td></tr>
+</tbody></table>
+</div>
+<h3 id="setconfig"><a class="header" href="#setconfig">setConfig</a></h3>
+<p>CONFIG *</p>
+<p>Allows owner to change congiguration.</p>
+<p><em>Checks if the caller is a member and if the claim period is valid. If the requirements are met,</em></p>
+<pre><code class="language-solidity">function setConfig(uint256 _periodLength, uint256 _cookieAmount, address _cookieToken) public virtual onlyOwner;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>_periodLength</code></td><td><code>uint256</code></td><td>The length of the period between claims.</td></tr>
+<tr><td><code>_cookieAmount</code></td><td><code>uint256</code></td><td>The amount of &quot;cookie&quot; that can be claimed.</td></tr>
+<tr><td><code>_cookieToken</code></td><td><code>address</code></td><td>The address of the token that is being distributed, zero address for native.</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="contents-7"><a class="header" href="#contents-7">Contents</a></h1>
+<ul>
+<li><a href="src/factory/CookieJarFactory.sol/contract.CookieJarFactory.html">CookieJarFactory</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cookiejarfactory"><a class="header" href="#cookiejarfactory">CookieJarFactory</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/factory/CookieJarFactory.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+Ownable</p>
+<h2 id="state-variables-10"><a class="header" href="#state-variables-10">State Variables</a></h2>
+<h3 id="moduleproxyfactory"><a class="header" href="#moduleproxyfactory">moduleProxyFactory</a></h3>
+<pre><code class="language-solidity">ModuleProxyFactory internal moduleProxyFactory;
+</code></pre>
+<h2 id="functions-17"><a class="header" href="#functions-17">Functions</a></h2>
+<h3 id="constructor-2"><a class="header" href="#constructor-2">constructor</a></h3>
+<pre><code class="language-solidity">constructor();
+</code></pre>
+<h3 id="setproxyfactory"><a class="header" href="#setproxyfactory">setProxyFactory</a></h3>
+<pre><code class="language-solidity">function setProxyFactory(address _moduleProxyFactory) public onlyOwner;
+</code></pre>
+<h3 id="summoncookiejar"><a class="header" href="#summoncookiejar">summonCookieJar</a></h3>
+<pre><code class="language-solidity">function summonCookieJar(address _singleton, bytes memory _initializer, string memory _details, uint256 _saltNonce)
+    public
+    returns (address);
+</code></pre>
+<h2 id="events-2"><a class="header" href="#events-2">Events</a></h2>
+<h3 id="summoncookiejar-1"><a class="header" href="#summoncookiejar-1">SummonCookieJar</a></h3>
+<pre><code class="language-solidity">event SummonCookieJar(address cookieJar, bytes initializer, string details, string uid);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-8"><a class="header" href="#contents-8">Contents</a></h1>
+<ul>
+<li><a href="src/interfaces/ICookieJar.sol/interface.ICookieJar.html">ICookieJar</a></li>
+<li><a href="src/interfaces/IERC6551.sol/interface.IAccount.html">IAccount</a></li>
+<li><a href="src/interfaces/IERC6551Registry.sol/interface.IRegistry.html">IRegistry</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="icookiejar"><a class="header" href="#icookiejar">ICookieJar</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/interfaces/ICookieJar.sol">Git Source</a></p>
+<h2 id="functions-18"><a class="header" href="#functions-18">Functions</a></h2>
+<h3 id="setup-12"><a class="header" href="#setup-12">setUp</a></h3>
+<p>Sets up the contract with the given initialization parameters.</p>
+<p><em>The initialization parameters are decoded from a bytes array into the Safe target, period length, cookie
+amount, and cookie token.
+The Safe target is set as both the avatar and target for the module.  This means that the module cannot be
+chained in a series of modules.
+A check is done to ensure the cookie amount is greater than the percentage points constant.
+The period length, cookie amount, and cookie token are then set as per the parameters.
+An event is emitted with the initialization parameters.</em></p>
+<pre><code class="language-solidity">function setUp(bytes memory _initializationParams) external;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>_initializationParams</code></td><td><code>bytes</code></td><td>The initialization parameters, encoded as a bytes array. // TODO: add initializer to this contract</td></tr>
+</tbody></table>
+</div>
+<h3 id="setconfig-1"><a class="header" href="#setconfig-1">setConfig</a></h3>
+<p>Allows owner to change congiguration.</p>
+<p><em>Checks if the caller is a member and if the claim period is valid. If the requirements are met,</em></p>
+<pre><code class="language-solidity">function setConfig(uint256 _periodLength, uint256 _cookieAmount, address _cookieToken) external;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>_periodLength</code></td><td><code>uint256</code></td><td>The length of the period between claims.</td></tr>
+<tr><td><code>_cookieAmount</code></td><td><code>uint256</code></td><td>The amount of &quot;cookie&quot; that can be claimed.</td></tr>
+<tr><td><code>_cookieToken</code></td><td><code>address</code></td><td>The address of the token that is being distributed, zero address for native.</td></tr>
+</tbody></table>
+</div>
+<h3 id="reachinjar-4"><a class="header" href="#reachinjar-4">reachInJar</a></h3>
+<p>Allows a member to make a claim and provides a reason for the claim.</p>
+<p><em>Checks if the caller is a member and if the claim period is valid. If the requirements are met,
+it updates the last claim timestamp for the caller, gives a cookie to the caller, and posts the reason for the
+claim.
+This function can only be called by the member themselves, and not on behalf of others.</em></p>
+<pre><code class="language-solidity">function reachInJar(string calldata _reason) external;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>_reason</code></td><td><code>string</code></td><td>The reason provided by the member for making the claim. This will be posted publicly.</td></tr>
+</tbody></table>
+</div>
+<h3 id="reachinjar-5"><a class="header" href="#reachinjar-5">reachInJar</a></h3>
+<p>Allows a member to make a claim on behalf of another address and provides a reason for the claim.</p>
+<p><em>Checks if the caller is a member and if the claim period is valid. If the requirements are met,
+it updates the last claim timestamp for the caller, gives a cookie to the specified address, and posts the reason
+for the claim.
+This function can be called by a member on behalf of another address, allowing for more flexible distribution.</em></p>
+<pre><code class="language-solidity">function reachInJar(address cookieMonster, string calldata _reason) external;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>cookieMonster</code></td><td><code>address</code></td><td>The address to receive the cookie.</td></tr>
+<tr><td><code>_reason</code></td><td><code>string</code></td><td>The reason provided by the member for making the claim. This will be posted publicly.</td></tr>
+</tbody></table>
+</div>
+<h3 id="assessreason-1"><a class="header" href="#assessreason-1">assessReason</a></h3>
+<p>Allows a member to assess the reason for a claim.</p>
+<p><em>The member can give a thumbs up or thumbs down to a claim reason. The assessment is posted to the Poster
+contract.</em></p>
+<pre><code class="language-solidity">function assessReason(string calldata _uid, bool _isGood) external;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>_uid</code></td><td><code>string</code></td><td>The unique identifier of the claim reason to be assessed.</td></tr>
+<tr><td><code>_isGood</code></td><td><code>bool</code></td><td>A boolean indicating whether the assessment is positive (true) or negative (false).</td></tr>
+</tbody></table>
+</div>
+<h3 id="canclaim-1"><a class="header" href="#canclaim-1">canClaim</a></h3>
+<p>Checks if the caller is eligible to make a claim.</p>
+<p><em>Calls the isAllowList and isValidClaimPeriod functions to check if the caller is a member and within the
+valid claim period.</em></p>
+<pre><code class="language-solidity">function canClaim(address user) external view returns (bool);
+</code></pre>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>bool</code></td><td>A boolean indicating whether the caller is eligible to make a claim.</td></tr>
+</tbody></table>
+</div>
+<h2 id="events-3"><a class="header" href="#events-3">Events</a></h2>
+<h3 id="setup-13"><a class="header" href="#setup-13">Setup</a></h3>
+<p><em>Emitted when the contract is set up.</em></p>
+<pre><code class="language-solidity">event Setup(bytes initializationParams);
+</code></pre>
+<h3 id="givecookie-5"><a class="header" href="#givecookie-5">GiveCookie</a></h3>
+<p><em>Emitted when a &quot;cookie&quot; is given to an address.</em></p>
+<pre><code class="language-solidity">event GiveCookie(address indexed cookieMonster, uint256 amount, string _uid);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="iaccount"><a class="header" href="#iaccount">IAccount</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/interfaces/IERC6551.sol">Git Source</a></p>
+<h2 id="functions-19"><a class="header" href="#functions-19">Functions</a></h2>
+<h3 id="executecall-1"><a class="header" href="#executecall-1">executeCall</a></h3>
+<p><em>Executes <code>call</code> on address <code>to</code>, with value <code>value</code> and calldata
+<code>data</code>.
+MUST revert and bubble up errors if call fails.
+By default, token bound accounts MUST allow the owner of the ERC-721 token
+which owns the account to execute arbitrary calls using <code>executeCall</code>.
+Token bound accounts MAY implement additional authorization mechanisms
+which limit the ability of the ERC-721 token holder to execute calls.
+Token bound accounts MAY implement additional execution functions which
+grant execution permissions to other non-owner accounts.</em></p>
+<pre><code class="language-solidity">function executeCall(address to, uint256 value, bytes calldata data) external payable returns (bytes memory);
+</code></pre>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>bytes</code></td><td>The result of the call</td></tr>
+</tbody></table>
+</div>
+<h3 id="token-1"><a class="header" href="#token-1">token</a></h3>
+<p><em>Returns identifier of the ERC-721 token which owns the
+account
+The return value of this function MUST be constant - it MUST NOT change
+over time.</em></p>
+<pre><code class="language-solidity">function token() external view returns (uint256 chainId, address tokenContract, uint256 tokenId);
+</code></pre>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>chainId</code></td><td><code>uint256</code></td><td>The EIP-155 ID of the chain the ERC-721 token exists on</td></tr>
+<tr><td><code>tokenContract</code></td><td><code>address</code></td><td>The contract address of the ERC-721 token</td></tr>
+<tr><td><code>tokenId</code></td><td><code>uint256</code></td><td>The ID of the ERC-721 token</td></tr>
+</tbody></table>
+</div>
+<h3 id="owner-1"><a class="header" href="#owner-1">owner</a></h3>
+<p><em>Returns the owner of the ERC-721 token which controls the account
+if the token exists.
+This is value is obtained by calling <code>ownerOf</code> on the ERC-721 contract.</em></p>
+<pre><code class="language-solidity">function owner() external view returns (address);
+</code></pre>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>address</code></td><td>Address of the owner of the ERC-721 token which owns the account</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="iregistry"><a class="header" href="#iregistry">IRegistry</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/interfaces/IERC6551Registry.sol">Git Source</a></p>
+<h2 id="functions-20"><a class="header" href="#functions-20">Functions</a></h2>
+<h3 id="createaccount-1"><a class="header" href="#createaccount-1">createAccount</a></h3>
+<pre><code class="language-solidity">function createAccount(
+    address implementation,
+    uint256 chainId,
+    address tokenContract,
+    uint256 tokenId,
+    uint256 seed,
+    bytes calldata initData
+) external returns (address);
+</code></pre>
+<h3 id="account-1"><a class="header" href="#account-1">account</a></h3>
+<pre><code class="language-solidity">function account(address implementation, uint256 chainId, address tokenContract, uint256 tokenId, uint256 salt)
+    external
+    view
+    returns (address);
+</code></pre>
+<h2 id="events-4"><a class="header" href="#events-4">Events</a></h2>
+<h3 id="accountcreated-1"><a class="header" href="#accountcreated-1">AccountCreated</a></h3>
+<pre><code class="language-solidity">event AccountCreated(
+    address account, address implementation, uint256 chainId, address tokenContract, uint256 tokenId, uint256 salt
+);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contents-9"><a class="header" href="#contents-9">Contents</a></h1>
+<ul>
+<li><a href="src/lib/Base64.sol/library.Base64.html">Base64</a></li>
+<li><a href="src/lib/CookieUtils.sol/library.CookieUtils.html">CookieUtils</a></li>
+<li><a href="src/lib/ERC6551AccountLib.sol/library.ERC6551AccountLib.html">ERC6551AccountLib</a></li>
+<li><a href="src/lib/ERC6551BytecodeLib.sol/library.ERC6551BytecodeLib.html">ERC6551BytecodeLib</a></li>
+<li><a href="src/lib/MinimalReceiver.sol/contract.MinimalReceiver.html">MinimalReceiver</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="base64"><a class="header" href="#base64">Base64</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/lib/Base64.sol">Git Source</a></p>
+<p><strong>Author:</strong>
+Brecht Devos - <a href="mailto:src/lib/Base64.sol/brecht@loopring.org">brecht@loopring.org</a></p>
+<p>Provides a function for encoding some bytes in base64</p>
+<h2 id="state-variables-11"><a class="header" href="#state-variables-11">State Variables</a></h2>
+<h3 id="table"><a class="header" href="#table">TABLE</a></h3>
+<pre><code class="language-solidity">string internal constant TABLE = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;;
+</code></pre>
+<h2 id="functions-21"><a class="header" href="#functions-21">Functions</a></h2>
+<h3 id="encode"><a class="header" href="#encode">encode</a></h3>
+<pre><code class="language-solidity">function encode(bytes memory data) internal pure returns (string memory);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cookieutils"><a class="header" href="#cookieutils">CookieUtils</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/lib/CookieUtils.sol">Git Source</a></p>
+<h2 id="functions-22"><a class="header" href="#functions-22">Functions</a></h2>
+<h3 id="getcookiejaruid"><a class="header" href="#getcookiejaruid">getCookieJarUid</a></h3>
+<pre><code class="language-solidity">function getCookieJarUid(address cookieJarAddr) internal view returns (string memory);
+</code></pre>
+<h3 id="getcookieuid"><a class="header" href="#getcookieuid">getCookieUid</a></h3>
+<pre><code class="language-solidity">function getCookieUid(string memory cookieJarUid) internal view returns (string memory);
+</code></pre>
+<h3 id="bytes32tostring"><a class="header" href="#bytes32tostring">bytes32ToString</a></h3>
+<p>Converts a bytes32 value to a string.</p>
+<p><em>This is a helper function that is used to convert bytes32 values to strings, for example, to convert hashed
+values
+to their string representation.</em></p>
+<pre><code class="language-solidity">function bytes32ToString(bytes32 _b) private pure returns (string memory);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>_b</code></td><td><code>bytes32</code></td><td>The bytes32 value to convert.</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>string</code></td><td>The string representation of the given bytes32 value.</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="erc6551accountlib"><a class="header" href="#erc6551accountlib">ERC6551AccountLib</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/lib/ERC6551AccountLib.sol">Git Source</a></p>
+<h2 id="functions-23"><a class="header" href="#functions-23">Functions</a></h2>
+<h3 id="token-2"><a class="header" href="#token-2">token</a></h3>
+<pre><code class="language-solidity">function token() internal view returns (uint256, address, uint256);
+</code></pre>
+<h3 id="salt"><a class="header" href="#salt">salt</a></h3>
+<pre><code class="language-solidity">function salt() internal view returns (uint256);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="erc6551bytecodelib"><a class="header" href="#erc6551bytecodelib">ERC6551BytecodeLib</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/lib/ERC6551BytecodeLib.sol">Git Source</a></p>
+<h2 id="functions-24"><a class="header" href="#functions-24">Functions</a></h2>
+<h3 id="getcreationcode"><a class="header" href="#getcreationcode">getCreationCode</a></h3>
+<pre><code class="language-solidity">function getCreationCode(
+    address implementation_,
+    uint256 chainId_,
+    address tokenContract_,
+    uint256 tokenId_,
+    uint256 salt_
+) internal pure returns (bytes memory);
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="minimalreceiver"><a class="header" href="#minimalreceiver">MinimalReceiver</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/lib/MinimalReceiver.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+ERC721Holder, ERC1155Holder</p>
+<h2 id="functions-25"><a class="header" href="#functions-25">Functions</a></h2>
+<h3 id="receive"><a class="header" href="#receive">receive</a></h3>
+<p><em>Allows all Ether transfers</em></p>
+<pre><code class="language-solidity">receive() external payable virtual;
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="solidity.min.js"></script>
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>

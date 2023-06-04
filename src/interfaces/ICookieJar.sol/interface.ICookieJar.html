@@ -1,0 +1,293 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ICookieJar</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../../favicon.svg">
+        <link rel="shortcut icon" href="../../../favicon.png">
+        <link rel="stylesheet" href="../../../css/variables.css">
+        <link rel="stylesheet" href="../../../css/general.css">
+        <link rel="stylesheet" href="../../../css/chrome.css">
+        <link rel="stylesheet" href="../../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../../highlight.css">
+        <link rel="stylesheet" href="../../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../../book.css">
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item "><a href="../../../index.html">Home</a></li><li class="chapter-item affix "><li class="part-title">src</li><li class="chapter-item "><a href="../../../src/ERC6551/index.html">❱ ERC6551</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../src/ERC6551/erc6551/index.html">❱ erc6551</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../src/ERC6551/erc6551/ERC6551Module.sol/contract.AccountERC6551.html">AccountERC6551</a></li><li class="chapter-item "><a href="../../../src/ERC6551/erc6551/ERC6551Registry.sol/contract.AccountRegistry.html">AccountRegistry</a></li></ol></li><li class="chapter-item "><a href="../../../src/ERC6551/nft/index.html">❱ nft</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../src/ERC6551/nft/CookieNFT.sol/contract.CookieNFT.html">CookieNFT</a></li></ol></li><li class="chapter-item "><a href="../../../src/ERC6551/ImpCookieJar6551.sol/contract.ImpCookieJar6551.html">ImpCookieJar6551</a></li></ol></li><li class="chapter-item "><a href="../../../src/SafeModule/index.html">❱ SafeModule</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../src/SafeModule/BaalCookieJar.sol/contract.ZodiacBaalCookieJar.html">ZodiacBaalCookieJar</a></li><li class="chapter-item "><a href="../../../src/SafeModule/ERC20CookieJar.sol/contract.ZodiacERC20CookieJar.html">ZodiacERC20CookieJar</a></li><li class="chapter-item "><a href="../../../src/SafeModule/ERC721CookieJar.sol/contract.ZodiacERC721CookieJar.html">ZodiacERC721CookieJar</a></li><li class="chapter-item "><a href="../../../src/SafeModule/ListCookieJar.sol/contract.ZodiacListCookieJar.html">ZodiacListCookieJar</a></li><li class="chapter-item "><a href="../../../src/SafeModule/OpenCookieJar.sol/contract.ZodiacOpenCookieJar.html">ZodiacOpenCookieJar</a></li><li class="chapter-item "><a href="../../../src/SafeModule/ZodiacCookieJar.sol/contract.ZodiacCookieJar.html">ZodiacCookieJar</a></li></ol></li><li class="chapter-item "><a href="../../../src/core/index.html">❱ core</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../src/core/allowlists/index.html">❱ allowlists</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../src/core/allowlists/BaalAllowlist.sol/contract.BaalAllowlist.html">BaalAllowlist</a></li><li class="chapter-item "><a href="../../../src/core/allowlists/ERC20Allowlist.sol/contract.ERC20Allowlist.html">ERC20Allowlist</a></li><li class="chapter-item "><a href="../../../src/core/allowlists/ERC721Allowlist.sol/contract.ERC721Allowlist.html">ERC721Allowlist</a></li><li class="chapter-item "><a href="../../../src/core/allowlists/MappedAllowlist.sol/contract.MappedAllowlist.html">MappedAllowlist</a></li></ol></li><li class="chapter-item "><a href="../../../src/core/givers/index.html">❱ givers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../src/core/givers/Giver6551.sol/abstract.Giver6551.html">Giver6551</a></li><li class="chapter-item "><a href="../../../src/core/givers/GiverZodiac.sol/abstract.GiverZodiac.html">GiverZodiac</a></li></ol></li><li class="chapter-item "><a href="../../../src/core/CookieJarCore.sol/abstract.CookieJarCore.html">CookieJarCore</a></li></ol></li><li class="chapter-item "><a href="../../../src/factory/index.html">❱ factory</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../src/factory/CookieJarFactory.sol/contract.CookieJarFactory.html">CookieJarFactory</a></li></ol></li><li class="chapter-item expanded "><a href="../../../src/interfaces/index.html">❱ interfaces</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../src/interfaces/ICookieJar.sol/interface.ICookieJar.html" class="active">ICookieJar</a></li><li class="chapter-item "><a href="../../../src/interfaces/IERC6551.sol/interface.IAccount.html">IAccount</a></li><li class="chapter-item "><a href="../../../src/interfaces/IERC6551Registry.sol/interface.IRegistry.html">IRegistry</a></li></ol></li><li class="chapter-item "><a href="../../../src/lib/index.html">❱ lib</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../src/lib/Base64.sol/library.Base64.html">Base64</a></li><li class="chapter-item "><a href="../../../src/lib/CookieUtils.sol/library.CookieUtils.html">CookieUtils</a></li><li class="chapter-item "><a href="../../../src/lib/ERC6551AccountLib.sol/library.ERC6551AccountLib.html">ERC6551AccountLib</a></li><li class="chapter-item "><a href="../../../src/lib/ERC6551BytecodeLib.sol/library.ERC6551BytecodeLib.html">ERC6551BytecodeLib</a></li><li class="chapter-item "><a href="../../../src/lib/MinimalReceiver.sol/contract.MinimalReceiver.html">MinimalReceiver</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="../../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/bitbeckers/cookiejar-contracts" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="icookiejar"><a class="header" href="#icookiejar">ICookieJar</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/interfaces/ICookieJar.sol">Git Source</a></p>
+<h2 id="functions"><a class="header" href="#functions">Functions</a></h2>
+<h3 id="setup"><a class="header" href="#setup">setUp</a></h3>
+<p>Sets up the contract with the given initialization parameters.</p>
+<p><em>The initialization parameters are decoded from a bytes array into the Safe target, period length, cookie
+amount, and cookie token.
+The Safe target is set as both the avatar and target for the module.  This means that the module cannot be
+chained in a series of modules.
+A check is done to ensure the cookie amount is greater than the percentage points constant.
+The period length, cookie amount, and cookie token are then set as per the parameters.
+An event is emitted with the initialization parameters.</em></p>
+<pre><code class="language-solidity">function setUp(bytes memory _initializationParams) external;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>_initializationParams</code></td><td><code>bytes</code></td><td>The initialization parameters, encoded as a bytes array. // TODO: add initializer to this contract</td></tr>
+</tbody></table>
+</div>
+<h3 id="setconfig"><a class="header" href="#setconfig">setConfig</a></h3>
+<p>Allows owner to change congiguration.</p>
+<p><em>Checks if the caller is a member and if the claim period is valid. If the requirements are met,</em></p>
+<pre><code class="language-solidity">function setConfig(uint256 _periodLength, uint256 _cookieAmount, address _cookieToken) external;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>_periodLength</code></td><td><code>uint256</code></td><td>The length of the period between claims.</td></tr>
+<tr><td><code>_cookieAmount</code></td><td><code>uint256</code></td><td>The amount of &quot;cookie&quot; that can be claimed.</td></tr>
+<tr><td><code>_cookieToken</code></td><td><code>address</code></td><td>The address of the token that is being distributed, zero address for native.</td></tr>
+</tbody></table>
+</div>
+<h3 id="reachinjar"><a class="header" href="#reachinjar">reachInJar</a></h3>
+<p>Allows a member to make a claim and provides a reason for the claim.</p>
+<p><em>Checks if the caller is a member and if the claim period is valid. If the requirements are met,
+it updates the last claim timestamp for the caller, gives a cookie to the caller, and posts the reason for the
+claim.
+This function can only be called by the member themselves, and not on behalf of others.</em></p>
+<pre><code class="language-solidity">function reachInJar(string calldata _reason) external;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>_reason</code></td><td><code>string</code></td><td>The reason provided by the member for making the claim. This will be posted publicly.</td></tr>
+</tbody></table>
+</div>
+<h3 id="reachinjar-1"><a class="header" href="#reachinjar-1">reachInJar</a></h3>
+<p>Allows a member to make a claim on behalf of another address and provides a reason for the claim.</p>
+<p><em>Checks if the caller is a member and if the claim period is valid. If the requirements are met,
+it updates the last claim timestamp for the caller, gives a cookie to the specified address, and posts the reason
+for the claim.
+This function can be called by a member on behalf of another address, allowing for more flexible distribution.</em></p>
+<pre><code class="language-solidity">function reachInJar(address cookieMonster, string calldata _reason) external;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>cookieMonster</code></td><td><code>address</code></td><td>The address to receive the cookie.</td></tr>
+<tr><td><code>_reason</code></td><td><code>string</code></td><td>The reason provided by the member for making the claim. This will be posted publicly.</td></tr>
+</tbody></table>
+</div>
+<h3 id="assessreason"><a class="header" href="#assessreason">assessReason</a></h3>
+<p>Allows a member to assess the reason for a claim.</p>
+<p><em>The member can give a thumbs up or thumbs down to a claim reason. The assessment is posted to the Poster
+contract.</em></p>
+<pre><code class="language-solidity">function assessReason(string calldata _uid, bool _isGood) external;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>_uid</code></td><td><code>string</code></td><td>The unique identifier of the claim reason to be assessed.</td></tr>
+<tr><td><code>_isGood</code></td><td><code>bool</code></td><td>A boolean indicating whether the assessment is positive (true) or negative (false).</td></tr>
+</tbody></table>
+</div>
+<h3 id="canclaim"><a class="header" href="#canclaim">canClaim</a></h3>
+<p>Checks if the caller is eligible to make a claim.</p>
+<p><em>Calls the isAllowList and isValidClaimPeriod functions to check if the caller is a member and within the
+valid claim period.</em></p>
+<pre><code class="language-solidity">function canClaim(address user) external view returns (bool);
+</code></pre>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>bool</code></td><td>A boolean indicating whether the caller is eligible to make a claim.</td></tr>
+</tbody></table>
+</div>
+<h2 id="events"><a class="header" href="#events">Events</a></h2>
+<h3 id="setup-1"><a class="header" href="#setup-1">Setup</a></h3>
+<p><em>Emitted when the contract is set up.</em></p>
+<pre><code class="language-solidity">event Setup(bytes initializationParams);
+</code></pre>
+<h3 id="givecookie"><a class="header" href="#givecookie">GiveCookie</a></h3>
+<p><em>Emitted when a &quot;cookie&quot; is given to an address.</em></p>
+<pre><code class="language-solidity">event GiveCookie(address indexed cookieMonster, uint256 amount, string _uid);
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../src/interfaces/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../../../src/interfaces/IERC6551.sol/interface.IAccount.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../src/interfaces/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../../../src/interfaces/IERC6551.sol/interface.IAccount.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../../elasticlunr.min.js"></script>
+        <script src="../../../mark.min.js"></script>
+        <script src="../../../searcher.js"></script>
+
+        <script src="../../../clipboard.min.js"></script>
+        <script src="../../../highlight.js"></script>
+        <script src="../../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../../solidity.min.js"></script>
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>AccountERC6551</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../../../favicon.svg">
+        <link rel="shortcut icon" href="../../../../favicon.png">
+        <link rel="stylesheet" href="../../../../css/variables.css">
+        <link rel="stylesheet" href="../../../../css/general.css">
+        <link rel="stylesheet" href="../../../../css/chrome.css">
+        <link rel="stylesheet" href="../../../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../../../highlight.css">
+        <link rel="stylesheet" href="../../../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../../../book.css">
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item "><a href="../../../../index.html">Home</a></li><li class="chapter-item affix "><li class="part-title">src</li><li class="chapter-item expanded "><a href="../../../../src/ERC6551/index.html">❱ ERC6551</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../src/ERC6551/erc6551/index.html">❱ erc6551</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../../src/ERC6551/erc6551/ERC6551Module.sol/contract.AccountERC6551.html" class="active">AccountERC6551</a></li><li class="chapter-item "><a href="../../../../src/ERC6551/erc6551/ERC6551Registry.sol/contract.AccountRegistry.html">AccountRegistry</a></li></ol></li><li class="chapter-item "><a href="../../../../src/ERC6551/nft/index.html">❱ nft</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../../src/ERC6551/nft/CookieNFT.sol/contract.CookieNFT.html">CookieNFT</a></li></ol></li><li class="chapter-item "><a href="../../../../src/ERC6551/ImpCookieJar6551.sol/contract.ImpCookieJar6551.html">ImpCookieJar6551</a></li></ol></li><li class="chapter-item "><a href="../../../../src/SafeModule/index.html">❱ SafeModule</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../../src/SafeModule/BaalCookieJar.sol/contract.ZodiacBaalCookieJar.html">ZodiacBaalCookieJar</a></li><li class="chapter-item "><a href="../../../../src/SafeModule/ERC20CookieJar.sol/contract.ZodiacERC20CookieJar.html">ZodiacERC20CookieJar</a></li><li class="chapter-item "><a href="../../../../src/SafeModule/ERC721CookieJar.sol/contract.ZodiacERC721CookieJar.html">ZodiacERC721CookieJar</a></li><li class="chapter-item "><a href="../../../../src/SafeModule/ListCookieJar.sol/contract.ZodiacListCookieJar.html">ZodiacListCookieJar</a></li><li class="chapter-item "><a href="../../../../src/SafeModule/OpenCookieJar.sol/contract.ZodiacOpenCookieJar.html">ZodiacOpenCookieJar</a></li><li class="chapter-item "><a href="../../../../src/SafeModule/ZodiacCookieJar.sol/contract.ZodiacCookieJar.html">ZodiacCookieJar</a></li></ol></li><li class="chapter-item "><a href="../../../../src/core/index.html">❱ core</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../../src/core/allowlists/index.html">❱ allowlists</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../../src/core/allowlists/BaalAllowlist.sol/contract.BaalAllowlist.html">BaalAllowlist</a></li><li class="chapter-item "><a href="../../../../src/core/allowlists/ERC20Allowlist.sol/contract.ERC20Allowlist.html">ERC20Allowlist</a></li><li class="chapter-item "><a href="../../../../src/core/allowlists/ERC721Allowlist.sol/contract.ERC721Allowlist.html">ERC721Allowlist</a></li><li class="chapter-item "><a href="../../../../src/core/allowlists/MappedAllowlist.sol/contract.MappedAllowlist.html">MappedAllowlist</a></li></ol></li><li class="chapter-item "><a href="../../../../src/core/givers/index.html">❱ givers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../../src/core/givers/Giver6551.sol/abstract.Giver6551.html">Giver6551</a></li><li class="chapter-item "><a href="../../../../src/core/givers/GiverZodiac.sol/abstract.GiverZodiac.html">GiverZodiac</a></li></ol></li><li class="chapter-item "><a href="../../../../src/core/CookieJarCore.sol/abstract.CookieJarCore.html">CookieJarCore</a></li></ol></li><li class="chapter-item "><a href="../../../../src/factory/index.html">❱ factory</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../../src/factory/CookieJarFactory.sol/contract.CookieJarFactory.html">CookieJarFactory</a></li></ol></li><li class="chapter-item "><a href="../../../../src/interfaces/index.html">❱ interfaces</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../../src/interfaces/ICookieJar.sol/interface.ICookieJar.html">ICookieJar</a></li><li class="chapter-item "><a href="../../../../src/interfaces/IERC6551.sol/interface.IAccount.html">IAccount</a></li><li class="chapter-item "><a href="../../../../src/interfaces/IERC6551Registry.sol/interface.IRegistry.html">IRegistry</a></li></ol></li><li class="chapter-item "><a href="../../../../src/lib/index.html">❱ lib</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../../src/lib/Base64.sol/library.Base64.html">Base64</a></li><li class="chapter-item "><a href="../../../../src/lib/CookieUtils.sol/library.CookieUtils.html">CookieUtils</a></li><li class="chapter-item "><a href="../../../../src/lib/ERC6551AccountLib.sol/library.ERC6551AccountLib.html">ERC6551AccountLib</a></li><li class="chapter-item "><a href="../../../../src/lib/ERC6551BytecodeLib.sol/library.ERC6551BytecodeLib.html">ERC6551BytecodeLib</a></li><li class="chapter-item "><a href="../../../../src/lib/MinimalReceiver.sol/contract.MinimalReceiver.html">MinimalReceiver</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="../../../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/bitbeckers/cookiejar-contracts" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="accounterc6551"><a class="header" href="#accounterc6551">AccountERC6551</a></h1>
+<p><a href="https://github.com/bitbeckers/cookiejar-contracts/blob/fe399470513a276d8de52ee2ab32414a9695b4a6/src/ERC6551/erc6551/ERC6551Module.sol">Git Source</a></p>
+<p><strong>Inherits:</strong>
+IERC165, IERC1271, <a href="/src/interfaces/IERC6551.sol/interface.IAccount.html">IAccount</a>, <a href="/src/lib/MinimalReceiver.sol/contract.MinimalReceiver.html">MinimalReceiver</a>, Initializable</p>
+<p><strong>Author:</strong>
+Jayden Windle (jaydenwindle)</p>
+<h2 id="state-variables"><a class="header" href="#state-variables">State Variables</a></h2>
+<h3 id="unlocktimestamp"><a class="header" href="#unlocktimestamp">unlockTimestamp</a></h3>
+<p><em>Timestamp at which Account will unlock</em></p>
+<pre><code class="language-solidity">uint256 public unlockTimestamp;
+</code></pre>
+<h3 id="executor"><a class="header" href="#executor">executor</a></h3>
+<p><em>Mapping from owner address to executor address</em></p>
+<pre><code class="language-solidity">mapping(address =&gt; address) public executor;
+</code></pre>
+<h2 id="functions"><a class="header" href="#functions">Functions</a></h2>
+<h3 id="constructor"><a class="header" href="#constructor">constructor</a></h3>
+<pre><code class="language-solidity">constructor();
+</code></pre>
+<h3 id="onlyunlocked"><a class="header" href="#onlyunlocked">onlyUnlocked</a></h3>
+<p><em>Ensures execution can only continue if the account is not locked</em></p>
+<pre><code class="language-solidity">modifier onlyUnlocked();
+</code></pre>
+<h3 id="fallback"><a class="header" href="#fallback">fallback</a></h3>
+<p><em>If account is unlocked and an executor is set, pass call to executor</em></p>
+<pre><code class="language-solidity">fallback(bytes calldata data) external payable onlyUnlocked returns (bytes memory result);
+</code></pre>
+<h3 id="executecall"><a class="header" href="#executecall">executeCall</a></h3>
+<p><em>Executes a transaction from the Account. Must be called by an account owner.</em></p>
+<pre><code class="language-solidity">function executeCall(address to, uint256 value, bytes calldata data)
+    external
+    payable
+    onlyUnlocked
+    returns (bytes memory result);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>to</code></td><td><code>address</code></td><td>Destination address of the transaction</td></tr>
+<tr><td><code>value</code></td><td><code>uint256</code></td><td>Ether value of the transaction</td></tr>
+<tr><td><code>data</code></td><td><code>bytes</code></td><td>Encoded payload of the transaction</td></tr>
+</tbody></table>
+</div>
+<h3 id="exec"><a class="header" href="#exec">exec</a></h3>
+<p><em>wrapper to align with zodiac.</em></p>
+<pre><code class="language-solidity">function exec(address to, uint256 value, bytes calldata data)
+    external
+    payable
+    onlyUnlocked
+    returns (bytes memory result);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>to</code></td><td><code>address</code></td><td>Destination address of the transaction</td></tr>
+<tr><td><code>value</code></td><td><code>uint256</code></td><td>Ether value of the transaction</td></tr>
+<tr><td><code>data</code></td><td><code>bytes</code></td><td>Encoded payload of the transaction</td></tr>
+</tbody></table>
+</div>
+<h3 id="executetrustedcall"><a class="header" href="#executetrustedcall">executeTrustedCall</a></h3>
+<p><em>Executes a transaction from the Account. Must be called by an authorized executor.</em></p>
+<pre><code class="language-solidity">function executeTrustedCall(address to, uint256 value, bytes calldata data)
+    external
+    payable
+    onlyUnlocked
+    returns (bytes memory result);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>to</code></td><td><code>address</code></td><td>Destination address of the transaction</td></tr>
+<tr><td><code>value</code></td><td><code>uint256</code></td><td>Ether value of the transaction</td></tr>
+<tr><td><code>data</code></td><td><code>bytes</code></td><td>Encoded payload of the transaction</td></tr>
+</tbody></table>
+</div>
+<h3 id="setexecutor"><a class="header" href="#setexecutor">setExecutor</a></h3>
+<p><em>Sets executor address for Account, allowing owner to use a custom implementation if they choose to.
+When the token controlling the account is transferred, the implementation address will reset</em></p>
+<pre><code class="language-solidity">function setExecutor(address _executionModule) external onlyUnlocked;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>_executionModule</code></td><td><code>address</code></td><td>the address of the execution module</td></tr>
+</tbody></table>
+</div>
+<h3 id="setexecutorinit"><a class="header" href="#setexecutorinit">setExecutorInit</a></h3>
+<pre><code class="language-solidity">function setExecutorInit(address _executionModule) external initializer;
+</code></pre>
+<h3 id="lock"><a class="header" href="#lock">lock</a></h3>
+<p><em>Locks Account, preventing transactions from being executed until a certain time</em></p>
+<pre><code class="language-solidity">function lock(uint256 _unlockTimestamp) external onlyUnlocked;
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>_unlockTimestamp</code></td><td><code>uint256</code></td><td>timestamp when the account will become unlocked</td></tr>
+</tbody></table>
+</div>
+<h3 id="islocked"><a class="header" href="#islocked">isLocked</a></h3>
+<p><em>Returns Account lock status</em></p>
+<pre><code class="language-solidity">function isLocked() external view returns (bool);
+</code></pre>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>bool</code></td><td>true if Account is locked, false otherwise</td></tr>
+</tbody></table>
+</div>
+<h3 id="isauthorized"><a class="header" href="#isauthorized">isAuthorized</a></h3>
+<p><em>Returns true if caller is authorized to execute actions on this account</em></p>
+<pre><code class="language-solidity">function isAuthorized(address caller) external view returns (bool);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>caller</code></td><td><code>address</code></td><td>the address to query authorization for</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>bool</code></td><td>true if caller is authorized, false otherwise</td></tr>
+</tbody></table>
+</div>
+<h3 id="isvalidsignature"><a class="header" href="#isvalidsignature">isValidSignature</a></h3>
+<p><em>Implements EIP-1271 signature validation</em></p>
+<pre><code class="language-solidity">function isValidSignature(bytes32 hash, bytes memory signature) external view returns (bytes4 magicValue);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>hash</code></td><td><code>bytes32</code></td><td>Hash of the signed data</td></tr>
+<tr><td><code>signature</code></td><td><code>bytes</code></td><td>Signature to validate</td></tr>
+</tbody></table>
+</div>
+<h3 id="supportsinterface"><a class="header" href="#supportsinterface">supportsInterface</a></h3>
+<p><em>Implements EIP-165 standard interface detection</em></p>
+<pre><code class="language-solidity">function supportsInterface(bytes4 interfaceId) public view virtual override(IERC165, ERC1155Receiver) returns (bool);
+</code></pre>
+<p><strong>Parameters</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>interfaceId</code></td><td><code>bytes4</code></td><td>the interfaceId to check support for</td></tr>
+</tbody></table>
+</div>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>bool</code></td><td>true if the interface is supported, false otherwise</td></tr>
+</tbody></table>
+</div>
+<h3 id="owner"><a class="header" href="#owner">owner</a></h3>
+<p><em>Returns the owner of the token that controls this Account (public for Ownable compatibility)</em></p>
+<pre><code class="language-solidity">function owner() public view returns (address);
+</code></pre>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>&lt;none&gt;</code></td><td><code>address</code></td><td>the address of the Account owner</td></tr>
+</tbody></table>
+</div>
+<h3 id="token"><a class="header" href="#token">token</a></h3>
+<p><em>Returns information about the token that owns this account</em></p>
+<pre><code class="language-solidity">function token() public view returns (uint256 chainId, address tokenCollection, uint256 tokenId);
+</code></pre>
+<p><strong>Returns</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>chainId</code></td><td><code>uint256</code></td><td>the chainId of the  ERC721 token which owns this account</td></tr>
+<tr><td><code>tokenCollection</code></td><td><code>address</code></td><td>the contract address of the  ERC721 token which owns this account</td></tr>
+<tr><td><code>tokenId</code></td><td><code>uint256</code></td><td>the tokenId of the  ERC721 token which owns this account</td></tr>
+</tbody></table>
+</div>
+<h3 id="_context"><a class="header" href="#_context">_context</a></h3>
+<pre><code class="language-solidity">function _context() internal view returns (uint256 chainId, address tokenContract, uint256 tokenId);
+</code></pre>
+<h3 id="_call"><a class="header" href="#_call">_call</a></h3>
+<p><em>Executes a low-level call</em></p>
+<pre><code class="language-solidity">function _call(address to, uint256 value, bytes calldata data) internal returns (bytes memory result);
+</code></pre>
+<h2 id="events"><a class="header" href="#events">Events</a></h2>
+<h3 id="lockupdated"><a class="header" href="#lockupdated">LockUpdated</a></h3>
+<p><em>Emitted whenever the lock status of a account is updated</em></p>
+<pre><code class="language-solidity">event LockUpdated(uint256 timestamp);
+</code></pre>
+<h3 id="executorupdated"><a class="header" href="#executorupdated">ExecutorUpdated</a></h3>
+<p><em>Emitted whenever the executor for a account is updated</em></p>
+<pre><code class="language-solidity">event ExecutorUpdated(address owner, address executor);
+</code></pre>
+<h2 id="errors"><a class="header" href="#errors">Errors</a></h2>
+<h3 id="notauthorized"><a class="header" href="#notauthorized">NotAuthorized</a></h3>
+<pre><code class="language-solidity">error NotAuthorized();
+</code></pre>
+<h3 id="accountlocked"><a class="header" href="#accountlocked">AccountLocked</a></h3>
+<pre><code class="language-solidity">error AccountLocked();
+</code></pre>
+<h3 id="exceedsmaxlocktime"><a class="header" href="#exceedsmaxlocktime">ExceedsMaxLockTime</a></h3>
+<pre><code class="language-solidity">error ExceedsMaxLockTime();
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../../src/ERC6551/erc6551/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../../../../src/ERC6551/erc6551/ERC6551Registry.sol/contract.AccountRegistry.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../../src/ERC6551/erc6551/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../../../../src/ERC6551/erc6551/ERC6551Registry.sol/contract.AccountRegistry.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../../../elasticlunr.min.js"></script>
+        <script src="../../../../mark.min.js"></script>
+        <script src="../../../../searcher.js"></script>
+
+        <script src="../../../../clipboard.min.js"></script>
+        <script src="../../../../highlight.js"></script>
+        <script src="../../../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../../../solidity.min.js"></script>
+
+
+    </div>
+    </body>
+</html>
