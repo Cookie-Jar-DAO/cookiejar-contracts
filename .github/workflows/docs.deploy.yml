@@ -22,6 +22,9 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Setup Node.js (required to install Vercel CLI)
+        uses: actions/setup-node@v3
+
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
         with:
@@ -31,14 +34,15 @@ jobs:
         run: forge doc --out docs
         id: generate-docs
 
-      - name: Setup Node.js (required to install Vercel CLI)
-        uses: actions/setup-node@v3
-
       - name: Install Vercel CLI
         run: npm install --global vercel
 
       - name: Pull Vercel environment information
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
+      - name: List files
+        run: |
+          ls -la
+          
       - name: Deploy to Vercel
         run: vercel docs/book --prod --token=${{ secrets.VERCEL_TOKEN }}
