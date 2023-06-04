@@ -11,30 +11,70 @@ import {ZodiacBaalCookieJar} from "src/SafeModule/BaalCookieJar.sol";
 import {ModuleProxyFactory} from "@gnosis.pm/zodiac/contracts/factory/ModuleProxyFactory.sol";
 
 contract ZodiacBaalCookieJarHarnass is ZodiacBaalCookieJar {
+    function posterUid() public view returns (string memory) {
+        return POSTER_UID;
+    }
+
+    function posterTag() public pure returns (string memory) {
+        return POSTER_TAG;
+    }
+
     function exposed_isAllowList(address user) external view returns (bool) {
         return isAllowList(user);
     }
 }
 
 contract ZodiacERC20CookieJarHarnass is ZodiacERC20CookieJar {
+    function posterUid() public view returns (string memory) {
+        return POSTER_UID;
+    }
+
+    function posterTag() public pure returns (string memory) {
+        return POSTER_TAG;
+    }
+
     function exposed_isAllowList(address user) external view returns (bool) {
         return isAllowList(user);
     }
 }
 
 contract ZodiacERC721CookieJarHarnass is ZodiacERC721CookieJar {
+    function posterUid() public view returns (string memory) {
+        return POSTER_UID;
+    }
+
+    function posterTag() public pure returns (string memory) {
+        return POSTER_TAG;
+    }
+
     function exposed_isAllowList(address user) external view returns (bool) {
         return isAllowList(user);
     }
 }
 
 contract ZodiacListCookieJarHarnass is ZodiacListCookieJar {
+    function posterUid() public view returns (string memory) {
+        return POSTER_UID;
+    }
+
+    function posterTag() public pure returns (string memory) {
+        return POSTER_TAG;
+    }
+
     function exposed_isAllowList(address user) external view returns (bool) {
         return isAllowList(user);
     }
 }
 
 contract ZodiacOpenCookieJarHarnass is ZodiacOpenCookieJar {
+    function posterUid() public view returns (string memory) {
+        return POSTER_UID;
+    }
+
+    function posterTag() public pure returns (string memory) {
+        return POSTER_TAG;
+    }
+
     function exposed_isAllowList(address user) external view returns (bool) {
         return isAllowList(user);
     }
@@ -68,7 +108,7 @@ contract ZodiacCloneSummoner is Test {
         Vm.Log[] memory entries = vm.getRecordedLogs();
 
         assertEq(entries.length, 8);
-        assertEq(entries[7].topics[0], keccak256("SummonCookieJar(address,bytes,string)"));
+        assertEq(entries[7].topics[0], keccak256("SummonCookieJar(address,bytes,string,string)"));
         address cookieJar = _calculateCreate2Address(address(baalCookieJarImplementation), _initializer, saltNonce);
 
         assertEq(abi.decode(entries[7].data, (address)), cookieJar);
@@ -84,7 +124,7 @@ contract ZodiacCloneSummoner is Test {
 
         Vm.Log[] memory entries = vm.getRecordedLogs();
         assertEq(entries.length, 8);
-        assertEq(entries[7].topics[0], keccak256("SummonCookieJar(address,bytes,string)"));
+        assertEq(entries[7].topics[0], keccak256("SummonCookieJar(address,bytes,string,string)"));
         address cookieJar = _calculateCreate2Address(address(erc20CookieJarImplementation), _initializer, saltNonce);
 
         assertEq(abi.decode(entries[7].data, (address)), cookieJar);
@@ -100,7 +140,7 @@ contract ZodiacCloneSummoner is Test {
 
         Vm.Log[] memory entries = vm.getRecordedLogs();
         assertEq(entries.length, 8);
-        assertEq(entries[7].topics[0], keccak256("SummonCookieJar(address,bytes,string)"));
+        assertEq(entries[7].topics[0], keccak256("SummonCookieJar(address,bytes,string,string)"));
         address cookieJar = _calculateCreate2Address(address(erc721CookieJarImplementation), _initializer, saltNonce);
 
         assertEq(abi.decode(entries[7].data, (address)), cookieJar);
@@ -115,7 +155,7 @@ contract ZodiacCloneSummoner is Test {
 
         Vm.Log[] memory entries = vm.getRecordedLogs();
         assertEq(entries.length, 8);
-        assertEq(entries[7].topics[0], keccak256("SummonCookieJar(address,bytes,string)"));
+        assertEq(entries[7].topics[0], keccak256("SummonCookieJar(address,bytes,string,string)"));
         address cookieJar = _calculateCreate2Address(address(listCookieJarImplementation), _initializer, saltNonce);
 
         assertEq(abi.decode(entries[7].data, (address)), cookieJar);
@@ -130,7 +170,7 @@ contract ZodiacCloneSummoner is Test {
 
         Vm.Log[] memory entries = vm.getRecordedLogs();
         assertEq(entries.length, 8);
-        assertEq(entries[7].topics[0], keccak256("SummonCookieJar(address,bytes,string)"));
+        assertEq(entries[7].topics[0], keccak256("SummonCookieJar(address,bytes,string,string)"));
         address cookieJar = _calculateCreate2Address(address(openCookieJarImplementation), _initializer, saltNonce);
 
         assertEq(abi.decode(entries[7].data, (address)), cookieJar);
