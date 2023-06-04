@@ -27,12 +27,6 @@ jobs:
         with:
           version: nightly
 
-      - name: Install mdBook
-        uses: extractions/setup-crate@v1
-        with:
-          owner: rust-lang
-          name: mdBook
-
       - name: Run Forge doc
         run: 
           forge doc
@@ -48,4 +42,4 @@ jobs:
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy to Vercel
-        run: vercel ./docs/book --prod --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel docs/book --prod --token=${{ secrets.VERCEL_TOKEN }}
