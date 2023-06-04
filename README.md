@@ -7,15 +7,16 @@ CookieJar is a collection of smart contracts that allow users to deposit ERC20 a
 The following table lists the addresses of the deployed contracts:
 
 | Contract            | Address                                      |
-| ------------------- | -------------------------------------------- | 
+| ------------------- | -------------------------------------------- |
+| Baal Cookie Jar     | `0x2bfe504e5C145F5d5b95df2b7798Ec1C422C5Bc1` |
 | ERC20 Cookie Jar    | `0x8e694435C2Ad04ac4C59F50d75D501f678aD26bd` |
 | ERC721 Cookie Jar   | `0x24A2D8772521A9fa2f85d7024e020e7821C23c97` |
 | List Cookie Jar     | `0x3Ae8da051CC6Ab7Ef884A8f0fF86e02c3303fc38` |
 | Open Cookie Jar     | `0x0c6544Af9424C24549c57BD805C299635081eDE4` |
 | Cookie Jar Factory  | `0x3737053eC30f53DD7543a615dA69BB9996aD7C81` |
-| List Cookie Jar6551 | `0x3Ae8da051CC6Ab7Ef884A8f0fF86e02c3303fc38` |
+| List Cookie Jar6551 | `0x81eF83E26a19C0532a0DF80D84525bfCaCF2E4C4` |
 | Account             | `0x9CD838ba5ce219d1Eaf58Fa413b9D6e74799A7c8` |
-| NFT                 | `0xc9997Bf3D85ef279C2671Fccc4E7Fa4ef092450B` |
+| Cookie Jar NFT      | `0xc9997Bf3D85ef279C2671Fccc4E7Fa4ef092450B` |
 
 The contracts are written in Solidity and use the Truffle framework for development and testing. The contracts are also compatible with the OpenZeppelin library, which provides a set of reusable smart contract components.
 
