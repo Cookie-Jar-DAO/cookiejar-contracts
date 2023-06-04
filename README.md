@@ -6,6 +6,8 @@ CookieJar is a collection of smart contracts that allow users to deposit ERC20 a
 
 The following table lists the addresses of the deployed contracts:
 
+## Gnosis
+
 | Contract            | Address                                      |
 | ------------------- | -------------------------------------------- |
 | Baal Cookie Jar     | `0x2bfe504e5C145F5d5b95df2b7798Ec1C422C5Bc1` |
@@ -18,7 +20,19 @@ The following table lists the addresses of the deployed contracts:
 | Account             | `0x9CD838ba5ce219d1Eaf58Fa413b9D6e74799A7c8` |
 | Cookie Jar NFT      | `0xc9997Bf3D85ef279C2671Fccc4E7Fa4ef092450B` |
 
-The contracts are written in Solidity and use the Truffle framework for development and testing. The contracts are also compatible with the OpenZeppelin library, which provides a set of reusable smart contract components.
+## Goerli
+
+| Contract            | Address                                      |
+| ------------------- | -------------------------------------------- |
+| Baal Cookie Jar     | `0x16369aF30e491981B773c8169abBBA9df4B16d52` |
+| ERC20 Cookie Jar    | `0x9fF779Db6512BdeD0b3b93EA0BEfDc4b104a64B5` |
+| ERC721 Cookie Jar   | `0x320991a135fd31Cb9CCFd8f6eefd46B33067E421` |
+| List Cookie Jar     | `0x59b6A8f6515A42d1EB6711bD58f76D3c74617B52` |
+| Open Cookie Jar     | `0x3865541C43178EfBAbd13ADB337a37392351C252` |
+| Cookie Jar Factory  | `0xf348F2E75801da94282cf7700C316D68AeF3c787` |
+| List Cookie Jar6551 | `0x59b6A8f6515A42d1EB6711bD58f76D3c74617B52` |
+| Account             | `0xbF9C87e3871Cc79273f54dC2A2D7E772fECcA875` |
+| Cookie Jar NFT      | `0xB1D839eEd68420555E40aDE58EEaDeCE47eECe6a` |
 
 ## Installation
 
