@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy documentation
 on:
   pull_request:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  deploy:
+  deploy-mdbook:
     runs-on: ubuntu-latest
     permissions:
       contents: write # To push a branch
@@ -32,10 +32,10 @@ jobs:
           echo `pwd`/mdbook >> $GITHUB_PATH
         id: install-mdbook
 
-      - name: Run Forge docs
+      - name: Run Forge doc
         run: |
           forge --version
-          forge docs
+          forge doc
         id: docs
 
       - name: Deploy GitHub Pages
