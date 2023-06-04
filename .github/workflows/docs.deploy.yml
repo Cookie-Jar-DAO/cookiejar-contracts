@@ -34,8 +34,7 @@ jobs:
           name: mdBook
 
       - name: Run Forge doc
-        run: |
-          forge --version
+        run: 
           forge doc
         id: generate-docs
 
