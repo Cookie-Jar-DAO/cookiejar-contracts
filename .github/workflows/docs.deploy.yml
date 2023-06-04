@@ -44,6 +44,10 @@ jobs:
         run: |
           ls -la
 
+      - name: List files in docs
+        working-directory: docs
+        run: |
+          ls -la
+
       - name: Deploy to Vercel
-        working-directory: ./docs
-        run: vercel book --prod --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel --cwd docs book --prod --token=${{ secrets.VERCEL_TOKEN }}
