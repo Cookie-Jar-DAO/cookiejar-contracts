@@ -3,6 +3,7 @@ pragma solidity 0.8.19;
 
 import {CookieJarCore} from "src/core/CookieJarCore.sol";
 import {Giver6551} from "src/core/givers/Giver6551.sol";
+import { CookieUtils } from "src/lib/CookieUtils.sol";
 
 contract ImpCookieJar6551 is CookieJarCore, Giver6551 {
     mapping(address allowed => bool isAllowed) public allowList;
@@ -22,7 +23,8 @@ contract ImpCookieJar6551 is CookieJarCore, Giver6551 {
     }
 
     function giveCookie(address cookieMonster, uint256 amount) internal override(CookieJarCore) {
-        return Giver6551.giveCookie(cookieMonster, amount, cookieToken);
+        Giver6551.giveCookie(cookieMonster, amount, cookieToken);
+        emit GiveCookie(cookieMonster, amount, CookieUtils.getCookieUid(POSTER_UID));
     }
 
     function isAllowList(address account) internal view override returns (bool) {

@@ -6,11 +6,12 @@ import {ModuleProxyFactory} from "@gnosis.pm/zodiac/contracts/factory/ModuleProx
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 
 import {CookieJarCore} from "src/core/CookieJarCore.sol";
+import {CookieUtils} from "src/lib/CookieUtils.sol";
 
 contract CookieJarFactory is Ownable {
     ModuleProxyFactory internal moduleProxyFactory;
 
-    event SummonCookieJar(address cookieJar, bytes initializer, string details);
+    event SummonCookieJar(address cookieJar, bytes initializer, string details, string uid);
 
     /*solhint-disable no-empty-blocks*/
     constructor() {}
@@ -43,13 +44,23 @@ contract CookieJarFactory is Ownable {
     // Mapping
     // 7. address[] _allowlist
 
+    // Details
+    // {
+    //   "type":"Baal",
+    //   "name":"Moloch Pastries",
+    //   "description":"This is where you add some more content",
+    //   "link":"app.daohaus.club/0x64/0x0....666"
+    // }
+
     function summonCookieJar(address _singleton, bytes memory _initializer, string memory _details, uint256 _saltNonce)
         public
         returns (address)
     {
         CookieJarCore cookieJar = CookieJarCore(moduleProxyFactory.deployModule(_singleton, _initializer, _saltNonce));
 
-        emit SummonCookieJar(address(cookieJar), _initializer, _details);
+        string memory uid = CookieUtils.getCookieJarUid(address(cookieJar));
+
+        emit SummonCookieJar(address(cookieJar), _initializer, _details, uid);
         return address(cookieJar);
     }
 }

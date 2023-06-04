@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity 0.8.19;
 
-import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 import {ICookieJar} from "src/interfaces/ICookieJar.sol";
 import {OwnableUpgradeable} from "@openzeppelin/contracts-upgradeable/contracts/access/OwnableUpgradeable.sol";
 import {Initializable} from "@openzeppelin/contracts-upgradeable/contracts/proxy/utils/Initializable.sol";
 import {IPoster} from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
+import {CookieUtils} from "src/lib/CookieUtils.sol";
+import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 
 abstract contract CookieJarCore is Initializable, OwnableUpgradeable, ICookieJar {
     /// @notice The tag used for posts related to this contract.
@@ -13,6 +14,9 @@ abstract contract CookieJarCore is Initializable, OwnableUpgradeable, ICookieJar
 
     /// @notice The address for the poster.
     address public constant POSTER_ADDR = 0x000000000000cd17345801aa8147b8D3950260FF;
+
+    /// @notice The UID for the poster.
+    string public POSTER_UID;
 
     /// @notice The amount of "cookie" that can be claimed.
     uint256 public cookieAmount;
@@ -46,6 +50,8 @@ abstract contract CookieJarCore is Initializable, OwnableUpgradeable, ICookieJar
         cookieToken = _cookieToken;
 
         __Ownable_init();
+
+        POSTER_UID = CookieUtils.getCookieJarUid(address(this));
 
         emit Setup(_initializationParams);
     }
@@ -81,7 +87,9 @@ abstract contract CookieJarCore is Initializable, OwnableUpgradeable, ICookieJar
         require(isValidClaimPeriod(msg.sender), "not a valid claim period");
 
         claims[msg.sender] = block.timestamp;
+
         giveCookie(cookieMonster, cookieAmount);
+
         postReason(_reason);
     }
 
@@ -98,17 +106,23 @@ abstract contract CookieJarCore is Initializable, OwnableUpgradeable, ICookieJar
      * @notice Allows a member to assess the reason for a claim.
      * @dev The member can give a thumbs up or thumbs down to a claim reason. The assessment is posted to the Poster
      * contract.
-     * @param _uid The unique identifier of the claim reason to be assessed.
+     * @param _cookieUid The unique identifier of the claim reason to be assessed.
      * @param _isGood A boolean indicating whether the assessment is positive (true) or negative (false).
+     *
+     *  {
+     *    tag: CookieJar.<jar_uid>.reaction.<cookie_uid>
+     *    content: "...reason..."
+     *  }
      */
-    function assessReason(string calldata _uid, bool _isGood) public {
+    function assessReason(string calldata _cookieUid, bool _isGood) public {
         require(isAllowList(msg.sender), "not a member");
-        string memory tag = string.concat(POSTER_TAG, ".reaction");
+        string memory assessTag = string.concat(POSTER_TAG, ".", POSTER_UID, ".reaction.", _cookieUid);
+
         string memory senderString = Strings.toHexString(uint256(uint160(msg.sender)), 20);
         if (_isGood) {
-            IPoster(POSTER_ADDR).post(string.concat(_uid, " UP ", senderString), tag);
+            IPoster(POSTER_ADDR).post(string.concat("UP ", senderString), assessTag);
         } else {
-            IPoster(POSTER_ADDR).post(string.concat(_uid, " DOWN ", senderString), tag);
+            IPoster(POSTER_ADDR).post(string.concat("DOWN ", senderString), assessTag);
         }
     }
 
@@ -152,28 +166,17 @@ abstract contract CookieJarCore is Initializable, OwnableUpgradeable, ICookieJar
      * @dev Generates a unique identifier (uid) for the post using keccak256. Then, it calls the post function of the
      * Poster contract.
      * @param _reason The reason provided by the member for making the claim.
+     *
+     *  {
+     *    tag: CookieJar.<jar_uid>.reason.<cookie_uid>
+     *    content: "...reason..."
+     *  }
      */
     function postReason(string calldata _reason) internal {
-        bytes32 uid = keccak256(abi.encodePacked(address(this), msg.sender, block.timestamp, _reason));
-        IPoster(POSTER_ADDR).post(_reason, string.concat(POSTER_TAG, " ", bytes32ToString(uid)));
-    }
+        string memory reasonTag =
+            string.concat(POSTER_TAG, ".", POSTER_UID, ".reason.", CookieUtils.getCookieUid(POSTER_UID));
 
-    /**
-     *
-     * UTIL *
-     *
-     */
-
-    /**
-     * @notice Converts a bytes32 value to a string.
-     * @dev This is a helper function that is used to convert bytes32 values to strings, for example, to convert hashed
-     * values
-     * to their string representation.
-     * @param _b The bytes32 value to convert.
-     * @return The string representation of the given bytes32 value.
-     */
-    function bytes32ToString(bytes32 _b) private pure returns (string memory) {
-        return string(abi.encodePacked(_b));
+        IPoster(POSTER_ADDR).post(_reason, string.concat(reasonTag));
     }
 
     /**

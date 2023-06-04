@@ -9,7 +9,7 @@ interface ICookieJar {
     /// @dev Emitted when a "cookie" is given to an address.
     /// @param cookieMonster The address receiving the cookie.
     /// @param amount The amount of cookie given.
-    event GiveCookie(address indexed cookieMonster, uint256 amount);
+    event GiveCookie(address indexed cookieMonster, uint256 amount, string _uid);
 
     /**
      * @notice Sets up the contract with the given initialization parameters.
