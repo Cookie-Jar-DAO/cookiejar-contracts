@@ -50,6 +50,59 @@ To run the tests for the Cookie Jar contracts, you can run the following command
 
 ## Jar features
 
+### Cookie Jar Initialization Parameters
+
+The Cookie Jar contract can be initialized with a set of parameters that define the behavior of the contract. The parameters are passed to the contract's constructor as an array of values.
+
+The parameters are different depending on the type of Cookie Jar being created. There are three types of Cookie Jars: Baal, ERC20, and ERC721. The parameters for each type of Cookie Jar are as follows:
+
+#### Baal Cookie Jar
+
+| Parameter | Type    | Description                                                |
+| --------- | ------- | ---------------------------------------------------------- |
+| 0         | address | The address of the owner or safe target of the Cookie Jar. |
+| 1         | uint256 | The length of the period for the Cookie Jar.               |
+| 2         | uint256 | The amount of cookies to be distributed per period.        |
+| 3         | address | The address of the cookie token contract.                  |
+| 4         | address | The address of the DAO contract.                           |
+| 5         | uint256 | The threshold for tokens in the DAO.                       |
+| 6         | bool    | Whether to use shareTokens.                                |
+| 7         | bool    | Whether to use lootTokens.                                 |
+
+#### ERC20 Cookie Jar
+
+| Parameter | Type    | Description                                                |
+| --------- | ------- | ---------------------------------------------------------- |
+| 0         | address | The address of the owner or safe target of the Cookie Jar. |
+| 1         | uint256 | The length of the period for the Cookie Jar.               |
+| 2         | uint256 | The amount of cookies to be distributed per period.        |
+| 3         | address | The address of the cookie token contract.                  |
+| 4         | address | The address of the ERC20 token contract.                   |
+| 5         | uint256 | The threshold for balance in the ERC20 token contract.     |
+
+#### ERC721 Cookie Jar
+
+| Parameter | Type    | Description                                                |
+| --------- | ------- | ---------------------------------------------------------- |
+| 0         | address | The address of the owner or safe target of the Cookie Jar. |
+| 1         | uint256 | The length of the period for the Cookie Jar.               |
+| 2         | uint256 | The amount of cookies to be distributed per period.        |
+| 3         | address | The address of the cookie token contract.                  |
+| 4         | address | The address of the ERC721 token contract.                  |
+| 5         | uint256 | The threshold for balance in the ERC721 token contract.    |
+
+#### Mapping Cookie Jar
+
+| Parameter | Type      | Description                                                |
+| --------- | --------- | ---------------------------------------------------------- |
+| 0         | address   | The address of the owner or safe target of the Cookie Jar. |
+| 1         | uint256   | The length of the period for the Cookie Jar.               |
+| 2         | uint256   | The amount of cookies to be distributed per period.        |
+| 3         | address   | The address of the cookie token contract.                  |
+| 4         | address[] | The list of addresses allowed to claim cookies.            |
+
+The parameters for each type of Cookie Jar are passed to the summonCookieJar function as a byte array. The byte array is constructed by encoding the parameters in the order listed above.
+
 ## Poster schema
 
 The Poster contract is used to emit events on chain as a way to store more complex information on chain in a gas-efficient manner.

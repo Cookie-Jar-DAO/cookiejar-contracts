@@ -23,8 +23,8 @@ contract CookieJarFactory is Ownable {
 
     //Cookie Jar init params
     // 0. address owner or safeTarget,
-    // 2. uint256 _periodLength,
-    // 3. uint256 _cookieAmount,
+    // 1. uint256 _periodLength,
+    // 2. uint256 _cookieAmount,
     // 4. address _cookieToken
 
     // Baal
