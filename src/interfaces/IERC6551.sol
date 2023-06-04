@@ -17,11 +17,7 @@ interface IAccount {
     /// grant execution permissions to other non-owner accounts.
     ///
     /// @return The result of the call
-    function executeCall(
-        address to,
-        uint256 value,
-        bytes calldata data
-    ) external payable returns (bytes memory);
+    function executeCall(address to, uint256 value, bytes calldata data) external payable returns (bytes memory);
 
     /// @dev Returns identifier of the ERC-721 token which owns the
     /// account
@@ -32,10 +28,7 @@ interface IAccount {
     /// @return chainId The EIP-155 ID of the chain the ERC-721 token exists on
     /// @return tokenContract The contract address of the ERC-721 token
     /// @return tokenId The ID of the ERC-721 token
-    function token()
-        external
-        view
-        returns (uint256 chainId, address tokenContract, uint256 tokenId);
+    function token() external view returns (uint256 chainId, address tokenContract, uint256 tokenId);
 
     /// @dev Returns the owner of the ERC-721 token which controls the account
     /// if the token exists.

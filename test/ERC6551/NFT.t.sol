@@ -48,98 +48,62 @@ contract AccountRegistryTest is PRBTest {
             address(listCookieJarImp)
         );
 
-        vm.mockCall(
-            0x000000000000cd17345801aa8147b8D3950260FF,
-            abi.encodeWithSelector(IPoster.post.selector),
-            ""
-        );
+        vm.mockCall(0x000000000000cd17345801aa8147b8D3950260FF, abi.encodeWithSelector(IPoster.post.selector), "");
     }
 
-    function testCookieMint()
-        public
-        returns (address account, address cookieJar, uint256 tokenId)
-    {
+    function testCookieMint() public returns (address account, address cookieJar, uint256 tokenId) {
         address user1 = vm.addr(1);
         uint256 cookieAmount = 1e16;
         uint256 periodLength = 3600;
         address cookieToken = address(cookieJarImp);
         address[] memory allowList = new address[](0);
 
-        (account, cookieJar, tokenId) = tokenCollection.cookieMint(
-            user1,
-            periodLength,
-            cookieAmount,
-            cookieToken,
-            allowList
-        );
+        (account, cookieJar, tokenId) =
+            tokenCollection.cookieMint(user1, periodLength, cookieAmount, cookieToken, allowList);
 
-        (bool sent, ) = payable(account).call{value: 1 ether}("");
+        (bool sent,) = payable(account).call{value: 1 ether}("");
         require(sent, "Failed to send Ether?");
 
         assertEq(tokenCollection.balanceOf(user1), 1);
     }
 
     function testCookieAddAccountToAllowListAsOwner() public {
-        (address account, address cookieJar, ) = testCookieMint();
+        (address account, address cookieJar,) = testCookieMint();
         AccountERC6551 accountContract = AccountERC6551(payable(account));
         ImpCookieJar6551 listCookieJarContract = ImpCookieJar6551(cookieJar);
 
         vm.prank(vm.addr(1));
         accountContract.executeCall(
-            cookieJar,
-            0,
-            abi.encodeWithSelector(
-                listCookieJarContract.setAllowList.selector,
-                vm.addr(2),
-                true
-            )
+            cookieJar, 0, abi.encodeWithSelector(listCookieJarContract.setAllowList.selector, vm.addr(2), true)
         );
 
         assertEq(listCookieJarContract.allowList(vm.addr(2)), true);
     }
 
     function testCookieRemoveAccountToAllowListAsOwner() public {
-        (address account, address cookieJar, ) = testCookieMint();
+        (address account, address cookieJar,) = testCookieMint();
         AccountERC6551 accountContract = AccountERC6551(payable(account));
         ImpCookieJar6551 listCookieJarContract = ImpCookieJar6551(cookieJar);
 
         vm.prank(vm.addr(1));
         accountContract.executeCall(
-            cookieJar,
-            0,
-            abi.encodeWithSelector(
-                listCookieJarContract.setAllowList.selector,
-                vm.addr(2),
-                true
-            )
+            cookieJar, 0, abi.encodeWithSelector(listCookieJarContract.setAllowList.selector, vm.addr(2), true)
         );
         vm.prank(vm.addr(1));
         accountContract.executeCall(
-            cookieJar,
-            0,
-            abi.encodeWithSelector(
-                listCookieJarContract.setAllowList.selector,
-                vm.addr(2),
-                false
-            )
+            cookieJar, 0, abi.encodeWithSelector(listCookieJarContract.setAllowList.selector, vm.addr(2), false)
         );
         assertEq(listCookieJarContract.allowList(vm.addr(2)), false);
     }
 
     function testCookieAllowListWithdraw() public {
-        (address account, address cookieJar, ) = testCookieMint();
+        (address account, address cookieJar,) = testCookieMint();
         AccountERC6551 accountContract = AccountERC6551(payable(account));
         ImpCookieJar6551 listCookieJarContract = ImpCookieJar6551(cookieJar);
 
         vm.prank(vm.addr(1));
         accountContract.executeCall(
-            cookieJar,
-            0,
-            abi.encodeWithSelector(
-                listCookieJarContract.setAllowList.selector,
-                vm.addr(2),
-                true
-            )
+            cookieJar, 0, abi.encodeWithSelector(listCookieJarContract.setAllowList.selector, vm.addr(2), true)
         );
         assertEq(listCookieJarContract.allowList(vm.addr(2)), true);
 
@@ -150,11 +114,7 @@ contract AccountRegistryTest is PRBTest {
     }
 
     function testCookieNftTransfer() public {
-        (
-            address account,
-            address cookieJar,
-            uint256 tokenId
-        ) = testCookieMint();
+        (address account, address cookieJar, uint256 tokenId) = testCookieMint();
         vm.prank(vm.addr(1));
         tokenCollection.transferFrom(vm.addr(1), vm.addr(2), tokenId);
         assertEq(tokenCollection.balanceOf(vm.addr(2)), 1);
@@ -166,24 +126,13 @@ contract AccountRegistryTest is PRBTest {
         vm.prank(vm.addr(1));
         vm.expectRevert(AccountERC6551.NotAuthorized.selector);
         accountContract.executeCall(
-            cookieJar,
-            0,
-            abi.encodeWithSelector(
-                listCookieJarContract.setAllowList.selector,
-                vm.addr(2),
-                true
-            )
+            cookieJar, 0, abi.encodeWithSelector(listCookieJarContract.setAllowList.selector, vm.addr(2), true)
         );
     }
 
     function testCookieNftTokenURI() public {
-        (
-            ,
-            ,
-            uint256 tokenId
-        ) = testCookieMint();
+        (,, uint256 tokenId) = testCookieMint();
 
         tokenCollection.tokenURI(tokenId);
-
     }
 }

@@ -18,13 +18,7 @@ import {ERC6551AccountLib} from "src/lib/ERC6551AccountLib.sol";
  * @title A smart contract wallet owned by a single ERC721 token
  * @author Jayden Windle (jaydenwindle)
  */
-contract AccountERC6551 is
-    IERC165,
-    IERC1271,
-    IAccount,
-    MinimalReceiver,
-    Initializable
-{
+contract AccountERC6551 is IERC165, IERC1271, IAccount, MinimalReceiver, Initializable {
     error NotAuthorized();
     error AccountLocked();
     error ExceedsMaxLockTime();
@@ -62,9 +56,7 @@ contract AccountERC6551 is
     /**
      * @dev If account is unlocked and an executor is set, pass call to executor
      */
-    fallback(
-        bytes calldata data
-    ) external payable onlyUnlocked returns (bytes memory result) {
+    fallback(bytes calldata data) external payable onlyUnlocked returns (bytes memory result) {
         address _owner = owner();
         address _executor = executor[_owner];
 
@@ -81,11 +73,12 @@ contract AccountERC6551 is
      * @param value   Ether value of the transaction
      * @param data    Encoded payload of the transaction
      */
-    function executeCall(
-        address to,
-        uint256 value,
-        bytes calldata data
-    ) external payable onlyUnlocked returns (bytes memory result) {
+    function executeCall(address to, uint256 value, bytes calldata data)
+        external
+        payable
+        onlyUnlocked
+        returns (bytes memory result)
+    {
         address _owner = owner();
         if (msg.sender != _owner) revert NotAuthorized();
 
@@ -99,11 +92,12 @@ contract AccountERC6551 is
      * @param value   Ether value of the transaction
      * @param data    Encoded payload of the transaction
      */
-    function exec(
-        address to,
-        uint256 value,
-        bytes calldata data
-    ) external payable onlyUnlocked returns (bytes memory result) {
+    function exec(address to, uint256 value, bytes calldata data)
+        external
+        payable
+        onlyUnlocked
+        returns (bytes memory result)
+    {
         address _owner = owner();
         if (msg.sender != _owner) revert NotAuthorized();
 
@@ -117,11 +111,12 @@ contract AccountERC6551 is
      * @param value   Ether value of the transaction
      * @param data    Encoded payload of the transaction
      */
-    function executeTrustedCall(
-        address to,
-        uint256 value,
-        bytes calldata data
-    ) external payable onlyUnlocked returns (bytes memory result) {
+    function executeTrustedCall(address to, uint256 value, bytes calldata data)
+        external
+        payable
+        onlyUnlocked
+        returns (bytes memory result)
+    {
         address _executor = executor[owner()];
         if (msg.sender != _executor) revert NotAuthorized();
 
@@ -212,10 +207,7 @@ contract AccountERC6551 is
      * @param hash      Hash of the signed data
      * @param signature Signature to validate
      */
-    function isValidSignature(
-        bytes32 hash,
-        bytes memory signature
-    ) external view returns (bytes4 magicValue) {
+    function isValidSignature(bytes32 hash, bytes memory signature) external view returns (bytes4 magicValue) {
         // If account is locked, disable signing
         if (unlockTimestamp > block.timestamp) return "";
 
@@ -223,10 +215,7 @@ contract AccountERC6551 is
         address _owner = owner();
         address _executor = executor[_owner];
 
-        if (
-            _executor != address(0) &&
-            SignatureChecker.isValidSignatureNow(_executor, hash, signature)
-        ) {
+        if (_executor != address(0) && SignatureChecker.isValidSignatureNow(_executor, hash, signature)) {
             return IERC1271.isValidSignature.selector;
         }
 
@@ -244,14 +233,17 @@ contract AccountERC6551 is
      * @param interfaceId the interfaceId to check support for
      * @return true if the interface is supported, false otherwise
      */
-    function supportsInterface(
-        bytes4 interfaceId
-    ) public view virtual override(IERC165, ERC1155Receiver) returns (bool) {
+    function supportsInterface(bytes4 interfaceId)
+        public
+        view
+        virtual
+        override(IERC165, ERC1155Receiver)
+        returns (bool)
+    {
         // default interface support
         if (
-            interfaceId == type(IAccount).interfaceId ||
-            interfaceId == type(IERC1155Receiver).interfaceId ||
-            interfaceId == type(IERC165).interfaceId
+            interfaceId == type(IAccount).interfaceId || interfaceId == type(IERC1155Receiver).interfaceId
+                || interfaceId == type(IERC165).interfaceId
         ) {
             return true;
         }
@@ -263,9 +255,7 @@ contract AccountERC6551 is
         }
 
         // if interface is not supported by default, check executor
-        try IERC165(_executor).supportsInterface(interfaceId) returns (
-            bool _supportsInterface
-        ) {
+        try IERC165(_executor).supportsInterface(interfaceId) returns (bool _supportsInterface) {
             return _supportsInterface;
         } catch {
             return false;
@@ -278,11 +268,7 @@ contract AccountERC6551 is
      * @return the address of the Account owner
      */
     function owner() public view returns (address) {
-        (
-            uint256 chainId,
-            address tokenCollection,
-            uint256 tokenId
-        ) = _context();
+        (uint256 chainId, address tokenCollection, uint256 tokenId) = _context();
 
         if (chainId != block.chainid) {
             return address(0);
@@ -297,30 +283,18 @@ contract AccountERC6551 is
      * @return tokenCollection the contract address of the  ERC721 token which owns this account
      * @return tokenId the tokenId of the  ERC721 token which owns this account
      */
-    function token()
-        public
-        view
-        returns (uint256 chainId, address tokenCollection, uint256 tokenId)
-    {
+    function token() public view returns (uint256 chainId, address tokenCollection, uint256 tokenId) {
         (chainId, tokenCollection, tokenId) = _context();
     }
 
-    function _context()
-        internal
-        view
-        returns (uint256 chainId, address tokenContract, uint256 tokenId)
-    {
+    function _context() internal view returns (uint256 chainId, address tokenContract, uint256 tokenId) {
         (chainId, tokenContract, tokenId) = ERC6551AccountLib.token();
     }
 
     /**
      * @dev Executes a low-level call
      */
-    function _call(
-        address to,
-        uint256 value,
-        bytes calldata data
-    ) internal returns (bytes memory result) {
+    function _call(address to, uint256 value, bytes calldata data) internal returns (bytes memory result) {
         bool success;
         (success, result) = to.call{value: value}(data);
 

@@ -36,10 +36,9 @@ abstract contract CookieJarCore is Initializable, OwnableUpgradeable, ICookieJar
      * The period length, cookie amount, and cookie token are then set as per the parameters.
      * An event is emitted with the initialization parameters.
      * @param _initializationParams The initialization parameters, encoded as a bytes array.
-     *  // TODO: add initializer to this contract
      */
     function setUp(bytes memory _initializationParams) public virtual {
-        (address account, uint256 _periodLength, uint256 _cookieAmount, address _cookieToken) =
+        (, uint256 _periodLength, uint256 _cookieAmount, address _cookieToken) =
             abi.decode(_initializationParams, (address, uint256, uint256, address));
 
         periodLength = _periodLength;
@@ -47,7 +46,6 @@ abstract contract CookieJarCore is Initializable, OwnableUpgradeable, ICookieJar
         cookieToken = _cookieToken;
 
         __Ownable_init();
-        transferOwnership(account);
 
         emit Setup(_initializationParams);
     }

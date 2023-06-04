@@ -28,12 +28,13 @@ contract ZodiacCookieJar is CookieJarCore, GiverZodiac {
         override(CookieJarCore, FactoryFriendly)
         initializer
     {
-        (address _target) = abi.decode(_initializationParams, (address));
+        (address _safeTarget) = abi.decode(_initializationParams, (address));
+        super.setUp(_initializationParams);
 
-        CookieJarCore.setUp(_initializationParams);
+        setAvatar(_safeTarget);
+        setTarget(_safeTarget);
 
-        setAvatar(_target);
-        setTarget(_target);
+        transferOwnership(_safeTarget);
     }
 
     /**
