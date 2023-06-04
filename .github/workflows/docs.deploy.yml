@@ -1,4 +1,9 @@
-name: Deploy documentation
+name: Build Book & Deploy to Vercel
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
 on:
   pull_request:
   push:
@@ -6,53 +11,43 @@ on:
       - main
 
 jobs:
-  deploy-mdbook:
+  buildAndDeploy:
     runs-on: ubuntu-latest
     permissions:
       contents: write # To push a branch
       pull-requests: write # To create a PR from that branch
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v3
         with:
-          fetch-depth: 0
           submodules: recursive
+
+      - name: Setup Node.js (required to install Vercel CLI)
+        uses: actions/setup-node@v3
 
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
         with:
           version: nightly
-        id: install-foundry
-
-      - name: Install latest mdbook
-        run: |
-          tag=$(curl 'https://api.github.com/repos/rust-lang/mdbook/releases/latest' | jq -r '.tag_name')
-          url="https://github.com/rust-lang/mdbook/releases/download/${tag}/mdbook-${tag}-x86_64-unknown-linux-gnu.tar.gz"
-          mkdir mdbook
-          curl -sSL $url | tar -xz --directory=./mdbook
-          echo `pwd`/mdbook >> $GITHUB_PATH
-        id: install-mdbook
 
       - name: Run Forge doc
-        run: |
-          forge --version
-          forge doc
-        id: docs
+        run: forge doc -b
+        id: generate-docs
 
-      - name: Deploy GitHub Pages
+      - name: Install Vercel CLI
+        run: npm install --global vercel
+
+      - name: Pull Vercel environment information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: List files
         run: |
-          # This assumes your book is in the root of your repository.
-          # Just add a `cd` here if you need to change to another directory.
-          cd docs
-          mdbook build
-          git worktree add gh-pages
-          git config user.name "Deploy from CI"
-          git config user.email ""
-          cd gh-pages
-          # Delete the ref to avoid keeping history.
-          git update-ref -d refs/heads/gh-pages
-          rm -rf *
-          mv ../book/* .
-          git add .
-          git commit -m "Deploy $GITHUB_SHA to gh-pages"
-          git push --force --set-upstream origin gh-pages
-        id: deploy
+          ls -la
+
+      - name: List files in docs
+        working-directory: docs
+        run: |
+          ls -la
+
+      - name: Deploy to Vercel
+        run: vercel --cwd docs book --prod --token=${{ secrets.VERCEL_TOKEN }}
