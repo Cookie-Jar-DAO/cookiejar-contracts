@@ -29,7 +29,7 @@ jobs:
 
       - name: Run Forge doc
         run: 
-          forge doc
+          forge doc --out ./docs/book
         id: generate-docs
 
       - name: Setup Node.js (required to install Vercel CLI)
@@ -42,4 +42,4 @@ jobs:
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy to Vercel
-        run: vercel docs/book --prod --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel ./docs/book --prod --token=${{ secrets.VERCEL_TOKEN }}
