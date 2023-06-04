@@ -20,25 +20,23 @@ import {ModuleProxyFactory} from "@gnosis.pm/zodiac/contracts/factory/ModuleProx
 import {console} from "forge-std/console.sol";
 
 /// @dev See the Solidity Scripting tutorial: https://book.getfoundry.sh/tutorials/solidity-scripting
-contract DeployCookieJar is Script {
+contract TestMintCookieJar is Script {
     address internal deployer;
     uint256 internal deployerPk;
 
     // Zodiac
-    address internal baalCookieJar;
-    address internal erc20CookieJar;
-    address internal erc721CookieJar;
-    address internal listCookieJar;
-    address internal openCookieJar;
-    address internal cookieJarFactory;
-    address internal safeModuleSummoner;
+    address internal baalCookieJar = 0x2bfe504e5C145F5d5b95df2b7798Ec1C422C5Bc1;
+    address internal erc20CookieJar = 0x8e694435C2Ad04ac4C59F50d75D501f678aD26bd;
+    address internal erc721CookieJar = 0x24A2D8772521A9fa2f85d7024e020e7821C23c97;
+    address internal listCookieJar = 0x3Ae8da051CC6Ab7Ef884A8f0fF86e02c3303fc38;
+    address internal openCookieJar = 0x0c6544Af9424C24549c57BD805C299635081eDE4;
+    address internal cookieJarFactory = 0x3737053eC30f53DD7543a615dA69BB9996aD7C81;
     address internal moduleProxyFactory;
 
     // 6551
-    address internal listCookieJar6551;
-    address internal accountImp;
-    address internal registry;
-    address internal nft;
+    address internal listCookieJar6551 = 0x3Ae8da051CC6Ab7Ef884A8f0fF86e02c3303fc38;
+    address internal accountImp = 0x9CD838ba5ce219d1Eaf58Fa413b9D6e74799A7c8;
+    address internal nft = 0xc9997Bf3D85ef279C2671Fccc4E7Fa4ef092450B;
 
     function setUp() public virtual {
         string memory mnemonic = vm.envString("MNEMONIC");
@@ -56,41 +54,13 @@ contract DeployCookieJar is Script {
         if (deployer != address(0)) vm.startBroadcast(deployer);
         else vm.startBroadcast(deployerPk);
 
-        // Zodiac
-        baalCookieJar = address(new ZodiacBaalCookieJar());
-        erc20CookieJar = address(new ZodiacERC20CookieJar());
-        erc721CookieJar = address(new ZodiacERC721CookieJar());
-        listCookieJar = address(new ZodiacListCookieJar());
-        openCookieJar = address(new ZodiacOpenCookieJar());
-        cookieJarFactory = address(new CookieJarFactory());
-        CookieJarFactory(cookieJarFactory).setProxyFactory(moduleProxyFactory);
+        address user1 = vm.addr(1);
+        uint256 cookieAmount = 1e16;
+        uint256 periodLength = 3600;
+        address cookieToken = address(listCookieJar6551);
+        address[] memory allowList = new address[](0);
 
-        // 6551
-
-        listCookieJar6551 = address(new ImpCookieJar6551());
-        accountImp = address(new AccountERC6551());
-        registry = address(new AccountRegistry());
-        nft = address(
-            new CookieNFT(
-            registry, // account registry
-            accountImp,
-            cookieJarFactory,
-            listCookieJar
-            )
-        );
-
-        // solhint-disable quotes
-        console.log(block.chainid);
-        console.log('"baalCookieJar": "%s",', baalCookieJar);
-        console.log('"erc20CookieJar": "%s",', erc20CookieJar);
-        console.log('"erc721CookieJar": "%s",', erc721CookieJar);
-        console.log('"listCookieJar": "%s",', listCookieJar);
-        console.log('"openCookieJar": "%s",', openCookieJar);
-        console.log('"cookieJarFactory": "%s",', cookieJarFactory);
-        console.log('"listCookieJar6551": "%s",', listCookieJar);
-        console.log('"account": "%s",', accountImp);
-        console.log('"nft": "%s",', nft);
-        // solhint-enable quotes
+        CookieNFT(nft).cookieMint(user1, periodLength, cookieAmount, cookieToken, allowList);
 
         vm.stopBroadcast();
     }
