@@ -31,7 +31,7 @@ jobs:
           version: nightly
 
       - name: Run Forge doc
-        run: forge doc --out docs
+        run: forge doc -b
         id: generate-docs
 
       - name: Install Vercel CLI
