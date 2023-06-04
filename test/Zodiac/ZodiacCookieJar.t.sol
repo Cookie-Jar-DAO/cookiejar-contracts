@@ -8,8 +8,17 @@ import {TestAvatar} from "@gnosis.pm/zodiac/contracts/test/TestAvatar.sol";
 import {ERC20Mintable} from "test/utils/ERC20Mintable.sol";
 import {IPoster} from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
 import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
+import {CookieUtils} from "src/lib/CookieUtils.sol";
 
 contract CookieJarHarnass is ZodiacCookieJar {
+    function posterTag() public pure returns (string memory) {
+        return POSTER_TAG;
+    }
+
+    function posterUid() public view returns (string memory) {
+        return POSTER_UID;
+    }
+
     function exposed_isAllowList(address user) external view returns (bool) {
         return isAllowList(user);
     }
@@ -76,21 +85,24 @@ contract ZodiacCookieJarTest is PRBTest, StdCheats {
 
     function testAssessReason() external {
         vm.startPrank(alice);
-        string memory uid = "testEmit";
+        string memory cookieUid = CookieUtils.getCookieUid(cookieJar.posterUid());
+
+        string memory assessTag =
+            string.concat(cookieJar.posterTag(), ".", cookieJar.posterUid(), ".reaction.", cookieUid);
+
         string memory senderString = Strings.toHexString(uint256(uint160(alice)), 20);
-        string memory tag = string.concat("CookieJar", ".reaction");
 
         vm.expectCall(
             0x000000000000cd17345801aa8147b8D3950260FF,
-            abi.encodeCall(IPoster.post, (string.concat(uid, " UP ", senderString), tag))
+            abi.encodeCall(IPoster.post, (string.concat("UP ", senderString), assessTag))
         );
-        cookieJar.assessReason(uid, true);
+        cookieJar.assessReason(cookieUid, true);
 
         vm.expectCall(
             0x000000000000cd17345801aa8147b8D3950260FF,
-            abi.encodeCall(IPoster.post, (string.concat(uid, " DOWN ", senderString), tag))
+            abi.encodeCall(IPoster.post, (string.concat("DOWN ", senderString), assessTag))
         );
-        cookieJar.assessReason(uid, false);
+        cookieJar.assessReason(cookieUid, false);
     }
 
     function testGiveAwayCookie() external {

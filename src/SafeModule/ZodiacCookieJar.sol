@@ -9,6 +9,7 @@ import {CookieJarCore} from "src/core/CookieJarCore.sol";
 import {GiverZodiac} from "src/core/givers/GiverZodiac.sol";
 import {IPoster} from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
 import {FactoryFriendly} from "@gnosis.pm/zodiac/contracts/factory/FactoryFriendly.sol";
+import {CookieUtils} from "src/lib/CookieUtils.sol";
 
 contract ZodiacCookieJar is CookieJarCore, GiverZodiac {
     /**
@@ -81,6 +82,6 @@ contract ZodiacCookieJar is CookieJarCore, GiverZodiac {
      */
     function giveCookie(address cookieMonster, uint256 amount) internal override {
         GiverZodiac.giveCookie(cookieMonster, amount, cookieToken);
-        emit GiveCookie(cookieMonster, amount);
+        emit GiveCookie(cookieMonster, amount, CookieUtils.getCookieJarUid(address(this)));
     }
 }

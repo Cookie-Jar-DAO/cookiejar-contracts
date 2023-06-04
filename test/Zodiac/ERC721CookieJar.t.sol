@@ -7,6 +7,7 @@ import {TestAvatar} from "@gnosis.pm/zodiac/contracts/test/TestAvatar.sol";
 import {IPoster} from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
 
 import {ZodiacCloneSummoner, ZodiacERC721CookieJarHarnass} from "test/utils/ZodiacCloneSummoner.sol";
+import {Test, Vm} from "forge-std/Test.sol";
 
 contract ERC721CookieJarTest is ZodiacCloneSummoner {
     address internal alice = makeAddr("alice");
@@ -65,8 +66,12 @@ contract ERC721CookieJarTest is ZodiacCloneSummoner {
 
         // Alice puts her hand in the jar
         vm.startPrank(alice);
-        vm.expectEmit(false, false, false, true);
-        emit GiveCookie(alice, cookieAmount);
+        // GiveCookie is not the last emitted event so we drill down the logs
+        // vm.expectEmit(false, false, false, true);
+        // emit GiveCookie(alice, cookieAmount, CookieUtils.getCookieJarUid(address(cookieJar)));
         cookieJar.reachInJar(reason);
+
+        Vm.Log[] memory entries = vm.getRecordedLogs();
+        assertEq(entries[3].topics[0], keccak256("GiveCookie(address,uint256,string)"));
     }
 }
