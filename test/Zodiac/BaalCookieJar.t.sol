@@ -36,17 +36,6 @@ contract BaalCookieJarTest is ZodiacCloneSummoner {
         vm.mockCall(molochDAO, abi.encodeWithSelector(IBaal.lootToken.selector), abi.encode(lootToken));
         vm.mockCall(molochDAO, abi.encodeWithSelector(IBaal.target.selector), abi.encode(sharesToken));
 
-        //Cookie Jar init params
-        // 0. address safeAddress
-        // 1. uint256 _periodLength,
-        // 2. uint256 _cookieAmount,
-        // 3. address _cookieToken
-
-        // Baal
-        // 4. address _dao,
-        // 5. uint256 _threshold,
-        // 6. bool _useShares,
-        // 7. bool _useLoot
         bytes memory initParams =
             abi.encode(address(testAvatar), 3600, cookieAmount, address(cookieToken), molochDAO, 1, true, true);
 

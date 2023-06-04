@@ -17,12 +17,7 @@ contract AccountRegistryTest is PRBTest {
     AccountRegistry public accountRegistry;
 
     event AccountCreated(
-        address account,
-        address implementation,
-        uint256 chainId,
-        address tokenContract,
-        uint256 tokenId,
-        uint256 salt
+        address account, address implementation, uint256 chainId, address tokenContract, uint256 tokenId, uint256 salt
     );
 
     function setUp() public {
@@ -30,37 +25,18 @@ contract AccountRegistryTest is PRBTest {
         accountRegistry = new AccountRegistry();
     }
 
-    function testDeployAccount(
-        address tokenCollection,
-        uint256 tokenId
-    ) public {
+    function testDeployAccount(address tokenCollection, uint256 tokenId) public {
         assertTrue(address(accountRegistry) != address(0));
 
-        address predictedAccountAddress = accountRegistry.account(
-            address(implementation),
-            block.chainid,
-            tokenCollection,
-            tokenId,
-            101
-        );
+        address predictedAccountAddress =
+            accountRegistry.account(address(implementation), block.chainid, tokenCollection, tokenId, 101);
 
         vm.expectEmit(true, true, true, true);
         emit AccountCreated(
-            predictedAccountAddress,
-            address(implementation),
-            block.chainid,
-            tokenCollection,
-            tokenId,
-            101
+            predictedAccountAddress, address(implementation), block.chainid, tokenCollection, tokenId, 101
         );
-        address accountAddress = accountRegistry.createAccount(
-            address(implementation),
-            block.chainid,
-            tokenCollection,
-            tokenId,
-            101,
-            ""
-        );
+        address accountAddress =
+            accountRegistry.createAccount(address(implementation), block.chainid, tokenCollection, tokenId, 101, "");
 
         assertTrue(accountAddress != address(0));
         assertTrue(accountAddress == predictedAccountAddress);

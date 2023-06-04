@@ -1,19 +1,19 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.19;
 
-import { Script } from "forge-std/Script.sol";
+import {Script} from "forge-std/Script.sol";
 
-import { CookieJarFactory } from "src/factory/CookieJarFactory.sol";
-import { CookieNFT } from "src/ERC6551/nft/CookieNFT.sol";
-import { ImpCookieJar6551 } from "src/ERC6551/ImpCookieJar6551.sol";
+import {CookieJarFactory} from "src/factory/CookieJarFactory.sol";
+import {CookieNFT} from "src/ERC6551/nft/CookieNFT.sol";
+import {ImpCookieJar6551} from "src/ERC6551/ImpCookieJar6551.sol";
 
-import { AccountERC6551 } from "src/ERC6551/erc6551/ERC6551Module.sol";
-import { AccountRegistry } from "src/ERC6551/erc6551/ERC6551Registry.sol";
+import {AccountERC6551} from "src/ERC6551/erc6551/ERC6551Module.sol";
+import {AccountRegistry} from "src/ERC6551/erc6551/ERC6551Registry.sol";
 
-import { Create2 } from "@openzeppelin/contracts/utils/Create2.sol";
+import {Create2} from "@openzeppelin/contracts/utils/Create2.sol";
 
 //import forge console
-import { console } from "forge-std/console.sol";
+import {console} from "forge-std/console.sol";
 
 /// @dev See the Solidity Scripting tutorial: https://book.getfoundry.sh/tutorials/solidity-scripting
 contract DeployCookieJar6551 is Script {

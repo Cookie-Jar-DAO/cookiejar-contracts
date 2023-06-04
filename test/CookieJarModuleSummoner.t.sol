@@ -2,7 +2,6 @@
 pragma solidity 0.8.19;
 
 import {PRBTest} from "@prb/test/PRBTest.sol";
-import {console2} from "forge-std/console2.sol";
 import {StdCheats} from "forge-std/StdCheats.sol";
 
 import {ModuleProxyFactory} from "@gnosis.pm/zodiac/contracts/factory/ModuleProxyFactory.sol";
@@ -70,13 +69,13 @@ contract CookieJarModuleSummonerTest is PRBTest, StdCheats {
 
         ZodiacBaalCookieJar baalCookieJar = ZodiacBaalCookieJar(cookieJar);
 
+        assertEq(baalCookieJar.owner(), address(_safeTarget));
         assertEq(baalCookieJar.dao(), _dao);
         assertEq(baalCookieJar.threshold(), _threshold);
         assertEq(baalCookieJar.useShares(), _useShares);
         assertEq(baalCookieJar.useLoot(), _useLoot);
-        //TODO fix this
-        // assertEq(baalCookieJar.avatar(), _safeTarget);
-        // assertEq(baalCookieJar.target(), _safeTarget);
+        assertEq(baalCookieJar.avatar(), _safeTarget);
+        assertEq(baalCookieJar.target(), _safeTarget);
         assertEq(baalCookieJar.cookieAmount(), _cookieAmount);
         assertEq(baalCookieJar.cookieToken(), _cookieToken);
         assertEq(baalCookieJar.periodLength(), _periodLength);
@@ -98,10 +97,11 @@ contract CookieJarModuleSummonerTest is PRBTest, StdCheats {
 
         ZodiacERC20CookieJar erc20CookieJar = ZodiacERC20CookieJar(cookieJar);
 
+        assertEq(erc20CookieJar.owner(), address(_safeTarget));
         assertEq(erc20CookieJar.erc20Addr(), _mockERC20);
         assertEq(erc20CookieJar.threshold(), _threshold);
-        // assertEq(erc20CookieJar.avatar(), _safeTarget);
-        // assertEq(erc20CookieJar.target(), _safeTarget);
+        assertEq(erc20CookieJar.avatar(), _safeTarget);
+        assertEq(erc20CookieJar.target(), _safeTarget);
         assertEq(erc20CookieJar.cookieAmount(), _cookieAmount);
         assertEq(erc20CookieJar.cookieToken(), _cookieToken);
         assertEq(erc20CookieJar.periodLength(), _periodLength);
@@ -123,9 +123,10 @@ contract CookieJarModuleSummonerTest is PRBTest, StdCheats {
 
         ZodiacERC721CookieJar erc721CookieJar = ZodiacERC721CookieJar(cookieJar);
 
+        assertEq(erc721CookieJar.owner(), address(_safeTarget));
         assertEq(erc721CookieJar.erc721Addr(), _mockERC721);
-        // assertEq(erc721CookieJar.avatar(), _safeTarget);
-        // assertEq(erc721CookieJar.target(), _safeTarget);
+        assertEq(erc721CookieJar.avatar(), _safeTarget);
+        assertEq(erc721CookieJar.target(), _safeTarget);
         assertEq(erc721CookieJar.cookieAmount(), _cookieAmount);
         assertEq(erc721CookieJar.cookieToken(), _cookieToken);
         assertEq(erc721CookieJar.periodLength(), _periodLength);
@@ -150,11 +151,12 @@ contract CookieJarModuleSummonerTest is PRBTest, StdCheats {
 
         ZodiacListCookieJar listCookieJar = ZodiacListCookieJar(cookieJar);
 
+        assertEq(listCookieJar.owner(), address(_safeTarget));
         assertEq(listCookieJar.allowList(_list[0]), true);
         assertEq(listCookieJar.allowList(_list[1]), true);
         assertEq(listCookieJar.allowList(cookieJar), false);
-        // assertEq(listCookieJar.avatar(), _safeTarget);
-        // assertEq(listCookieJar.target(), _safeTarget);
+        assertEq(listCookieJar.avatar(), _safeTarget);
+        assertEq(listCookieJar.target(), _safeTarget);
         assertEq(listCookieJar.cookieAmount(), _cookieAmount);
         assertEq(listCookieJar.cookieToken(), _cookieToken);
         assertEq(listCookieJar.periodLength(), _periodLength);
@@ -175,8 +177,9 @@ contract CookieJarModuleSummonerTest is PRBTest, StdCheats {
 
         ZodiacOpenCookieJar openCookieJar = ZodiacOpenCookieJar(cookieJar);
 
-        // assertEq(openCookieJar.avatar(), _safeTarget);
-        // assertEq(openCookieJar.target(), _safeTarget);
+        assertEq(openCookieJar.owner(), address(_safeTarget));
+        assertEq(openCookieJar.avatar(), _safeTarget);
+        assertEq(openCookieJar.target(), _safeTarget);
         assertEq(openCookieJar.cookieAmount(), _cookieAmount);
         assertEq(openCookieJar.cookieToken(), _cookieToken);
         assertEq(openCookieJar.periodLength(), _periodLength);

@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.19;
 
-import { Script } from "forge-std/Script.sol";
-import { ZodiacBaalCookieJar } from "../src/SafeModule/BaalCookieJar.sol";
-import { ZodiacERC20CookieJar } from "../src/SafeModule/ERC20CookieJar.sol";
-import { ZodiacERC721CookieJar } from "../src/SafeModule/ERC721CookieJar.sol";
-import { ZodiacListCookieJar } from "../src/SafeModule/ListCookieJar.sol";
-import { ZodiacOpenCookieJar } from "../src/SafeModule/OpenCookieJar.sol";
-import { CookieJarFactory } from "../src/factory/CookieJarFactory.sol";
-import { Create2 } from "@openzeppelin/contracts/utils/Create2.sol";
+import {Script} from "forge-std/Script.sol";
+import {ZodiacBaalCookieJar} from "../src/SafeModule/BaalCookieJar.sol";
+import {ZodiacERC20CookieJar} from "../src/SafeModule/ERC20CookieJar.sol";
+import {ZodiacERC721CookieJar} from "../src/SafeModule/ERC721CookieJar.sol";
+import {ZodiacListCookieJar} from "../src/SafeModule/ListCookieJar.sol";
+import {ZodiacOpenCookieJar} from "../src/SafeModule/OpenCookieJar.sol";
+import {CookieJarFactory} from "../src/factory/CookieJarFactory.sol";
+import {Create2} from "@openzeppelin/contracts/utils/Create2.sol";
 
 //import forge console
-import { console } from "forge-std/console.sol";
+import {console} from "forge-std/console.sol";
 
 /// @dev See the Solidity Scripting tutorial: https://book.getfoundry.sh/tutorials/solidity-scripting
 contract DeployCookieJar is Script {

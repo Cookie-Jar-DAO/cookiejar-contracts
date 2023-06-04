@@ -36,7 +36,6 @@ abstract contract CookieJarCore is Initializable, OwnableUpgradeable, ICookieJar
      * The period length, cookie amount, and cookie token are then set as per the parameters.
      * An event is emitted with the initialization parameters.
      * @param _initializationParams The initialization parameters, encoded as a bytes array.
-     *  // TODO: add initializer to this contract
      */
     function setUp(bytes memory _initializationParams) public virtual {
         (, uint256 _periodLength, uint256 _cookieAmount, address _cookieToken) =

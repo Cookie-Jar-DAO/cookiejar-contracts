@@ -6,8 +6,9 @@ import {ZodiacCookieJar} from "src/SafeModule/ZodiacCookieJar.sol";
 
 contract ZodiacListCookieJar is MappedAllowlist, ZodiacCookieJar {
     function setUp(bytes memory _initializationParams) public override(MappedAllowlist, ZodiacCookieJar) {
-        ZodiacCookieJar.setUp(_initializationParams);
         MappedAllowlist.setUp(_initializationParams);
+
+        ZodiacCookieJar.setUp(_initializationParams);
     }
 
     function isAllowList(address user) internal view override returns (bool) {

@@ -21,49 +21,35 @@ contract CookieJarFactory is Ownable {
     }
 
     //Cookie Jar init params
-    // 0. address safeAddress
-    // 1. uint256 _periodLength,
-    // 2. uint256 _cookieAmount,
-    // 3. address _cookieToken
+    // 0. address owner or safeTarget,
+    // 2. uint256 _periodLength,
+    // 3. uint256 _cookieAmount,
+    // 4. address _cookieToken
 
     // Baal
-    // 4. address _dao,
-    // 5. uint256 _threshold,
-    // 6. bool _useShares,
-    // 7. bool _useLoot
+    // 5. address _dao,
+    // 6. uint256 _threshold,
+    // 7. bool _useShares,
+    // 8. bool _useLoot
 
     // ERC20
-    // 4. address _erc20addr,
-    // 5. uint256 _threshold
+    // 7. address _erc20addr,
+    // 8. uint256 _threshold
 
     // ERC721
-    // 4. address _erc721addr,
-    // 5. uint256 _threshold
+    // 7. address _erc721addr,
+    // 8. uint256 _threshold
 
     // Mapping
-    // 4. address[] _allowlist
-
-    function summonCookieJar(address _singleton, bytes memory _initializer, string memory _details)
-        public
-        returns (address)
-    {
-        //TODO CookieJarCore can be an interface?
-        CookieJarCore cookieJar = CookieJarCore(Clones.clone(_singleton));
-        cookieJar.setUp(_initializer);
-
-        CookieJarCore(cookieJar).transferOwnership(msg.sender);
-
-        emit SummonCookieJar(address(cookieJar), _initializer, _details);
-
-        //TODO do we need to return the address?
-        return address(cookieJar);
-    }
+    // 7. address[] _allowlist
 
     function summonCookieJar(address _singleton, bytes memory _initializer, string memory _details, uint256 _saltNonce)
         public
+        returns (address)
     {
-        CookieJarCore _cookieJar = CookieJarCore(moduleProxyFactory.deployModule(_singleton, _initializer, _saltNonce));
+        CookieJarCore cookieJar = CookieJarCore(moduleProxyFactory.deployModule(_singleton, _initializer, _saltNonce));
 
-        emit SummonCookieJar(address(_cookieJar), _initializer, _details);
+        emit SummonCookieJar(address(cookieJar), _initializer, _details);
+        return address(cookieJar);
     }
 }

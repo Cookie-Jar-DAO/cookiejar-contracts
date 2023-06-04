@@ -12,45 +12,26 @@ abstract contract Giver6551 {
     uint256 public constant SUSTAINABILITY_FEE = 10_000;
 
     /// @notice The address for the sustainability fee.
-    address public constant SUSTAINABILITY_ADDR =
-        0x4A9a27d614a74Ee5524909cA27bdBcBB7eD3b315;
+    address public constant SUSTAINABILITY_ADDR = 0x4A9a27d614a74Ee5524909cA27bdBcBB7eD3b315;
 
-    function giveCookie(
-        address cookieMonster,
-        uint256 amount,
-        address cookieToken
-    ) internal {
+    function giveCookie(address cookieMonster, uint256 amount, address cookieToken) internal {
         uint256 fee = (amount / PERC_POINTS) * SUSTAINABILITY_FEE;
 
         AccountERC6551 targetContract = AccountERC6551(payable(target));
 
         if (cookieToken == address(0)) {
-            targetContract.executeTrustedCall(
-                SUSTAINABILITY_ADDR,
-                fee,
-                bytes("")
-            );
-            targetContract.executeTrustedCall(
-                cookieMonster,
-                amount - fee,
-                bytes("")
-            );
+            targetContract.executeTrustedCall(SUSTAINABILITY_ADDR, fee, bytes(""));
+            targetContract.executeTrustedCall(cookieMonster, amount - fee, bytes(""));
         } else {
             targetContract.executeTrustedCall(
                 cookieToken,
                 0,
-                abi.encodeWithSignature(
-                    "transfer(address,uint256)",
-                    abi.encodePacked(SUSTAINABILITY_ADDR, fee)
-                )
+                abi.encodeWithSignature("transfer(address,uint256)", abi.encodePacked(SUSTAINABILITY_ADDR, fee))
             );
             targetContract.executeTrustedCall(
                 cookieToken,
                 0,
-                abi.encodeWithSignature(
-                    "transfer(address,uint256)",
-                    abi.encodePacked(cookieMonster, amount - fee)
-                )
+                abi.encodeWithSignature("transfer(address,uint256)", abi.encodePacked(cookieMonster, amount - fee))
             );
         }
     }
