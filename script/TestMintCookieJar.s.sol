@@ -36,7 +36,7 @@ contract TestMintCookieJar is Script {
     // 6551
     address internal listCookieJar6551 = 0x3Ae8da051CC6Ab7Ef884A8f0fF86e02c3303fc38;
     address internal accountImp = 0x9CD838ba5ce219d1Eaf58Fa413b9D6e74799A7c8;
-    address internal nft = 0xc9997Bf3D85ef279C2671Fccc4E7Fa4ef092450B;
+    address internal nft = 0x65022ba0CD19699D84A32945c710519c82b6597B;
 
     function setUp() public virtual {
         string memory mnemonic = vm.envString("MNEMONIC");
