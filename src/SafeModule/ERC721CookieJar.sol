@@ -11,7 +11,7 @@ contract ZodiacERC721CookieJar is ERC721Allowlist, ZodiacCookieJar {
         ZodiacCookieJar.setUp(_initializationParams);
     }
 
-    function isAllowList(address user) internal view override returns (bool) {
+    function isAllowList(address user) public view override returns (bool) {
         return ERC721Allowlist._isAllowList(user);
     }
 }

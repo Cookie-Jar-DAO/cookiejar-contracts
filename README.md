@@ -10,15 +10,15 @@ The following table lists the addresses of the deployed contracts:
 
 | Contract            | Address                                      |
 | ------------------- | -------------------------------------------- |
-| Baal Cookie Jar     | `0x2bfe504e5C145F5d5b95df2b7798Ec1C422C5Bc1` |
-| ERC20 Cookie Jar    | `0x8e694435C2Ad04ac4C59F50d75D501f678aD26bd` |
-| ERC721 Cookie Jar   | `0x24A2D8772521A9fa2f85d7024e020e7821C23c97` |
-| List Cookie Jar     | `0x3Ae8da051CC6Ab7Ef884A8f0fF86e02c3303fc38` |
-| Open Cookie Jar     | `0x0c6544Af9424C24549c57BD805C299635081eDE4` |
-| Cookie Jar Factory  | `0x3737053eC30f53DD7543a615dA69BB9996aD7C81` |
-| List Cookie Jar6551 | `0x81eF83E26a19C0532a0DF80D84525bfCaCF2E4C4` |
-| Account             | `0x9CD838ba5ce219d1Eaf58Fa413b9D6e74799A7c8` |
-| Cookie Jar NFT      | `0xe94633534a02102e0819fE60f88E2D5AA2729a44` |
+| Baal Cookie Jar     | `0x7CEfc2492Cf3BEb03e5B8eF9ba52c4a219301425` |
+| ERC20 Cookie Jar    | `0xF8Ff08a263D258c0618394734feD493806bd60cd` |
+| ERC721 Cookie Jar   | `0x4ef92B5bE63605A0c27433F5AF88746384c379e5` |
+| List Cookie Jar     | `0xcFb18dd95A3B8DBe27A25F0456f31508BBF0992A` |
+| Open Cookie Jar     | `0x680982C79bE794Bcc4CDd52cDb547d73d8b1C6e9` |
+| Cookie Jar Factory  | `0x998b53d1A35c9630eE655B8D4ec9D4488ed7678F` |
+| List Cookie Jar6551 | `0xcFb18dd95A3B8DBe27A25F0456f31508BBF0992A` |
+| Account             | `0x83006b5c56F909A97256a5678Fcc54E2b444528d` |
+| Cookie Jar NFT      | `0xdc383fEB53B439ECE111625F67b28456db2899c6` |
 
 ## Goerli
 
@@ -33,6 +33,16 @@ The following table lists the addresses of the deployed contracts:
 | List Cookie Jar6551 | `0x59b6A8f6515A42d1EB6711bD58f76D3c74617B52` |
 | Account             | `0xbF9C87e3871Cc79273f54dC2A2D7E772fECcA875` |
 | Cookie Jar NFT      | `0x65022ba0cd19699d84a32945c710519c82b6597b` |
+
+## 6551 Tokenbound Registry
+
+The Tokenbound Registry for 6551 tokens is deployed on the following chains:
+
+| Chain               | Address                                      |
+| ------------------- | -------------------------------------------- |
+| Arbitrum            | `0x02101dfB77FDE026414827Fdc604ddAF224F0921` |
+| Gnosis              | `0x02101dfB77FDE026414827Fdc604ddAF224F0921` |
+| Optimism            | `0x02101dfB77FDE026414827Fdc604ddAF224F0921` |
 
 ## Installation
 

@@ -11,7 +11,7 @@ contract ZodiacListCookieJar is MappedAllowlist, ZodiacCookieJar {
         ZodiacCookieJar.setUp(_initializationParams);
     }
 
-    function isAllowList(address user) internal view override returns (bool) {
+    function isAllowList(address user) public view override returns (bool) {
         return MappedAllowlist._isAllowList(user);
     }
 
