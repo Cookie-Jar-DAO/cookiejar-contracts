@@ -12,7 +12,7 @@ library CookieUtils {
     }
 
     function getCookieUid(string memory cookieJarUid) internal view returns (string memory) {
-        return bytes32ToString(keccak256(abi.encodePacked(cookieJarUid, msg.sender, block.timestamp)));
+        return string(abi.encodePacked(keccak256(abi.encodePacked(cookieJarUid, msg.sender, block.timestamp))));
     }
 
     /**

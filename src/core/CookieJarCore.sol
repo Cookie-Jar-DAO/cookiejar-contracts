@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity 0.8.19;
 
-import {ICookieJar} from "src/interfaces/ICookieJar.sol";
-import {OwnableUpgradeable} from "@openzeppelin/contracts-upgradeable/contracts/access/OwnableUpgradeable.sol";
-import {Initializable} from "@openzeppelin/contracts-upgradeable/contracts/proxy/utils/Initializable.sol";
-import {IPoster} from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
-import {CookieUtils} from "src/lib/CookieUtils.sol";
-import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
+import { ICookieJar } from "src/interfaces/ICookieJar.sol";
+import { OwnableUpgradeable } from "@openzeppelin/contracts-upgradeable/contracts/access/OwnableUpgradeable.sol";
+import { Initializable } from "@openzeppelin/contracts-upgradeable/contracts/proxy/utils/Initializable.sol";
+import { IPoster } from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
+import { CookieUtils } from "src/lib/CookieUtils.sol";
+import { Strings } from "@openzeppelin/contracts/utils/Strings.sol";
 
 abstract contract CookieJarCore is Initializable, OwnableUpgradeable, ICookieJar {
     /// @notice The tag used for posts related to this contract.
@@ -100,7 +100,7 @@ abstract contract CookieJarCore is Initializable, OwnableUpgradeable, ICookieJar
      * @param cookieMonster The address to receive the cookie.
      * @param amount The amount of cookie to be transferred.
      */
-    function giveCookie(address cookieMonster, uint256 amount) internal virtual {}
+    function giveCookie(address cookieMonster, uint256 amount) internal virtual { }
 
     /**
      * @notice Allows a member to assess the reason for a claim.
@@ -137,19 +137,19 @@ abstract contract CookieJarCore is Initializable, OwnableUpgradeable, ICookieJar
     }
 
     /**
-     *
-     * INTERNAL  *
-     *
-     */
-
-    /**
      * @notice Checks if the caller is a member.
      * @dev Always returns true in this contract, but is expected to be overridden in a derived contract.
      * @return A boolean indicating whether the caller is a member.
      */
-    function isAllowList(address user) internal view virtual returns (bool) {
+    function isAllowList(address user) public view virtual returns (bool) {
         return true;
     }
+
+    /**
+     *
+     * INTERNAL  *
+     *
+     */
 
     /**
      * @notice Checks if the claim period for the caller is valid.

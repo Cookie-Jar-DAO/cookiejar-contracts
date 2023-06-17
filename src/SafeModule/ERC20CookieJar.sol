@@ -11,7 +11,7 @@ contract ZodiacERC20CookieJar is ERC20Allowlist, ZodiacCookieJar {
         ZodiacCookieJar.setUp(_initializationParams);
     }
 
-    function isAllowList(address user) internal view override returns (bool) {
+    function isAllowList(address user) public view override returns (bool) {
         return ERC20Allowlist._isAllowList(user);
     }
 }
