@@ -34,6 +34,16 @@ The following table lists the addresses of the deployed contracts:
 | Account             | `0xbF9C87e3871Cc79273f54dC2A2D7E772fECcA875` |
 | Cookie Jar NFT      | `0x65022ba0cd19699d84a32945c710519c82b6597b` |
 
+## 6551 Tokenbound Registry
+
+The Tokenbound Registry for 6551 tokens is deployed on the following chains:
+
+| Chain               | Address                                      |
+| ------------------- | -------------------------------------------- |
+| Arbitrum            | `0x02101dfB77FDE026414827Fdc604ddAF224F0921` |
+| Gnosis              | `0x02101dfB77FDE026414827Fdc604ddAF224F0921` |
+| Optimism            | `0x02101dfB77FDE026414827Fdc604ddAF224F0921` |
+
 ## Installation
 
 To run the CookieJar contracts, you will need to have foundry installed on your system. You can then run the following command:
