@@ -74,7 +74,7 @@ contract DeployCookieJar is Script {
             registry, // account registry
             accountImp,
             cookieJarFactory,
-            listCookieJar
+            listCookieJar6551
             )
         );
 
