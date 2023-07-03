@@ -6,16 +6,16 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/introspection/IERC165.sol";
 import "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol";
 
-import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import { ERC20 } from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-import {IRegistry} from "src/interfaces/IERC6551Registry.sol";
-import {CookieJarFactory} from "src/factory/CookieJarFactory.sol";
-import {CookieJarCore} from "src/core/CookieJarCore.sol";
+import { IRegistry } from "src/interfaces/IERC6551Registry.sol";
+import { CookieJarFactory } from "src/factory/CookieJarFactory.sol";
+import { CookieJarCore } from "src/core/CookieJarCore.sol";
 
-import {AccountERC6551} from "src/ERC6551/erc6551/ERC6551Module.sol";
-import {IAccount} from "src/interfaces/IERC6551.sol";
-import {MinimalReceiver} from "src/lib/MinimalReceiver.sol";
-import {Base64} from "src/lib/Base64.sol";
+import { AccountERC6551 } from "src/ERC6551/erc6551/ERC6551Module.sol";
+import { IAccount } from "src/interfaces/IERC6551.sol";
+import { MinimalReceiver } from "src/lib/MinimalReceiver.sol";
+import { Base64 } from "src/lib/Base64.sol";
 
 contract CookieNFT is ERC721 {
     using Counters for Counters.Counter;
@@ -39,7 +39,12 @@ contract CookieNFT is ERC721 {
 
     event AccountCreated(address indexed account, address indexed cookieJar, uint256 tokenId);
 
-    constructor(address _erc6551Reg, address _erc6551Imp, address _cookieJarSummoner, address _cookieJarImp)
+    constructor(
+        address _erc6551Reg,
+        address _erc6551Imp,
+        address _cookieJarSummoner,
+        address _cookieJarImp
+    )
         ERC721("CookieJar Number 1", "COOKIE1")
     {
         erc6551Reg = _erc6551Reg;
@@ -53,9 +58,18 @@ contract CookieNFT is ERC721 {
         uint256 periodLength,
         uint256 cookieAmount,
         address cookieToken,
+        address donationToken,
+        uint256 donationAmount,
         address[] memory allowList
-    ) public returns (address account, address cookieJar, uint256 tokenId) {
+    )
+        public
+        payable
+        returns (address account, address cookieJar, uint256 tokenId)
+    {
         require(_tokenIdCounter.current() <= cap, "CookieNFT: cap reached, no more cookies");
+        if (msg.value > 0) {
+            payable(address(this)).transfer(msg.value);
+        }
         _tokenIdCounter.increment();
         tokenId = _tokenIdCounter.current();
         _mint(to, tokenId);
@@ -66,7 +80,9 @@ contract CookieNFT is ERC721 {
         bytes memory initializer = abi.encodeWithSignature("setUp(bytes)", initializerParams);
         string memory details = '{"type":"6551", "title":"Cookie NFT Gen 1", "description":"Gen1 Cookie", "link":""}';
         uint256 saltNonce = 1_234_567_890; // hard code saltNonce for now
-        cookieJar = CookieJarFactory(cookieJarSummoner).summonCookieJar(cookieJarImp, initializer, details, saltNonce);
+        cookieJar = CookieJarFactory(cookieJarSummoner).summonCookieJar(
+            cookieJarImp, initializer, details, donationToken, donationAmount, saltNonce
+        );
 
         AccountERC6551(payable(account)).setExecutorInit(cookieJar);
 

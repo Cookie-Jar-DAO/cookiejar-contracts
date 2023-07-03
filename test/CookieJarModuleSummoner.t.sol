@@ -1,18 +1,19 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity 0.8.19;
 
-import {PRBTest} from "@prb/test/PRBTest.sol";
-import {StdCheats} from "forge-std/StdCheats.sol";
+import { PRBTest } from "@prb/test/PRBTest.sol";
+import { StdCheats } from "forge-std/StdCheats.sol";
 
-import {ModuleProxyFactory} from "@gnosis.pm/zodiac/contracts/factory/ModuleProxyFactory.sol";
+import { ModuleProxyFactory } from "@gnosis.pm/zodiac/contracts/factory/ModuleProxyFactory.sol";
+import { ERC20Mintable } from "test/utils/ERC20Mintable.sol";
 
-import {CookieJarFactory} from "src/factory/CookieJarFactory.sol";
-import {ZodiacBaalCookieJar} from "src/SafeModule/BaalCookieJar.sol";
-import {ZodiacERC20CookieJar} from "src/SafeModule/ERC20CookieJar.sol";
-import {ZodiacERC721CookieJar} from "src/SafeModule/ERC721CookieJar.sol";
-import {ZodiacListCookieJar} from "src/SafeModule/ListCookieJar.sol";
-import {ZodiacOpenCookieJar} from "src/SafeModule/OpenCookieJar.sol";
-import {CookieJarFactory} from "src/factory/CookieJarFactory.sol";
+import { CookieJarFactory } from "src/factory/CookieJarFactory.sol";
+import { ZodiacBaalCookieJar } from "src/SafeModule/BaalCookieJar.sol";
+import { ZodiacERC20CookieJar } from "src/SafeModule/ERC20CookieJar.sol";
+import { ZodiacERC721CookieJar } from "src/SafeModule/ERC721CookieJar.sol";
+import { ZodiacListCookieJar } from "src/SafeModule/ListCookieJar.sol";
+import { ZodiacOpenCookieJar } from "src/SafeModule/OpenCookieJar.sol";
+import { CookieJarFactory } from "src/factory/CookieJarFactory.sol";
 
 contract CookieJarModuleSummonerTest is PRBTest, StdCheats {
     CookieJarFactory public cookieJarSummoner = new CookieJarFactory();
@@ -29,12 +30,17 @@ contract CookieJarModuleSummonerTest is PRBTest, StdCheats {
     bool internal _useLoot = true;
 
     event SummonCookieJar(address cookieJarSingleton, string jarType, bytes initializer, uint256 saltNonce);
+    event DonationReceived(address donationToken, uint256 donationAmount);
 
     function setUp() public virtual {
         cookieJarSummoner.setProxyFactory(address(moduleProxyFactory));
     }
 
-    function _calculateCreate2Address(address template, bytes memory _initializer, uint256 _saltNonce)
+    function _calculateCreate2Address(
+        address template,
+        bytes memory _initializer,
+        uint256 _saltNonce
+    )
         internal
         view
         returns (address cookieJar)
@@ -63,7 +69,9 @@ contract CookieJarModuleSummonerTest is PRBTest, StdCheats {
         string memory details = "BaalCookieJar";
         uint256 saltNonce = 1_234_567_890;
 
-        cookieJarSummoner.summonCookieJar(address(baalCookieJarSingleton), _initializer, details, saltNonce);
+        cookieJarSummoner.summonCookieJar(
+            address(baalCookieJarSingleton), _initializer, details, address(0), 0, saltNonce
+        );
 
         address cookieJar = _calculateCreate2Address(address(baalCookieJarSingleton), _initializer, saltNonce);
 
@@ -91,7 +99,9 @@ contract CookieJarModuleSummonerTest is PRBTest, StdCheats {
         string memory details = "ERC20CookieJar";
         uint256 saltNonce = 1_234_567_890;
 
-        cookieJarSummoner.summonCookieJar(address(erc20CookieJarSingleton), _initializer, details, saltNonce);
+        cookieJarSummoner.summonCookieJar(
+            address(erc20CookieJarSingleton), _initializer, details, address(0), 0, saltNonce
+        );
 
         address cookieJar = _calculateCreate2Address(address(erc20CookieJarSingleton), _initializer, saltNonce);
 
@@ -117,7 +127,9 @@ contract CookieJarModuleSummonerTest is PRBTest, StdCheats {
         string memory details = "ERC721CookieJar";
         uint256 saltNonce = 1_234_567_890;
 
-        cookieJarSummoner.summonCookieJar(address(erc721CookieJarSingleton), _initializer, details, saltNonce);
+        cookieJarSummoner.summonCookieJar(
+            address(erc721CookieJarSingleton), _initializer, details, address(0), 0, saltNonce
+        );
 
         address cookieJar = _calculateCreate2Address(address(erc721CookieJarSingleton), _initializer, saltNonce);
 
@@ -145,7 +157,9 @@ contract CookieJarModuleSummonerTest is PRBTest, StdCheats {
         string memory details = "ListCookieJar";
         uint256 saltNonce = 1_234_567_890;
 
-        cookieJarSummoner.summonCookieJar(address(listCookieJarSingleton), _initializer, details, saltNonce);
+        cookieJarSummoner.summonCookieJar(
+            address(listCookieJarSingleton), _initializer, details, address(0), 0, saltNonce
+        );
 
         address cookieJar = _calculateCreate2Address(address(listCookieJarSingleton), _initializer, saltNonce);
 
@@ -171,7 +185,9 @@ contract CookieJarModuleSummonerTest is PRBTest, StdCheats {
         string memory details = "OpenCookieJar";
         uint256 saltNonce = 1_234_567_890;
 
-        cookieJarSummoner.summonCookieJar(address(openCookieJarSingleton), _initializer, details, saltNonce);
+        cookieJarSummoner.summonCookieJar(
+            address(openCookieJarSingleton), _initializer, details, address(0), 0, saltNonce
+        );
 
         address cookieJar = _calculateCreate2Address(address(openCookieJarSingleton), _initializer, saltNonce);
 
@@ -183,5 +199,50 @@ contract CookieJarModuleSummonerTest is PRBTest, StdCheats {
         assertEq(openCookieJar.cookieAmount(), _cookieAmount);
         assertEq(openCookieJar.cookieToken(), _cookieToken);
         assertEq(openCookieJar.periodLength(), _periodLength);
+    }
+
+    function testSummonCookieJarWithDonationsNativeToken() public {
+        ZodiacOpenCookieJar openCookieJarSingleton = new ZodiacOpenCookieJar();
+
+        bytes memory _initializerParams = abi.encode(_safeTarget, _periodLength, _cookieAmount, _cookieToken);
+        bytes memory _initializer = abi.encodeWithSignature("setUp(bytes)", _initializerParams);
+
+        string memory details = "CookieJarWithDonations";
+        uint256 saltNonce = 1_234_567_890;
+
+        vm.expectEmit(false, false, false, true);
+        emit DonationReceived(address(0), 1 ether);
+        cookieJarSummoner.summonCookieJar{ value: 1 ether }(
+            address(openCookieJarSingleton), _initializer, details, address(0), 0, saltNonce
+        );
+
+        assertEq(address(0x1cE42BA793BA1E9Bf36c8b3f0aDDEe6c89D9a9fc).balance, 1 ether);
+    }
+
+    function testSummonCookieJarWithDonationsERC20() public {
+        ERC20Mintable donationToken = new ERC20Mintable("Test", "TEST");
+        address alice = makeAddr("alice");
+
+        donationToken.mint(alice, 10 ether);
+        ZodiacOpenCookieJar openCookieJarSingleton = new ZodiacOpenCookieJar();
+
+        bytes memory _initializerParams = abi.encode(_safeTarget, _periodLength, _cookieAmount, _cookieToken);
+        bytes memory _initializer = abi.encodeWithSignature("setUp(bytes)", _initializerParams);
+
+        string memory details = "CookieJarWithDonations";
+        uint256 saltNonce = 1_234_567_890;
+
+        vm.startPrank(alice);
+
+        donationToken.approve(address(cookieJarSummoner), 1 ether);
+        
+        vm.expectEmit(false, false, false, true);
+        emit DonationReceived(address(donationToken), 1 ether);
+        cookieJarSummoner.summonCookieJar(
+            address(openCookieJarSingleton), _initializer, details, address(donationToken), 1 ether, saltNonce
+        );
+        vm.stopPrank();
+
+        assertEq(donationToken.balanceOf(0x1cE42BA793BA1E9Bf36c8b3f0aDDEe6c89D9a9fc), 1 ether);
     }
 }

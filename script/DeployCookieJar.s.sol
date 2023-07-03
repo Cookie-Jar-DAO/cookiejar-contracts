@@ -41,18 +41,28 @@ contract DeployCookieJar is Script {
     address internal nft;
 
     function setUp() public virtual {
-        string memory mnemonic = vm.envString("MNEMONIC");
-        if (bytes(mnemonic).length > 0) {
-            (deployer,) = deriveRememberKey(mnemonic, 0);
-        } else {
-            deployerPk = vm.envUint("PRIVATE_KEY");
-        }
+        // string memory mnemonic = vm.envString("MNEMONIC");
+        // if (bytes(mnemonic).length > 0) {
+        //     console.log("Using mnemonic");
+
+        //     (deployer,) = deriveRememberKey(mnemonic, 0);
+        // } else {
+        console.log("Using private key");
+
+        deployerPk = vm.envUint("PRIVATE_KEY");
+        // }
+        // Optimism
         if (block.chainid == 10) moduleProxyFactory = 0xC22834581EbC8527d974F8a1c97E1bEA4EF910BC;
+
+        // Hardhat
         if (block.chainid == 31_337) moduleProxyFactory = address(new ModuleProxyFactory());
+        // Default
         else moduleProxyFactory = 0x00000000000DC7F163742Eb4aBEf650037b1f588;
     }
 
     function run() public {
+        console.log('"deployer": "%s",', deployer);
+
         if (deployer != address(0)) vm.startBroadcast(deployer);
         else vm.startBroadcast(deployerPk);
 

@@ -14,9 +14,11 @@
     "lint": "forge fmt",
     "docs": "forge doc",
     "docs:serve": "forge doc --serve --port 4000",
-    "deploy:dryrun": "forge script script/DeployCookieJar.s.sol:DeployCookieJar",
+    "deploy:dryrun": "forge script script/DeployCookieJar.s.sol:DeployCookieJar --fork-url goerli --force",
     "deploy:goerli": "forge script script/DeployCookieJar.s.sol:DeployCookieJar --broadcast --verify -vvvv --fork-url goerli",
     "deploy:gnosis": "forge script script/DeployCookieJar.s.sol:DeployCookieJar --broadcast --verify -vvvv --verifier-url https://api.gnosisscan.io/api/ --fork-url gnosis",
+    "deploy:optimism": "forge script script/DeployCookieJar.s.sol:DeployCookieJar --broadcast --verify -vvvv --fork-url optimism",
+    "deploy:mainnet": "forge script script/DeployCookieJar.s.sol:DeployCookieJar --broadcast --verify -vvvv --fork-url mainnet",
     "deploy:simulate:gnosis": "forge script script/DeployCookieJar.s.sol:DeployCookieJar --fork-url gnosis",
     "fork:gnosis": "anvil --fork-chain-id 100 --fork-url https://rpc.gnosis.gateway.fm --fork-block-number 28287659"
   }

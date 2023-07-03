@@ -34,15 +34,53 @@ The following table lists the addresses of the deployed contracts:
 | Account             | `0xbF9C87e3871Cc79273f54dC2A2D7E772fECcA875` |
 | Cookie Jar NFT      | `0x65022ba0cd19699d84a32945c710519c82b6597b` |
 
+## Mainnet
+
+| Contract            | Address                                      |
+| ------------------- | -------------------------------------------- |
+| Baal Cookie Jar     | `0x0000000000000000000000000000000000000000` |
+| ERC20 Cookie Jar    | `0x0000000000000000000000000000000000000000` |
+| ERC721 Cookie Jar   | `0x0000000000000000000000000000000000000000` |
+| List Cookie Jar     | `0x0000000000000000000000000000000000000000` |
+| Open Cookie Jar     | `0x0000000000000000000000000000000000000000` |
+| Cookie Jar Factory  | `0x0000000000000000000000000000000000000000` |
+| List Cookie Jar6551 | `0x0000000000000000000000000000000000000000` |
+| Account             | `0x0000000000000000000000000000000000000000` |
+| Cookie Jar NFT      | `0x0000000000000000000000000000000000000000` |
+
+## Optimism
+
+| Contract            | Address                                      |
+| ------------------- | -------------------------------------------- |
+| Baal Cookie Jar     | `0x0000000000000000000000000000000000000000` |
+| ERC20 Cookie Jar    | `0x0000000000000000000000000000000000000000` |
+| ERC721 Cookie Jar   | `0x0000000000000000000000000000000000000000` |
+| List Cookie Jar     | `0x0000000000000000000000000000000000000000` |
+| Open Cookie Jar     | `0x0000000000000000000000000000000000000000` |
+| Cookie Jar Factory  | `0x0000000000000000000000000000000000000000` |
+| List Cookie Jar6551 | `0x0000000000000000000000000000000000000000` |
+| Account             | `0x0000000000000000000000000000000000000000` |
+| Cookie Jar NFT      | `0x0000000000000000000000000000000000000000` |
+
 ## 6551 Tokenbound Registry
 
 The Tokenbound Registry for 6551 tokens is deployed on the following chains:
 
-| Chain               | Address                                      |
-| ------------------- | -------------------------------------------- |
-| Arbitrum            | `0x02101dfB77FDE026414827Fdc604ddAF224F0921` |
-| Gnosis              | `0x02101dfB77FDE026414827Fdc604ddAF224F0921` |
-| Optimism            | `0x02101dfB77FDE026414827Fdc604ddAF224F0921` |
+| Chain    | Address                                      |
+| -------- | -------------------------------------------- |
+| Arbitrum | `0x02101dfB77FDE026414827Fdc604ddAF224F0921` |
+| Gnosis   | `0x02101dfB77FDE026414827Fdc604ddAF224F0921` |
+| Optimism | `0x02101dfB77FDE026414827Fdc604ddAF224F0921` |
+
+## Sustainability Safe
+
+To fund further development we implemented sustainability fees when claiming cookies and the option to donate native tokens or ERC20s when summoning a CookieJar. Donations are optional; summon the CookieJar with `donationToken` = address(0) and `donationAmount` = 0;
+
+| Chain    | Address                                      |
+| -------- | -------------------------------------------- |
+| Gnosis   | `0x1cE42BA793BA1E9Bf36c8b3f0aDDEe6c89D9a9fc` |
+| Mainnet  | `0x1cE42BA793BA1E9Bf36c8b3f0aDDEe6c89D9a9fc` |
+| Optimism | `0x1cE42BA793BA1E9Bf36c8b3f0aDDEe6c89D9a9fc` |
 
 ## Installation
 
