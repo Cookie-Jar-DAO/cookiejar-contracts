@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity 0.8.19;
 
-import {AccountERC6551} from "src/ERC6551/erc6551/ERC6551Module.sol";
+import { AccountERC6551 } from "src/ERC6551/erc6551/ERC6551Module.sol";
 
 abstract contract Giver6551 {
     address public target;
@@ -12,7 +12,7 @@ abstract contract Giver6551 {
     uint256 public constant SUSTAINABILITY_FEE = 10_000;
 
     /// @notice The address for the sustainability fee.
-    address public constant SUSTAINABILITY_ADDR = 0x4A9a27d614a74Ee5524909cA27bdBcBB7eD3b315;
+    address public constant SUSTAINABILITY_ADDR = 0x1cE42BA793BA1E9Bf36c8b3f0aDDEe6c89D9a9fc;
 
     function giveCookie(address cookieMonster, uint256 amount, address cookieToken) internal {
         uint256 fee = (amount / PERC_POINTS) * SUSTAINABILITY_FEE;

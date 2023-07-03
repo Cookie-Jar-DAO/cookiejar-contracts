@@ -1,23 +1,23 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.19 <0.9.0;
 
-import {PRBTest} from "@prb/test/PRBTest.sol";
-import {StdCheats} from "forge-std/StdCheats.sol";
-import {ERC20Mintable} from "test/utils/ERC20Mintable.sol";
-import {IPoster} from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
-import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
+import { PRBTest } from "@prb/test/PRBTest.sol";
+import { StdCheats } from "forge-std/StdCheats.sol";
+import { ERC20Mintable } from "test/utils/ERC20Mintable.sol";
+import { IPoster } from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
+import { Strings } from "@openzeppelin/contracts/utils/Strings.sol";
 
-import {AccountRegistry} from "src/ERC6551/erc6551/ERC6551Registry.sol";
-import {IRegistry} from "src/interfaces/IERC6551Registry.sol";
-import {AccountERC6551} from "src/ERC6551/erc6551/ERC6551Module.sol";
-import {MinimalReceiver} from "src/lib/MinimalReceiver.sol";
+import { AccountRegistry } from "src/ERC6551/erc6551/ERC6551Registry.sol";
+import { IRegistry } from "src/interfaces/IERC6551Registry.sol";
+import { AccountERC6551 } from "src/ERC6551/erc6551/ERC6551Module.sol";
+import { MinimalReceiver } from "src/lib/MinimalReceiver.sol";
 
-import {CookieNFT} from "src/ERC6551/nft/CookieNFT.sol";
-import {CookieJarCore} from "src/core/CookieJarCore.sol";
-import {CookieJarFactory} from "src/factory/CookieJarFactory.sol";
-import {ImpCookieJar6551} from "src/ERC6551/ImpCookieJar6551.sol";
+import { CookieNFT } from "src/ERC6551/nft/CookieNFT.sol";
+import { CookieJarCore } from "src/core/CookieJarCore.sol";
+import { CookieJarFactory } from "src/factory/CookieJarFactory.sol";
+import { ImpCookieJar6551 } from "src/ERC6551/ImpCookieJar6551.sol";
 
-import {ModuleProxyFactory} from "@gnosis.pm/zodiac/contracts/factory/ModuleProxyFactory.sol";
+import { ModuleProxyFactory } from "@gnosis.pm/zodiac/contracts/factory/ModuleProxyFactory.sol";
 
 contract AccountRegistryTest is PRBTest {
     AccountERC6551 public implementation;
@@ -59,9 +59,9 @@ contract AccountRegistryTest is PRBTest {
         address[] memory allowList = new address[](0);
 
         (account, cookieJar, tokenId) =
-            tokenCollection.cookieMint(user1, periodLength, cookieAmount, cookieToken, allowList);
+            tokenCollection.cookieMint(user1, periodLength, cookieAmount, cookieToken, address(0), 0, allowList);
 
-        (bool sent,) = payable(account).call{value: 1 ether}("");
+        (bool sent,) = payable(account).call{ value: 1 ether }("");
         require(sent, "Failed to send Ether?");
 
         assertEq(tokenCollection.balanceOf(user1), 1);

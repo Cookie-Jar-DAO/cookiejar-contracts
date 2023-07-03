@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.19 <0.9.0;
 
-import {Test, Vm} from "forge-std/Test.sol";
-import {CookieJarFactory} from "src/factory/CookieJarFactory.sol";
-import {ZodiacERC20CookieJar} from "src/SafeModule/ERC20CookieJar.sol";
-import {ZodiacERC721CookieJar} from "src/SafeModule/ERC721CookieJar.sol";
-import {ZodiacListCookieJar} from "src/SafeModule/ListCookieJar.sol";
-import {ZodiacOpenCookieJar} from "src/SafeModule/OpenCookieJar.sol";
-import {ZodiacBaalCookieJar} from "src/SafeModule/BaalCookieJar.sol";
-import {ModuleProxyFactory} from "@gnosis.pm/zodiac/contracts/factory/ModuleProxyFactory.sol";
+import { Test, Vm } from "forge-std/Test.sol";
+import { CookieJarFactory } from "src/factory/CookieJarFactory.sol";
+import { ZodiacERC20CookieJar } from "src/SafeModule/ERC20CookieJar.sol";
+import { ZodiacERC721CookieJar } from "src/SafeModule/ERC721CookieJar.sol";
+import { ZodiacListCookieJar } from "src/SafeModule/ListCookieJar.sol";
+import { ZodiacOpenCookieJar } from "src/SafeModule/OpenCookieJar.sol";
+import { ZodiacBaalCookieJar } from "src/SafeModule/BaalCookieJar.sol";
+import { ModuleProxyFactory } from "@gnosis.pm/zodiac/contracts/factory/ModuleProxyFactory.sol";
 
 contract ZodiacBaalCookieJarHarnass is ZodiacBaalCookieJar {
     function posterUid() public view returns (string memory) {
@@ -103,7 +103,9 @@ contract ZodiacCloneSummoner is Test {
 
         bytes memory _initializer = abi.encodeWithSignature("setUp(bytes)", initParams);
 
-        cookieJarFactory.summonCookieJar(address(baalCookieJarImplementation), _initializer, "Baal", saltNonce);
+        cookieJarFactory.summonCookieJar(
+            address(baalCookieJarImplementation), _initializer, "Baal", address(0), 0, saltNonce
+        );
 
         Vm.Log[] memory entries = vm.getRecordedLogs();
 
@@ -120,7 +122,9 @@ contract ZodiacCloneSummoner is Test {
         vm.recordLogs();
         bytes memory _initializer = abi.encodeWithSignature("setUp(bytes)", initParams);
 
-        cookieJarFactory.summonCookieJar(address(erc20CookieJarImplementation), _initializer, "ERC20", saltNonce);
+        cookieJarFactory.summonCookieJar(
+            address(erc20CookieJarImplementation), _initializer, "ERC20", address(0), 0, saltNonce
+        );
 
         Vm.Log[] memory entries = vm.getRecordedLogs();
         assertEq(entries.length, 8);
@@ -136,7 +140,9 @@ contract ZodiacCloneSummoner is Test {
 
         bytes memory _initializer = abi.encodeWithSignature("setUp(bytes)", initParams);
 
-        cookieJarFactory.summonCookieJar(address(erc721CookieJarImplementation), _initializer, "ERC721", saltNonce);
+        cookieJarFactory.summonCookieJar(
+            address(erc721CookieJarImplementation), _initializer, "ERC721", address(0), 0, saltNonce
+        );
 
         Vm.Log[] memory entries = vm.getRecordedLogs();
         assertEq(entries.length, 8);
@@ -151,7 +157,9 @@ contract ZodiacCloneSummoner is Test {
         vm.recordLogs();
         bytes memory _initializer = abi.encodeWithSignature("setUp(bytes)", initParams);
 
-        cookieJarFactory.summonCookieJar(address(listCookieJarImplementation), _initializer, "List", saltNonce);
+        cookieJarFactory.summonCookieJar(
+            address(listCookieJarImplementation), _initializer, "List", address(0), 0, saltNonce
+        );
 
         Vm.Log[] memory entries = vm.getRecordedLogs();
         assertEq(entries.length, 8);
@@ -166,7 +174,9 @@ contract ZodiacCloneSummoner is Test {
         vm.recordLogs();
         bytes memory _initializer = abi.encodeWithSignature("setUp(bytes)", initParams);
 
-        cookieJarFactory.summonCookieJar(address(openCookieJarImplementation), _initializer, "Open", saltNonce);
+        cookieJarFactory.summonCookieJar(
+            address(openCookieJarImplementation), _initializer, "Open", address(0), 0, saltNonce
+        );
 
         Vm.Log[] memory entries = vm.getRecordedLogs();
         assertEq(entries.length, 8);
@@ -177,7 +187,11 @@ contract ZodiacCloneSummoner is Test {
         return ZodiacOpenCookieJarHarnass(cookieJar);
     }
 
-    function _calculateCreate2Address(address template, bytes memory _initializer, uint256 _saltNonce)
+    function _calculateCreate2Address(
+        address template,
+        bytes memory _initializer,
+        uint256 _saltNonce
+    )
         internal
         view
         returns (address cookieJar)
