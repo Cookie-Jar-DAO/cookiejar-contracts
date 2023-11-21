@@ -20,24 +20,14 @@ import { ModuleProxyFactory } from "@gnosis.pm/zodiac/contracts/factory/ModulePr
 import { console } from "forge-std/console.sol";
 
 /// @dev See the Solidity Scripting tutorial: https://book.getfoundry.sh/tutorials/solidity-scripting
-contract DeployCookieJar is Script {
+contract Deploy6551Jar is Script {
     address internal deployer;
     uint256 internal deployerPk;
 
     // Zodiac
-    address internal baalCookieJar;
-    address internal erc20CookieJar;
-    address internal erc721CookieJar;
-    address internal listCookieJar;
-    address internal openCookieJar;
-    address internal cookieJarFactory;
-    address internal safeModuleSummoner;
     address internal moduleProxyFactory;
 
     // 6551
-    address internal listCookieJar6551;
-    address internal accountImp;
-    address internal registry = 0x02101dfB77FDE026414827Fdc604ddAF224F0921;
     address internal nft;
 
     function setUp() public virtual {
@@ -71,19 +61,11 @@ contract DeployCookieJar is Script {
 
         vm.startBroadcast(deployer);
 
-        // // Zodiac
-        baalCookieJar = address(new ZodiacBaalCookieJar());
-        erc20CookieJar = address(new ZodiacERC20CookieJar());
-        erc721CookieJar = address(new ZodiacERC721CookieJar());
-        listCookieJar = address(new ZodiacListCookieJar());
-        openCookieJar = address(new ZodiacOpenCookieJar());
-        cookieJarFactory = address(new CookieJarFactory());
-        CookieJarFactory(cookieJarFactory).setProxyFactory(moduleProxyFactory);
-
         // // 6551
-
-        listCookieJar6551 = address(new ImpCookieJar6551());
-        accountImp = address(new AccountERC6551());
+        address registry = 0x02101dfB77FDE026414827Fdc604ddAF224F0921;
+        address cookieJarFactory = 0xD8f6FE1E102a05Eae8ab70290Dc410f80FdA3a8D;
+        address listCookieJar6551 = address(new ImpCookieJar6551());
+        address accountImp = 0x75f88208b6DcCa2Beb069ED38A403956f9cd1095;
 
         nft = address(
             new CookieNFT(
@@ -96,12 +78,6 @@ contract DeployCookieJar is Script {
 
         // solhint-disable quotes
         console.log(block.chainid);
-        console.log('"baalCookieJar": "%s",', baalCookieJar);
-        console.log('"erc20CookieJar": "%s",', erc20CookieJar);
-        console.log('"erc721CookieJar": "%s",', erc721CookieJar);
-        console.log('"listCookieJar": "%s",', listCookieJar);
-        console.log('"openCookieJar": "%s",', openCookieJar);
-        console.log('"cookieJarFactory": "%s",', cookieJarFactory);
         console.log('"listCookieJar6551": "%s",', listCookieJar6551);
         console.log('"account": "%s",', accountImp);
         console.log('"registry": "%s",', registry);

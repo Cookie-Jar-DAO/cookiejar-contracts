@@ -56,15 +56,48 @@ contract AccountRegistryTest is PRBTest {
         uint256 cookieAmount = 1e16;
         uint256 periodLength = 3600;
         address cookieToken = address(cookieJarImp);
-        address[] memory allowList = new address[](0);
+        address[] memory allowList = new address[](2);
+        allowList[0] = vm.addr(1);
+        allowList[1] = vm.addr(2);
 
-        (account, cookieJar, tokenId) =
-            tokenCollection.cookieMint(user1, periodLength, cookieAmount, cookieToken, address(0), 0, allowList);
+        string memory details = '{"type":"6551", "title":"Test Cookie NFT", "description":"Gen1 Cookie", "link":""}';
+
+        (account, cookieJar, tokenId) = tokenCollection.cookieMint(
+            user1, periodLength, cookieAmount, address(0), address(0), 1 ether, allowList, details
+        );
 
         (bool sent,) = payable(account).call{ value: 1 ether }("");
         require(sent, "Failed to send Ether?");
 
         assertEq(tokenCollection.balanceOf(user1), 1);
+        assertEq(tokenCollection.ownerOf(tokenId), user1);
+        assertEq(payable(account).balance, 1 ether);
+    }
+
+    function testCookieEatCookiesAsOwner() public {
+        (address account, address cookieJar,) = testCookieMint();
+        AccountERC6551 accountContract = AccountERC6551(payable(account));
+        ImpCookieJar6551 listCookieJarContract = ImpCookieJar6551(cookieJar);
+
+        vm.prank(vm.addr(1));
+        accountContract.executeCall(
+            cookieJar, 0, abi.encodeWithSelector(listCookieJarContract.emptyJar.selector, address(0))
+        );
+
+        assertEq(payable(cookieJar).balance, 0 ether);
+    }
+
+    function testCookieCrumbleAsOwner() public {
+        (address account, address cookieJar,) = testCookieMint();
+        AccountERC6551 accountContract = AccountERC6551(payable(account));
+        ImpCookieJar6551 listCookieJarContract = ImpCookieJar6551(cookieJar);
+
+        vm.prank(vm.addr(1));
+        accountContract.executeCall(
+            cookieJar, 0, abi.encodeWithSelector(listCookieJarContract.emptyJar.selector, address(0))
+        );
+
+        assertEq(payable(cookieJar).balance, 0 ether);
     }
 
     function testCookieAddAccountToAllowListAsOwner() public {

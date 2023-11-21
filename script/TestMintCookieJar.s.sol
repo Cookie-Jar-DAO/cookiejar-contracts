@@ -60,7 +60,8 @@ contract TestMintCookieJar is Script {
         address cookieToken = address(listCookieJar6551);
         address[] memory allowList = new address[](0);
 
-        CookieNFT(nft).cookieMint(user1, periodLength, cookieAmount, cookieToken, address(0), 0, allowList);
+        string memory details = '{"type":"6551", "title":"Test Cookie NFT", "description":"Gen1 Cookie", "link":""}';
+        CookieNFT(nft).cookieMint(user1, periodLength, cookieAmount, cookieToken, address(0), 0, allowList, details);
 
         vm.stopBroadcast();
     }

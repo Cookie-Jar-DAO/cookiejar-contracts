@@ -38,6 +38,7 @@ contract CookieNFT is ERC721 {
     mapping(uint256 => Cookie) public cookies;
 
     event AccountCreated(address indexed account, address indexed cookieJar, uint256 tokenId);
+    event CookieEaten(uint256 indexed tokenId);
 
     constructor(
         address _erc6551Reg,
@@ -53,6 +54,7 @@ contract CookieNFT is ERC721 {
         cookieJarImp = _cookieJarImp;
     }
 
+    // details format: '{"type":"6551", "title":"Cookie NFT Gen 1", "description":"Gen1 Cookie", "link":""}';
     function cookieMint(
         address to,
         uint256 periodLength,
@@ -60,16 +62,14 @@ contract CookieNFT is ERC721 {
         address cookieToken,
         address donationToken,
         uint256 donationAmount,
-        address[] memory allowList
+        address[] memory allowList,
+        string memory details
     )
         public
         payable
         returns (address account, address cookieJar, uint256 tokenId)
     {
         require(_tokenIdCounter.current() <= cap, "CookieNFT: cap reached, no more cookies");
-        if (msg.value > 0) {
-            payable(address(this)).transfer(msg.value);
-        }
         _tokenIdCounter.increment();
         tokenId = _tokenIdCounter.current();
         _mint(to, tokenId);
@@ -78,9 +78,8 @@ contract CookieNFT is ERC721 {
             IRegistry(erc6551Reg).createAccount(erc6551Imp, block.chainid, address(this), tokenId, block.timestamp, "");
         bytes memory initializerParams = abi.encode(account, periodLength, cookieAmount, cookieToken, allowList);
         bytes memory initializer = abi.encodeWithSignature("setUp(bytes)", initializerParams);
-        string memory details = '{"type":"6551", "title":"Cookie NFT Gen 1", "description":"Gen1 Cookie", "link":""}';
         uint256 saltNonce = 1_234_567_890; // hard code saltNonce for now
-        cookieJar = CookieJarFactory(cookieJarSummoner).summonCookieJar(
+        cookieJar = CookieJarFactory(cookieJarSummoner).summonCookieJar{ value: msg.value }(
             cookieJarImp, initializer, details, donationToken, donationAmount, saltNonce
         );
 
@@ -93,6 +92,7 @@ contract CookieNFT is ERC721 {
 
     function _cookieBalance(uint256 tokenId) internal view returns (uint256) {
         if (cookies[tokenId].cookieToken == address(0)) {
+            //TODO should this be this?
             return address(this).balance;
         } else {
             return ERC20(cookies[tokenId].cookieToken).balanceOf(cookies[tokenId].cookieJar);
