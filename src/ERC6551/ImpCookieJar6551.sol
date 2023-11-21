@@ -4,11 +4,18 @@ pragma solidity 0.8.19;
 import { CookieJarCore } from "src/core/CookieJarCore.sol";
 import { Giver6551 } from "src/core/givers/Giver6551.sol";
 import { CookieUtils } from "src/lib/CookieUtils.sol";
+
+import { ICookieNFT } from "src/interfaces/ICookieNFT.sol";
+import { IAccount } from "src/interfaces/IERC6551.sol";
+
 import "forge-std/console2.sol";
 
 contract ImpCookieJar6551 is CookieJarCore, Giver6551 {
     mapping(address allowed => bool isAllowed) public allowList;
 
+    event CookiesEaten(address indexed cookieToken, uint256 indexed tokenId, uint256 amount);
+
+    error InvalidCaller();
     function setUp(bytes memory _initializationParams) public virtual override(CookieJarCore) initializer {
         (address _target,,,, address[] memory _allowList) =
             abi.decode(_initializationParams, (address, uint256, uint256, address, address[]));
@@ -27,6 +34,23 @@ contract ImpCookieJar6551 is CookieJarCore, Giver6551 {
     function giveCookie(address cookieMonster, uint256 amount) internal override(CookieJarCore) {
         Giver6551.giveCookie(cookieMonster, amount, cookieToken);
         emit GiveCookie(cookieMonster, amount, CookieUtils.getCookieUid(POSTER_UID));
+    }
+
+    function eatCookies(
+        uint256 amount,
+        address _cookieToken,
+        uint256 tokenId,
+        address nftContract) public {
+            // check that caller is coming correct
+            if(IAccount(target).owner() != msg.sender){
+                revert InvalidCaller();
+            }
+
+            Giver6551.eatCookie(amount, _cookieToken);
+        
+            ICookieNFT(nftContract).burn(tokenId);
+
+            emit CookiesEaten(_cookieToken, tokenId, amount);
     }
 
     function isAllowList(address account) public view override returns (bool) {

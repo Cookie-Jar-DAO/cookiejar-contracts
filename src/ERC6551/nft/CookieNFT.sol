@@ -33,12 +33,14 @@ contract CookieNFT is ERC721 {
         uint256 periodLength;
         uint256 cookieAmount;
         address cookieToken;
+        address erc6551Account;
     }
 
     mapping(uint256 => Cookie) public cookies;
 
     event AccountCreated(address indexed account, address indexed cookieJar, uint256 tokenId);
 
+    error InvalidCaller();
     constructor(
         address _erc6551Reg,
         address _erc6551Imp,
@@ -86,16 +88,24 @@ contract CookieNFT is ERC721 {
 
         AccountERC6551(payable(account)).setExecutorInit(cookieJar);
 
-        cookies[tokenId] = Cookie(cookieJar, periodLength, cookieAmount, cookieToken);
+        cookies[tokenId] = Cookie(cookieJar, periodLength, cookieAmount, cookieToken, account);
 
         emit AccountCreated(account, cookieJar, tokenId);
     }
 
+    function burn(uint256 tokenId) external {
+        if(address(cookies[tokenId].cookieJar) != msg.sender){
+            revert InvalidCaller();
+        }
+        
+        return _burn(tokenId);
+    }
+
     function _cookieBalance(uint256 tokenId) internal view returns (uint256) {
         if (cookies[tokenId].cookieToken == address(0)) {
-            return address(this).balance;
+            return address(cookies[tokenId].erc6551Account).balance;
         } else {
-            return ERC20(cookies[tokenId].cookieToken).balanceOf(cookies[tokenId].cookieJar);
+            return ERC20(cookies[tokenId].cookieToken).balanceOf(cookies[tokenId].erc6551Account);
         }
     }
 
