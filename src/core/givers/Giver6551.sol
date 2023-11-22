@@ -35,4 +35,43 @@ abstract contract Giver6551 {
             );
         }
     }
+
+     function eatCookies(
+        uint256 amount,
+         address cookieToken
+     ) internal {
+
+        AccountERC6551 targetContract = AccountERC6551(payable(target));
+        
+        address cookieMonster = msg.sender;
+
+        if (cookieToken == address(0)) {
+
+            // make transfer
+             targetContract.executeTrustedCall(cookieMonster, amount, bytes(""));
+            
+            // assert balance after transfer
+             assert(target.balance == 0);
+
+        } else {
+
+            // make transfer
+            targetContract.executeTrustedCall(
+                cookieToken,
+                0,
+                abi.encodeWithSignature("transfer(address,uint256)", cookieMonster, amount)
+            );
+
+            // get balance
+            uint256 balance =  abi.decode(targetContract.executeTrustedCall(
+                cookieToken,
+                0,
+                abi.encodeWithSignature("balanceOf(address)", target)
+            ), (uint256));
+
+            // assert valid transfer
+            assert(balance == 0);
+        }
+          
+    }
 }
