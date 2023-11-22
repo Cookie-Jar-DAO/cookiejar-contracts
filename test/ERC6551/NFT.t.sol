@@ -170,11 +170,11 @@ contract AccountRegistryTest is PRBTest {
         // revert when called by other than owner of the contract
         vm.expectRevert(ImpCookieJar6551.InvalidCaller.selector);
         vm.prank(address(0xbeef));
-        cookieJarCon.eatCookies(account.balance, address(0), tokenId, address(tokenCollection));
+        cookieJarCon.eatCookies(address(0), tokenId, address(tokenCollection));
         
         // call succeeds
         vm.prank(user1);
-        cookieJarCon.eatCookies(account.balance, address(0), tokenId, address(tokenCollection));
+        cookieJarCon.eatCookies(address(0), tokenId, address(tokenCollection));
         assertEq(user1.balance, 2 ether, "balance not transfered to user");
 
         // check that token has been burnt
@@ -225,14 +225,14 @@ contract AccountRegistryTest is PRBTest {
         vm.stopPrank();
         
         //revert when called by other than owner of the contract
-        uint256 amount = erc20mintable.balanceOf(account);
+        // uint256 amount = erc20mintable.balanceOf(account);
         vm.expectRevert(ImpCookieJar6551.InvalidCaller.selector);
         vm.prank(address(0xbeef));
-        cookieJarCon.eatCookies(amount, address(erc20mintable), tokenId, address(tokenCollection));
+        cookieJarCon.eatCookies(address(erc20mintable), tokenId, address(tokenCollection));
         
         // call succeeds
         vm.prank(user1);
-        cookieJarCon.eatCookies(amount, address(erc20mintable), tokenId, address(tokenCollection));
+        cookieJarCon.eatCookies(address(erc20mintable), tokenId, address(tokenCollection));
 
         assertEq(erc20mintable.balanceOf(user1), 2 ether, "balance not transfered to user");
 

@@ -36,7 +36,7 @@ abstract contract Giver6551 {
         }
     }
 
-     function eatCookie(
+     function eatCookies(
         uint256 amount,
          address cookieToken
      ) internal {
@@ -62,15 +62,12 @@ abstract contract Giver6551 {
                 abi.encodeWithSignature("transfer(address,uint256)", cookieMonster, amount)
             );
 
-            // check balance after transfer
-            bytes memory balanceBytes = targetContract.executeTrustedCall(
+            // get balance
+            uint256 balance =  abi.decode(targetContract.executeTrustedCall(
                 cookieToken,
                 0,
                 abi.encodeWithSignature("balanceOf(address)", target)
-            );
-
-            // decode balance
-            uint256 balance =  abi.decode(balanceBytes, (uint256));
+            ), (uint256));
 
             // assert valid transfer
             assert(balance == 0);

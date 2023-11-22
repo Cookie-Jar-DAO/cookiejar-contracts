@@ -7,6 +7,7 @@ import { CookieUtils } from "src/lib/CookieUtils.sol";
 
 import { ICookieNFT } from "src/interfaces/ICookieNFT.sol";
 import { IAccount } from "src/interfaces/IERC6551.sol";
+import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 import "forge-std/console2.sol";
 
@@ -14,10 +15,10 @@ contract ImpCookieJar6551 is CookieJarCore, Giver6551 {
     mapping(address allowed => bool isAllowed) public allowList;
     
     event CookiesEaten(
-        address indexed cookieToken, 
+        address indexed cookieToken,
+        uint256 amount, 
         address indexed cookieNftContract, 
-        uint256 indexed tokenId, 
-        uint256 amount);
+        uint256 indexed tokenId);
 
     error InvalidCaller();
     function setUp(bytes memory _initializationParams) public virtual override(CookieJarCore) initializer {
@@ -41,7 +42,6 @@ contract ImpCookieJar6551 is CookieJarCore, Giver6551 {
     }
 
     function eatCookies(
-        uint256 amount,
         address _cookieToken,
         uint256 tokenId,
         address nftContract) public {
@@ -50,11 +50,19 @@ contract ImpCookieJar6551 is CookieJarCore, Giver6551 {
                 revert InvalidCaller();
             }
 
-            Giver6551.eatCookie(amount, _cookieToken);
+            uint256 amount;
+
+            if(_cookieToken != address(0)){
+                amount = IERC20(_cookieToken).balanceOf(target);
+            } else {
+                amount = target.balance;
+            }
+
+            Giver6551.eatCookies(amount, _cookieToken);
 
             ICookieNFT(nftContract).burn(tokenId);
 
-            emit CookiesEaten(_cookieToken, nftContract, tokenId, amount);
+            emit CookiesEaten(_cookieToken, amount, nftContract, tokenId);
     }
 
     function isAllowList(address account) public view override returns (bool) {
