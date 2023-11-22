@@ -85,7 +85,7 @@ contract CookieNFT is ERC721 {
         cookieJar = CookieJarFactory(cookieJarSummoner).summonCookieJar(
             cookieJarImp, initializer, details, donationToken, donationAmount, saltNonce
         );
-
+        
         AccountERC6551(payable(account)).setExecutorInit(cookieJar);
 
         cookies[tokenId] = Cookie(cookieJar, periodLength, cookieAmount, cookieToken, account);

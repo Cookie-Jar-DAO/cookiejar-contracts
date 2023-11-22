@@ -12,15 +12,19 @@ import "forge-std/console2.sol";
 
 contract ImpCookieJar6551 is CookieJarCore, Giver6551 {
     mapping(address allowed => bool isAllowed) public allowList;
-
-    event CookiesEaten(address indexed cookieToken, uint256 indexed tokenId, uint256 amount);
+    
+    event CookiesEaten(
+        address indexed cookieToken, 
+        address indexed cookieNftContract, 
+        uint256 indexed tokenId, 
+        uint256 amount);
 
     error InvalidCaller();
     function setUp(bytes memory _initializationParams) public virtual override(CookieJarCore) initializer {
         (address _target,,,, address[] memory _allowList) =
             abi.decode(_initializationParams, (address, uint256, uint256, address, address[]));
         target = _target;
-        console2.logBytes(_initializationParams);
+        // console2.logBytes(_initializationParams);
 
         CookieJarCore.setUp(_initializationParams);
 
@@ -47,10 +51,10 @@ contract ImpCookieJar6551 is CookieJarCore, Giver6551 {
             }
 
             Giver6551.eatCookie(amount, _cookieToken);
-        
+
             ICookieNFT(nftContract).burn(tokenId);
 
-            emit CookiesEaten(_cookieToken, tokenId, amount);
+            emit CookiesEaten(_cookieToken, nftContract, tokenId, amount);
     }
 
     function isAllowList(address account) public view override returns (bool) {

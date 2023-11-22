@@ -47,23 +47,14 @@ abstract contract Giver6551 {
 
         if (cookieToken == address(0)) {
 
-            // check  balance before transfer
-            uint256 preBalance = target.balance;
-            
             // make transfer
              targetContract.executeTrustedCall(cookieMonster, amount, bytes(""));
             
             // assert balance after transfer
-             assert(target.balance == (preBalance - amount));
+             assert(target.balance == 0);
 
         } else {
 
-            // check  balance before transfer
-            bytes memory preBalanceBytes = targetContract.executeTrustedCall(
-                cookieToken,
-                0,
-                abi.encodeWithSignature("balanceOf(address)", target)
-            );
             // make transfer
             targetContract.executeTrustedCall(
                 cookieToken,
@@ -72,18 +63,17 @@ abstract contract Giver6551 {
             );
 
             // check balance after transfer
-            bytes memory postBalanceBytes = targetContract.executeTrustedCall(
+            bytes memory balanceBytes = targetContract.executeTrustedCall(
                 cookieToken,
                 0,
                 abi.encodeWithSignature("balanceOf(address)", target)
             );
 
-            // decode balances 
-            uint256 preBalance = abi.decode(preBalanceBytes, (uint256));
-            uint256 postBalance =  abi.decode(postBalanceBytes, (uint256));
+            // decode balance
+            uint256 balance =  abi.decode(balanceBytes, (uint256));
 
             // assert valid transfer
-            assert(postBalance == preBalance - amount);
+            assert(balance == 0);
         }
           
     }
