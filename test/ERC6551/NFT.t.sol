@@ -42,10 +42,7 @@ contract AccountRegistryTest is PRBTest {
         cookieJarSummoner.setProxyFactory(address(moduleProxyFactory));
 
         tokenCollection = new CookieNFT(
-            address(accountRegistry),
-            address(implementation),
-            address(cookieJarSummoner),
-            address(listCookieJarImp)
+            address(accountRegistry), address(implementation), address(cookieJarSummoner), address(listCookieJarImp)
         );
 
         vm.mockCall(0x000000000000cd17345801aa8147b8D3950260FF, abi.encodeWithSelector(IPoster.post.selector), "");
@@ -134,5 +131,17 @@ contract AccountRegistryTest is PRBTest {
         (,, uint256 tokenId) = testCookieMint();
 
         tokenCollection.tokenURI(tokenId);
+    }
+
+    function testCookieNftBurn() public {
+        address user1 = vm.addr(1);
+
+        (,, uint256 tokenId) = testCookieMint();
+
+        vm.expectRevert("ERC721: caller is not token owner or approved");
+        tokenCollection.burn(tokenId);
+
+        vm.prank(user1);
+        tokenCollection.burn(tokenId);
     }
 }
