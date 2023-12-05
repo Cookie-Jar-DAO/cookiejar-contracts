@@ -172,4 +172,9 @@ contract CookieNFT is ERC721 {
         require(_exists(_tokenId), "ERC721Metadata: URI query for nonexistent token");
         return string(_constructTokenURI(_tokenId));
     }
+
+    function burn(uint256 _tokenId) public {
+        require(_isApprovedOrOwner(_msgSender(), _tokenId), "ERC721: caller is not token owner or approved");
+        _burn(_tokenId);
+    }
 }

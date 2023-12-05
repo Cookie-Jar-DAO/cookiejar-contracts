@@ -10,29 +10,29 @@ The following table lists the addresses of the deployed contracts:
 
 | Contract            | Address                                      |
 | ------------------- | -------------------------------------------- |
-| Baal Cookie Jar     | `0x7CEfc2492Cf3BEb03e5B8eF9ba52c4a219301425` |
-| ERC20 Cookie Jar    | `0xF8Ff08a263D258c0618394734feD493806bd60cd` |
-| ERC721 Cookie Jar   | `0x4ef92B5bE63605A0c27433F5AF88746384c379e5` |
-| List Cookie Jar     | `0xcFb18dd95A3B8DBe27A25F0456f31508BBF0992A` |
-| Open Cookie Jar     | `0x680982C79bE794Bcc4CDd52cDb547d73d8b1C6e9` |
-| Cookie Jar Factory  | `0x998b53d1A35c9630eE655B8D4ec9D4488ed7678F` |
-| List Cookie Jar6551 | `0xcFb18dd95A3B8DBe27A25F0456f31508BBF0992A` |
-| Account             | `0x83006b5c56F909A97256a5678Fcc54E2b444528d` |
-| Cookie Jar NFT      | `0xdc383fEB53B439ECE111625F67b28456db2899c6` |
+| Baal Cookie Jar     | `0x7c1Db931F804271E39b04E68221b71Ca94E9AFa5` |
+| ERC20 Cookie Jar    | `0x85C60D0674e161B7f9d1d40A2A46e4b788E7F057` |
+| ERC721 Cookie Jar   | `0x15f06a6dB8eC8D79Eaa49659210C1c58975a4056` |
+| List Cookie Jar     | `0x226E0601aa8b8CC34519c76Be00A7a6a8a4d97d2` |
+| Open Cookie Jar     | `0x0C7F0fC0ddb95d7099ED97c10A2DE549c03E39F9` |
+| Cookie Jar Factory  | `0xD858ce60102BCEa272a6FA36B2E1770877B8Fa45` |
+| List Cookie Jar6551 | `0x226E0601aa8b8CC34519c76Be00A7a6a8a4d97d2` |
+| Account             | `0x2676e97a832F3b7a674732f5F4222b85eDEDD9Df` |
+| Cookie Jar NFT      | `0x2c500E43A070F6Fb6c72a41F3D6BcEB4De3FcCA1` |
 
 ## Goerli
 
 | Contract            | Address                                      |
 | ------------------- | -------------------------------------------- |
-| Baal Cookie Jar     | `0x16369aF30e491981B773c8169abBBA9df4B16d52` |
-| ERC20 Cookie Jar    | `0x9fF779Db6512BdeD0b3b93EA0BEfDc4b104a64B5` |
-| ERC721 Cookie Jar   | `0x320991a135fd31Cb9CCFd8f6eefd46B33067E421` |
-| List Cookie Jar     | `0x59b6A8f6515A42d1EB6711bD58f76D3c74617B52` |
-| Open Cookie Jar     | `0x3865541C43178EfBAbd13ADB337a37392351C252` |
-| Cookie Jar Factory  | `0xf348F2E75801da94282cf7700C316D68AeF3c787` |
-| List Cookie Jar6551 | `0x59b6A8f6515A42d1EB6711bD58f76D3c74617B52` |
-| Account             | `0xbF9C87e3871Cc79273f54dC2A2D7E772fECcA875` |
-| Cookie Jar NFT      | `0x65022ba0cd19699d84a32945c710519c82b6597b` |
+| Baal Cookie Jar     | `0x30b3Ac0e403e5102c9f0097E9c65f09E5AaF810c` |
+| ERC20 Cookie Jar    | `0x6a2580B166b7132042cCcABa1Fe554fd67440597` |
+| ERC721 Cookie Jar   | `0xf3219beFA8d7ae465fbb0DD227F706972943a84E` |
+| List Cookie Jar     | `0x92c82e6DFd97e54c5f22bE866b863Ce71f26373f` |
+| Open Cookie Jar     | `0x5BeFFF7186811b49d29B5565B161Ea7e3d890CC8` |
+| Cookie Jar Factory  | `0x8f60853B55847d91331106acc303F4A8676efc8B` |
+| List Cookie Jar6551 | `0x92c82e6DFd97e54c5f22bE866b863Ce71f26373f` |
+| Account             | `0xEbB47CBFBfe3f5BE5a02c54AE8D45C72Cf0E05aD` |
+| Cookie Jar NFT      | `0x74B1C12b054F47981B772f7DdaD41dd917705aAa` |
 
 ## Mainnet
 
@@ -52,15 +52,15 @@ The following table lists the addresses of the deployed contracts:
 
 | Contract            | Address                                      |
 | ------------------- | -------------------------------------------- |
-| Baal Cookie Jar     | `0x0000000000000000000000000000000000000000` |
-| ERC20 Cookie Jar    | `0x0000000000000000000000000000000000000000` |
-| ERC721 Cookie Jar   | `0x0000000000000000000000000000000000000000` |
-| List Cookie Jar     | `0x0000000000000000000000000000000000000000` |
-| Open Cookie Jar     | `0x0000000000000000000000000000000000000000` |
-| Cookie Jar Factory  | `0x0000000000000000000000000000000000000000` |
-| List Cookie Jar6551 | `0x0000000000000000000000000000000000000000` |
-| Account             | `0x0000000000000000000000000000000000000000` |
-| Cookie Jar NFT      | `0x0000000000000000000000000000000000000000` |
+| Baal Cookie Jar     | `0x7c1Db931F804271E39b04E68221b71Ca94E9AFa5` |
+| ERC20 Cookie Jar    | `0x85C60D0674e161B7f9d1d40A2A46e4b788E7F057` |
+| ERC721 Cookie Jar   | `0x15f06a6dB8eC8D79Eaa49659210C1c58975a4056` |
+| List Cookie Jar     | `0x226E0601aa8b8CC34519c76Be00A7a6a8a4d97d2` |
+| Open Cookie Jar     | `0x0C7F0fC0ddb95d7099ED97c10A2DE549c03E39F9` |
+| Cookie Jar Factory  | `0xD858ce60102BCEa272a6FA36B2E1770877B8Fa45` |
+| List Cookie Jar6551 | `0x226E0601aa8b8CC34519c76Be00A7a6a8a4d97d2` |
+| Account             | `0x2676e97a832F3b7a674732f5F4222b85eDEDD9Df` |
+| Cookie Jar NFT      | `0x2c500E43A070F6Fb6c72a41F3D6BcEB4De3FcCA1` |
 
 ## 6551 Tokenbound Registry
 
