@@ -14,7 +14,7 @@
     "lint": "forge fmt",
     "docs": "forge doc",
     "docs:serve": "forge doc --serve --port 4000",
-    "deploy:dryrun": "forge script script/DeployCookieJar.s.sol:DeployCookieJar --fork-url optimism --force",
+    "deploy:dryrun": "forge script script/DeployCookieJar.s.sol:DeployCookieJar --fork-url sepolia --force",
     "deploy:gnosis": "forge script script/DeployCookieJar.s.sol:DeployCookieJar --broadcast --verify -vvvv --verifier-url https://api.gnosisscan.io/api/ --fork-url gnosis",
     "deploy:goerli": "forge script script/DeployCookieJar.s.sol:DeployCookieJar --broadcast --verify -vvvv --fork-url goerli",
     "deploy:mainnet": "forge script script/DeployCookieJar.s.sol:DeployCookieJar --broadcast --verify -vvvv --fork-url mainnet",

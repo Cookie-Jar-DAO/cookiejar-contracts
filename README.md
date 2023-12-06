@@ -62,6 +62,20 @@ The following table lists the addresses of the deployed contracts:
 | Account             | `0x2676e97a832F3b7a674732f5F4222b85eDEDD9Df` |
 | Cookie Jar NFT      | `0x2c500E43A070F6Fb6c72a41F3D6BcEB4De3FcCA1` |
 
+## Sepolia
+
+| Contract            | Address                                      |
+| ------------------- | -------------------------------------------- |
+| Baal Cookie Jar     | `0x7c1Db931F804271E39b04E68221b71Ca94E9AFa5` |
+| ERC20 Cookie Jar    | `0x85C60D0674e161B7f9d1d40A2A46e4b788E7F057` |
+| ERC721 Cookie Jar   | `0x15f06a6dB8eC8D79Eaa49659210C1c58975a4056` |
+| List Cookie Jar     | `0x226E0601aa8b8CC34519c76Be00A7a6a8a4d97d2` |
+| Open Cookie Jar     | `0x0C7F0fC0ddb95d7099ED97c10A2DE549c03E39F9` |
+| Cookie Jar Factory  | `0xD858ce60102BCEa272a6FA36B2E1770877B8Fa45` |
+| List Cookie Jar6551 | `0x226E0601aa8b8CC34519c76Be00A7a6a8a4d97d2` |
+| Account             | `0x2676e97a832F3b7a674732f5F4222b85eDEDD9Df` |
+| Cookie Jar NFT      | `0x2c500E43A070F6Fb6c72a41F3D6BcEB4De3FcCA1` |
+
 ## 6551 Tokenbound Registry
 
 The Tokenbound Registry for 6551 tokens is deployed on the following chains:
@@ -71,6 +85,7 @@ The Tokenbound Registry for 6551 tokens is deployed on the following chains:
 | Arbitrum | `0x02101dfB77FDE026414827Fdc604ddAF224F0921` |
 | Gnosis   | `0x02101dfB77FDE026414827Fdc604ddAF224F0921` |
 | Optimism | `0x02101dfB77FDE026414827Fdc604ddAF224F0921` |
+| Sepolia  | `0x02101dfB77FDE026414827Fdc604ddAF224F0921` |
 
 ## Sustainability Safe
 

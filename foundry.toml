@@ -1,48 +1,48 @@
 [profile.default]
-  auto_detect_solc = false
-  block_timestamp = 1_680_220_800 # March 31, 2023 at 00:00 GMT
-  bytecode_hash = "none"
-  cbor_metadata = false
-  fuzz = { runs = 1_000 }
-  gas_reports = ["*"]
-  libs = ["lib"]
-  optimizer = true
-  optimizer_runs = 10_000
-  out = "out"
-  script = "script"
-  solc = "0.8.19"
-  src = "src"
-  test = "test"
+auto_detect_solc = false
+block_timestamp = 1_680_220_800 # March 31, 2023 at 00:00 GMT
+bytecode_hash = "none"
+cbor_metadata = false
+fuzz = { runs = 1_000 }
+gas_reports = ["*"]
+libs = ["lib"]
+optimizer = true
+optimizer_runs = 10_000
+out = "out"
+script = "script"
+solc = "0.8.19"
+src = "src"
+test = "test"
 
 [profile.ci]
-  fuzz = { runs = 10_000 }
-  verbosity = 4
+fuzz = { runs = 10_000 }
+verbosity = 4
 
 [etherscan]
-  arbitrum = { key = "${API_KEY_ARBISCAN}" }
-  goerli = { key = "${API_KEY_ETHERSCAN}" }
-  mainnet = { key = "${API_KEY_ETHERSCAN}" }
-  optimism = { key = "${API_KEY_OPTIMISTIC_ETHERSCAN}" }
-  polygon = { key = "${API_KEY_POLYGONSCAN}" }
-  sepolia = { key = "${API_KEY_ETHERSCAN}" }
-  gnosis = { key = "${API_KEY_GNOSISSCAN}", url = "https://api.gnosisscan.io/api/" }
+arbitrum = { key = "${API_KEY_ARBISCAN}" }
+goerli = { key = "${API_KEY_ETHERSCAN}" }
+mainnet = { key = "${API_KEY_ETHERSCAN}" }
+optimism = { key = "${API_KEY_OPTIMISTIC_ETHERSCAN}" }
+polygon = { key = "${API_KEY_POLYGONSCAN}" }
+sepolia = { key = "${API_KEY_ETHERSCAN}" }
+gnosis = { key = "${API_KEY_GNOSISSCAN}", url = "https://api.gnosisscan.io/api/" }
 
 [fmt]
-  bracket_spacing = true
-  int_types = "long"
-  line_length = 120
-  multiline_func_header = "all"
-  number_underscore = "thousands"
-  quote_style = "double"
-  tab_width = 4
-  wrap_comments = true
+bracket_spacing = true
+int_types = "long"
+line_length = 120
+multiline_func_header = "all"
+number_underscore = "thousands"
+quote_style = "double"
+tab_width = 4
+wrap_comments = true
 
 [rpc_endpoints]
-  arbitrum = "https://arbitrum-mainnet.infura.io/v3/${API_KEY_INFURA}"
-  goerli = "https://eth-goerli.g.alchemy.com/v2/${API_KEY_ALCHEMY}"
-  localhost = "http://localhost:8545"
-  mainnet = "https://eth-mainnet.g.alchemy.com/v2/${API_KEY_ALCHEMY}"
-  optimism = " https://opt-mainnet.g.alchemy.com/v2/${API_KEY_ALCHEMY}"
-  polygon = "https://polygon-mainnet.infura.io/v3/${API_KEY_INFURA}"
-  sepolia = "https://sepolia.infura.io/v3/${API_KEY_INFURA}"
-  gnosis = "https://rpc.gnosis.gateway.fm"
+arbitrum = "https://arb-mainnet.g.alchemy.com/v2/${API_KEY_ALCHEMY}"
+goerli = "https://eth-goerli.g.alchemy.com/v2/${API_KEY_ALCHEMY}"
+localhost = "http://localhost:8545"
+mainnet = "https://eth-mainnet.g.alchemy.com/v2/${API_KEY_ALCHEMY}"
+optimism = "https://opt-mainnet.g.alchemy.com/v2/${API_KEY_ALCHEMY}"
+polygon = "https://polygon-mainnet.infura.io/v3/${API_KEY_INFURA}"
+sepolia = "https://eth-sepolia.g.alchemy.com/v2/${API_KEY_ALCHEMY}"
+gnosis = "https://rpc.gnosis.gateway.fm"
