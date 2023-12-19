@@ -59,8 +59,9 @@ contract TestMintCookieJar is Script {
         uint256 periodLength = 3600;
         address cookieToken = address(listCookieJar6551);
         address[] memory allowList = new address[](0);
+        string memory details = "details";
 
-        CookieNFT(nft).cookieMint(user1, periodLength, cookieAmount, cookieToken, address(0), 0, allowList);
+        CookieNFT(nft).cookieMint(user1, periodLength, cookieAmount, cookieToken, address(0), 0, allowList, details);
 
         vm.stopBroadcast();
     }

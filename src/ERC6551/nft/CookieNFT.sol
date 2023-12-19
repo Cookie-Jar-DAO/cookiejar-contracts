@@ -60,7 +60,8 @@ contract CookieNFT is ERC721 {
         address cookieToken,
         address donationToken,
         uint256 donationAmount,
-        address[] memory allowList
+        address[] memory allowList,
+        string memory details
     )
         public
         payable
@@ -78,7 +79,6 @@ contract CookieNFT is ERC721 {
             IRegistry(erc6551Reg).createAccount(erc6551Imp, block.chainid, address(this), tokenId, block.timestamp, "");
         bytes memory initializerParams = abi.encode(account, periodLength, cookieAmount, cookieToken, allowList);
         bytes memory initializer = abi.encodeWithSignature("setUp(bytes)", initializerParams);
-        string memory details = '{"type":"6551", "title":"Cookie NFT Gen 1", "description":"Gen1 Cookie", "link":""}';
         uint256 saltNonce = 1_234_567_890; // hard code saltNonce for now
         cookieJar = CookieJarFactory(cookieJarSummoner).summonCookieJar(
             cookieJarImp, initializer, details, donationToken, donationAmount, saltNonce

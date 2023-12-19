@@ -20,7 +20,13 @@
     "deploy:mainnet": "forge script script/DeployCookieJar.s.sol:DeployCookieJar --broadcast --verify -vvvv --fork-url mainnet",
     "deploy:optimism": "forge script script/DeployCookieJar.s.sol:DeployCookieJar --broadcast --verify -vvvv --fork-url optimism",
     "deploy:sepolia": "forge script script/DeployCookieJar.s.sol:DeployCookieJar --broadcast --verify -vvvv --fork-url sepolia",
-    "deploy:simulate:gnosis": "forge script script/DeployCookieJar.s.sol:DeployCookieJar --fork-url gnosis",
+    "deploy:nft:dryrun": "forge script script/DeployCookieJarNFT.s.sol:DeployCookieJarNFT --fork-url goerli --force",
+    "deploy:nft:gnosis": "forge script script/DeployCookieJarNFT.s.sol:DeployCookieJarNFT --broadcast --verify -vvvv --verifier-url https://api.gnosisscan.io/api/ --fork-url gnosis",
+    "deploy:nft:goerli": "forge script script/DeployCookieJarNFT.s.sol:DeployCookieJarNFT --broadcast --verify -vvvv --fork-url goerli",
+    "deploy:nft:mainnet": "forge script script/DeployCookieJarNFT.s.sol:DeployCookieJarNFT --broadcast --verify -vvvv --fork-url mainnet",
+    "deploy:nft:optimism": "forge script script/DeployCookieJarNFT.s.sol:DeployCookieJarNFT --broadcast --verify -vvvv --fork-url optimism",
+    "deploy:nft:sepolia": "forge script script/DeployCookieJarNFT.s.sol:DeployCookieJarNFT --broadcast --verify -vvvv --fork-url sepolia",
+    "deploy:simulate:gnosis": "forge script script/DeployCookieJarNFT.s.sol:DeployCookieJar --fork-url optimism",
     "fork:gnosis": "anvil --fork-chain-id 100 --fork-url https://rpc.gnosis.gateway.fm --fork-block-number 28287659"
   }
 }

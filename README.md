@@ -16,9 +16,9 @@ The following table lists the addresses of the deployed contracts:
 | List Cookie Jar     | `0x226E0601aa8b8CC34519c76Be00A7a6a8a4d97d2` |
 | Open Cookie Jar     | `0x0C7F0fC0ddb95d7099ED97c10A2DE549c03E39F9` |
 | Cookie Jar Factory  | `0xD858ce60102BCEa272a6FA36B2E1770877B8Fa45` |
-| List Cookie Jar6551 | `0x226E0601aa8b8CC34519c76Be00A7a6a8a4d97d2` |
-| Account             | `0x2676e97a832F3b7a674732f5F4222b85eDEDD9Df` |
-| Cookie Jar NFT      | `0x2c500E43A070F6Fb6c72a41F3D6BcEB4De3FcCA1` |
+| List Cookie Jar6551 | `0xb8858dF24B89d9D17954D763b08b860AD24cfd2d` |
+| Account             | `0xbCe05b4eB846A033559387e0fa62F3D13EEAAECE` |
+| Cookie Jar NFT      | `0xb6F9534F53F3F42a0b25d8ECC290419c98f9f212` |
 
 ## Goerli
 
@@ -31,8 +31,8 @@ The following table lists the addresses of the deployed contracts:
 | Open Cookie Jar     | `0x5BeFFF7186811b49d29B5565B161Ea7e3d890CC8` |
 | Cookie Jar Factory  | `0x8f60853B55847d91331106acc303F4A8676efc8B` |
 | List Cookie Jar6551 | `0x92c82e6DFd97e54c5f22bE866b863Ce71f26373f` |
-| Account             | `0xEbB47CBFBfe3f5BE5a02c54AE8D45C72Cf0E05aD` |
-| Cookie Jar NFT      | `0x74B1C12b054F47981B772f7DdaD41dd917705aAa` |
+| Account             | `0x2EC5152cC1706Ba08DaA88FaD23D32f88Bd29988` |
+| Cookie Jar NFT      | `0xEA443B2ac5cDfa0357d92941a2F18d3B4C816b81` |
 
 ## Mainnet
 
@@ -72,9 +72,9 @@ The following table lists the addresses of the deployed contracts:
 | List Cookie Jar     | `0x226E0601aa8b8CC34519c76Be00A7a6a8a4d97d2` |
 | Open Cookie Jar     | `0x0C7F0fC0ddb95d7099ED97c10A2DE549c03E39F9` |
 | Cookie Jar Factory  | `0xD858ce60102BCEa272a6FA36B2E1770877B8Fa45` |
-| List Cookie Jar6551 | `0x226E0601aa8b8CC34519c76Be00A7a6a8a4d97d2` |
-| Account             | `0x2676e97a832F3b7a674732f5F4222b85eDEDD9Df` |
-| Cookie Jar NFT      | `0x2c500E43A070F6Fb6c72a41F3D6BcEB4De3FcCA1` |
+| List Cookie Jar6551 | `0xb8858dF24B89d9D17954D763b08b860AD24cfd2d` |
+| Account             | `0xbCe05b4eB846A033559387e0fa62F3D13EEAAECE` |
+| Cookie Jar NFT      | `0xb6F9534F53F3F42a0b25d8ECC290419c98f9f212` |
 
 ## 6551 Tokenbound Registry
 

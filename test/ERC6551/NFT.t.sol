@@ -54,9 +54,11 @@ contract AccountRegistryTest is PRBTest {
         uint256 periodLength = 3600;
         address cookieToken = address(cookieJarImp);
         address[] memory allowList = new address[](0);
-
-        (account, cookieJar, tokenId) =
-            tokenCollection.cookieMint(user1, periodLength, cookieAmount, cookieToken, address(0), 0, allowList);
+        string memory details =
+            "{\"type\":\"Baal\",\"name\":\"Moloch Pastries\",\"description\":\"This is where you add some more content\",\"link\":\"app.daohaus.club/0x64/0x0....666\"}";
+        (account, cookieJar, tokenId) = tokenCollection.cookieMint(
+            user1, periodLength, cookieAmount, cookieToken, address(0), 0, allowList, details
+        );
 
         (bool sent,) = payable(account).call{ value: 1 ether }("");
         require(sent, "Failed to send Ether?");
