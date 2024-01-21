@@ -3,7 +3,6 @@ pragma solidity >=0.8.19;
 
 import { Script } from "forge-std/Script.sol";
 import { CookieNFT } from "src/ERC6551/nft/CookieNFT.sol";
-import { ImpCookieJar6551 } from "src/ERC6551/ImpCookieJar6551.sol";
 import { AccountERC6551 } from "src/ERC6551/erc6551/ERC6551Module.sol";
 import { AccountRegistry } from "src/ERC6551/erc6551/ERC6551Registry.sol";
 
@@ -31,14 +30,9 @@ contract DeployCookieJar is Script {
     address internal listCookieJar;
     address internal openCookieJar;
     address internal cookieJarFactory;
-    address internal safeModuleSummoner;
-    address internal moduleProxyFactory;
 
-    // 6551
-    address internal listCookieJar6551;
-    address internal accountImp;
-    address internal registry = 0x02101dfB77FDE026414827Fdc604ddAF224F0921;
-    address internal nft;
+    // Deterministic deployment
+    bytes32 salt = keccak256("v0.1");
 
     function setUp() public virtual {
         // string memory mnemonic = vm.envString("MNEMONIC");
@@ -51,13 +45,6 @@ contract DeployCookieJar is Script {
 
         deployerPk = vm.envUint("PRIVATE_KEY");
         // }
-        // Optimism
-        if (block.chainid == 10) moduleProxyFactory = 0xC22834581EbC8527d974F8a1c97E1bEA4EF910BC;
-
-        // Hardhat
-        if (block.chainid == 31_337) moduleProxyFactory = address(new ModuleProxyFactory());
-        // Default
-        else moduleProxyFactory = 0x00000000000DC7F163742Eb4aBEf650037b1f588;
     }
 
     function run() public {
@@ -66,27 +53,12 @@ contract DeployCookieJar is Script {
         if (deployer != address(0)) vm.startBroadcast(deployer);
         else vm.startBroadcast(deployerPk);
 
-        // Zodiac
-        baalCookieJar = address(new ZodiacBaalCookieJar());
-        erc20CookieJar = address(new ZodiacERC20CookieJar());
-        erc721CookieJar = address(new ZodiacERC721CookieJar());
-        listCookieJar = address(new ZodiacListCookieJar());
-        openCookieJar = address(new ZodiacOpenCookieJar());
-        cookieJarFactory = address(new CookieJarFactory());
-        CookieJarFactory(cookieJarFactory).setProxyFactory(moduleProxyFactory);
-
-        // 6551
-
-        listCookieJar6551 = address(new ImpCookieJar6551());
-        accountImp = address(new AccountERC6551());
-        nft = address(
-            new CookieNFT(
-            registry, // account registry
-            accountImp,
-            cookieJarFactory,
-            listCookieJar6551
-            )
-        );
+        // Modules
+        baalCookieJar = address(new ZodiacBaalCookieJar{ salt: salt }());
+        erc20CookieJar = address(new ZodiacERC20CookieJar{ salt: salt }());
+        erc721CookieJar = address(new ZodiacERC721CookieJar{ salt: salt }());
+        listCookieJar = address(new ZodiacListCookieJar{ salt: salt }());
+        openCookieJar = address(new ZodiacOpenCookieJar{ salt: salt }());
 
         // solhint-disable quotes
         console.log(block.chainid);
@@ -95,11 +67,7 @@ contract DeployCookieJar is Script {
         console.log('"erc721CookieJar": "%s",', erc721CookieJar);
         console.log('"listCookieJar": "%s",', listCookieJar);
         console.log('"openCookieJar": "%s",', openCookieJar);
-        console.log('"cookieJarFactory": "%s",', cookieJarFactory);
-        console.log('"listCookieJar6551": "%s",', listCookieJar);
-        console.log('"account": "%s",', accountImp);
-        console.log('"registry": "%s",', registry);
-        console.log('"nft": "%s",', nft);
+
         // solhint-enable quotes
 
         vm.stopBroadcast();
