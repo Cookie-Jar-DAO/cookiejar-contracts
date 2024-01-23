@@ -3,15 +3,24 @@ pragma solidity >=0.8.19;
 
 import { Script } from "forge-std/Script.sol";
 import { CookieNFT } from "src/ERC6551/nft/CookieNFT.sol";
-import { ImpCookieJar6551 } from "src/ERC6551/ImpCookieJar6551.sol";
 import { AccountERC6551 } from "src/ERC6551/erc6551/ERC6551Module.sol";
 import { AccountRegistry } from "src/ERC6551/erc6551/ERC6551Registry.sol";
 
+// Zodiac
 import { ZodiacBaalCookieJar } from "../src/SafeModule/BaalCookieJar.sol";
 import { ZodiacERC20CookieJar } from "../src/SafeModule/ERC20CookieJar.sol";
 import { ZodiacERC721CookieJar } from "../src/SafeModule/ERC721CookieJar.sol";
 import { ZodiacListCookieJar } from "../src/SafeModule/ListCookieJar.sol";
 import { ZodiacOpenCookieJar } from "../src/SafeModule/OpenCookieJar.sol";
+
+// 6551
+import { BaalCookieJar6551 } from "../src/ERC6551/BaalCookieJar6551.sol";
+import { ERC20CookieJar6551 } from "../src/ERC6551/ERC20CookieJar6551.sol";
+import { ERC721CookieJar6551 } from "../src/ERC6551/ERC721CookieJar6551.sol";
+import { ListCookieJar6551 } from "../src/ERC6551/ListCookieJar6551.sol";
+import { OpenCookieJar6551 } from "../src/ERC6551/OpenCookieJar6551.sol";
+
+// Deploys
 import { CookieJarFactory } from "../src/factory/CookieJarFactory.sol";
 import { Create2 } from "@openzeppelin/contracts/utils/Create2.sol";
 import { ModuleProxyFactory } from "@gnosis.pm/zodiac/contracts/factory/ModuleProxyFactory.sol";
@@ -28,11 +37,20 @@ contract DeployCookieJarNFT is Script {
 
     address internal cookieJarFactory;
 
+    // Implementations
+    address internal baalCookieJar;
+    address internal erc20CookieJar;
+    address internal erc721CookieJar;
+    address internal listCookieJar;
+    address internal openCookieJar;
+
     // 6551
-    address internal listCookieJar6551;
     address internal accountImp;
     address internal registry = 0x02101dfB77FDE026414827Fdc604ddAF224F0921;
     address internal nft;
+
+    // Deterministic deployment
+    bytes32 salt = keccak256("v0.1");
 
     function setUp() public virtual {
         // string memory mnemonic = vm.envString("MNEMONIC");
@@ -53,7 +71,7 @@ contract DeployCookieJarNFT is Script {
         if (deployer != address(0)) vm.startBroadcast(deployer);
         else vm.startBroadcast(deployerPk);
 
-        // Zodiac
+        // Get factory address
         cookieJarFactory = block.chainid == 100
             ? 0xD858ce60102BCEa272a6FA36B2E1770877B8Fa45
             : block.chainid == 5
@@ -67,24 +85,44 @@ contract DeployCookieJarNFT is Script {
             revert NoCookieJarFactory("No cookie jar factory found for chain id");
         }
 
+        // Deploy 6551 implementations
+
+        // Baal
+        baalCookieJar = address(new BaalCookieJar6551{ salt: salt }());
+
+        // ERC20
+        erc20CookieJar = address(new ERC20CookieJar6551{ salt: salt }());
+
+        // ERC721
+        erc721CookieJar = address(new ERC721CookieJar6551{ salt: salt }());
+
+        // List
+        listCookieJar = address(new ListCookieJar6551{ salt: salt }());
+
+        // Open
+        openCookieJar = address(new OpenCookieJar6551{ salt: salt }());
+
         // 6551
-        listCookieJar6551 = address(new ImpCookieJar6551());
         accountImp = address(new AccountERC6551());
         nft = address(
             new CookieNFT(
                 registry, // account registry
                 accountImp,
-                cookieJarFactory,
-                listCookieJar6551
+                cookieJarFactory
             )
         );
 
         // solhint-disable quotes
         console.log(block.chainid);
-        console.log('"cookieJarFactory": "%s",', cookieJarFactory);
         console.log('"account": "%s",', accountImp);
         console.log('"registry": "%s",', registry);
         console.log('"nft": "%s",', nft);
+        console.log('"baalCookieJar": "%s",', baalCookieJar);
+        console.log('"erc20CookieJar": "%s",', erc20CookieJar);
+        console.log('"erc721CookieJar": "%s",', erc721CookieJar);
+        console.log('"listCookieJar": "%s",', listCookieJar);
+        console.log('"openCookieJar": "%s",', openCookieJar);
+
         // solhint-enable quotes
 
         vm.stopBroadcast();

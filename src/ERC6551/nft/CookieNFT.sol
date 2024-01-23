@@ -23,7 +23,6 @@ contract CookieNFT is ERC721 {
     address public erc6551Reg;
     address public erc6551Imp;
     address public cookieJarSummoner;
-    address public cookieJarImp; // list cookie jar
     uint256 public cap = 20;
 
     Counters.Counter private _tokenIdCounter;
@@ -42,32 +41,35 @@ contract CookieNFT is ERC721 {
     constructor(
         address _erc6551Reg,
         address _erc6551Imp,
-        address _cookieJarSummoner,
-        address _cookieJarImp
+        address _cookieJarSummoner
     )
         ERC721("CookieJar Number 1", "COOKIE1")
     {
         erc6551Reg = _erc6551Reg;
         erc6551Imp = _erc6551Imp;
         cookieJarSummoner = _cookieJarSummoner;
-        cookieJarImp = _cookieJarImp;
     }
 
     function cookieMint(
-        address to,
-        uint256 periodLength,
-        uint256 cookieAmount,
-        address cookieToken,
+        address cookieJarImp,
+        bytes memory _initializer,
+        string memory details,
         address donationToken,
-        uint256 donationAmount,
-        address[] memory allowList,
-        string memory details
+        uint256 donationAmount
     )
         public
         payable
         returns (address account, address cookieJar, uint256 tokenId)
     {
         require(_tokenIdCounter.current() <= cap, "CookieNFT: cap reached, no more cookies");
+
+        // 0. address owner or safeTarget,
+        // 1. uint256 _periodLength,
+        // 2. uint256 _cookieAmount,
+        // 4. address _cookieToken
+        (address to, uint256 periodLength, uint256 cookieAmount, address cookieToken) =
+            abi.decode(_initializer, (address, uint256, uint256, address));
+
         if (msg.value > 0) {
             payable(address(this)).transfer(msg.value);
         }
@@ -77,8 +79,20 @@ contract CookieNFT is ERC721 {
 
         account =
             IRegistry(erc6551Reg).createAccount(erc6551Imp, block.chainid, address(this), tokenId, block.timestamp, "");
-        bytes memory initializerParams = abi.encode(account, periodLength, cookieAmount, cookieToken, allowList);
-        bytes memory initializer = abi.encodeWithSignature("setUp(bytes)", initializerParams);
+
+        assembly {
+            // Load the first word from `data` (first 32 bytes)
+            let word := mload(add(_initializer, 32))
+
+            // Replace the first 20 bytes of this word with the address
+            // Solidity stores `bytes` objects with an additional length field, so we skip the first 12 bytes
+            word := or(and(word, 0xffffffffffffffffffffffff0000000000000000000000000000000000000000), account)
+
+            // Store the modified word back into `data`
+            mstore(add(_initializer, 32), word)
+        }
+
+        bytes memory initializer = abi.encodeWithSignature("setUp(bytes)", _initializer);
         uint256 saltNonce = 1_234_567_890; // hard code saltNonce for now
         cookieJar = CookieJarFactory(cookieJarSummoner).summonCookieJar(
             cookieJarImp, initializer, details, donationToken, donationAmount, saltNonce
