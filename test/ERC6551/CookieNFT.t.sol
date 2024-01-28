@@ -27,6 +27,7 @@ import { OpenCookieJar6551 } from "src/ERC6551/OpenCookieJar6551.sol";
 contract CookieNFTTest is PRBTest, StdCheats {
     address internal alice = makeAddr("alice");
     address internal bob = makeAddr("bob");
+    address internal owner = makeAddr("owner");
 
     AccountERC6551 public implementation;
     AccountRegistry public accountRegistry;
@@ -47,7 +48,7 @@ contract CookieNFTTest is PRBTest, StdCheats {
         implementation = new AccountERC6551();
         accountRegistry = new AccountRegistry();
 
-        cookieJarSummoner = new CookieJarFactory();
+        cookieJarSummoner = new CookieJarFactory(owner);
 
         baalCookieJarImp = new BaalCookieJar6551();
         erc20CookieJarImp = new ERC20CookieJar6551();
@@ -57,6 +58,7 @@ contract CookieNFTTest is PRBTest, StdCheats {
 
         moduleProxyFactory = new ModuleProxyFactory();
 
+        vm.prank(owner);
         cookieJarSummoner.setProxyFactory(address(moduleProxyFactory));
 
         cookieJarNFT = new CookieNFT(address(accountRegistry), address(implementation), address(cookieJarSummoner));

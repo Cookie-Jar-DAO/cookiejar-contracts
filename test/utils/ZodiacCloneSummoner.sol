@@ -81,7 +81,8 @@ contract ZodiacOpenCookieJarHarnass is ZodiacOpenCookieJar {
 }
 
 contract ZodiacCloneSummoner is Test {
-    CookieJarFactory public cookieJarFactory = new CookieJarFactory();
+    address internal owner = makeAddr("owner");
+    CookieJarFactory public cookieJarFactory = new CookieJarFactory(owner);
     ModuleProxyFactory public moduleProxyFactory = new ModuleProxyFactory();
 
     ZodiacBaalCookieJarHarnass internal baalCookieJarImplementation = new ZodiacBaalCookieJarHarnass();
@@ -95,6 +96,7 @@ contract ZodiacCloneSummoner is Test {
     uint256 internal saltNonce = 420;
 
     constructor() {
+        vm.prank(owner);
         cookieJarFactory.setProxyFactory(address(moduleProxyFactory));
     }
 

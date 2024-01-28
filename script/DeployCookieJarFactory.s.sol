@@ -24,19 +24,14 @@ contract DeployCookieJarFactory is Script {
     address internal moduleProxyFactory;
 
     // Deterministic deployment
-    bytes32 salt = keccak256("v0.1");
+    bytes32 salt = keccak256("v0.2");
 
     function setUp() public virtual {
-        // string memory mnemonic = vm.envString("MNEMONIC");
-        // if (bytes(mnemonic).length > 0) {
-        //     console.log("Using mnemonic");
+        string memory mnemonic = vm.envString("MNEMONIC");
+        console.log("Using mnemonic");
 
-        //     (deployer,) = deriveRememberKey(mnemonic, 0);
-        // } else {
-        console.log("Using private key");
+        (deployer,) = deriveRememberKey(mnemonic, 0);
 
-        deployerPk = vm.envUint("PRIVATE_KEY");
-        // }
         // Optimism
         if (block.chainid == 10) moduleProxyFactory = 0xC22834581EbC8527d974F8a1c97E1bEA4EF910BC;
 
@@ -53,7 +48,7 @@ contract DeployCookieJarFactory is Script {
         else vm.startBroadcast(deployerPk);
 
         // Zodiac
-        cookieJarFactory = address(new CookieJarFactory{ salt: salt }());
+        cookieJarFactory = address(new CookieJarFactory{ salt: salt }(deployer));
         CookieJarFactory(cookieJarFactory).setProxyFactory(moduleProxyFactory);
 
         // solhint-disable quotes
