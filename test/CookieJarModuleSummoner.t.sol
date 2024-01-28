@@ -16,7 +16,8 @@ import { ZodiacOpenCookieJar } from "src/SafeModule/OpenCookieJar.sol";
 import { CookieJarFactory } from "src/factory/CookieJarFactory.sol";
 
 contract CookieJarModuleSummonerTest is PRBTest, StdCheats {
-    CookieJarFactory public cookieJarSummoner = new CookieJarFactory();
+    address internal owner = makeAddr("owner");
+    CookieJarFactory public cookieJarSummoner = new CookieJarFactory(owner);
     ModuleProxyFactory public moduleProxyFactory = new ModuleProxyFactory();
     address internal _safeTarget = makeAddr("safe");
     address internal _mockERC20 = makeAddr("erc20");
@@ -33,6 +34,7 @@ contract CookieJarModuleSummonerTest is PRBTest, StdCheats {
     event DonationReceived(address donationToken, uint256 donationAmount);
 
     function setUp() public virtual {
+        vm.prank(owner);
         cookieJarSummoner.setProxyFactory(address(moduleProxyFactory));
     }
 
@@ -235,7 +237,7 @@ contract CookieJarModuleSummonerTest is PRBTest, StdCheats {
         vm.startPrank(alice);
 
         donationToken.approve(address(cookieJarSummoner), 1 ether);
-        
+
         vm.expectEmit(false, false, false, true);
         emit DonationReceived(address(donationToken), 1 ether);
         cookieJarSummoner.summonCookieJar(

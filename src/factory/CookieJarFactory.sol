@@ -17,8 +17,9 @@ contract CookieJarFactory is Ownable {
 
     address public constant SUSTAINABILITY_ADDR = 0x1cE42BA793BA1E9Bf36c8b3f0aDDEe6c89D9a9fc;
 
-    /*solhint-disable no-empty-blocks*/
-    constructor() { }
+    constructor(address newOwner) {
+        transferOwnership(newOwner);
+    }
 
     // must be called after deploy to set libraries
     function setProxyFactory(address _moduleProxyFactory) public onlyOwner {

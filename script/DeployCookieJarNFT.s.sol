@@ -30,6 +30,8 @@ import { console } from "forge-std/console.sol";
 
 error NoCookieJarFactory(string message);
 
+error NoDeployer();
+
 /// @dev See the Solidity Scripting tutorial: https://book.getfoundry.sh/tutorials/solidity-scripting
 contract DeployCookieJarNFT is Script {
     address internal deployer;
@@ -50,35 +52,28 @@ contract DeployCookieJarNFT is Script {
     address internal nft;
 
     // Deterministic deployment
-    bytes32 salt = keccak256("v0.1");
+    bytes32 salt = keccak256("v0.2");
 
     function setUp() public virtual {
-        // string memory mnemonic = vm.envString("MNEMONIC");
-        // if (bytes(mnemonic).length > 0) {
-        //     console.log("Using mnemonic");
+        string memory mnemonic = vm.envString("MNEMONIC");
+        if (bytes(mnemonic).length > 0) {
+            console.log("Using mnemonic");
 
-        //     (deployer,) = deriveRememberKey(mnemonic, 0);
-        // } else {
-        console.log("Using private key");
-
-        deployerPk = vm.envUint("PRIVATE_KEY");
-        // }
+            (deployer,) = deriveRememberKey(mnemonic, 0);
+        }
     }
 
     function run() public {
         console.log('"deployer": "%s",', deployer);
 
-        if (deployer != address(0)) vm.startBroadcast(deployer);
-        else vm.startBroadcast(deployerPk);
+        if (deployer == address(0)) {
+            revert NoDeployer();
+        }
+
+        vm.startBroadcast(deployer);
 
         // Get factory address
-        cookieJarFactory = block.chainid == 100
-            ? 0xD858ce60102BCEa272a6FA36B2E1770877B8Fa45
-            : block.chainid == 5
-                ? 0x8f60853B55847d91331106acc303F4A8676efc8B
-                : block.chainid == 10
-                    ? 0xD858ce60102BCEa272a6FA36B2E1770877B8Fa45
-                    : block.chainid == 11_155_111 ? 0xD858ce60102BCEa272a6FA36B2E1770877B8Fa45 : address(0);
+        cookieJarFactory = block.chainid == 11_155_111 ? 0x10864D3b5552735fD8B1Ddd6d5BddcF437e26Ae9 : address(0);
 
         if (cookieJarFactory == address(0)) {
             vm.stopBroadcast();
