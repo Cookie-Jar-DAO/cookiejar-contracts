@@ -1,24 +1,16 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.19 <0.9.0;
 
-import {PRBTest} from "@prb/test/PRBTest.sol";
-import {StdCheats} from "forge-std/StdCheats.sol";
-import {ZodiacCookieJar} from "src/SafeModule/ZodiacCookieJar.sol";
-import {TestAvatar} from "@gnosis.pm/zodiac/contracts/test/TestAvatar.sol";
-import {ERC20Mintable} from "test/utils/ERC20Mintable.sol";
-import {IPoster} from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
-import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
-import {CookieUtils} from "src/lib/CookieUtils.sol";
+import { PRBTest } from "@prb/test/PRBTest.sol";
+import { StdCheats } from "forge-std/StdCheats.sol";
+import { ZodiacCookieJar } from "src/SafeModule/ZodiacCookieJar.sol";
+import { TestAvatar } from "@gnosis.pm/zodiac/contracts/test/TestAvatar.sol";
+import { ERC20Mintable } from "test/utils/ERC20Mintable.sol";
+import { Strings } from "@openzeppelin/contracts/utils/Strings.sol";
+import { CookieUtils } from "src/lib/CookieUtils.sol";
+import { ICookieJar } from "src/interfaces/ICookieJar.sol";
 
 contract CookieJarHarnass is ZodiacCookieJar {
-    function posterTag() public pure returns (string memory) {
-        return POSTER_TAG;
-    }
-
-    function posterUid() public view returns (string memory) {
-        return POSTER_UID;
-    }
-
     function exposed_isAllowList(address user) external view returns (bool) {
         return isAllowList(user);
     }
@@ -38,8 +30,8 @@ contract ZodiacCookieJarTest is PRBTest, StdCheats {
     string internal reason = "CookieJar: Testing";
 
     event Setup(bytes initializationParams);
-    event GiveCookie(address indexed cookieMonster, uint256 amount);
-    event NewPost(address indexed user, string content, string indexed tag);
+    event GiveCookie(bytes32 indexed cookieUid, address indexed cookieMonster, uint256 amount, string reason);
+    event AssessReason(bytes32 indexed cookieUid, string message, bool isGood);
 
     function setUp() public virtual {
         // address _safeTarget,
@@ -53,8 +45,6 @@ contract ZodiacCookieJarTest is PRBTest, StdCheats {
 
         // Enable module
         testAvatar.enableModule(address(cookieJar));
-
-        vm.mockCall(0x000000000000cd17345801aa8147b8D3950260FF, abi.encodeWithSelector(IPoster.post.selector), "");
     }
 
     function testIsEnabledModule() external {
@@ -85,24 +75,20 @@ contract ZodiacCookieJarTest is PRBTest, StdCheats {
 
     function testAssessReason() external {
         vm.startPrank(alice);
-        string memory cookieUid = CookieUtils.getCookieUid(cookieJar.posterUid());
+        bytes32 cookieUid = CookieUtils.getCookieUid();
 
-        string memory assessTag =
-            string.concat(cookieJar.posterTag(), ".", cookieJar.posterUid(), ".reaction.", cookieUid);
-
+        string memory message = "testing 1234";
         string memory senderString = Strings.toHexString(uint256(uint160(alice)), 20);
 
-        vm.expectCall(
-            0x000000000000cd17345801aa8147b8D3950260FF,
-            abi.encodeCall(IPoster.post, (string.concat("UP ", senderString), assessTag))
-        );
-        cookieJar.assessReason(cookieUid, true);
+        vm.expectEmit(true, true, false, true);
+        emit AssessReason(cookieUid, message, true);
 
-        vm.expectCall(
-            0x000000000000cd17345801aa8147b8D3950260FF,
-            abi.encodeCall(IPoster.post, (string.concat("DOWN ", senderString), assessTag))
-        );
-        cookieJar.assessReason(cookieUid, false);
+        cookieJar.assessReason(cookieUid, message, true);
+
+        vm.expectEmit(true, true, false, true);
+        emit AssessReason(cookieUid, message, false);
+
+        cookieJar.assessReason(cookieUid, message, false);
     }
 
     function testGiveAwayCookie() external {

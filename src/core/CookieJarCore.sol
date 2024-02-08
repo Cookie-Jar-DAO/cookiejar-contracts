@@ -9,15 +9,6 @@ import { CookieUtils } from "src/lib/CookieUtils.sol";
 import { Strings } from "@openzeppelin/contracts/utils/Strings.sol";
 
 abstract contract CookieJarCore is Initializable, OwnableUpgradeable, ICookieJar {
-    /// @notice The tag used for posts related to this contract.
-    string public constant POSTER_TAG = "CookieJar";
-
-    /// @notice The address for the poster.
-    address public constant POSTER_ADDR = 0x000000000000cd17345801aa8147b8D3950260FF;
-
-    /// @notice The UID for the poster.
-    string public POSTER_UID;
-
     /// @notice The amount of "cookie" that can be claimed.
     uint256 public cookieAmount;
 
@@ -51,8 +42,6 @@ abstract contract CookieJarCore is Initializable, OwnableUpgradeable, ICookieJar
 
         __Ownable_init();
 
-        POSTER_UID = CookieUtils.getCookieJarUid(address(this));
-
         emit Setup(_initializationParams);
     }
 
@@ -62,15 +51,13 @@ abstract contract CookieJarCore is Initializable, OwnableUpgradeable, ICookieJar
      * it updates the last claim timestamp for the caller, gives a cookie to the caller, and posts the reason for the
      * claim.
      * This function can only be called by the member themselves, and not on behalf of others.
-     * @param _reason The reason provided by the member for making the claim. This will be posted publicly.
+     * @param reason The reason provided by the member for making the claim. This will be posted publicly.
      */
-    function reachInJar(string calldata _reason) public virtual {
+    function reachInJar(string calldata reason) public virtual {
         require(isAllowList(msg.sender), "not a member");
         require(isValidClaimPeriod(msg.sender), "not a valid claim period");
 
-        claims[msg.sender] = block.timestamp;
-        giveCookie(msg.sender, cookieAmount);
-        postReason(_reason);
+        reachInJar(msg.sender, reason);
     }
 
     /**
@@ -80,17 +67,17 @@ abstract contract CookieJarCore is Initializable, OwnableUpgradeable, ICookieJar
      * for the claim.
      * This function can be called by a member on behalf of another address, allowing for more flexible distribution.
      * @param cookieMonster The address to receive the cookie.
-     * @param _reason The reason provided by the member for making the claim. This will be posted publicly.
+     * @param reason The reason provided by the member for making the claim. This will be posted publicly.
      */
-    function reachInJar(address cookieMonster, string calldata _reason) public virtual {
+    function reachInJar(address cookieMonster, string calldata reason) public virtual {
         require(isAllowList(msg.sender), "not a member");
         require(isValidClaimPeriod(msg.sender), "not a valid claim period");
 
         claims[msg.sender] = block.timestamp;
 
-        giveCookie(cookieMonster, cookieAmount);
+        bytes32 cookieUid = giveCookie(cookieMonster, cookieAmount);
 
-        postReason(_reason);
+        emit GiveCookie(cookieUid, cookieMonster, cookieAmount, reason);
     }
 
     /**
@@ -99,31 +86,23 @@ abstract contract CookieJarCore is Initializable, OwnableUpgradeable, ICookieJar
      * an ERC20 token or ether, it executes the transfer operation. Finally, it emits a GiveCookie event.
      * @param cookieMonster The address to receive the cookie.
      * @param amount The amount of cookie to be transferred.
+     * @return cookieUid The unique identifier of the cookie.
      */
-    function giveCookie(address cookieMonster, uint256 amount) internal virtual { }
+    function giveCookie(address cookieMonster, uint256 amount) internal virtual returns (bytes32 cookieUid) { }
 
     /**
      * @notice Allows a member to assess the reason for a claim.
      * @dev The member can give a thumbs up or thumbs down to a claim reason. The assessment is posted to the Poster
      * contract.
-     * @param _cookieUid The unique identifier of the claim reason to be assessed.
-     * @param _isGood A boolean indicating whether the assessment is positive (true) or negative (false).
+     * @param cookieUid The unique identifier of the claim reason to be assessed.
+     * @param isGood A boolean indicating whether the assessment is positive (true) or negative (false).
+     * @param message The message to be posted with the assessment.
      *
-     *  {
-     *    tag: CookieJar.<jar_uid>.reaction.<cookie_uid>
-     *    content: "...reason..."
-     *  }
      */
-    function assessReason(string calldata _cookieUid, bool _isGood) public {
+    function assessReason(bytes32 cookieUid, string calldata message, bool isGood) public {
         require(isAllowList(msg.sender), "not a member");
-        string memory assessTag = string.concat(POSTER_TAG, ".", POSTER_UID, ".reaction.", _cookieUid);
 
-        string memory senderString = Strings.toHexString(uint256(uint160(msg.sender)), 20);
-        if (_isGood) {
-            IPoster(POSTER_ADDR).post(string.concat("UP ", senderString), assessTag);
-        } else {
-            IPoster(POSTER_ADDR).post(string.concat("DOWN ", senderString), assessTag);
-        }
+        emit AssessReason(cookieUid, message, isGood);
     }
 
     /**
@@ -141,7 +120,7 @@ abstract contract CookieJarCore is Initializable, OwnableUpgradeable, ICookieJar
      * @dev Always returns true in this contract, but is expected to be overridden in a derived contract.
      * @return A boolean indicating whether the caller is a member.
      */
-    function isAllowList(address user) public view virtual returns (bool) {
+    function isAllowList(address /*user*/ ) public view virtual returns (bool) {
         return true;
     }
 
@@ -159,24 +138,6 @@ abstract contract CookieJarCore is Initializable, OwnableUpgradeable, ICookieJar
      */
     function isValidClaimPeriod(address user) internal view returns (bool) {
         return block.timestamp - claims[user] >= periodLength || claims[user] == 0;
-    }
-
-    /**
-     * @notice Posts the reason for a claim.
-     * @dev Generates a unique identifier (uid) for the post using keccak256. Then, it calls the post function of the
-     * Poster contract.
-     * @param _reason The reason provided by the member for making the claim.
-     *
-     *  {
-     *    tag: CookieJar.<jar_uid>.reason.<cookie_uid>
-     *    content: "...reason..."
-     *  }
-     */
-    function postReason(string calldata _reason) internal {
-        string memory reasonTag =
-            string.concat(POSTER_TAG, ".", POSTER_UID, ".reason.", CookieUtils.getCookieUid(POSTER_UID));
-
-        IPoster(POSTER_ADDR).post(_reason, string.concat(reasonTag));
     }
 
     /**
