@@ -45,8 +45,7 @@ contract ZodiacCookieJar is CookieJarCore, GiverZodiac {
      * @param cookieMonster The address to receive the cookie.
      * @param amount The amount of cookie to be transferred.
      */
-    function giveCookie(address cookieMonster, uint256 amount) internal override {
-        GiverZodiac.giveCookie(cookieMonster, amount, cookieToken);
-        emit GiveCookie(cookieMonster, amount, CookieUtils.getCookieJarUid(address(this)));
+    function giveCookie(address cookieMonster, uint256 amount) internal override returns (bytes32 cookieUid) {
+        cookieUid = GiverZodiac.giveCookie(cookieMonster, amount, cookieToken);
     }
 }

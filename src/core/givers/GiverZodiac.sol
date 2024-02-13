@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity 0.8.19;
 
-import {Module} from "@gnosis.pm/zodiac/contracts/core/Module.sol";
-import {Enum} from "@gnosis.pm/safe-contracts/contracts/common/Enum.sol";
+import { Module } from "@gnosis.pm/zodiac/contracts/core/Module.sol";
+import { Enum } from "@gnosis.pm/safe-contracts/contracts/common/Enum.sol";
+import { CookieUtils } from "src/lib/CookieUtils.sol";
 
 abstract contract GiverZodiac is Module {
     /// @notice The constant that represents percentage points for calculations.
@@ -14,7 +15,14 @@ abstract contract GiverZodiac is Module {
     /// @notice The address for the sustainability fee.
     address public constant SUSTAINABILITY_ADDR = 0x4A9a27d614a74Ee5524909cA27bdBcBB7eD3b315;
 
-    function giveCookie(address cookieMonster, uint256 amount, address cookieToken) internal {
+    function giveCookie(
+        address cookieMonster,
+        uint256 amount,
+        address cookieToken
+    )
+        internal
+        returns (bytes32 cookieUid)
+    {
         uint256 fee = (amount / PERC_POINTS) * SUSTAINABILITY_FEE;
 
         // module exec
@@ -43,6 +51,7 @@ abstract contract GiverZodiac is Module {
                 "call failure setup"
             );
         }
-    }
 
+        cookieUid = CookieUtils.getCookieUid();
+    }
 }

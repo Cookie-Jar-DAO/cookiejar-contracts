@@ -7,9 +7,17 @@ interface ICookieJar {
     event Setup(bytes initializationParams);
 
     /// @dev Emitted when a "cookie" is given to an address.
+    /// @param cookieUid The unique identifier of the cookie given.
     /// @param cookieMonster The address receiving the cookie.
     /// @param amount The amount of cookie given.
-    event GiveCookie(address indexed cookieMonster, uint256 amount, string _uid);
+    /// @param reason The reason for the cookie being given.
+    event GiveCookie(bytes32 indexed cookieUid, address indexed cookieMonster, uint256 amount, string reason);
+
+    /// @dev Emitted when a reason is assessed.
+    /// @param cookieUid The unique identifier of the claim reason.
+    /// @param message The message given by the assessor.
+    /// @param isGood A boolean indicating whether the assessment is positive (true) or negative (false).
+    event AssessReason(bytes32 indexed cookieUid, string message, bool isGood);
 
     /**
      * @notice Sets up the contract with the given initialization parameters.
@@ -41,8 +49,8 @@ interface ICookieJar {
      * claim.
      * This function can only be called by the member themselves, and not on behalf of others.
      * @param _reason The reason provided by the member for making the claim. This will be posted publicly.
+     * @dev MUST emit a {GiveCookie} event.
      */
-
     function reachInJar(string calldata _reason) external;
 
     /**
@@ -53,6 +61,7 @@ interface ICookieJar {
      * This function can be called by a member on behalf of another address, allowing for more flexible distribution.
      * @param cookieMonster The address to receive the cookie.
      * @param _reason The reason provided by the member for making the claim. This will be posted publicly.
+     * @dev MUST emit a {GiveCookie} event.
      */
     function reachInJar(address cookieMonster, string calldata _reason) external;
 
@@ -60,10 +69,12 @@ interface ICookieJar {
      * @notice Allows a member to assess the reason for a claim.
      * @dev The member can give a thumbs up or thumbs down to a claim reason. The assessment is posted to the Poster
      * contract.
-     * @param _uid The unique identifier of the claim reason to be assessed.
-     * @param _isGood A boolean indicating whether the assessment is positive (true) or negative (false).
+     * @param cookieUid The unique identifier of the claim reason to be assessed.
+     * @param message The message given by the assessor.
+     * @param isGood A boolean indicating whether the assessment is positive (true) or negative (false).
+     * @dev MUST emit an {AssessReason} event.
      */
-    function assessReason(string calldata _uid, bool _isGood) external;
+    function assessReason(bytes32 cookieUid, string calldata message, bool isGood) external;
 
     /**
      * @notice Checks if the caller is eligible to make a claim.

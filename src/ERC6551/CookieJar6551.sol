@@ -15,8 +15,14 @@ contract CookieJar6551 is CookieJarCore, Giver6551 {
         transferOwnership(_target);
     }
 
-    function giveCookie(address cookieMonster, uint256 amount) internal override(CookieJarCore) {
-        Giver6551.giveCookie(cookieMonster, amount, cookieToken);
-        emit GiveCookie(cookieMonster, amount, CookieUtils.getCookieUid(POSTER_UID));
+    function giveCookie(
+        address cookieMonster,
+        uint256 amount
+    )
+        internal
+        override(CookieJarCore)
+        returns (bytes32 cookieUid)
+    {
+        cookieUid = Giver6551.giveCookie(cookieMonster, amount, cookieToken);
     }
 }

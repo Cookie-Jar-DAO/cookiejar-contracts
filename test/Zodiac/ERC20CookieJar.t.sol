@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.19 <0.9.0;
 
-import {ZodiacCloneSummoner, ZodiacERC20CookieJarHarnass} from "test/utils/ZodiacCloneSummoner.sol";
-import {ERC20Mintable} from "test/utils/ERC20Mintable.sol";
-import {TestAvatar} from "@gnosis.pm/zodiac/contracts/test/TestAvatar.sol";
-import {IPoster} from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
-import {ERC20} from "openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
-import {Test, Vm} from "forge-std/Test.sol";
+import { ZodiacCloneSummoner, ZodiacERC20CookieJarHarnass } from "test/utils/ZodiacCloneSummoner.sol";
+import { ERC20Mintable } from "test/utils/ERC20Mintable.sol";
+import { TestAvatar } from "@gnosis.pm/zodiac/contracts/test/TestAvatar.sol";
+import { IPoster } from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
+import { ERC20 } from "openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
+import { Test, Vm } from "forge-std/Test.sol";
 
 contract ERC20CookieJarTest is ZodiacCloneSummoner {
     ZodiacERC20CookieJarHarnass internal cookieJar;
@@ -25,7 +25,8 @@ contract ERC20CookieJarTest is ZodiacCloneSummoner {
     string internal reason = "CookieJar: Testing";
 
     event Setup(bytes initializationParams);
-    event GiveCookie(address indexed cookieMonster, uint256 amount);
+    event GiveCookie(bytes32 indexed cookieUid, address indexed cookieMonster, uint256 amount, string reason);
+    event AssessReason(bytes32 indexed cookieUid, string message, bool isGood);
 
     function setUp() public virtual {
         // address _safeTarget,
@@ -41,8 +42,6 @@ contract ERC20CookieJarTest is ZodiacCloneSummoner {
 
         // Enable module
         testAvatar.enableModule(address(cookieJar));
-
-        vm.mockCall(0x000000000000cd17345801aa8147b8D3950260FF, abi.encodeWithSelector(IPoster.post.selector), "");
     }
 
     function testIsAllowed() external {
@@ -73,6 +72,6 @@ contract ERC20CookieJarTest is ZodiacCloneSummoner {
         cookieJar.reachInJar(reason);
 
         Vm.Log[] memory entries = vm.getRecordedLogs();
-        assertEq(entries[3].topics[0], keccak256("GiveCookie(address,uint256,string)"));
+        assertEq(entries[3].topics[0], keccak256("GiveCookie(bytes32,address,uint256,string)"));
     }
 }

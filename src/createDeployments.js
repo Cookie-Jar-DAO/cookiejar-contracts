@@ -34,7 +34,8 @@ function processFile(filePath, chainId) {
       transaction.contractName &&
       transaction.contractAddress &&
       transaction.hash &&
-      transaction.transactionType === "CREATE2"
+      (transaction.transactionType === "CREATE2" ||
+        transaction.transactionType === "CREATE")
     ) {
       const deployment = {
         contractName: transaction.contractName,

@@ -12,7 +12,7 @@ import { CookieUtils } from "src/lib/CookieUtils.sol";
 contract CookieJarFactory is Ownable {
     ModuleProxyFactory internal moduleProxyFactory;
 
-    event SummonCookieJar(address cookieJar, bytes initializer, string details, string uid);
+    event SummonCookieJar(address cookieJar, bytes initializer, string details);
     event DonationReceived(address donationToken, uint256 donationAmount);
 
     address public constant SUSTAINABILITY_ADDR = 0x1cE42BA793BA1E9Bf36c8b3f0aDDEe6c89D9a9fc;
@@ -96,9 +96,8 @@ contract CookieJarFactory is Ownable {
 
         CookieJarCore cookieJar = CookieJarCore(moduleProxyFactory.deployModule(_singleton, _initializer, _saltNonce));
 
-        string memory uid = CookieUtils.getCookieJarUid(address(cookieJar));
+        emit SummonCookieJar(address(cookieJar), _initializer, _details);
 
-        emit SummonCookieJar(address(cookieJar), _initializer, _details, uid);
         return address(cookieJar);
     }
 }
