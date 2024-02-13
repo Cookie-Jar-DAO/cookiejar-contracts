@@ -52,7 +52,7 @@ contract DeployCookieJarNFT is Script {
     address internal nft;
 
     // Deterministic deployment
-    bytes32 salt = keccak256("v0.2");
+    bytes32 salt = keccak256("v0.4");
 
     function setUp() public virtual {
         string memory mnemonic = vm.envString("MNEMONIC");
@@ -83,15 +83,19 @@ contract DeployCookieJarNFT is Script {
         // Deploy 6551 implementations
 
         // Baal
+        console.log("Deploying BaalCookieJar");
         baalCookieJar = address(new BaalCookieJar6551{ salt: salt }());
 
         // ERC20
+        console.log("Deploying ERC20CookieJar");
         erc20CookieJar = address(new ERC20CookieJar6551{ salt: salt }());
 
         // ERC721
+        console.log("Deploying ERC721CookieJar");
         erc721CookieJar = address(new ERC721CookieJar6551{ salt: salt }());
 
         // List
+        console.log("Deploying ListCookieJar");
         listCookieJar = address(new ListCookieJar6551{ salt: salt }());
 
         // Open
