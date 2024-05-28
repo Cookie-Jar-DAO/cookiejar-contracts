@@ -8,6 +8,7 @@ import { ZodiacERC721CookieJar } from "src/SafeModule/ZodiacERC721CookieJar.sol"
 import { ZodiacListCookieJar } from "src/SafeModule/ZodiacListCookieJar.sol";
 import { ZodiacOpenCookieJar } from "src/SafeModule/ZodiacOpenCookieJar.sol";
 import { ZodiacBaalCookieJar } from "src/SafeModule/ZodiacBaalCookieJar.sol";
+import { ZodiacHatsCookieJar } from "src/SafeModule/ZodiacHatsCookieJar.sol";
 import { ModuleProxyFactory } from "@gnosis.pm/zodiac/contracts/factory/ModuleProxyFactory.sol";
 
 contract ZodiacBaalCookieJarHarnass is ZodiacBaalCookieJar {
@@ -40,6 +41,12 @@ contract ZodiacOpenCookieJarHarnass is ZodiacOpenCookieJar {
     }
 }
 
+contract ZodiacHatsCookieJarHarnass is ZodiacHatsCookieJar {
+    function exposed_isAllowList(address user) external view returns (bool) {
+        return isAllowList(user);
+    }
+}
+
 contract ZodiacCloneSummoner is Test {
     address internal owner = makeAddr("owner");
     CookieJarFactory public cookieJarFactory = new CookieJarFactory(owner);
@@ -50,6 +57,7 @@ contract ZodiacCloneSummoner is Test {
     ZodiacERC721CookieJarHarnass internal erc721CookieJarImplementation = new ZodiacERC721CookieJarHarnass();
     ZodiacListCookieJarHarnass internal listCookieJarImplementation = new ZodiacListCookieJarHarnass();
     ZodiacOpenCookieJarHarnass internal openCookieJarImplementation = new ZodiacOpenCookieJarHarnass();
+    ZodiacHatsCookieJarHarnass internal hatsCookieJarImplementation = new ZodiacHatsCookieJarHarnass();
 
     event SummonCookieJar(address cookieJar, string _cookieType, bytes initParams);
 
@@ -147,6 +155,23 @@ contract ZodiacCloneSummoner is Test {
 
         assertEq(abi.decode(entries[7].data, (address)), cookieJar);
         return ZodiacOpenCookieJarHarnass(cookieJar);
+    }
+
+    function getHatsCookieJar(bytes memory initParams) public returns (ZodiacHatsCookieJarHarnass) {
+        vm.recordLogs();
+        bytes memory _initializer = abi.encodeWithSignature("setUp(bytes)", initParams);
+
+        cookieJarFactory.summonCookieJar(
+            address(hatsCookieJarImplementation), _initializer, "Hats", address(0), 0, saltNonce
+        );
+
+        Vm.Log[] memory entries = vm.getRecordedLogs();
+        assertEq(entries.length, 8);
+        assertEq(entries[7].topics[0], keccak256("SummonCookieJar(address,bytes,string)"));
+        address cookieJar = _calculateCreate2Address(address(hatsCookieJarImplementation), _initializer, saltNonce);
+
+        assertEq(abi.decode(entries[7].data, (address)), cookieJar);
+        return ZodiacHatsCookieJarHarnass(cookieJar);
     }
 
     function _calculateCreate2Address(
