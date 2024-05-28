@@ -6,11 +6,12 @@ import { CookieNFT } from "src/ERC6551/nft/CookieNFT.sol";
 import { AccountERC6551 } from "src/ERC6551/erc6551/ERC6551Module.sol";
 import { AccountRegistry } from "src/ERC6551/erc6551/ERC6551Registry.sol";
 
-import { ZodiacBaalCookieJar } from "../src/SafeModule/BaalCookieJar.sol";
-import { ZodiacERC20CookieJar } from "../src/SafeModule/ERC20CookieJar.sol";
-import { ZodiacERC721CookieJar } from "../src/SafeModule/ERC721CookieJar.sol";
-import { ZodiacListCookieJar } from "../src/SafeModule/ListCookieJar.sol";
-import { ZodiacOpenCookieJar } from "../src/SafeModule/OpenCookieJar.sol";
+import { ZodiacBaalCookieJar } from "../src/SafeModule/ZodiacBaalCookieJar.sol";
+import { ZodiacERC20CookieJar } from "../src/SafeModule/ZodiacERC20CookieJar.sol";
+import { ZodiacERC721CookieJar } from "../src/SafeModule/ZodiacERC721CookieJar.sol";
+import { ZodiacListCookieJar } from "../src/SafeModule/ZodiacListCookieJar.sol";
+import { ZodiacOpenCookieJar } from "../src/SafeModule/ZodiacOpenCookieJar.sol";
+import { ZodiacHatsCookieJar } from "../src/SafeModule/ZodiacHatsCookieJar.sol";
 import { CookieJarFactory } from "../src/factory/CookieJarFactory.sol";
 import { ModuleProxyFactory } from "@gnosis.pm/zodiac/contracts/factory/ModuleProxyFactory.sol";
 
@@ -33,7 +34,7 @@ contract DeployCookieJarModule is Script {
     address internal cookieJarFactory;
 
     // Deterministic deployment
-    bytes32 salt = keccak256("v0.3");
+    bytes32 salt = keccak256("v0.4");
 
     function setUp() public virtual {
         string memory mnemonic = vm.envString("MNEMONIC");
@@ -72,11 +73,11 @@ contract DeployCookieJarModule is Script {
 
         // solhint-disable quotes
         console.log(block.chainid);
-        console.log('"baalCookieJar": "%s",', baalCookieJar);
-        console.log('"erc20CookieJar": "%s",', erc20CookieJar);
-        console.log('"erc721CookieJar": "%s",', erc721CookieJar);
-        console.log('"listCookieJar": "%s",', listCookieJar);
-        console.log('"openCookieJar": "%s",', openCookieJar);
+        console.log('"ZodiacBaalCookieJar": "%s",', baalCookieJar);
+        console.log('"ZodiacErc20CookieJar": "%s",', erc20CookieJar);
+        console.log('"ZodiacErc721CookieJar": "%s",', erc721CookieJar);
+        console.log('"ZodiaclistCookieJar": "%s",', listCookieJar);
+        console.log('"ZodiacOpenCookieJar": "%s",', openCookieJar);
 
         // solhint-enable quotes
 

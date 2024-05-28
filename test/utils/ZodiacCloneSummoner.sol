@@ -3,11 +3,11 @@ pragma solidity >=0.8.19 <0.9.0;
 
 import { Test, Vm } from "forge-std/Test.sol";
 import { CookieJarFactory } from "src/factory/CookieJarFactory.sol";
-import { ZodiacERC20CookieJar } from "src/SafeModule/ERC20CookieJar.sol";
-import { ZodiacERC721CookieJar } from "src/SafeModule/ERC721CookieJar.sol";
-import { ZodiacListCookieJar } from "src/SafeModule/ListCookieJar.sol";
-import { ZodiacOpenCookieJar } from "src/SafeModule/OpenCookieJar.sol";
-import { ZodiacBaalCookieJar } from "src/SafeModule/BaalCookieJar.sol";
+import { ZodiacERC20CookieJar } from "src/SafeModule/ZodiacERC20CookieJar.sol";
+import { ZodiacERC721CookieJar } from "src/SafeModule/ZodiacERC721CookieJar.sol";
+import { ZodiacListCookieJar } from "src/SafeModule/ZodiacListCookieJar.sol";
+import { ZodiacOpenCookieJar } from "src/SafeModule/ZodiacOpenCookieJar.sol";
+import { ZodiacBaalCookieJar } from "src/SafeModule/ZodiacBaalCookieJar.sol";
 import { ModuleProxyFactory } from "@gnosis.pm/zodiac/contracts/factory/ModuleProxyFactory.sol";
 
 contract ZodiacBaalCookieJarHarnass is ZodiacBaalCookieJar {

@@ -23,7 +23,6 @@ contract CookieNFT is ERC721 {
     address public erc6551Reg;
     address public erc6551Imp;
     address public cookieJarSummoner;
-    uint256 public cap = 20;
 
     Counters.Counter private _tokenIdCounter;
 
@@ -61,8 +60,6 @@ contract CookieNFT is ERC721 {
         payable
         returns (address account, address cookieJar, uint256 tokenId)
     {
-        require(_tokenIdCounter.current() <= cap, "CookieNFT: cap reached, no more cookies");
-
         // 0. address owner or safeTarget,
         // 1. uint256 _periodLength,
         // 2. uint256 _cookieAmount,

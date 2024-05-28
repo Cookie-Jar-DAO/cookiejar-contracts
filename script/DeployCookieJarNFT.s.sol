@@ -7,11 +7,11 @@ import { AccountERC6551 } from "src/ERC6551/erc6551/ERC6551Module.sol";
 import { AccountRegistry } from "src/ERC6551/erc6551/ERC6551Registry.sol";
 
 // Zodiac
-import { ZodiacBaalCookieJar } from "../src/SafeModule/BaalCookieJar.sol";
-import { ZodiacERC20CookieJar } from "../src/SafeModule/ERC20CookieJar.sol";
-import { ZodiacERC721CookieJar } from "../src/SafeModule/ERC721CookieJar.sol";
-import { ZodiacListCookieJar } from "../src/SafeModule/ListCookieJar.sol";
-import { ZodiacOpenCookieJar } from "../src/SafeModule/OpenCookieJar.sol";
+import { ZodiacBaalCookieJar } from "../src/SafeModule/ZodiacBaalCookieJar.sol";
+import { ZodiacERC20CookieJar } from "../src/SafeModule/ZodiacERC20CookieJar.sol";
+import { ZodiacERC721CookieJar } from "../src/SafeModule/ZodiacERC721CookieJar.sol";
+import { ZodiacListCookieJar } from "../src/SafeModule/ZodiacListCookieJar.sol";
+import { ZodiacOpenCookieJar } from "../src/SafeModule/ZodiacOpenCookieJar.sol";
 
 // 6551
 import { BaalCookieJar6551 } from "../src/ERC6551/BaalCookieJar6551.sol";

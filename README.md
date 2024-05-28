@@ -8,7 +8,7 @@ The following table lists the addresses of the deployed contracts:
 
 ## Gnosis
 
-| Contract            | Address                                      |
+<!-- | Contract            | Address                                      |
 | ------------------- | -------------------------------------------- |
 | Baal Cookie Jar     | `0x7c1Db931F804271E39b04E68221b71Ca94E9AFa5` |
 | ERC20 Cookie Jar    | `0x85C60D0674e161B7f9d1d40A2A46e4b788E7F057` |
@@ -18,11 +18,11 @@ The following table lists the addresses of the deployed contracts:
 | Cookie Jar Factory  | `0xD858ce60102BCEa272a6FA36B2E1770877B8Fa45` |
 | List Cookie Jar6551 | `0xb8858dF24B89d9D17954D763b08b860AD24cfd2d` |
 | Account             | `0xbCe05b4eB846A033559387e0fa62F3D13EEAAECE` |
-| Cookie Jar NFT      | `0xb6F9534F53F3F42a0b25d8ECC290419c98f9f212` |
+| Cookie Jar NFT      | `0xb6F9534F53F3F42a0b25d8ECC290419c98f9f212` | -->
 
 ## Goerli
 
-| Contract            | Address                                      |
+<!-- | Contract            | Address                                      |
 | ------------------- | -------------------------------------------- |
 | Baal Cookie Jar     | `0x30b3Ac0e403e5102c9f0097E9c65f09E5AaF810c` |
 | ERC20 Cookie Jar    | `0x6a2580B166b7132042cCcABa1Fe554fd67440597` |
@@ -32,11 +32,11 @@ The following table lists the addresses of the deployed contracts:
 | Cookie Jar Factory  | `0x8f60853B55847d91331106acc303F4A8676efc8B` |
 | List Cookie Jar6551 | `0x92c82e6DFd97e54c5f22bE866b863Ce71f26373f` |
 | Account             | `0x2EC5152cC1706Ba08DaA88FaD23D32f88Bd29988` |
-| Cookie Jar NFT      | `0xEA443B2ac5cDfa0357d92941a2F18d3B4C816b81` |
+| Cookie Jar NFT      | `0xEA443B2ac5cDfa0357d92941a2F18d3B4C816b81` | -->
 
 ## Mainnet
 
-| Contract            | Address                                      |
+<!-- | Contract            | Address                                      |
 | ------------------- | -------------------------------------------- |
 | Baal Cookie Jar     | `0x0000000000000000000000000000000000000000` |
 | ERC20 Cookie Jar    | `0x0000000000000000000000000000000000000000` |
@@ -46,11 +46,11 @@ The following table lists the addresses of the deployed contracts:
 | Cookie Jar Factory  | `0x0000000000000000000000000000000000000000` |
 | List Cookie Jar6551 | `0x0000000000000000000000000000000000000000` |
 | Account             | `0x0000000000000000000000000000000000000000` |
-| Cookie Jar NFT      | `0x0000000000000000000000000000000000000000` |
+| Cookie Jar NFT      | `0x0000000000000000000000000000000000000000` | -->
 
 ## Optimism
 
-| Contract            | Address                                      |
+<!-- | Contract            | Address                                      |
 | ------------------- | -------------------------------------------- |
 | Baal Cookie Jar     | `0x7c1Db931F804271E39b04E68221b71Ca94E9AFa5` |
 | ERC20 Cookie Jar    | `0x85C60D0674e161B7f9d1d40A2A46e4b788E7F057` |
@@ -60,7 +60,7 @@ The following table lists the addresses of the deployed contracts:
 | Cookie Jar Factory  | `0xD858ce60102BCEa272a6FA36B2E1770877B8Fa45` |
 | List Cookie Jar6551 | `0x226E0601aa8b8CC34519c76Be00A7a6a8a4d97d2` |
 | Account             | `0x2676e97a832F3b7a674732f5F4222b85eDEDD9Df` |
-| Cookie Jar NFT      | `0x2c500E43A070F6Fb6c72a41F3D6BcEB4De3FcCA1` |
+| Cookie Jar NFT      | `0x2c500E43A070F6Fb6c72a41F3D6BcEB4De3FcCA1` | -->
 
 ## Sepolia
 
@@ -153,6 +153,17 @@ The parameters are different depending on the type of Cookie Jar being created. 
 | 3         | address | The address of the cookie token contract.                  |
 | 4         | address | The address of the ERC721 token contract.                  |
 | 5         | uint256 | The threshold for balance in the ERC721 token contract.    |
+
+#### Hats Cookie Jar
+
+| Parameter | Type    | Description                                                |
+| --------- | ------- | ---------------------------------------------------------- |
+| 0         | address | The address of the owner or safe target of the Cookie Jar. |
+| 1         | uint256 | The length of the period for the Cookie Jar.               |
+| 2         | uint256 | The amount of cookies to be distributed per period.        |
+| 3         | address | The address of the cookie token contract.                  |
+| 4         | address | The address of the Hats contract.                          |
+| 5         | uint256 | The HatID to check eligibility against                     |
 
 #### Mapping Cookie Jar
 
