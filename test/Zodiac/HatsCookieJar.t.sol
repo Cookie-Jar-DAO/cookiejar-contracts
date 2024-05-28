@@ -38,7 +38,7 @@ contract HatsCookieJarTest is ZodiacCloneSummoner {
         // uint256 _periodLength,
         // uint256 _cookieAmount,
         // address _cookieToken,
-        // address _erc20addr,
+        // address _hatsAddress,
         // uint256 _threshold,
         bytes memory initParams =
             abi.encode(address(testAvatar), 3600, cookieAmount, address(cookieToken), address(mockHats), threshold);

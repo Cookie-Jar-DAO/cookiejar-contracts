@@ -6,19 +6,13 @@ import { CookieNFT } from "src/ERC6551/nft/CookieNFT.sol";
 import { AccountERC6551 } from "src/ERC6551/erc6551/ERC6551Module.sol";
 import { AccountRegistry } from "src/ERC6551/erc6551/ERC6551Registry.sol";
 
-// Zodiac
-import { ZodiacBaalCookieJar } from "../src/SafeModule/ZodiacBaalCookieJar.sol";
-import { ZodiacERC20CookieJar } from "../src/SafeModule/ZodiacERC20CookieJar.sol";
-import { ZodiacERC721CookieJar } from "../src/SafeModule/ZodiacERC721CookieJar.sol";
-import { ZodiacListCookieJar } from "../src/SafeModule/ZodiacListCookieJar.sol";
-import { ZodiacOpenCookieJar } from "../src/SafeModule/ZodiacOpenCookieJar.sol";
-
 // 6551
 import { BaalCookieJar6551 } from "../src/ERC6551/BaalCookieJar6551.sol";
 import { ERC20CookieJar6551 } from "../src/ERC6551/ERC20CookieJar6551.sol";
 import { ERC721CookieJar6551 } from "../src/ERC6551/ERC721CookieJar6551.sol";
 import { ListCookieJar6551 } from "../src/ERC6551/ListCookieJar6551.sol";
 import { OpenCookieJar6551 } from "../src/ERC6551/OpenCookieJar6551.sol";
+import { HatsCookieJar6551 } from "../src/ERC6551/HatsCookieJar6551.sol";
 
 // Deploys
 import { CookieJarFactory } from "../src/factory/CookieJarFactory.sol";
@@ -45,6 +39,7 @@ contract DeployCookieJarNFT is Script {
     address internal erc721CookieJar;
     address internal listCookieJar;
     address internal openCookieJar;
+    address internal hatsCookieJar;
 
     // 6551
     address internal accountImp;
@@ -52,7 +47,7 @@ contract DeployCookieJarNFT is Script {
     address internal nft;
 
     // Deterministic deployment
-    bytes32 salt = keccak256("v0.4");
+    bytes32 salt = keccak256("v0.5");
 
     function setUp() public virtual {
         string memory mnemonic = vm.envString("MNEMONIC");
@@ -101,6 +96,10 @@ contract DeployCookieJarNFT is Script {
         // Open
         openCookieJar = address(new OpenCookieJar6551{ salt: salt }());
 
+        // Hats
+        console.log("Deploying HatsCookieJar");
+        hatsCookieJar = address(new HatsCookieJar6551{ salt: salt }());
+
         // 6551
         accountImp = address(new AccountERC6551());
         nft = address(
@@ -121,6 +120,7 @@ contract DeployCookieJarNFT is Script {
         console.log('"erc721CookieJar": "%s",', erc721CookieJar);
         console.log('"listCookieJar": "%s",', listCookieJar);
         console.log('"openCookieJar": "%s",', openCookieJar);
+        console.log('"hatsCookieJar": "%s",', hatsCookieJar);
 
         // solhint-enable quotes
 

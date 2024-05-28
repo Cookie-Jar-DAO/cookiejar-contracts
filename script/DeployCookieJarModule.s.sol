@@ -31,6 +31,7 @@ contract DeployCookieJarModule is Script {
     address internal erc721CookieJar;
     address internal listCookieJar;
     address internal openCookieJar;
+    address internal hatsCookieJar;
     address internal cookieJarFactory;
 
     // Deterministic deployment
@@ -71,6 +72,9 @@ contract DeployCookieJarModule is Script {
         // Open
         openCookieJar = address(new ZodiacOpenCookieJar{ salt: salt }());
 
+        // Hats
+        hatsCookieJar = address(new ZodiacHatsCookieJar{ salt: salt }());
+
         // solhint-disable quotes
         console.log(block.chainid);
         console.log('"ZodiacBaalCookieJar": "%s",', baalCookieJar);
@@ -78,6 +82,7 @@ contract DeployCookieJarModule is Script {
         console.log('"ZodiacErc721CookieJar": "%s",', erc721CookieJar);
         console.log('"ZodiaclistCookieJar": "%s",', listCookieJar);
         console.log('"ZodiacOpenCookieJar": "%s",', openCookieJar);
+        console.log('"ZodiacHatsCookieJar": "%s",', hatsCookieJar);
 
         // solhint-enable quotes
 
