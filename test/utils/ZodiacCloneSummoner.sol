@@ -11,53 +11,60 @@ import { ZodiacBaalCookieJar } from "src/SafeModule/ZodiacBaalCookieJar.sol";
 import { ZodiacHatsCookieJar } from "src/SafeModule/ZodiacHatsCookieJar.sol";
 import { ModuleProxyFactory } from "@gnosis.pm/zodiac/contracts/factory/ModuleProxyFactory.sol";
 
-contract ZodiacBaalCookieJarHarnass is ZodiacBaalCookieJar {
-    function exposed_isAllowList(address user) external view returns (bool) {
-        return isAllowList(user);
-    }
-}
-
-contract ZodiacERC20CookieJarHarnass is ZodiacERC20CookieJar {
-    function exposed_isAllowList(address user) external view returns (bool) {
-        return isAllowList(user);
-    }
-}
-
-contract ZodiacERC721CookieJarHarnass is ZodiacERC721CookieJar {
-    function exposed_isAllowList(address user) external view returns (bool) {
-        return isAllowList(user);
-    }
-}
-
-contract ZodiacListCookieJarHarnass is ZodiacListCookieJar {
-    function exposed_isAllowList(address user) external view returns (bool) {
-        return isAllowList(user);
-    }
-}
-
-contract ZodiacOpenCookieJarHarnass is ZodiacOpenCookieJar {
-    function exposed_isAllowList(address user) external view returns (bool) {
-        return isAllowList(user);
-    }
-}
-
-contract ZodiacHatsCookieJarHarnass is ZodiacHatsCookieJar {
-    function exposed_isAllowList(address user) external view returns (bool) {
-        return isAllowList(user);
-    }
-}
+//contract ZodiacBaalCookieJarHarnass is ZodiacBaalCookieJar {
+//    function exposed_isAllowList(address user) external view returns (bool) {
+//        return isAllowList(user);
+//    }
+//}
+//
+//contract ZodiacERC20CookieJarHarnass is ZodiacERC20CookieJar {
+//    function exposed_isAllowList(address user) external view returns (bool) {
+//        return isAllowList(user);
+//    }
+//}
+//
+//contract ZodiacERC721CookieJarHarnass is ZodiacERC721CookieJar {
+//    function exposed_isAllowList(address user) external view returns (bool) {
+//        return isAllowList(user);
+//    }
+//}
+//
+//contract ZodiacListCookieJarHarnass is ZodiacListCookieJar {
+//    function exposed_isAllowList(address user) external view returns (bool) {
+//        return isAllowList(user);
+//    }
+//}
+//
+//contract ZodiacOpenCookieJarHarnass is ZodiacOpenCookieJar {
+//    function exposed_isAllowList(address user) external view returns (bool) {
+//        return isAllowList(user);
+//    }
+//}
+//
+//contract ZodiacHatsCookieJarHarnass is ZodiacHatsCookieJar {
+//    function exposed_isAllowList(address user) external view returns (bool) {
+//        return isAllowList(user);
+//    }
+//}
 
 contract ZodiacCloneSummoner is Test {
     address internal owner = makeAddr("owner");
     CookieJarFactory public cookieJarFactory = new CookieJarFactory(owner);
     ModuleProxyFactory public moduleProxyFactory = new ModuleProxyFactory();
 
-    ZodiacBaalCookieJarHarnass internal baalCookieJarImplementation = new ZodiacBaalCookieJarHarnass();
-    ZodiacERC20CookieJarHarnass internal erc20CookieJarImplementation = new ZodiacERC20CookieJarHarnass();
-    ZodiacERC721CookieJarHarnass internal erc721CookieJarImplementation = new ZodiacERC721CookieJarHarnass();
-    ZodiacListCookieJarHarnass internal listCookieJarImplementation = new ZodiacListCookieJarHarnass();
-    ZodiacOpenCookieJarHarnass internal openCookieJarImplementation = new ZodiacOpenCookieJarHarnass();
-    ZodiacHatsCookieJarHarnass internal hatsCookieJarImplementation = new ZodiacHatsCookieJarHarnass();
+    //    ZodiacBaalCookieJarHarnass internal baalCookieJarImplementation = new ZodiacBaalCookieJarHarnass();
+    //    ZodiacERC20CookieJarHarnass internal erc20CookieJarImplementation = new ZodiacERC20CookieJarHarnass();
+    //    ZodiacERC721CookieJarHarnass internal erc721CookieJarImplementation = new ZodiacERC721CookieJarHarnass();
+    //    ZodiacListCookieJarHarnass internal listCookieJarImplementation = new ZodiacListCookieJarHarnass();
+    //    ZodiacOpenCookieJarHarnass internal openCookieJarImplementation = new ZodiacOpenCookieJarHarnass();
+    //    ZodiacHatsCookieJarHarnass internal hatsCookieJarImplementation = new ZodiacHatsCookieJarHarnass();
+
+    ZodiacBaalCookieJar internal baalCookieJarImplementation = new ZodiacBaalCookieJar();
+    ZodiacERC20CookieJar internal erc20CookieJarImplementation = new ZodiacERC20CookieJar();
+    ZodiacERC721CookieJar internal erc721CookieJarImplementation = new ZodiacERC721CookieJar();
+    ZodiacListCookieJar internal listCookieJarImplementation = new ZodiacListCookieJar();
+    ZodiacOpenCookieJar internal openCookieJarImplementation = new ZodiacOpenCookieJar();
+    ZodiacHatsCookieJar internal hatsCookieJarImplementation = new ZodiacHatsCookieJar();
 
     event SummonCookieJar(address cookieJar, string _cookieType, bytes initParams);
 
@@ -68,7 +75,7 @@ contract ZodiacCloneSummoner is Test {
         cookieJarFactory.setProxyFactory(address(moduleProxyFactory));
     }
 
-    function getBaalCookieJar(bytes memory initParams) public returns (ZodiacBaalCookieJarHarnass) {
+    function getBaalCookieJar(bytes memory initParams) public returns (ZodiacBaalCookieJar) {
         vm.recordLogs();
 
         bytes memory _initializer = abi.encodeWithSignature("setUp(bytes)", initParams);
@@ -85,10 +92,10 @@ contract ZodiacCloneSummoner is Test {
 
         assertEq(abi.decode(entries[7].data, (address)), cookieJar);
 
-        return ZodiacBaalCookieJarHarnass(cookieJar);
+        return ZodiacBaalCookieJar(cookieJar);
     }
 
-    function getERC20CookieJar(bytes memory initParams) public returns (ZodiacERC20CookieJarHarnass) {
+    function getERC20CookieJar(bytes memory initParams) public returns (ZodiacERC20CookieJar) {
         vm.recordLogs();
         bytes memory _initializer = abi.encodeWithSignature("setUp(bytes)", initParams);
 
@@ -102,10 +109,10 @@ contract ZodiacCloneSummoner is Test {
         address cookieJar = _calculateCreate2Address(address(erc20CookieJarImplementation), _initializer, saltNonce);
 
         assertEq(abi.decode(entries[7].data, (address)), cookieJar);
-        return ZodiacERC20CookieJarHarnass(cookieJar);
+        return ZodiacERC20CookieJar(cookieJar);
     }
 
-    function getERC721CookieJar(bytes memory initParams) public returns (ZodiacERC721CookieJarHarnass) {
+    function getERC721CookieJar(bytes memory initParams) public returns (ZodiacERC721CookieJar) {
         vm.recordLogs();
 
         bytes memory _initializer = abi.encodeWithSignature("setUp(bytes)", initParams);
@@ -120,10 +127,10 @@ contract ZodiacCloneSummoner is Test {
         address cookieJar = _calculateCreate2Address(address(erc721CookieJarImplementation), _initializer, saltNonce);
 
         assertEq(abi.decode(entries[7].data, (address)), cookieJar);
-        return ZodiacERC721CookieJarHarnass(cookieJar);
+        return ZodiacERC721CookieJar(cookieJar);
     }
 
-    function getListCookieJar(bytes memory initParams) public returns (ZodiacListCookieJarHarnass) {
+    function getListCookieJar(bytes memory initParams) public returns (ZodiacListCookieJar) {
         vm.recordLogs();
         bytes memory _initializer = abi.encodeWithSignature("setUp(bytes)", initParams);
 
@@ -137,10 +144,10 @@ contract ZodiacCloneSummoner is Test {
         address cookieJar = _calculateCreate2Address(address(listCookieJarImplementation), _initializer, saltNonce);
 
         assertEq(abi.decode(entries[7].data, (address)), cookieJar);
-        return ZodiacListCookieJarHarnass(cookieJar);
+        return ZodiacListCookieJar(cookieJar);
     }
 
-    function getOpenCookieJar(bytes memory initParams) public returns (ZodiacOpenCookieJarHarnass) {
+    function getOpenCookieJar(bytes memory initParams) public returns (ZodiacOpenCookieJar) {
         vm.recordLogs();
         bytes memory _initializer = abi.encodeWithSignature("setUp(bytes)", initParams);
 
@@ -154,10 +161,10 @@ contract ZodiacCloneSummoner is Test {
         address cookieJar = _calculateCreate2Address(address(openCookieJarImplementation), _initializer, saltNonce);
 
         assertEq(abi.decode(entries[7].data, (address)), cookieJar);
-        return ZodiacOpenCookieJarHarnass(cookieJar);
+        return ZodiacOpenCookieJar(cookieJar);
     }
 
-    function getHatsCookieJar(bytes memory initParams) public returns (ZodiacHatsCookieJarHarnass) {
+    function getHatsCookieJar(bytes memory initParams) public returns (ZodiacHatsCookieJar) {
         vm.recordLogs();
         bytes memory _initializer = abi.encodeWithSignature("setUp(bytes)", initParams);
 
@@ -171,7 +178,7 @@ contract ZodiacCloneSummoner is Test {
         address cookieJar = _calculateCreate2Address(address(hatsCookieJarImplementation), _initializer, saltNonce);
 
         assertEq(abi.decode(entries[7].data, (address)), cookieJar);
-        return ZodiacHatsCookieJarHarnass(cookieJar);
+        return ZodiacHatsCookieJar(cookieJar);
     }
 
     function _calculateCreate2Address(

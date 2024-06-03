@@ -164,8 +164,7 @@ The parameters are different depending on the type of Cookie Jar being created. 
 | 1         | uint256 | The length of the period for the Cookie Jar.               |
 | 2         | uint256 | The amount of cookies to be distributed per period.        |
 | 3         | address | The address of the cookie token contract.                  |
-| 4         | address | The address of the Hats contract.                          |
-| 5         | uint256 | The HatID to check eligibility against                     |
+| 4         | uint256 | The HatID to check eligibility against                     |
 
 #### Mapping Cookie Jar
 

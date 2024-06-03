@@ -66,8 +66,7 @@ contract HatsCookieJar6551Test is PRBTest, StdCheats {
         string memory details =
             "{\"type\":\"List\",\"name\":\"Moloch Pastries\",\"description\":\"This is where you add some more content\",\"link\":\"app.daohaus.club/0x64/0x0....666\"}";
 
-        bytes memory _initializer =
-            abi.encode(alice, periodLength, cookieAmount, cookieToken, address(mockHats), hatId);
+        bytes memory _initializer = abi.encode(alice, periodLength, cookieAmount, cookieToken, address(mockHats), hatId);
         (account, cookieJar, tokenId) =
             cookieJarNFT.cookieMint(address(hatsCookieJar6551Impl), _initializer, details, address(0), 0);
 

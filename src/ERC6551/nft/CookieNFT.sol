@@ -17,6 +17,8 @@ import { IAccount } from "src/interfaces/IERC6551.sol";
 import { MinimalReceiver } from "src/lib/MinimalReceiver.sol";
 import { Base64 } from "src/lib/Base64.sol";
 
+import { NOT_APPROVED_OR_OWNER, INVALID_TOKEN_ID } from "src/lib/Errors.sol";
+
 contract CookieNFT is ERC721 {
     using Counters for Counters.Counter;
 
@@ -180,12 +182,16 @@ contract CookieNFT is ERC721 {
      * param _tokenId the token ID
      */
     function tokenURI(uint256 _tokenId) public view override returns (string memory) {
-        require(_exists(_tokenId), "ERC721Metadata: URI query for nonexistent token");
+        if (!_exists(_tokenId)) {
+            revert INVALID_TOKEN_ID(_tokenId);
+        }
         return string(_constructTokenURI(_tokenId));
     }
 
     function burn(uint256 _tokenId) public {
-        require(_isApprovedOrOwner(_msgSender(), _tokenId), "ERC721: caller is not token owner or approved");
+        if (!_isApprovedOrOwner(_msgSender(), _tokenId)) {
+            revert NOT_APPROVED_OR_OWNER();
+        }
         _burn(_tokenId);
     }
 }

@@ -8,5 +8,5 @@ contract MinimalReceiver is ERC721Holder, ERC1155Holder {
     /**
      * @dev Allows all Ether transfers
      */
-    receive() external payable virtual {}
+    receive() external payable virtual { }
 }

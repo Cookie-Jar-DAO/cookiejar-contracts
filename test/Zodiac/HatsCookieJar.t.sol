@@ -1,11 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.19 <0.9.0;
 
-import {
-    ZodiacCloneSummoner,
-    ZodiacERC20CookieJarHarnass,
-    ZodiacHatsCookieJarHarnass
-} from "test/utils/ZodiacCloneSummoner.sol";
+import { ZodiacCloneSummoner, ZodiacHatsCookieJar } from "test/utils/ZodiacCloneSummoner.sol";
 import { MockHats } from "test/utils/MockHats.sol";
 import { ERC20Mintable } from "test/utils/ERC20Mintable.sol";
 import { TestAvatar } from "@gnosis.pm/zodiac/contracts/test/TestAvatar.sol";
@@ -14,7 +10,7 @@ import { ERC20 } from "openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
 import { Test, Vm } from "forge-std/Test.sol";
 
 contract HatsCookieJarTest is ZodiacCloneSummoner {
-    ZodiacHatsCookieJarHarnass internal cookieJar;
+    ZodiacHatsCookieJar internal cookieJar;
 
     address internal alice = makeAddr("alice");
     address internal bob = makeAddr("bob");
@@ -52,10 +48,10 @@ contract HatsCookieJarTest is ZodiacCloneSummoner {
     function testIsAllowed() external {
         mockHats.setMockResponse(false);
 
-        assertFalse(cookieJar.exposed_isAllowList(msg.sender));
+        assertFalse(cookieJar.isAllowList(msg.sender));
 
         mockHats.setMockResponse(true);
-        assertTrue(cookieJar.exposed_isAllowList(msg.sender));
+        assertTrue(cookieJar.isAllowList(msg.sender));
     }
 
     function testReachInJar() external {

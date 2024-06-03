@@ -19,19 +19,20 @@ interface ICookieJar {
     /// @param isGood A boolean indicating whether the assessment is positive (true) or negative (false).
     event AssessReason(bytes32 indexed cookieUid, string message, bool isGood);
 
-    /**
-     * @notice Sets up the contract with the given initialization parameters.
-     * @dev The initialization parameters are decoded from a bytes array into the Safe target, period length, cookie
-     * amount, and cookie token.
-     * The Safe target is set as both the avatar and target for the module.  This means that the module cannot be
-     * chained in a series of modules.
-     * A check is done to ensure the cookie amount is greater than the percentage points constant.
-     * The period length, cookie amount, and cookie token are then set as per the parameters.
-     * An event is emitted with the initialization parameters.
-     * @param _initializationParams The initialization parameters, encoded as a bytes array.
-     *  // TODO: add initializer to this contract
-     */
-    function setUp(bytes memory _initializationParams) external;
+    //    /**
+    //     * @notice Sets up the contract with the given initialization parameters.
+    //     * @dev The initialization parameters are decoded from a bytes array into the Safe target, period length,
+    // cookie
+    //     * amount, and cookie token.
+    //     * The Safe target is set as both the avatar and target for the module.  This means that the module cannot be
+    //     * chained in a series of modules.
+    //     * A check is done to ensure the cookie amount is greater than the percentage points constant.
+    //     * The period length, cookie amount, and cookie token are then set as per the parameters.
+    //     * An event is emitted with the initialization parameters.
+    //     * @param _initializationParams The initialization parameters, encoded as a bytes array.
+    //     *  // TODO: add initializer to this contract
+    //     */
+    //    function setUp(bytes memory _initializationParams) external;
 
     /**
      * @notice Allows owner to change congiguration.

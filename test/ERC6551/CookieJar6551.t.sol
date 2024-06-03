@@ -9,9 +9,24 @@ import { CookieUtils } from "src/lib/CookieUtils.sol";
 import { CookieJar6551 } from "src/ERC6551/CookieJar6551.sol";
 import { ICookieJar } from "src/interfaces/ICookieJar.sol";
 
-contract CookieJarHarnass is CookieJar6551 {
-    function exposed_isAllowList(address user) external view returns (bool) {
-        return isAllowList(user);
+contract MockCookieJar6551 is CookieJar6551 {
+    function __Allowlist_init(bytes memory _initializationParams) public override { }
+
+    function isAllowlist(address user) public view returns (bool) {
+        return _isAllowList(user);
+    }
+
+    function reachInJar(string calldata reason) public override {
+        // Do nothing
+    }
+
+    function _isAllowList(address user) internal view override returns (bool) {
+        return true;
+    }
+
+    function _giveCookie(address cookieMonster, uint256 amount, string memory reason) internal returns (bytes32) {
+        emit GiveCookie(CookieUtils.getCookieUid(), cookieMonster, amount, reason);
+        return keccak256("cookieUid");
     }
 }
 
@@ -19,7 +34,7 @@ contract CookieJar6551Test is PRBTest, StdCheats {
     address internal alice = makeAddr("alice");
     address internal bob = makeAddr("bob");
 
-    CookieJarHarnass internal cookieJar;
+    MockCookieJar6551 internal cookieJar;
     ERC20Mintable internal cookieToken = new ERC20Mintable("Mock", "MCK");
 
     uint256 internal cookieAmount = 2e6;
@@ -37,12 +52,12 @@ contract CookieJar6551Test is PRBTest, StdCheats {
         // address _cookieToken
         bytes memory initParams = abi.encode(alice, 3600, cookieAmount, address(cookieToken));
 
-        cookieJar = new CookieJarHarnass();
+        cookieJar = new MockCookieJar6551();
         cookieJar.setUp(initParams);
     }
 
     function testIsAllowList() external {
-        assertTrue(cookieJar.exposed_isAllowList(msg.sender));
+        assertTrue(cookieJar.isAllowList(msg.sender));
     }
 
     function testCanClaim() external {

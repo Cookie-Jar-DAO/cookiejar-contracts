@@ -7,26 +7,26 @@ import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 import "@openzeppelin/contracts/interfaces/IERC1271.sol";
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 
-import {PRBTest} from "@prb/test/PRBTest.sol";
-import {StdCheats} from "forge-std/StdCheats.sol";
+import { PRBTest } from "@prb/test/PRBTest.sol";
+import { StdCheats } from "forge-std/StdCheats.sol";
 
-import {ERC20Mintable} from "test/utils/ERC20Mintable.sol";
-import {IPoster} from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
-import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
+import { ERC20Mintable } from "test/utils/ERC20Mintable.sol";
+import { IPoster } from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
+import { Strings } from "@openzeppelin/contracts/utils/Strings.sol";
 
-import {IAccount} from "src/interfaces/IERC6551.sol";
-import {IRegistry} from "src/interfaces/IERC6551Registry.sol";
-import {AccountRegistry} from "src/ERC6551/erc6551/ERC6551Registry.sol";
-import {AccountERC6551} from "src/ERC6551/erc6551/ERC6551Module.sol";
-import {MinimalReceiver} from "src/lib/MinimalReceiver.sol";
+import { IAccount } from "src/interfaces/IERC6551.sol";
+import { IRegistry } from "src/interfaces/IERC6551Registry.sol";
+import { AccountRegistry } from "src/ERC6551/erc6551/ERC6551Registry.sol";
+import { AccountERC6551 } from "src/ERC6551/erc6551/ERC6551Module.sol";
+import { MinimalReceiver } from "src/lib/MinimalReceiver.sol";
 
-import {ERC20Mintable} from "test/utils/ERC20Mintable.sol";
+import { ERC20Mintable } from "test/utils/ERC20Mintable.sol";
 
-import {MockExecutor} from "test/utils/MockExecutor.sol";
+import { MockExecutor } from "test/utils/MockExecutor.sol";
 
-import {MockReverter} from "test/utils/MockReverter.sol";
+import { MockReverter } from "test/utils/MockReverter.sol";
 
-import {MockERC721} from "test/utils/MockERC721.sol";
+import { MockERC721 } from "test/utils/MockERC721.sol";
 
 contract AccountTest is PRBTest {
     AccountERC6551 public implementation;

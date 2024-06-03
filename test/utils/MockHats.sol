@@ -11,19 +11,20 @@ interface IHats {
 
 contract MockHats is IHats {
     bool public response;
+
     function setMockResponse(bool _response) external {
         response = _response;
     }
 
-    function isWearerOfHat(address /*_user*/, uint256 /*_hatId*/) external view override returns (bool isWearer) {
+    function isWearerOfHat(address, /*_user*/ uint256 /*_hatId*/ ) external view override returns (bool isWearer) {
         return response;
     }
 
-    function isAdminOfHat(address /*_user*/, uint256 /*_hatId*/) external view override returns (bool isAdmin) {
+    function isAdminOfHat(address, /*_user*/ uint256 /*_hatId*/ ) external view override returns (bool isAdmin) {
         return response;
     }
 
-    function isInGoodStanding(address /*_user*/, uint256 /*_hatId*/) external view override returns (bool standing) {
+    function isInGoodStanding(address, /*_user*/ uint256 /*_hatId*/ ) external view override returns (bool standing) {
         return response;
     }
 }

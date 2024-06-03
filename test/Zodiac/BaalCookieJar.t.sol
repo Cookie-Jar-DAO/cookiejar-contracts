@@ -9,12 +9,12 @@ import { TestAvatar } from "@gnosis.pm/zodiac/contracts/test/TestAvatar.sol";
 import { IPoster } from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
 import { CookieJarFactory } from "src/factory/CookieJarFactory.sol";
 
-import { ZodiacCloneSummoner, ZodiacBaalCookieJarHarnass } from "test/utils/ZodiacCloneSummoner.sol";
+import { ZodiacCloneSummoner, ZodiacBaalCookieJar } from "test/utils/ZodiacCloneSummoner.sol";
 import { CookieUtils } from "src/lib/CookieUtils.sol";
 import { Test, Vm } from "forge-std/Test.sol";
 
 contract BaalCookieJarTest is ZodiacCloneSummoner {
-    ZodiacBaalCookieJarHarnass internal cookieJar;
+    ZodiacBaalCookieJar internal cookieJar;
 
     address internal alice = makeAddr("alice");
     address internal bob = makeAddr("bob");
@@ -49,12 +49,12 @@ contract BaalCookieJarTest is ZodiacCloneSummoner {
     }
 
     function testIdentifyMolochMember() external {
-        assertFalse(cookieJar.exposed_isAllowList(msg.sender));
+        assertFalse(cookieJar.isAllowList(msg.sender));
 
         vm.mockCall(address(sharesToken), abi.encodeWithSelector(IBaalToken.balanceOf.selector), abi.encode(1));
         vm.mockCall(address(lootToken), abi.encodeWithSelector(IBaalToken.balanceOf.selector), abi.encode(1));
 
-        assertTrue(cookieJar.exposed_isAllowList(msg.sender));
+        assertTrue(cookieJar.isAllowList(msg.sender));
     }
 
     function testReachInJar() external {

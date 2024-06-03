@@ -5,7 +5,7 @@ import { ERC20Mintable } from "test/utils/ERC20Mintable.sol";
 import { TestAvatar } from "@gnosis.pm/zodiac/contracts/test/TestAvatar.sol";
 import { IPoster } from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
 
-import { ZodiacCloneSummoner, ZodiacOpenCookieJarHarnass } from "test/utils/ZodiacCloneSummoner.sol";
+import { ZodiacCloneSummoner, ZodiacOpenCookieJar } from "test/utils/ZodiacCloneSummoner.sol";
 import { Test, Vm } from "forge-std/Test.sol";
 
 contract OpenCookieJarTest is ZodiacCloneSummoner {
@@ -13,7 +13,7 @@ contract OpenCookieJarTest is ZodiacCloneSummoner {
     address internal bob = makeAddr("bob");
     address internal molochDAO = vm.addr(666);
 
-    ZodiacOpenCookieJarHarnass internal cookieJar;
+    ZodiacOpenCookieJar internal cookieJar;
     ERC20Mintable internal cookieToken = new ERC20Mintable("Mock", "MCK");
     TestAvatar internal testAvatar = new TestAvatar();
 
@@ -40,7 +40,7 @@ contract OpenCookieJarTest is ZodiacCloneSummoner {
 
     function testIsAllowList() external {
         //Always true for OpenCookieJar
-        assertTrue(cookieJar.exposed_isAllowList(msg.sender));
+        assertTrue(cookieJar.isAllowList(msg.sender));
     }
 
     function testReachInJar() external {
