@@ -117,18 +117,30 @@ The following table lists the addresses of the deployed contracts:
 
 ## Sepolia
 
-| Contract            | Address                                      |
-|---------------------|----------------------------------------------|
-| Baal Cookie Jar     | `0x1540F8eb71264EF41c7B12490f1D4556778a9E4f` |
-| ERC20 Cookie Jar    | `0x4ab3Ced6b45Ef849e5A69716b35a6F54a3b75e1c` |
-| ERC721 Cookie Jar   | `0x9036A0D0EB7C4400CDBAb840CD87B717Bb95Dd0E` |
-| List Cookie Jar     | `0x2f84613209bc5Bb3096c67D9C7C681241EB9d1ee` |
-| Open Cookie Jar     | `0xCb35984911100BA211602A599Fca94870b0E6b2E` |
-| Hats Cookie Jar     | `0xC3AA5F5b706B98Bff06316F8dAdd9E64aF1E43F1` |
-| Cookie Jar Factory  | `0xD858ce60102BCEa272a6FA36B2E1770877B8Fa45` |
-| List Cookie Jar6551 | `0xb8858dF24B89d9D17954D763b08b860AD24cfd2d` |
-| Account             | `0xB91594c1DBc9Fc2fF75eBF4Dcae8B9099D6e088A` |
-| Cookie Jar NFT      | `0xa16B24f39d90002C71914D055A65143720C1D5A7` |
+| Setup              | Address                                                                                                                         |
+|--------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| Cookie Jar Factory | [`0xA4Bd15948B9cAFfd8DE8a2be59893F2395c9C780`](https://sepolia.etherscan.io/address/0xA4Bd15948B9cAFfd8DE8a2be59893F2395c9C780) |
+
+| Contract          | Address                                                                                                                         |
+|-------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| Account           | [`0xfd8ee663fA65CAcCf4B488252074B07834D82882`](https://sepolia.etherscan.io/address/0xfd8ee663fA65CAcCf4B488252074B07834D82882) |
+| Registry          | [`0x02101dfB77FDE026414827Fdc604ddAF224F0921`](https://sepolia.etherscan.io/address/0x02101dfB77FDE026414827Fdc604ddAF224F0921) |
+| NFT               | [`0xF427b9cc56552AaE45ffCe75CE656723a9C22ac6`](https://sepolia.etherscan.io/address/0xF427b9cc56552AaE45ffCe75CE656723a9C22ac6) |
+| Baal Cookie Jar   | [`0xc672529A93D8010CAc796c76f9Aae7b2d8250357`](https://sepolia.etherscan.io/address/0xc672529A93D8010CAc796c76f9Aae7b2d8250357) |
+| ERC20 Cookie Jar  | [`0x9e4F0a6FE048264ad612B0c9094649dE0AD81a6C`](https://sepolia.etherscan.io/address/0x9e4F0a6FE048264ad612B0c9094649dE0AD81a6C) |
+| ERC721 Cookie Jar | [`0x92564a3A1030883F4081487Cb4c61d567E52ebFE`](https://sepolia.etherscan.io/address/0x92564a3A1030883F4081487Cb4c61d567E52ebFE) |
+| List Cookie Jar   | [`0x4A72b05E2577114c887Fd7A5606AA5E1147463cB`](https://sepolia.etherscan.io/address/0x4A72b05E2577114c887Fd7A5606AA5E1147463cB) |
+| Open Cookie Jar   | [`0xf24DB58d03f26A5daEEFCe825a19136e2582ad49`](https://sepolia.etherscan.io/address/0xf24DB58d03f26A5daEEFCe825a19136e2582ad49) |
+| Hats Cookie Jar   | [`0xfC30B3bB071632B031f4Fd3036316F3a37959FF7`](https://sepolia.etherscan.io/address/0xfC30B3bB071632B031f4Fd3036316F3a37959FF7) |
+
+| Safe Module Contracts    | Address                                                                                                                         |
+|--------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| Zodiac Baal Cookie Jar   | [`0xF7A3E320bb11e3111Ae0E8b708DCa292c1dE636F`](https://sepolia.etherscan.io/address/0xF7A3E320bb11e3111Ae0E8b708DCa292c1dE636F) |
+| Zodiac ERC20 Cookie Jar  | [`0xDa21A3eC5815E68a7D58496f3a06Fb61A139Ce50`](https://sepolia.etherscan.io/address/0xDa21A3eC5815E68a7D58496f3a06Fb61A139Ce50) |
+| Zodiac ERC721 Cookie Jar | [`0x1f56e3b81eAED75c08A2f85290D489600aC64b6b`](https://sepolia.etherscan.io/address/0x1f56e3b81eAED75c08A2f85290D489600aC64b6b) |
+| Zodiac List Cookie Jar   | [`0xeA1bA9FCEDbaD5C3914B8a9AAadF977B0d056CE1`](https://sepolia.etherscan.io/address/0xeA1bA9FCEDbaD5C3914B8a9AAadF977B0d056CE1) |
+| Zodiac Open Cookie Jar   | [`0x5A3257b373d2816108918107D9262C6ac8eA127D`](https://sepolia.etherscan.io/address/0x5A3257b373d2816108918107D9262C6ac8eA127D) |
+| Zodiac Hats Cookie Jar   | [`0xe70af4E292701099Ea43aCc67a6A7c9Af04dBFCa`](https://sepolia.etherscan.io/address/0xe70af4E292701099Ea43aCc67a6A7c9Af04dBFCa) |
 
 ## 6551 Tokenbound Registry
 

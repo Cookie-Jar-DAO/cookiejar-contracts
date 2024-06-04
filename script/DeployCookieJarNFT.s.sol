@@ -47,7 +47,7 @@ contract DeployCookieJarNFT is Script {
     address internal nft;
 
     // Deterministic deployment
-    bytes32 salt = keccak256("v0.5");
+    bytes32 salt = keccak256("v0.6");
 
     function setUp() public virtual {
         string memory mnemonic = vm.envString("MNEMONIC");

@@ -35,7 +35,7 @@ contract DeployCookieJarModule is Script {
     address internal cookieJarFactory;
 
     // Deterministic deployment
-    bytes32 salt = keccak256("v0.4");
+    bytes32 salt = keccak256("v0.5");
 
     function setUp() public virtual {
         string memory mnemonic = vm.envString("MNEMONIC");
