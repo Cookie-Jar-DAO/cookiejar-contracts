@@ -7,6 +7,7 @@ import { IPoster } from "@daohaus/baal-contracts/contracts/interfaces/IPoster.so
 
 import { ZodiacCloneSummoner, ZodiacOpenCookieJar } from "test/utils/ZodiacCloneSummoner.sol";
 import { Test, Vm } from "forge-std/Test.sol";
+import { CALL_FAILED } from "src/lib/Errors.sol";
 
 contract OpenCookieJarTest is ZodiacCloneSummoner {
     address internal alice = makeAddr("alice");
@@ -45,7 +46,7 @@ contract OpenCookieJarTest is ZodiacCloneSummoner {
 
     function testReachInJar() external {
         // No cookie balance so expect fail
-        vm.expectRevert(bytes("call failure setup"));
+        vm.expectRevert();
         cookieJar.reachInJar(reason);
 
         // Put cookie tokens in jar

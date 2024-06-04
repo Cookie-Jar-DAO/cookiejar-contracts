@@ -19,10 +19,6 @@ contract MockCookieJarCore is CookieJarCore {
         return _isAllowList(user);
     }
 
-    function reachInJar(string calldata reason) public override {
-        // Do nothing
-    }
-
     function _isAllowList(address user) internal view override returns (bool) {
         return true;
     }

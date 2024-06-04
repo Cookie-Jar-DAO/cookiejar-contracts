@@ -19,7 +19,5 @@ abstract contract ZodiacCookieJar is GiverZodiac {
      */
     function setUp(bytes memory _initializationParams) public virtual override {
         super.setUp(_initializationParams);
-
-        transferOwnership(target);
     }
 }

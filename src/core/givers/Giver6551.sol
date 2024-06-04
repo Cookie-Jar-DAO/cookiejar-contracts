@@ -9,7 +9,7 @@ import { CookieJarCore } from "src/core/CookieJarCore.sol";
 
 /**
  * @title Giver6551
- * @dev This contract extends GiverBase and provides a mechanism for giving cookies.
+ * @dev This contract extends GiverBase and provides a mechanism for giving cookies from a smart account.
  */
 abstract contract Giver6551 is CookieJarCore {
     /// @notice The target address for the contract.

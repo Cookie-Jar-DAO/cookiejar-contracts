@@ -2,12 +2,12 @@
 pragma solidity >=0.8.19 <0.9.0;
 
 import { ZodiacCloneSummoner, ZodiacHatsCookieJar } from "test/utils/ZodiacCloneSummoner.sol";
-import { MockHats } from "test/utils/MockHats.sol";
 import { ERC20Mintable } from "test/utils/ERC20Mintable.sol";
 import { TestAvatar } from "@gnosis.pm/zodiac/contracts/test/TestAvatar.sol";
 import { IPoster } from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
 import { ERC20 } from "openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
 import { Test, Vm } from "forge-std/Test.sol";
+import { IHats } from "src/interfaces/IHats.sol";
 
 contract HatsCookieJarTest is ZodiacCloneSummoner {
     ZodiacHatsCookieJar internal cookieJar;
@@ -18,10 +18,8 @@ contract HatsCookieJarTest is ZodiacCloneSummoner {
     ERC20Mintable internal cookieToken = new ERC20Mintable("Mock", "MCK");
     TestAvatar internal testAvatar = new TestAvatar();
 
-    MockHats internal mockHats = new MockHats();
-
     uint256 internal cookieAmount = 2e6;
-    uint256 internal threshold = 420;
+    uint256 internal hatId = 420;
 
     string internal reason = "CookieJar: Testing";
 
@@ -36,8 +34,7 @@ contract HatsCookieJarTest is ZodiacCloneSummoner {
         // address _cookieToken,
         // address _hatsAddress,
         // uint256 _threshold,
-        bytes memory initParams =
-            abi.encode(address(testAvatar), 3600, cookieAmount, address(cookieToken), address(mockHats), threshold);
+        bytes memory initParams = abi.encode(address(testAvatar), 3600, cookieAmount, address(cookieToken), hatId);
 
         cookieJar = getHatsCookieJar(initParams);
 
@@ -45,25 +42,29 @@ contract HatsCookieJarTest is ZodiacCloneSummoner {
         testAvatar.enableModule(address(cookieJar));
     }
 
+    function mockIsWearerOfHatResponse(bool response) internal {
+        vm.mockCall(HATS_ADDRESS, abi.encodeWithSelector(IHats.isWearerOfHat.selector), abi.encode(response));
+    }
+
     function testIsAllowed() external {
-        mockHats.setMockResponse(false);
+        mockIsWearerOfHatResponse(false);
 
         assertFalse(cookieJar.isAllowList(msg.sender));
 
-        mockHats.setMockResponse(true);
+        mockIsWearerOfHatResponse(true);
         assertTrue(cookieJar.isAllowList(msg.sender));
     }
 
     function testReachInJar() external {
         // No hat for user so expect fail
-        mockHats.setMockResponse(false);
-
-        vm.expectRevert(bytes("not a member"));
+        mockIsWearerOfHatResponse(false);
+        vm.expectRevert(abi.encodeWithSignature("NOT_ALLOWED(string)", "not a member"));
         cookieJar.reachInJar(reason);
 
         // No cookie balance so expect fail
-        mockHats.setMockResponse(true);
-        vm.expectRevert(bytes("call failure setup"));
+
+        mockIsWearerOfHatResponse(true);
+        vm.expectRevert();
         cookieJar.reachInJar(reason);
 
         // Put cookie tokens in jar

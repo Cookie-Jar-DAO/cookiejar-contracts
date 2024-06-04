@@ -24,8 +24,8 @@ abstract contract GiverZodiac is Module, CookieJarCore {
     function __Giver_init(bytes memory _initializationParams) public virtual override {
         (address _safeTarget) = abi.decode(_initializationParams, (address));
 
-        setAvatar(_safeTarget);
-        setTarget(_safeTarget);
+        avatar = _safeTarget;
+        target = _safeTarget;
     }
 
     /**

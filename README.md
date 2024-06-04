@@ -1,6 +1,59 @@
 # CookieJar
 
-CookieJar is a collection of smart contracts that allow users to deposit ERC20 and ERC721 tokens and earn interest on their deposits. The contracts are designed to be modular and extensible, allowing developers to easily add new features and functionality.
+The cookie jar is a protocol for distributing tokens to users over time. It is designed to be flexible and extensible,
+allowing developers to create custom cookie jars with different distribution rules and token types.
+
+The CookieJar protocol supports various types of distributions, including Baal Cookie Jars for distributing tokens to
+`Moloch DAO` members, `ERC20` and `ERC721` Cookie Jars for distributing tokens based on users' token balances, `List`
+Cookie Jars for
+distributing tokens to a pre-approved list of users, `Open` Cookie Jars for distributing tokens to any user who claims
+them, and [`Hats`](https://www.hatsprotocol.xyz/) Cookie Jars for distributing tokens based on users' Hat wearingness.
+
+# Architecture
+
+The protocol consists of a set of composable modules to establish multiple types of cookie jars. The core module is
+the `CookieJarCore` contract that represents the cookie jar which configures the rate limiting and ownership. By adding
+a `Giver` module tokens held by the cookie jar can be distributed from a `6551` smart wallet or a `Safe` contract. Based
+on the allowlist, users can claim tokens from the cookie jar.
+
+## Rate limiting
+
+By defining the `amount` and `period` of the cookie jar, the rate of token distribution can be controlled. The `amount`
+is the number of tokens distributed per `period`. The `period` is the time interval in seconds between each
+distribution.
+
+## Allow lists
+
+Allow lists gate access to the cookie jar. Currently we support `Baal` (MolochV3), `ERC20`, `ERC721`, `List`, `Open`,
+and `Hats` gating.
+
+Baal cookie jars are gated by the MolochV3 DAO. The `ERC20` cookie jar is gated by the balance of an ERC20 token.
+The `ERC721` cookie jar is gated by the balance of an ERC721 token. The `List` cookie jar is gated by a list of
+addresses. The `Open` cookie jar is open to all addresses. The `Hats` cookie jar is gated by the HatID.
+
+## Givers
+
+Givers are the source of tokens for the cookie jar. Currently we support `6551` and `Safe` givers.
+
+The `6551` giver is a smart wallet that holds tokens. The `Safe` giver is a Safe contract that holds tokens.
+
+## Example happy flow
+
+```mermaid
+sequenceDiagram
+    participant User as Allowlisted user
+    participant CJC as Cookie Jar
+    participant GB as Giver
+    participant AB as Allowlist
+    User->>CJC: reachInJar("I like cookies")
+    CJC->>AB: _isAllowList(User)
+    AB-->>CJC: true
+    CJC->>CJC: _isValidClaimPeriod(User)
+    CJC-->>CJC: true
+    CJC->>GB: _giveCookie(User, cookieAmount, cookieToken)
+    GB-->>CJC: cookieUid
+    CJC-->>User: emit GiveCookie(cookieUid, User, cookieAmount, reason)
+```
 
 # Deployment
 
@@ -65,7 +118,7 @@ The following table lists the addresses of the deployed contracts:
 ## Sepolia
 
 | Contract            | Address                                      |
-| ------------------- | -------------------------------------------- |
+|---------------------|----------------------------------------------|
 | Baal Cookie Jar     | `0x1540F8eb71264EF41c7B12490f1D4556778a9E4f` |
 | ERC20 Cookie Jar    | `0x4ab3Ced6b45Ef849e5A69716b35a6F54a3b75e1c` |
 | ERC721 Cookie Jar   | `0x9036A0D0EB7C4400CDBAb840CD87B717Bb95Dd0E` |
@@ -77,13 +130,12 @@ The following table lists the addresses of the deployed contracts:
 | Account             | `0xB91594c1DBc9Fc2fF75eBF4Dcae8B9099D6e088A` |
 | Cookie Jar NFT      | `0xa16B24f39d90002C71914D055A65143720C1D5A7` |
 
-
 ## 6551 Tokenbound Registry
 
 The Tokenbound Registry for 6551 tokens is deployed on the following chains:
 
 | Chain    | Address                                      |
-| -------- | -------------------------------------------- |
+|----------|----------------------------------------------|
 | Arbitrum | `0x02101dfB77FDE026414827Fdc604ddAF224F0921` |
 | Gnosis   | `0x02101dfB77FDE026414827Fdc604ddAF224F0921` |
 | Optimism | `0x02101dfB77FDE026414827Fdc604ddAF224F0921` |
@@ -91,17 +143,20 @@ The Tokenbound Registry for 6551 tokens is deployed on the following chains:
 
 ## Sustainability Safe
 
-To fund further development we implemented sustainability fees when claiming cookies and the option to donate native tokens or ERC20s when summoning a CookieJar. Donations are optional; summon the CookieJar with `donationToken` = address(0) and `donationAmount` = 0;
+To fund further development we implemented sustainability fees when claiming cookies and the option to donate native
+tokens or ERC20s when summoning a CookieJar. Donations are optional; summon the CookieJar with `donationToken` =
+address(0) and `donationAmount` = 0;
 
 | Chain    | Address                                      |
-| -------- | -------------------------------------------- |
+|----------|----------------------------------------------|
 | Gnosis   | `0x1cE42BA793BA1E9Bf36c8b3f0aDDEe6c89D9a9fc` |
 | Mainnet  | `0x1cE42BA793BA1E9Bf36c8b3f0aDDEe6c89D9a9fc` |
 | Optimism | `0x1cE42BA793BA1E9Bf36c8b3f0aDDEe6c89D9a9fc` |
 
 ## Installation
 
-To run the CookieJar contracts, you will need to have foundry installed on your system. You can then run the following command:
+To run the CookieJar contracts, you will need to have foundry installed on your system. You can then run the following
+command:
 
 `forge compile`
 
@@ -117,14 +172,16 @@ To run the tests for the Cookie Jar contracts, you can run the following command
 
 ### Cookie Jar Initialization Parameters
 
-The Cookie Jar contract can be initialized with a set of parameters that define the behavior of the contract. The parameters are passed to the contract's constructor as an array of values.
+The Cookie Jar contract can be initialized with a set of parameters that define the behavior of the contract. The
+parameters are passed to the contract's constructor as an array of values.
 
-The parameters are different depending on the type of Cookie Jar being created. There are three types of Cookie Jars: Baal, ERC20, and ERC721. The parameters for each type of Cookie Jar are as follows:
+The parameters are different depending on the type of Cookie Jar being created. There are three types of Cookie Jars:
+Baal, ERC20, and ERC721. The parameters for each type of Cookie Jar are as follows:
 
 #### Baal Cookie Jar
 
 | Parameter | Type    | Description                                                |
-| --------- | ------- | ---------------------------------------------------------- |
+|-----------|---------|------------------------------------------------------------|
 | 0         | address | The address of the owner or safe target of the Cookie Jar. |
 | 1         | uint256 | The length of the period for the Cookie Jar.               |
 | 2         | uint256 | The amount of cookies to be distributed per period.        |
@@ -137,7 +194,7 @@ The parameters are different depending on the type of Cookie Jar being created. 
 #### ERC20 Cookie Jar
 
 | Parameter | Type    | Description                                                |
-| --------- | ------- | ---------------------------------------------------------- |
+|-----------|---------|------------------------------------------------------------|
 | 0         | address | The address of the owner or safe target of the Cookie Jar. |
 | 1         | uint256 | The length of the period for the Cookie Jar.               |
 | 2         | uint256 | The amount of cookies to be distributed per period.        |
@@ -148,7 +205,7 @@ The parameters are different depending on the type of Cookie Jar being created. 
 #### ERC721 Cookie Jar
 
 | Parameter | Type    | Description                                                |
-| --------- | ------- | ---------------------------------------------------------- |
+|-----------|---------|------------------------------------------------------------|
 | 0         | address | The address of the owner or safe target of the Cookie Jar. |
 | 1         | uint256 | The length of the period for the Cookie Jar.               |
 | 2         | uint256 | The amount of cookies to be distributed per period.        |
@@ -159,7 +216,7 @@ The parameters are different depending on the type of Cookie Jar being created. 
 #### Hats Cookie Jar
 
 | Parameter | Type    | Description                                                |
-| --------- | ------- | ---------------------------------------------------------- |
+|-----------|---------|------------------------------------------------------------|
 | 0         | address | The address of the owner or safe target of the Cookie Jar. |
 | 1         | uint256 | The length of the period for the Cookie Jar.               |
 | 2         | uint256 | The amount of cookies to be distributed per period.        |
@@ -169,18 +226,15 @@ The parameters are different depending on the type of Cookie Jar being created. 
 #### Mapping Cookie Jar
 
 | Parameter | Type      | Description                                                |
-| --------- | --------- | ---------------------------------------------------------- |
+|-----------|-----------|------------------------------------------------------------|
 | 0         | address   | The address of the owner or safe target of the Cookie Jar. |
 | 1         | uint256   | The length of the period for the Cookie Jar.               |
 | 2         | uint256   | The amount of cookies to be distributed per period.        |
 | 3         | address   | The address of the cookie token contract.                  |
 | 4         | address[] | The list of addresses allowed to claim cookies.            |
 
-The parameters for each type of Cookie Jar are passed to the summonCookieJar function as a byte array. The byte array is constructed by encoding the parameters in the order listed above.
-
-## Poster schema
-
-The Poster contract is used to emit events on chain as a way to store more complex information on chain in a gas-efficient manner.
+The parameters for each type of Cookie Jar are passed to the summonCookieJar function as a byte array. The byte array is
+constructed by encoding the parameters in the order listed above.
 
 ### Generating IDs
 
@@ -188,31 +242,56 @@ The CookieUtils library provides utility functions for generating unique identif
 
 #### getCookieJarUid
 
-The getCookieJarUid function is used to generate a unique identifier for a cookie jar. The function takes an address parameter cookieJarAddr and returns a string that represents the unique identifier.
+The getCookieJarUid function is used to generate a unique identifier for a cookie jar. The function takes an address
+parameter cookieJarAddr and returns a string that represents the unique identifier.
 
-For example, to generate a unique identifier for a new cookie jar, you can call the getCookieJarUid function with the address of the new cookie jar as the input parameter:
+For example, to generate a unique identifier for a new cookie jar, you can call the getCookieJarUid function with the
+address of the new cookie jar as the input parameter:
 
 ```js
-    function getCookieJarUid(address cookieJarAddr) internal view returns (string memory) {
-        return string(abi.encodePacked(Strings.toHexString(uint160(cookieJarAddr)), Strings.toHexString(block.chainid)));
-    }
+    function getCookieJarUid(address
+
+cookieJarAddr
+)
+internal
+view
+returns(string
+memory
+)
+{
+    return string(abi.encodePacked(Strings.toHexString(uint160(cookieJarAddr)), Strings.toHexString(block.chainid)));
+}
 ```
 
-The unique identifier is generated by concatenating the hexadecimal representation of the cookieJarAddr parameter with the hexadecimal representation of the current blockchain chain ID.
+The unique identifier is generated by concatenating the hexadecimal representation of the cookieJarAddr parameter with
+the hexadecimal representation of the current blockchain chain ID.
 
 #### getCookieUid
 
-The getCookieUid function is used to generate a unique identifier for a cookie. The function takes a string parameter cookieJarUid and returns a string that represents the unique identifier.
+The getCookieUid function is used to generate a unique identifier for a cookie. The function takes a string parameter
+cookieJarUid and returns a string that represents the unique identifier.
 
-Similarly, to generate a unique identifier for a new cookie, you can call the getCookieUid function with the unique identifier of the cookie jar as the input parameter:
+Similarly, to generate a unique identifier for a new cookie, you can call the getCookieUid function with the unique
+identifier of the cookie jar as the input parameter:
 
 ```js
-   function getCookieUid(string memory cookieJarUid) internal view returns (string memory) {
-        return bytes32ToString(keccak256(abi.encodePacked(cookieJarUid, msg.sender, block.timestamp)));
-    }
+   function getCookieUid(string
+
+memory
+cookieJarUid
+)
+internal
+view
+returns(string
+memory
+)
+{
+    return bytes32ToString(keccak256(abi.encodePacked(cookieJarUid, msg.sender, block.timestamp)));
+}
 ```
 
-The unique identifier is generated by concatenating the cookieJarUid parameter with the hexadecimal representation of the current user's address and the current block timestamp.
+The unique identifier is generated by concatenating the cookieJarUid parameter with the hexadecimal representation of
+the current user's address and the current block timestamp.
 
 ### Details schema
 
@@ -242,7 +321,8 @@ The post claim reason event is used to store a reason for a claim made by a user
 
 ### Assess Reason
 
-The assess reason event is used to store an assessment of a reason for a claim made by a user. The event has the following schema:
+The assess reason event is used to store an assessment of a reason for a claim made by a user. The event has the
+following schema:
 
 ```json
 {

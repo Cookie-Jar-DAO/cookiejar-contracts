@@ -52,8 +52,6 @@ contract ERC20CookieJar6551Test is PRBTest, StdCheats {
         cookieJarSummoner.setProxyFactory(address(moduleProxyFactory));
 
         cookieJarNFT = new CookieNFT(address(accountRegistry), address(implementation), address(cookieJarSummoner));
-
-        vm.mockCall(0x000000000000cd17345801aa8147b8D3950260FF, abi.encodeWithSelector(IPoster.post.selector), "");
     }
 
     function testCookieMint() public returns (address account, address cookieJar, uint256 tokenId) {
@@ -82,7 +80,7 @@ contract ERC20CookieJar6551Test is PRBTest, StdCheats {
 
         vm.startPrank(bob);
 
-        vm.expectRevert(bytes("not a member"));
+        vm.expectRevert(abi.encodeWithSignature("NOT_ALLOWED(string)", "not a member"));
         ERC20CookieJar6551(cookieJar).reachInJar(bob, "test");
 
         mockErc20.mint(bob, 1 ether);

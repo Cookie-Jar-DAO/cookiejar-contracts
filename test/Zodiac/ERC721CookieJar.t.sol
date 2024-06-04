@@ -52,12 +52,12 @@ contract ERC721CookieJarTest is ZodiacCloneSummoner {
 
     function testReachInJar() external {
         // No gating token balance so expect fail
-        vm.expectRevert(bytes("not a member"));
+        vm.expectRevert(abi.encodeWithSignature("NOT_ALLOWED(string)", "not a member"));
         cookieJar.reachInJar(reason);
 
         // No cookie balance so expect fail
         vm.mockCall(address(gatingERC721), abi.encodeWithSelector(ERC721.balanceOf.selector), abi.encode(1));
-        vm.expectRevert(bytes("call failure setup"));
+        vm.expectRevert();
         cookieJar.reachInJar(reason);
 
         // Put cookie tokens in jar

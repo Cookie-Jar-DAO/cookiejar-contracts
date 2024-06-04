@@ -14,9 +14,9 @@ import { AllowlistBase } from "./allowlists/AllowlistBase.sol";
 
 /**
  * @title CookieJarCore
- * @notice A base contract for a cookie jar that distributes tokens to members of a DAO.
+ * @notice A base contract for a cookie jar that distributes tokens according to an allow list.
  * @dev This contract is intended to be inherited by a derived contract that implements the logic for distributing
- * tokens to members of a DAO. The derived contract should implement the giveCookie function to handle the logic of
+ * tokens according to checks against an allowlist. The derived contract should implement the giveCookie function to handle the logic of
  * transferring the specified amount of cookies to the given address and return a unique identifier for the cookie.
  */
 abstract contract CookieJarCore is GiverBase, AllowlistBase, ICookieJar, Initializable, OwnableUpgradeable {
@@ -44,14 +44,14 @@ abstract contract CookieJarCore is GiverBase, AllowlistBase, ICookieJar, Initial
      * @param _initializationParams The initialization parameters, encoded as a bytes array.
      */
     function setUp(bytes memory _initializationParams) public virtual initializer {
-        (, uint256 _periodLength, uint256 _cookieAmount, address _cookieToken) =
+        (address target, uint256 _periodLength, uint256 _cookieAmount, address _cookieToken) =
             abi.decode(_initializationParams, (address, uint256, uint256, address));
 
         periodLength = _periodLength;
         cookieAmount = _cookieAmount;
         cookieToken = _cookieToken;
 
-        __Ownable_init();
+        _transferOwnership(target);
 
         emit Setup(_initializationParams);
     }

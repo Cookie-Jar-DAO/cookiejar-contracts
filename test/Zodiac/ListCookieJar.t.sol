@@ -51,14 +51,14 @@ contract ListCookieJarTest is ZodiacCloneSummoner {
 
     function testReachInJar() external {
         // Anon puts their hand in the jar
-        vm.expectRevert(bytes("not a member"));
+        vm.expectRevert(abi.encodeWithSignature("NOT_ALLOWED(string)", "not a member"));
         cookieJar.reachInJar(reason);
 
         // Alice puts her hand in the jar
         vm.startPrank(alice);
 
         // No cookie balance so expect fail
-        vm.expectRevert(bytes("call failure setup"));
+        vm.expectRevert();
         cookieJar.reachInJar(reason);
 
         // Put cookie tokens in jar

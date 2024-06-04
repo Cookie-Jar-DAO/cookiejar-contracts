@@ -16,10 +16,6 @@ contract MockCookieJar6551 is CookieJar6551 {
         return _isAllowList(user);
     }
 
-    function reachInJar(string calldata reason) public override {
-        // Do nothing
-    }
-
     function _isAllowList(address user) internal view override returns (bool) {
         return true;
     }

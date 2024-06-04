@@ -18,7 +18,5 @@ abstract contract CookieJar6551 is Giver6551 {
      */
     function setUp(bytes memory _initializationParams) public virtual override {
         super.setUp(_initializationParams);
-
-        transferOwnership(target);
     }
 }

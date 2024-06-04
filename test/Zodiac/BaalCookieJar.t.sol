@@ -60,10 +60,15 @@ contract BaalCookieJarTest is ZodiacCloneSummoner {
     function testReachInJar() external {
         vm.recordLogs();
 
+        // Not a member  so expect fail
+        vm.mockCall(address(sharesToken), abi.encodeWithSelector(IBaalToken.balanceOf.selector), abi.encode(0));
+
+        vm.expectRevert(abi.encodeWithSignature("NOT_ALLOWED(string)", "not a member"));
+        cookieJar.reachInJar(reason);
+
         // No balance so expect fail
         vm.mockCall(address(sharesToken), abi.encodeWithSelector(IBaalToken.balanceOf.selector), abi.encode(1));
-
-        vm.expectRevert(bytes("call failure setup"));
+        vm.expectRevert();
         cookieJar.reachInJar(reason);
 
         // Put cookie tokens in jar

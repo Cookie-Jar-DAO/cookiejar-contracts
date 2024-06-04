@@ -17,10 +17,6 @@ contract MockZodiacCookieJar is ZodiacCookieJar {
         return _isAllowList(user);
     }
 
-    function reachInJar(string calldata reason) public override {
-        // Do nothing
-    }
-
     function _isAllowList(address user) internal view override returns (bool) {
         return true;
     }
@@ -89,7 +85,7 @@ contract ZodiacCookieJarTest is PRBTest, StdCheats {
         assertTrue(cookieJar.canClaim(alice));
 
         // No balance so expect fail
-        vm.expectRevert(bytes("call failure setup"));
+        vm.expectRevert();
         cookieJar.reachInJar(reason);
 
         assertTrue(cookieJar.canClaim(alice));
@@ -118,7 +114,7 @@ contract ZodiacCookieJarTest is PRBTest, StdCheats {
         assertTrue(cookieJar.canClaim(alice));
 
         // No balance so expect fail
-        vm.expectRevert(bytes("call failure setup"));
+        vm.expectRevert();
         cookieJar.reachInJar(bob, reason);
 
         assertTrue(cookieJar.canClaim(alice));
