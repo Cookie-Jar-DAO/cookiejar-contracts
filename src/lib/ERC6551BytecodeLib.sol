@@ -7,7 +7,11 @@ library ERC6551BytecodeLib {
         address tokenContract_,
         uint256 tokenId_,
         uint256 salt_
-    ) internal pure returns (bytes memory) {
+    )
+        internal
+        pure
+        returns (bytes memory)
+    {
         return abi.encodePacked(
             hex"3d60ad80600a3d3981f3363d3d373d3d3d363d73",
             implementation_,

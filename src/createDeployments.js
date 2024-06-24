@@ -8,10 +8,10 @@ const processedFiles = new Set();
 
 function getABI(contractName) {
   // stupid lazy hack to get the ABI
-  const dirname = contractName.replace("Zodiac", "");
+  // const dirname = contractName.replace("Zodiac", "");
   const abiFilePath = path.join(
     outDirectory,
-    `${dirname}.sol/${contractName}.json`
+    `${contractName}.sol/${contractName}.json`
   );
   if (fs.existsSync(abiFilePath)) {
     const abiData = JSON.parse(fs.readFileSync(abiFilePath, "utf-8"));

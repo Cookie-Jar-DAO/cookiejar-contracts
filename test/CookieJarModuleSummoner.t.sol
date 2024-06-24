@@ -8,11 +8,11 @@ import { ModuleProxyFactory } from "@gnosis.pm/zodiac/contracts/factory/ModulePr
 import { ERC20Mintable } from "test/utils/ERC20Mintable.sol";
 
 import { CookieJarFactory } from "src/factory/CookieJarFactory.sol";
-import { ZodiacBaalCookieJar } from "src/SafeModule/BaalCookieJar.sol";
-import { ZodiacERC20CookieJar } from "src/SafeModule/ERC20CookieJar.sol";
-import { ZodiacERC721CookieJar } from "src/SafeModule/ERC721CookieJar.sol";
-import { ZodiacListCookieJar } from "src/SafeModule/ListCookieJar.sol";
-import { ZodiacOpenCookieJar } from "src/SafeModule/OpenCookieJar.sol";
+import { ZodiacBaalCookieJar } from "src/SafeModule/ZodiacBaalCookieJar.sol";
+import { ZodiacERC20CookieJar } from "src/SafeModule/ZodiacERC20CookieJar.sol";
+import { ZodiacERC721CookieJar } from "src/SafeModule/ZodiacERC721CookieJar.sol";
+import { ZodiacListCookieJar } from "src/SafeModule/ZodiacListCookieJar.sol";
+import { ZodiacOpenCookieJar } from "src/SafeModule/ZodiacOpenCookieJar.sol";
 import { CookieJarFactory } from "src/factory/CookieJarFactory.sol";
 
 contract CookieJarModuleSummonerTest is PRBTest, StdCheats {

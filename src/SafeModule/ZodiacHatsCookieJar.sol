@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity 0.8.19;
 
-import { BaalAllowlist } from "src/core/allowlists/BaalAllowlist.sol";
-import { CookieJar6551 } from "src/ERC6551/CookieJar6551.sol";
+import { HatsAllowlist } from "src/core/allowlists/HatsAllowlist.sol";
+import { ZodiacCookieJar } from "src/SafeModule/ZodiacCookieJar.sol";
 
-contract BaalCookieJar6551 is BaalAllowlist, CookieJar6551 {
+contract ZodiacHatsCookieJar is HatsAllowlist, ZodiacCookieJar {
     function setUp(bytes memory _initializationParams) public override {
         __Allowlist_init(_initializationParams);
         super.setUp(_initializationParams);

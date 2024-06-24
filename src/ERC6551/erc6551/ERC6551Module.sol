@@ -8,11 +8,11 @@ import "@openzeppelin/contracts/utils/cryptography/SignatureChecker.sol";
 import "@openzeppelin/contracts/utils/introspection/IERC165.sol";
 import "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol";
 
-import {Initializable} from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import { Initializable } from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 import "src/lib/MinimalReceiver.sol";
-import {IAccount} from "src/interfaces/IERC6551.sol";
-import {ERC6551AccountLib} from "src/lib/ERC6551AccountLib.sol";
+import { IAccount } from "src/interfaces/IERC6551.sol";
+import { ERC6551AccountLib } from "src/lib/ERC6551AccountLib.sol";
 
 /**
  * @title A smart contract wallet owned by a single ERC721 token
@@ -43,7 +43,7 @@ contract AccountERC6551 is IERC165, IERC1271, IAccount, MinimalReceiver, Initial
      */
     event ExecutorUpdated(address owner, address executor);
 
-    constructor() {}
+    constructor() { }
 
     /**
      * @dev Ensures execution can only continue if the account is not locked
@@ -73,7 +73,11 @@ contract AccountERC6551 is IERC165, IERC1271, IAccount, MinimalReceiver, Initial
      * @param value   Ether value of the transaction
      * @param data    Encoded payload of the transaction
      */
-    function executeCall(address to, uint256 value, bytes calldata data)
+    function executeCall(
+        address to,
+        uint256 value,
+        bytes calldata data
+    )
         external
         payable
         onlyUnlocked
@@ -92,7 +96,11 @@ contract AccountERC6551 is IERC165, IERC1271, IAccount, MinimalReceiver, Initial
      * @param value   Ether value of the transaction
      * @param data    Encoded payload of the transaction
      */
-    function exec(address to, uint256 value, bytes calldata data)
+    function exec(
+        address to,
+        uint256 value,
+        bytes calldata data
+    )
         external
         payable
         onlyUnlocked
@@ -111,7 +119,11 @@ contract AccountERC6551 is IERC165, IERC1271, IAccount, MinimalReceiver, Initial
      * @param value   Ether value of the transaction
      * @param data    Encoded payload of the transaction
      */
-    function executeTrustedCall(address to, uint256 value, bytes calldata data)
+    function executeTrustedCall(
+        address to,
+        uint256 value,
+        bytes calldata data
+    )
         external
         payable
         onlyUnlocked
@@ -296,7 +308,7 @@ contract AccountERC6551 is IERC165, IERC1271, IAccount, MinimalReceiver, Initial
      */
     function _call(address to, uint256 value, bytes calldata data) internal returns (bytes memory result) {
         bool success;
-        (success, result) = to.call{value: value}(data);
+        (success, result) = to.call{ value: value }(data);
 
         if (!success) {
             assembly {

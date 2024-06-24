@@ -1,9 +1,204 @@
 {
   "11155111": [
     {
+      "contractName": "CookieJarFactory",
+      "contractAddress": "0xa4bd15948b9caffd8de8a2be59893f2395c9c780",
+      "transactionHash": "0x8b0bbe50f6111e3c6e842b04a302b523043fce96d79de2e7e9d7149f0d068732",
+      "abi": [
+        {
+          "type": "constructor",
+          "inputs": [
+            {
+              "name": "newOwner",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "SUSTAINABILITY_ADDR",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "owner",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "renounceOwnership",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setProxyFactory",
+          "inputs": [
+            {
+              "name": "_moduleProxyFactory",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "summonCookieJar",
+          "inputs": [
+            {
+              "name": "_singleton",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "_initializer",
+              "type": "bytes",
+              "internalType": "bytes"
+            },
+            {
+              "name": "_details",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "donationToken",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "donationAmount",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "_saltNonce",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "payable"
+        },
+        {
+          "type": "function",
+          "name": "transferOwnership",
+          "inputs": [
+            {
+              "name": "newOwner",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "event",
+          "name": "DonationReceived",
+          "inputs": [
+            {
+              "name": "donationToken",
+              "type": "address",
+              "indexed": false,
+              "internalType": "address"
+            },
+            {
+              "name": "donationAmount",
+              "type": "uint256",
+              "indexed": false,
+              "internalType": "uint256"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "OwnershipTransferred",
+          "inputs": [
+            {
+              "name": "previousOwner",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            },
+            {
+              "name": "newOwner",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "SummonCookieJar",
+          "inputs": [
+            {
+              "name": "cookieJar",
+              "type": "address",
+              "indexed": false,
+              "internalType": "address"
+            },
+            {
+              "name": "initializer",
+              "type": "bytes",
+              "indexed": false,
+              "internalType": "bytes"
+            },
+            {
+              "name": "details",
+              "type": "string",
+              "indexed": false,
+              "internalType": "string"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "error",
+          "name": "CALL_FAILED",
+          "inputs": [
+            {
+              "name": "message",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "contractName": "ZodiacBaalCookieJar",
-      "contractAddress": "0xE07651A14C7A852D18bfcFab26A84080a0030bcC",
-      "transactionHash": "0x5ddbe7e5cfc24386dd2b0bfff6abdb567fc22d0d90ae04e9a3eda144c0b44e0b",
+      "contractAddress": "0xf7a3e320bb11e3111ae0e8b708dca292c1de636f",
+      "transactionHash": "0x1fead9547e9e1a0bb5a8857271cd826f4bbf8e0bc0714cc505200bfe1640ecf8",
       "abi": [
         {
           "type": "function",
@@ -43,6 +238,32 @@
             }
           ],
           "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "__Allowlist_init",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "__Giver_init",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
         },
         {
           "type": "function",
@@ -557,6 +778,28 @@
             }
           ],
           "anonymous": false
+        },
+        {
+          "type": "error",
+          "name": "CALL_FAILED",
+          "inputs": [
+            {
+              "name": "message",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "NOT_ALLOWED",
+          "inputs": [
+            {
+              "name": "message",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
         },
         {
           "type": "error",
@@ -573,8 +816,8 @@
     },
     {
       "contractName": "ZodiacERC20CookieJar",
-      "contractAddress": "0x01e1bcED65D54F206ee9D609c6B769D71AA36aEF",
-      "transactionHash": "0x4b17507ecdf6f57bd96dc71031a384ccb896974afc9ac0c5a91e3e7805bfcb2c",
+      "contractAddress": "0xda21a3ec5815e68a7d58496f3a06fb61a139ce50",
+      "transactionHash": "0xbfec9ab74f177765b1035f2613c27808a7c04626291dc8e85d9a244ca17920f4",
       "abi": [
         {
           "type": "function",
@@ -614,6 +857,32 @@
             }
           ],
           "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "__Allowlist_init",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "__Giver_init",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
         },
         {
           "type": "function",
@@ -1105,6 +1374,28 @@
         },
         {
           "type": "error",
+          "name": "CALL_FAILED",
+          "inputs": [
+            {
+              "name": "message",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "NOT_ALLOWED",
+          "inputs": [
+            {
+              "name": "message",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
+        },
+        {
+          "type": "error",
           "name": "NotIERC165Compliant",
           "inputs": [
             {
@@ -1118,8 +1409,8 @@
     },
     {
       "contractName": "ZodiacERC721CookieJar",
-      "contractAddress": "0xC60d3A15Ac671A9c3aFa945e4c78896529db4dFA",
-      "transactionHash": "0x036d8ec2a5e2194a498b7d40975e25d3e6afb8ea3320305ee9d52ea5306e1dff",
+      "contractAddress": "0x1f56e3b81eaed75c08a2f85290d489600ac64b6b",
+      "transactionHash": "0xa3f5b3e114b2a55187164a9c8e3ca1cf7280bff2fab789a2e4c189def3b89538",
       "abi": [
         {
           "type": "function",
@@ -1159,6 +1450,32 @@
             }
           ],
           "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "__Allowlist_init",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "__Giver_init",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
         },
         {
           "type": "function",
@@ -1637,6 +1954,28 @@
         },
         {
           "type": "error",
+          "name": "CALL_FAILED",
+          "inputs": [
+            {
+              "name": "message",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "NOT_ALLOWED",
+          "inputs": [
+            {
+              "name": "message",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
+        },
+        {
+          "type": "error",
           "name": "NotIERC165Compliant",
           "inputs": [
             {
@@ -1650,8 +1989,8 @@
     },
     {
       "contractName": "ZodiacListCookieJar",
-      "contractAddress": "0x2b2D9eaC07588100eF53B4BE68aF9407F5aB7628",
-      "transactionHash": "0x43e0a81042e93e53944edf9a559d87a299b7d2d0580288a9a5f480658a61142f",
+      "contractAddress": "0xea1ba9fcedbad5c3914b8a9aaadf977b0d056ce1",
+      "transactionHash": "0xfecefb979cd02202e3389c8d0189e0f860b2f14d4d6e3cd7db93d853cea7d9af",
       "abi": [
         {
           "type": "function",
@@ -1694,17 +2033,43 @@
         },
         {
           "type": "function",
+          "name": "__Allowlist_init",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "__Giver_init",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
           "name": "allowList",
           "inputs": [
             {
-              "name": "allowed",
+              "name": "",
               "type": "address",
               "internalType": "address"
             }
           ],
           "outputs": [
             {
-              "name": "exists",
+              "name": "",
               "type": "bool",
               "internalType": "bool"
             }
@@ -2211,6 +2576,44 @@
         },
         {
           "type": "error",
+          "name": "ARRAY_LENGTH_MISMATCH",
+          "inputs": [
+            {
+              "name": "a",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "b",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "CALL_FAILED",
+          "inputs": [
+            {
+              "name": "message",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "NOT_ALLOWED",
+          "inputs": [
+            {
+              "name": "message",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
+        },
+        {
+          "type": "error",
           "name": "NotIERC165Compliant",
           "inputs": [
             {
@@ -2224,8 +2627,8 @@
     },
     {
       "contractName": "ZodiacOpenCookieJar",
-      "contractAddress": "0x0Ea985BdC6CF0aBC8813a9e346f4Ef8E0bdf1861",
-      "transactionHash": "0x20ca850271578178d44634c4b9875ac1b71e487ecc8a8f262a23490c941b0686",
+      "contractAddress": "0x5a3257b373d2816108918107d9262c6ac8ea127d",
+      "transactionHash": "0x572d16046887b65d7f96ac236dfc2f8946f9304d2ed7fd2cea872f8609225149",
       "abi": [
         {
           "type": "function",
@@ -2265,6 +2668,32 @@
             }
           ],
           "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "__Allowlist_init",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "__Giver_init",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
         },
         {
           "type": "function",
@@ -2397,7 +2826,7 @@
           "name": "isAllowList",
           "inputs": [
             {
-              "name": "",
+              "name": "user",
               "type": "address",
               "internalType": "address"
             }
@@ -2730,6 +3159,621 @@
         },
         {
           "type": "error",
+          "name": "CALL_FAILED",
+          "inputs": [
+            {
+              "name": "message",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "NOT_ALLOWED",
+          "inputs": [
+            {
+              "name": "message",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "NotIERC165Compliant",
+          "inputs": [
+            {
+              "name": "guard_",
+              "type": "address",
+              "internalType": "address"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "contractName": "ZodiacHatsCookieJar",
+      "contractAddress": "0xe70af4e292701099ea43acc67a6a7c9af04dbfca",
+      "transactionHash": "0xc711ca533c35682290af664373770bc1ee5a7a0d336029087de72ef99015ebd6",
+      "abi": [
+        {
+          "type": "function",
+          "name": "HATS_ADDRESS",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "PERC_POINTS",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "SUSTAINABILITY_ADDR",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "SUSTAINABILITY_FEE",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "__Allowlist_init",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "__Giver_init",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "assessReason",
+          "inputs": [
+            {
+              "name": "cookieUid",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "message",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "isGood",
+              "type": "bool",
+              "internalType": "bool"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "avatar",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "canClaim",
+          "inputs": [
+            {
+              "name": "user",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "allowed",
+              "type": "bool",
+              "internalType": "bool"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "claims",
+          "inputs": [
+            {
+              "name": "claimer",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "dateTime",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "cookieAmount",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "cookieToken",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "getGuard",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "_guard",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "guard",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "hatId",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "isAllowList",
+          "inputs": [
+            {
+              "name": "user",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "owner",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "periodLength",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "reachInJar",
+          "inputs": [
+            {
+              "name": "reason",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "reachInJar",
+          "inputs": [
+            {
+              "name": "cookieMonster",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "reason",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "renounceOwnership",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setAvatar",
+          "inputs": [
+            {
+              "name": "_avatar",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setConfig",
+          "inputs": [
+            {
+              "name": "_periodLength",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "_cookieAmount",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "_cookieToken",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setGuard",
+          "inputs": [
+            {
+              "name": "_guard",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setTarget",
+          "inputs": [
+            {
+              "name": "_target",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setUp",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "target",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "transferOwnership",
+          "inputs": [
+            {
+              "name": "newOwner",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "event",
+          "name": "AssessReason",
+          "inputs": [
+            {
+              "name": "cookieUid",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            },
+            {
+              "name": "message",
+              "type": "string",
+              "indexed": false,
+              "internalType": "string"
+            },
+            {
+              "name": "isGood",
+              "type": "bool",
+              "indexed": false,
+              "internalType": "bool"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "AvatarSet",
+          "inputs": [
+            {
+              "name": "previousAvatar",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            },
+            {
+              "name": "newAvatar",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "ChangedGuard",
+          "inputs": [
+            {
+              "name": "guard",
+              "type": "address",
+              "indexed": false,
+              "internalType": "address"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "GiveCookie",
+          "inputs": [
+            {
+              "name": "cookieUid",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            },
+            {
+              "name": "cookieMonster",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "indexed": false,
+              "internalType": "uint256"
+            },
+            {
+              "name": "reason",
+              "type": "string",
+              "indexed": false,
+              "internalType": "string"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "Initialized",
+          "inputs": [
+            {
+              "name": "version",
+              "type": "uint8",
+              "indexed": false,
+              "internalType": "uint8"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "OwnershipTransferred",
+          "inputs": [
+            {
+              "name": "previousOwner",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            },
+            {
+              "name": "newOwner",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "Setup",
+          "inputs": [
+            {
+              "name": "initializationParams",
+              "type": "bytes",
+              "indexed": false,
+              "internalType": "bytes"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "TargetSet",
+          "inputs": [
+            {
+              "name": "previousTarget",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            },
+            {
+              "name": "newTarget",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "error",
+          "name": "CALL_FAILED",
+          "inputs": [
+            {
+              "name": "message",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "NOT_ALLOWED",
+          "inputs": [
+            {
+              "name": "message",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
+        },
+        {
+          "type": "error",
           "name": "NotIERC165Compliant",
           "inputs": [
             {
@@ -2743,8 +3787,8 @@
     },
     {
       "contractName": "BaalCookieJar6551",
-      "contractAddress": "0xF615299B76297Fd43e07BF0Cdd1D12BD48448546",
-      "transactionHash": "0xe8b17a1fac17aee9a57755fd1a9a8988f68909c9bbf06809ab4863175fa02c63",
+      "contractAddress": "0xc672529a93d8010cac796c76f9aae7b2d8250357",
+      "transactionHash": "0xcab86758d1735189f1ca0096cf174b01781ed97574234f37a9854485ee7bcd14",
       "abi": [
         {
           "type": "function",
@@ -2784,6 +3828,32 @@
             }
           ],
           "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "__Allowlist_init",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "__Giver_init",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
         },
         {
           "type": "function",
@@ -3169,13 +4239,24 @@
             }
           ],
           "anonymous": false
+        },
+        {
+          "type": "error",
+          "name": "NOT_ALLOWED",
+          "inputs": [
+            {
+              "name": "message",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
         }
       ]
     },
     {
       "contractName": "ERC20CookieJar6551",
-      "contractAddress": "0x6CF9029A725D888Dea4B258586c35886A35b7750",
-      "transactionHash": "0xa157afdde39ca244e0678d98342db7c2caf005a33b54694b361e00d960fddedc",
+      "contractAddress": "0x9e4f0a6fe048264ad612b0c9094649de0ad81a6c",
+      "transactionHash": "0x6758093a02c7453534ef7f294581c46f08d9c9278b0e32374e85c6a7a41ae6b9",
       "abi": [
         {
           "type": "function",
@@ -3215,6 +4296,32 @@
             }
           ],
           "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "__Allowlist_init",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "__Giver_init",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
         },
         {
           "type": "function",
@@ -3574,13 +4681,24 @@
             }
           ],
           "anonymous": false
+        },
+        {
+          "type": "error",
+          "name": "NOT_ALLOWED",
+          "inputs": [
+            {
+              "name": "message",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
         }
       ]
     },
     {
       "contractName": "ERC721CookieJar6551",
-      "contractAddress": "0xFd78d95f274d79037Ea08a13a22005E2E1772204",
-      "transactionHash": "0xc95a6991d814fcc35b03178b8d41b61686c8737ef18ce153c6900eb9d884a601",
+      "contractAddress": "0x92564a3a1030883f4081487cb4c61d567e52ebfe",
+      "transactionHash": "0x78f19fd10d2c3a8ae6ea81cc11e0f7280d4c4ac8b5e0f4d265a9ff066eb77643",
       "abi": [
         {
           "type": "function",
@@ -3620,6 +4738,32 @@
             }
           ],
           "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "__Allowlist_init",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "__Giver_init",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
         },
         {
           "type": "function",
@@ -3966,13 +5110,24 @@
             }
           ],
           "anonymous": false
+        },
+        {
+          "type": "error",
+          "name": "NOT_ALLOWED",
+          "inputs": [
+            {
+              "name": "message",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
         }
       ]
     },
     {
       "contractName": "ListCookieJar6551",
-      "contractAddress": "0x75269cD2926887c5158Ee6385Aee00d0F83C7296",
-      "transactionHash": "0x7c68d78b2c7fd001e4c536b32432c13ae3b67d33c001b97a99d13f82805263a7",
+      "contractAddress": "0x4a72b05e2577114c887fd7a5606aa5e1147463cb",
+      "transactionHash": "0x7e5440b387c09004f88d40e0216c6d4bd67bfee04c435442d8770f34334e88ff",
       "abi": [
         {
           "type": "function",
@@ -4015,17 +5170,43 @@
         },
         {
           "type": "function",
+          "name": "__Allowlist_init",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "__Giver_init",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
           "name": "allowList",
           "inputs": [
             {
-              "name": "allowed",
+              "name": "",
               "type": "address",
               "internalType": "address"
             }
           ],
           "outputs": [
             {
-              "name": "exists",
+              "name": "",
               "type": "bool",
               "internalType": "bool"
             }
@@ -4400,13 +5581,40 @@
             }
           ],
           "anonymous": false
+        },
+        {
+          "type": "error",
+          "name": "ARRAY_LENGTH_MISMATCH",
+          "inputs": [
+            {
+              "name": "a",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "b",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "NOT_ALLOWED",
+          "inputs": [
+            {
+              "name": "message",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
         }
       ]
     },
     {
       "contractName": "OpenCookieJar6551",
-      "contractAddress": "0x51f30901059ddc2DA6ddcA9eD2D6377C8592242F",
-      "transactionHash": "0xa77814905e0124bd89e17044ca4fd873b37b39cf71820a95de0d360513197758",
+      "contractAddress": "0xf24db58d03f26a5daeefce825a19136e2582ad49",
+      "transactionHash": "0xe7fe9b04bb8f1ec0857b595599de474679f3b3dd3326a9a5c817ffe09459cbf1",
       "abi": [
         {
           "type": "function",
@@ -4446,6 +5654,32 @@
             }
           ],
           "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "__Allowlist_init",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "__Giver_init",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
         },
         {
           "type": "function",
@@ -4539,7 +5773,7 @@
           "name": "isAllowList",
           "inputs": [
             {
-              "name": "",
+              "name": "user",
               "type": "address",
               "internalType": "address"
             }
@@ -4779,19 +6013,472 @@
             }
           ],
           "anonymous": false
+        },
+        {
+          "type": "error",
+          "name": "NOT_ALLOWED",
+          "inputs": [
+            {
+              "name": "message",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "contractName": "HatsCookieJar6551",
+      "contractAddress": "0xfc30b3bb071632b031f4fd3036316f3a37959ff7",
+      "transactionHash": "0x8026e49213b46e1d8208f043c7394ab938626e8160c4e1ae78b2f320d734662a",
+      "abi": [
+        {
+          "type": "function",
+          "name": "HATS_ADDRESS",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "PERC_POINTS",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "SUSTAINABILITY_ADDR",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "SUSTAINABILITY_FEE",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "__Allowlist_init",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "__Giver_init",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "assessReason",
+          "inputs": [
+            {
+              "name": "cookieUid",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "message",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "isGood",
+              "type": "bool",
+              "internalType": "bool"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "canClaim",
+          "inputs": [
+            {
+              "name": "user",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "allowed",
+              "type": "bool",
+              "internalType": "bool"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "claims",
+          "inputs": [
+            {
+              "name": "claimer",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "dateTime",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "cookieAmount",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "cookieToken",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "hatId",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "isAllowList",
+          "inputs": [
+            {
+              "name": "user",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "owner",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "periodLength",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "reachInJar",
+          "inputs": [
+            {
+              "name": "reason",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "reachInJar",
+          "inputs": [
+            {
+              "name": "cookieMonster",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "reason",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "renounceOwnership",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setConfig",
+          "inputs": [
+            {
+              "name": "_periodLength",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "_cookieAmount",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "_cookieToken",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setUp",
+          "inputs": [
+            {
+              "name": "_initializationParams",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "target",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "transferOwnership",
+          "inputs": [
+            {
+              "name": "newOwner",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "event",
+          "name": "AssessReason",
+          "inputs": [
+            {
+              "name": "cookieUid",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            },
+            {
+              "name": "message",
+              "type": "string",
+              "indexed": false,
+              "internalType": "string"
+            },
+            {
+              "name": "isGood",
+              "type": "bool",
+              "indexed": false,
+              "internalType": "bool"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "GiveCookie",
+          "inputs": [
+            {
+              "name": "cookieUid",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            },
+            {
+              "name": "cookieMonster",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "indexed": false,
+              "internalType": "uint256"
+            },
+            {
+              "name": "reason",
+              "type": "string",
+              "indexed": false,
+              "internalType": "string"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "Initialized",
+          "inputs": [
+            {
+              "name": "version",
+              "type": "uint8",
+              "indexed": false,
+              "internalType": "uint8"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "OwnershipTransferred",
+          "inputs": [
+            {
+              "name": "previousOwner",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            },
+            {
+              "name": "newOwner",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "Setup",
+          "inputs": [
+            {
+              "name": "initializationParams",
+              "type": "bytes",
+              "indexed": false,
+              "internalType": "bytes"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "error",
+          "name": "NOT_ALLOWED",
+          "inputs": [
+            {
+              "name": "message",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
         }
       ]
     },
     {
       "contractName": "AccountERC6551",
-      "contractAddress": "0x8AB5bb183D111C333f041a0EeFf552De762A2394",
-      "transactionHash": "0xba841e0291683e55febc861e4a427ba15a8a311c2bc8152c964bc6d1dec96c98",
+      "contractAddress": "0xfd8ee663fa65caccf4b488252074b07834d82882",
+      "transactionHash": "0x0e7969877e0b4000a380a539b0fc27c612b2e1ee301b07dc2520e80401fe3ca2",
       "abi": null
     },
     {
       "contractName": "CookieNFT",
-      "contractAddress": "0xAc9e597dFbA157f19E240a31A667437D0F77e69A",
-      "transactionHash": "0xea8a24afd28714d4c2bd7ca1689447c620240200e61cf464d901e17869c45f3b",
+      "contractAddress": "0xf427b9cc56552aae45ffce75ce656723a9c22ac6",
+      "transactionHash": "0x85c2f7bfdb828fe4ad04607a422e5d4dfde1430d5f2baab069c100295790a244",
       "abi": [
         {
           "type": "constructor",
@@ -4863,19 +6550,6 @@
           ],
           "outputs": [],
           "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "cap",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256"
-            }
-          ],
-          "stateMutability": "view"
         },
         {
           "type": "function",
@@ -5316,6 +6990,22 @@
             }
           ],
           "anonymous": false
+        },
+        {
+          "type": "error",
+          "name": "INVALID_TOKEN_ID",
+          "inputs": [
+            {
+              "name": "tokenId",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "NOT_APPROVED_OR_OWNER",
+          "inputs": []
         }
       ]
     }

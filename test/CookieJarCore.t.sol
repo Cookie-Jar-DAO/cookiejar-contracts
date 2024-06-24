@@ -10,17 +10,29 @@ import { Strings } from "@openzeppelin/contracts/utils/Strings.sol";
 import { CookieUtils } from "src/lib/CookieUtils.sol";
 import { ICookieJar } from "src/interfaces/ICookieJar.sol";
 
-contract CookieJarHarnass is CookieJarCore {
-    constructor(bytes memory initParams) {
-        setUp(initParams);
+contract MockCookieJarCore is CookieJarCore {
+    function __Giver_init(bytes memory _initializationParams) public override { }
+
+    function __Allowlist_init(bytes memory _initializationParams) public override { }
+
+    function isAllowlist(address user) public view returns (bool) {
+        return _isAllowList(user);
     }
 
-    function setUp(bytes memory initParams) public override initializer {
-        super.setUp(initParams);
+    function _isAllowList(address user) internal view override returns (bool) {
+        return true;
     }
 
-    function exposed_isAllowList(address user) external view returns (bool) {
-        return isAllowList(user);
+    function _giveCookie(
+        address cookieMonster,
+        uint256 amount,
+        address cookieToken
+    )
+        internal
+        override
+        returns (bytes32 cookieUid)
+    {
+        cookieUid = keccak256("cookieUid");
     }
 }
 
@@ -29,7 +41,7 @@ contract CookieJarCoreTest is PRBTest, StdCheats {
     address internal bob = makeAddr("bob");
     address internal molochDAO = vm.addr(666);
 
-    CookieJarHarnass internal cookieJar;
+    MockCookieJarCore internal cookieJar;
     ERC20Mintable internal cookieToken = new ERC20Mintable("Mock", "MCK");
     TestAvatar internal testAvatar = new TestAvatar();
 
@@ -48,14 +60,15 @@ contract CookieJarCoreTest is PRBTest, StdCheats {
         // address _cookieToken
         bytes memory initParams = abi.encode(address(testAvatar), 3600, cookieAmount, address(cookieToken));
 
-        cookieJar = new CookieJarHarnass(initParams);
+        cookieJar = new MockCookieJarCore();
+        cookieJar.setUp(initParams);
 
         // Enable module
         testAvatar.enableModule(address(cookieJar));
     }
 
     function testIsAllowList() external {
-        assertTrue(cookieJar.exposed_isAllowList(msg.sender));
+        assertTrue(cookieJar.isAllowList(msg.sender));
     }
 
     function testCanClaim() external {

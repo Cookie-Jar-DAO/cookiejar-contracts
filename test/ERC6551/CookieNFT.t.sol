@@ -23,6 +23,7 @@ import { ERC20CookieJar6551 } from "src/ERC6551/ERC20CookieJar6551.sol";
 import { ERC721CookieJar6551 } from "src/ERC6551/ERC721CookieJar6551.sol";
 import { ListCookieJar6551 } from "src/ERC6551/ListCookieJar6551.sol";
 import { OpenCookieJar6551 } from "src/ERC6551/OpenCookieJar6551.sol";
+import { NOT_APPROVED_OR_OWNER } from "src/lib/Errors.sol";
 
 contract CookieNFTTest is PRBTest, StdCheats {
     address internal alice = makeAddr("alice");
@@ -62,8 +63,6 @@ contract CookieNFTTest is PRBTest, StdCheats {
         cookieJarSummoner.setProxyFactory(address(moduleProxyFactory));
 
         cookieJarNFT = new CookieNFT(address(accountRegistry), address(implementation), address(cookieJarSummoner));
-
-        vm.mockCall(0x000000000000cd17345801aa8147b8D3950260FF, abi.encodeWithSelector(IPoster.post.selector), "");
     }
 
     function testCookieMint() public returns (address account, address cookieJar, uint256 tokenId) {
@@ -86,19 +85,23 @@ contract CookieNFTTest is PRBTest, StdCheats {
 
     function testCookieNftTransfer() public {
         (address account, address cookieJar, uint256 tokenId) = testCookieMint();
-        vm.prank(alice);
+        AccountERC6551 accountContract = AccountERC6551(payable(account));
+        ListCookieJar6551 listCookieJarContract = ListCookieJar6551(cookieJar);
+
+        vm.startPrank(alice);
+        accountContract.executeCall(
+            cookieJar, 0, abi.encodeWithSelector(listCookieJarContract.setAllowList.selector, bob, true)
+        );
+
         cookieJarNFT.transferFrom(alice, bob, tokenId);
         assertEq(cookieJarNFT.balanceOf(bob), 1);
         assertEq(cookieJarNFT.balanceOf(alice), 0);
 
-        AccountERC6551 accountContract = AccountERC6551(payable(account));
-        ListCookieJar6551 listCookieJarContract = ListCookieJar6551(cookieJar);
-
-        vm.prank(alice);
         vm.expectRevert(AccountERC6551.NotAuthorized.selector);
         accountContract.executeCall(
-            cookieJar, 0, abi.encodeWithSelector(listCookieJarContract.setAllowList.selector, bob, true)
+            cookieJar, 0, abi.encodeWithSelector(listCookieJarContract.setAllowList.selector, bob, false)
         );
+        vm.stopPrank();
     }
 
     function testCookieNftTokenURI() public {
@@ -110,7 +113,7 @@ contract CookieNFTTest is PRBTest, StdCheats {
     function testCookieNftBurn() public {
         (,, uint256 tokenId) = testCookieMint();
 
-        vm.expectRevert("ERC721: caller is not token owner or approved");
+        vm.expectRevert(NOT_APPROVED_OR_OWNER.selector);
         cookieJarNFT.burn(tokenId);
 
         vm.prank(alice);

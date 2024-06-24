@@ -8,6 +8,7 @@ import { IERC20 } from "@openzeppelin/contracts/interfaces/IERC20.sol";
 
 import { CookieJarCore } from "src/core/CookieJarCore.sol";
 import { CookieUtils } from "src/lib/CookieUtils.sol";
+import { CALL_FAILED } from "src/lib/Errors.sol";
 
 contract CookieJarFactory is Ownable {
     ModuleProxyFactory internal moduleProxyFactory;
@@ -49,6 +50,9 @@ contract CookieJarFactory is Ownable {
     // Mapping
     // 7. address[] _allowlist
 
+    // Hats
+    // 7. address _hatId
+
     // Details
     // {
     //   "type":"Baal",
@@ -81,16 +85,20 @@ contract CookieJarFactory is Ownable {
         returns (address)
     {
         if (donationAmount > 0 && donationToken != address(0)) {
-            require(
-                IERC20(donationToken).transferFrom(msg.sender, address(SUSTAINABILITY_ADDR), donationAmount),
-                "CookieJarFactory: donation failed"
-            );
+            if (IERC20(donationToken).transferFrom(msg.sender, address(SUSTAINABILITY_ADDR), donationAmount)) {
+                emit DonationReceived(donationToken, donationAmount);
+            } else {
+                revert CALL_FAILED("CookieJarFactory: donation failed");
+            }
+
             emit DonationReceived(donationToken, donationAmount);
         }
 
         if (msg.value > 0) {
             (bool success,) = SUSTAINABILITY_ADDR.call{ value: msg.value }("");
-            require(success, "CookieJarFactory: donation transfer failed");
+            if (!success) {
+                revert CALL_FAILED("CookieJarFactory: donation failed");
+            }
             emit DonationReceived(address(0), msg.value);
         }
 

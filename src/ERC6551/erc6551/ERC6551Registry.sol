@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.19;
 
-import {Create2} from "@openzeppelin/contracts/utils/Create2.sol";
+import { Create2 } from "@openzeppelin/contracts/utils/Create2.sol";
 
 import "src/lib/ERC6551BytecodeLib.sol";
 
@@ -14,7 +14,6 @@ import "src/ERC6551/erc6551/ERC6551Registry.sol";
  * @dev Determines the address for each token bound account and performs deployment of accounts
  * @author https://github.com/ethereum/EIPs/pull/6551/files
  */
-
 contract AccountRegistry is IRegistry {
     error InitializationFailed();
 
@@ -25,7 +24,10 @@ contract AccountRegistry is IRegistry {
         uint256 tokenId,
         uint256 salt,
         bytes calldata initData
-    ) external returns (address) {
+    )
+        external
+        returns (address)
+    {
         bytes memory code = ERC6551BytecodeLib.getCreationCode(implementation, chainId, tokenContract, tokenId, salt);
 
         address _account = Create2.computeAddress(bytes32(salt), keccak256(code));
@@ -44,7 +46,13 @@ contract AccountRegistry is IRegistry {
         return _account;
     }
 
-    function account(address implementation, uint256 chainId, address tokenContract, uint256 tokenId, uint256 salt)
+    function account(
+        address implementation,
+        uint256 chainId,
+        address tokenContract,
+        uint256 tokenId,
+        uint256 salt
+    )
         external
         view
         returns (address)

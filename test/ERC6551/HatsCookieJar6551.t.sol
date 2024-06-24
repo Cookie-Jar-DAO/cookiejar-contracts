@@ -18,9 +18,11 @@ import { CookieJarFactory } from "src/factory/CookieJarFactory.sol";
 
 import { ModuleProxyFactory } from "@gnosis.pm/zodiac/contracts/factory/ModuleProxyFactory.sol";
 
-import { ERC20CookieJar6551 } from "src/ERC6551/ERC20CookieJar6551.sol";
+import { HatsCookieJar6551 } from "src/ERC6551/HatsCookieJar6551.sol";
 
-contract ERC20CookieJar6551Test is PRBTest, StdCheats {
+import { IHats } from "src/interfaces/IHats.sol";
+
+contract HatsCookieJar6551Test is PRBTest, StdCheats {
     address internal alice = makeAddr("alice");
     address internal bob = makeAddr("bob");
     address internal owner = makeAddr("owner");
@@ -32,11 +34,15 @@ contract ERC20CookieJar6551Test is PRBTest, StdCheats {
     CookieJarFactory public cookieJarSummoner;
     CookieNFT public cookieJarNFT;
 
-    ERC20CookieJar6551 public erc20CookieJarImpl;
-
-    ERC20Mintable internal mockErc20 = new ERC20Mintable("Mock", "MCK");
+    HatsCookieJar6551 public hatsCookieJar6551Impl;
 
     ModuleProxyFactory public moduleProxyFactory;
+
+    /// @notice https://docs.hatsprotocol.xyz/using-hats/hats-protocol-supported-chains
+    /// @notice The address of the Hats Protocol contract.
+    address public constant HATS_ADDRESS = 0x3bc1A0Ad72417f2d411118085256fC53CBdDd137;
+
+    uint256 public hatId;
 
     function setUp() public {
         implementation = new AccountERC6551();
@@ -44,7 +50,7 @@ contract ERC20CookieJar6551Test is PRBTest, StdCheats {
 
         cookieJarSummoner = new CookieJarFactory(owner);
 
-        erc20CookieJarImpl = new ERC20CookieJar6551();
+        hatsCookieJar6551Impl = new HatsCookieJar6551();
 
         moduleProxyFactory = new ModuleProxyFactory();
 
@@ -58,14 +64,12 @@ contract ERC20CookieJar6551Test is PRBTest, StdCheats {
         uint256 cookieAmount = 1e16;
         uint256 periodLength = 3600;
         address cookieToken = address(cookieJarImp);
-        address[] memory allowList = new address[](0);
         string memory details =
             "{\"type\":\"List\",\"name\":\"Moloch Pastries\",\"description\":\"This is where you add some more content\",\"link\":\"app.daohaus.club/0x64/0x0....666\"}";
 
-        bytes memory _initializer =
-            abi.encode(alice, periodLength, cookieAmount, cookieToken, address(mockErc20), 1 ether);
+        bytes memory _initializer = abi.encode(alice, periodLength, cookieAmount, cookieToken, hatId);
         (account, cookieJar, tokenId) =
-            cookieJarNFT.cookieMint(address(erc20CookieJarImpl), _initializer, details, address(0), 0);
+            cookieJarNFT.cookieMint(address(hatsCookieJar6551Impl), _initializer, details, address(0), 0);
 
         (bool sent,) = payable(account).call{ value: 1 ether }("");
         require(sent, "Failed to send Ether?");
@@ -73,19 +77,23 @@ contract ERC20CookieJar6551Test is PRBTest, StdCheats {
         assertEq(cookieJarNFT.balanceOf(alice), 1);
     }
 
-    function testCookieErc20Withdraw() public {
+    function testCookieHatsWithdraw() public {
         (address account, address cookieJar,) = testCookieMint();
-        AccountERC6551 accountContract = AccountERC6551(payable(account));
-        ERC20CookieJar6551 erc20CookieJarContract = ERC20CookieJar6551(cookieJar);
+        HatsCookieJar6551 hatsCookieJar = HatsCookieJar6551(cookieJar);
 
         vm.startPrank(bob);
 
+        vm.mockCall(HATS_ADDRESS, abi.encodeWithSelector(IHats.isWearerOfHat.selector), abi.encode(false));
+
         vm.expectRevert(abi.encodeWithSignature("NOT_ALLOWED(string)", "not a member"));
-        ERC20CookieJar6551(cookieJar).reachInJar(bob, "test");
+        hatsCookieJar.reachInJar(bob, "test");
 
-        mockErc20.mint(bob, 1 ether);
+        assertEq(account.balance, 1e18);
 
-        ERC20CookieJar6551(cookieJar).reachInJar(bob, "test");
+        vm.mockCall(HATS_ADDRESS, abi.encodeWithSelector(IHats.isWearerOfHat.selector), abi.encode(true));
+
+        hatsCookieJar.reachInJar(bob, "test");
+
         // new balance should be 1 eth minus cookie amount
         assertEq(account.balance, 1e18 - 1e16);
 

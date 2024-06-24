@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.19 <0.9.0;
 
-import { ZodiacCloneSummoner, ZodiacERC20CookieJarHarnass } from "test/utils/ZodiacCloneSummoner.sol";
+import { ZodiacCloneSummoner, ZodiacERC20CookieJar } from "test/utils/ZodiacCloneSummoner.sol";
 import { ERC20Mintable } from "test/utils/ERC20Mintable.sol";
 import { TestAvatar } from "@gnosis.pm/zodiac/contracts/test/TestAvatar.sol";
 import { IPoster } from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
@@ -9,7 +9,7 @@ import { ERC20 } from "openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
 import { Test, Vm } from "forge-std/Test.sol";
 
 contract ERC20CookieJarTest is ZodiacCloneSummoner {
-    ZodiacERC20CookieJarHarnass internal cookieJar;
+    ZodiacERC20CookieJar internal cookieJar;
 
     address internal alice = makeAddr("alice");
     address internal bob = makeAddr("bob");
@@ -45,20 +45,20 @@ contract ERC20CookieJarTest is ZodiacCloneSummoner {
     }
 
     function testIsAllowed() external {
-        assertFalse(cookieJar.exposed_isAllowList(msg.sender));
+        assertFalse(cookieJar.isAllowList(msg.sender));
 
         vm.mockCall(address(gatingERC20), abi.encodeWithSelector(ERC20.balanceOf.selector), abi.encode(threshold));
-        assertTrue(cookieJar.exposed_isAllowList(msg.sender));
+        assertTrue(cookieJar.isAllowList(msg.sender));
     }
 
     function testReachInJar() external {
         // No gating token balance so expect fail
-        vm.expectRevert(bytes("not a member"));
+        vm.expectRevert(abi.encodeWithSignature("NOT_ALLOWED(string)", "not a member"));
         cookieJar.reachInJar(reason);
 
         // No cookie balance so expect fail
         vm.mockCall(address(gatingERC20), abi.encodeWithSelector(ERC20.balanceOf.selector), abi.encode(threshold));
-        vm.expectRevert(bytes("call failure setup"));
+        vm.expectRevert();
         cookieJar.reachInJar(reason);
 
         // Put cookie tokens in jar

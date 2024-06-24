@@ -13,9 +13,17 @@ interface IRegistry {
         uint256 tokenId,
         uint256 seed,
         bytes calldata initData
-    ) external returns (address);
+    )
+        external
+        returns (address);
 
-    function account(address implementation, uint256 chainId, address tokenContract, uint256 tokenId, uint256 salt)
+    function account(
+        address implementation,
+        uint256 chainId,
+        address tokenContract,
+        uint256 tokenId,
+        uint256 salt
+    )
         external
         view
         returns (address);

@@ -3,9 +3,8 @@ pragma solidity >=0.8.19 <0.9.0;
 
 import { ERC20Mintable } from "test/utils/ERC20Mintable.sol";
 import { TestAvatar } from "@gnosis.pm/zodiac/contracts/test/TestAvatar.sol";
-import { IPoster } from "@daohaus/baal-contracts/contracts/interfaces/IPoster.sol";
 
-import { ZodiacCloneSummoner, ZodiacListCookieJarHarnass } from "test/utils/ZodiacCloneSummoner.sol";
+import { ZodiacCloneSummoner, ZodiacListCookieJar } from "test/utils/ZodiacCloneSummoner.sol";
 import { Test, Vm } from "forge-std/Test.sol";
 
 contract ListCookieJarTest is ZodiacCloneSummoner {
@@ -14,7 +13,7 @@ contract ListCookieJarTest is ZodiacCloneSummoner {
     address internal molochDAO = vm.addr(666);
     address internal testSafe = vm.addr(1337);
 
-    ZodiacListCookieJarHarnass internal cookieJar;
+    ZodiacListCookieJar internal cookieJar;
     ERC20Mintable internal cookieToken = new ERC20Mintable("Mock", "MCK");
     TestAvatar internal testAvatar = new TestAvatar();
 
@@ -45,21 +44,21 @@ contract ListCookieJarTest is ZodiacCloneSummoner {
     }
 
     function testIsAllowed() external {
-        assertFalse(cookieJar.exposed_isAllowList(msg.sender));
+        assertFalse(cookieJar.isAllowList(msg.sender));
 
-        assertTrue(cookieJar.exposed_isAllowList(alice));
+        assertTrue(cookieJar.isAllowList(alice));
     }
 
     function testReachInJar() external {
         // Anon puts their hand in the jar
-        vm.expectRevert(bytes("not a member"));
+        vm.expectRevert(abi.encodeWithSignature("NOT_ALLOWED(string)", "not a member"));
         cookieJar.reachInJar(reason);
 
         // Alice puts her hand in the jar
         vm.startPrank(alice);
 
         // No cookie balance so expect fail
-        vm.expectRevert(bytes("call failure setup"));
+        vm.expectRevert();
         cookieJar.reachInJar(reason);
 
         // Put cookie tokens in jar
