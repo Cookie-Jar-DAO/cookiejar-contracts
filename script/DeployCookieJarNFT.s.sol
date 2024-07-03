@@ -47,7 +47,7 @@ contract DeployCookieJarNFT is Script {
     address internal nft;
 
     // Deterministic deployment
-    bytes32 salt = keccak256("v0.6");
+    bytes32 salt = keccak256("v1.0");
 
     function setUp() public virtual {
         string memory mnemonic = vm.envString("MNEMONIC");
@@ -68,7 +68,7 @@ contract DeployCookieJarNFT is Script {
         vm.startBroadcast(deployer);
 
         // Get factory address
-        cookieJarFactory = block.chainid == 11_155_111 ? 0x10864D3b5552735fD8B1Ddd6d5BddcF437e26Ae9 : address(0);
+        cookieJarFactory = 0x4c941CAfAc0B6D67a6c4eE5399927AA889aAb780;
 
         if (cookieJarFactory == address(0)) {
             vm.stopBroadcast();
@@ -94,6 +94,7 @@ contract DeployCookieJarNFT is Script {
         listCookieJar = address(new ListCookieJar6551{ salt: salt }());
 
         // Open
+        console.log("Deploying OpenCookieJar");
         openCookieJar = address(new OpenCookieJar6551{ salt: salt }());
 
         // Hats

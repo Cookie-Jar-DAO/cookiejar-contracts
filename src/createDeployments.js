@@ -32,6 +32,7 @@ function processFile(filePath, chainId) {
   data.transactions.forEach((transaction) => {
     if (
       transaction.contractName &&
+      transaction.contractName.includes("Cookie") &&
       transaction.contractAddress &&
       transaction.hash &&
       (transaction.transactionType === "CREATE2" ||

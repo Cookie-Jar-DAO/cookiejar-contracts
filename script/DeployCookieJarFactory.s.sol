@@ -24,7 +24,7 @@ contract DeployCookieJarFactory is Script {
     address internal moduleProxyFactory;
 
     // Deterministic deployment
-    bytes32 salt = keccak256("v0.4");
+    bytes32 salt = keccak256("v1.0");
 
     function setUp() public virtual {
         string memory mnemonic = vm.envString("MNEMONIC");
@@ -32,13 +32,10 @@ contract DeployCookieJarFactory is Script {
 
         (deployer,) = deriveRememberKey(mnemonic, 0);
 
-        // Optimism
-        if (block.chainid == 10) moduleProxyFactory = 0xC22834581EbC8527d974F8a1c97E1bEA4EF910BC;
-
         // Hardhat
         if (block.chainid == 31_337) moduleProxyFactory = address(new ModuleProxyFactory());
         // Default
-        else moduleProxyFactory = 0x00000000000DC7F163742Eb4aBEf650037b1f588;
+        else moduleProxyFactory = 0xC22834581EbC8527d974F8a1c97E1bEA4EF910BC;
     }
 
     function run() public {
