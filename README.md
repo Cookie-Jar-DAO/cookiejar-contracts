@@ -59,88 +59,133 @@ sequenceDiagram
 
 The following table lists the addresses of the deployed contracts:
 
+## Arbitrum
+
+| Setup              | Address                                                                                                                         |
+|--------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| Cookie Jar Factory | [`0x4c941cafac0b6d67a6c4ee5399927aa889aab780`](https://arbiscan.io/address/0x4c941cafac0b6d67a6c4ee5399927aa889aab780) |
+
+| Contract          | Address                                                                                                                         |
+|-------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| NFT               | [`0x9fcbcda3decd4a0d6dd7347755762439aa6c1832`](https://arbiscan.io/address/0x9fcbcda3decd4a0d6dd7347755762439aa6c1832) |
+| Baal Cookie Jar   | [`0x8b1ac5a3fea9eebbece920c98171d19e0b048029`](https://arbiscan.io/address/0x8b1ac5a3fea9eebbece920c98171d19e0b048029) |
+| ERC20 Cookie Jar  | [`0x0b963b444adb4c0056647377149ea33ff2bdc077`](https://arbiscan.io/address/0x0b963b444adb4c0056647377149ea33ff2bdc077) |
+| ERC721 Cookie Jar | [`0xceb1a0695db4a521573439eabe76caacf82c90ed`](https://arbiscan.io/address/0xceb1a0695db4a521573439eabe76caacf82c90ed) |
+| List Cookie Jar   | [`0xc4a4e1f354f6b04a429c6436cdebb5fe0aa071fe`](https://arbiscan.io/address/0xc4a4e1f354f6b04a429c6436cdebb5fe0aa071fe) |
+| Open Cookie Jar   | [`0x6baf21f2179c98a503193d4f09ad3cb0c3bdb797`](https://arbiscan.io/address/0x6baf21f2179c98a503193d4f09ad3cb0c3bdb797) |
+| Hats Cookie Jar   | [`0x2b5a30b2e626ba38f2a910cb4fc20e12522eb76a`](https://arbiscan.io/address/0x2b5a30b2e626ba38f2a910cb4fc20e12522eb76a) |
+
+| Safe Module Contracts    | Address                                                                                                                         |
+|--------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| Zodiac Baal Cookie Jar   | [`0xe44a0e469667e5ea677721746b0439fe70434b6f`](https://arbiscan.io/address/0xe44a0e469667e5ea677721746b0439fe70434b6f) |
+| Zodiac ERC20 Cookie Jar  | [`0x008138711b2dff79d45e1ee8ad29b03c3c907b20`](https://arbiscan.io/address/0x008138711b2dff79d45e1ee8ad29b03c3c907b20) |
+| Zodiac ERC721 Cookie Jar | [`0x997e3fd50a40ce41b68b2eb9d5d5c5cbd3d64f9c`](https://arbiscan.io/address/0x997e3fd50a40ce41b68b2eb9d5d5c5cbd3d64f9c) |
+| Zodiac List Cookie Jar   | [`0x667afc73fbd1fdd2de327456a2473a48eee04e78`](https://arbiscan.io/address/0x667afc73fbd1fdd2de327456a2473a48eee04e78) |
+| Zodiac Open Cookie Jar   | [`0x8b5e3f92a992752ddf270f43b35d8f8123560e03`](https://arbiscan.io/address/0x8b5e3f92a992752ddf270f43b35d8f8123560e03) |
+| Zodiac Hats Cookie Jar   | [`0x7de5cc168dfee378c5c2a8ecaf529cbea0bb0768`](https://arbiscan.io/address/0x7de5cc168dfee378c5c2a8ecaf529cbea0bb0768) |
+
+## Base
+
+| Setup              | Address                                                                                                                         |
+|--------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| Cookie Jar Factory | [`0x9fcbcda3decd4a0d6dd7347755762439aa6c1832`](https://basescan.org/address/0x9fcbcda3decd4a0d6dd7347755762439aa6c1832) |
+
+| Contract          | Address                                                                                                                         |
+|-------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| NFT               | [`0x9fcbcda3decd4a0d6dd7347755762439aa6c1832`](https://basescan.org/address/0x9fcbcda3decd4a0d6dd7347755762439aa6c1832) |
+| Baal Cookie Jar   | [`0x8b1ac5a3fea9eebbece920c98171d19e0b048029`](https://basescan.org/address/0x8b1ac5a3fea9eebbece920c98171d19e0b048029) |
+| ERC20 Cookie Jar  | [`0x0b963b444adb4c0056647377149ea33ff2bdc077`](https://basescan.org/address/0x0b963b444adb4c0056647377149ea33ff2bdc077) |
+| ERC721 Cookie Jar | [`0xceb1a0695db4a521573439eabe76caacf82c90ed`](https://basescan.org/address/0xceb1a0695db4a521573439eabe76caacf82c90ed) |
+| List Cookie Jar   | [`0xc4a4e1f354f6b04a429c6436cdebb5fe0aa071fe`](https://basescan.org/address/0xc4a4e1f354f6b04a429c6436cdebb5fe0aa071fe) |
+| Open Cookie Jar   | [`0x6baf21f2179c98a503193d4f09ad3cb0c3bdb797`](https://basescan.org/address/0x6baf21f2179c98a503193d4f09ad3cb0c3bdb797) |
+| Hats Cookie Jar   | [`0x2b5a30b2e626ba38f2a910cb4fc20e12522eb76a`](https://basescan.org/address/0x2b5a30b2e626ba38f2a910cb4fc20e12522eb76a) |
+
+| Safe Module Contracts    | Address                                                                                                                         |
+|--------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| Zodiac Baal Cookie Jar   | [`0xe44a0e469667e5ea677721746b0439fe70434b6f`](https://basescan.org/address/0xe44a0e469667e5ea677721746b0439fe70434b6f) |
+| Zodiac ERC20 Cookie Jar  | [`0x008138711b2dff79d45e1ee8ad29b03c3c907b20`](https://basescan.org/address/0x008138711b2dff79d45e1ee8ad29b03c3c907b20) |
+| Zodiac ERC721 Cookie Jar | [`0x997e3fd50a40ce41b68b2eb9d5d5c5cbd3d64f9c`](https://basescan.org/address/0x997e3fd50a40ce41b68b2eb9d5d5c5cbd3d64f9c) |
+| Zodiac List Cookie Jar   | [`0x667afc73fbd1fdd2de327456a2473a48eee04e78`](https://basescan.org/address/0x667afc73fbd1fdd2de327456a2473a48eee04e78) |
+| Zodiac Open Cookie Jar   | [`0x8b5e3f92a992752ddf270f43b35d8f8123560e03`](https://basescan.org/address/0x8b5e3f92a992752ddf270f43b35d8f8123560e03) |
+| Zodiac Hats Cookie Jar   | [`0x7de5cc168dfee378c5c2a8ecaf529cbea0bb0768`](https://basescan.org/address/0x7de5cc168dfee378c5c2a8ecaf529cbea0bb0768) |
+
+
 ## Gnosis
 
-<!-- | Contract            | Address                                      |
-| ------------------- | -------------------------------------------- |
-| Baal Cookie Jar     | `0x7c1Db931F804271E39b04E68221b71Ca94E9AFa5` |
-| ERC20 Cookie Jar    | `0x85C60D0674e161B7f9d1d40A2A46e4b788E7F057` |
-| ERC721 Cookie Jar   | `0x15f06a6dB8eC8D79Eaa49659210C1c58975a4056` |
-| List Cookie Jar     | `0x226E0601aa8b8CC34519c76Be00A7a6a8a4d97d2` |
-| Open Cookie Jar     | `0x0C7F0fC0ddb95d7099ED97c10A2DE549c03E39F9` |
-| Cookie Jar Factory  | `0xD858ce60102BCEa272a6FA36B2E1770877B8Fa45` |
-| List Cookie Jar6551 | `0xb8858dF24B89d9D17954D763b08b860AD24cfd2d` |
-| Account             | `0xbCe05b4eB846A033559387e0fa62F3D13EEAAECE` |
-| Cookie Jar NFT      | `0xb6F9534F53F3F42a0b25d8ECC290419c98f9f212` | -->
+| Setup              | Address                                                                                                                         |
+|--------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| Cookie Jar Factory | [`0x4c941cafac0b6d67a6c4ee5399927aa889aab780`](https://gnosisscan.io/address/0x4c941cafac0b6d67a6c4ee5399927aa889aab780) |
 
-## Goerli
+| Contract          | Address                                                                                                                         |
+|-------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| NFT               | [`0xff15b1de4921e8832f688f9660c97454ea448a16`](https://gnosisscan.io/address/0xff15b1de4921e8832f688f9660c97454ea448a16) |
+| Baal Cookie Jar   | [`0x8b1ac5a3fea9eebbece920c98171d19e0b048029`](https://gnosisscan.io/address/0x8b1ac5a3fea9eebbece920c98171d19e0b048029) |
+| ERC20 Cookie Jar  | [`0x0b963b444adb4c0056647377149ea33ff2bdc077`](https://gnosisscan.io/address/0x0b963b444adb4c0056647377149ea33ff2bdc077) |
+| ERC721 Cookie Jar | [`0xceb1a0695db4a521573439eabe76caacf82c90ed`](https://gnosisscan.io/address/0xceb1a0695db4a521573439eabe76caacf82c90ed) |
+| List Cookie Jar   | [`0xc4a4e1f354f6b04a429c6436cdebb5fe0aa071fe`](https://gnosisscan.io/address/0xc4a4e1f354f6b04a429c6436cdebb5fe0aa071fe) |
+| Open Cookie Jar   | [`0x6baf21f2179c98a503193d4f09ad3cb0c3bdb797`](https://gnosisscan.io/address/0x6baf21f2179c98a503193d4f09ad3cb0c3bdb797) |
+| Hats Cookie Jar   | [`0x2b5a30b2e626ba38f2a910cb4fc20e12522eb76a`](https://gnosisscan.io/address/0x2b5a30b2e626ba38f2a910cb4fc20e12522eb76a) |
 
-<!-- | Contract            | Address                                      |
-| ------------------- | -------------------------------------------- |
-| Baal Cookie Jar     | `0x30b3Ac0e403e5102c9f0097E9c65f09E5AaF810c` |
-| ERC20 Cookie Jar    | `0x6a2580B166b7132042cCcABa1Fe554fd67440597` |
-| ERC721 Cookie Jar   | `0xf3219beFA8d7ae465fbb0DD227F706972943a84E` |
-| List Cookie Jar     | `0x92c82e6DFd97e54c5f22bE866b863Ce71f26373f` |
-| Open Cookie Jar     | `0x5BeFFF7186811b49d29B5565B161Ea7e3d890CC8` |
-| Cookie Jar Factory  | `0x8f60853B55847d91331106acc303F4A8676efc8B` |
-| List Cookie Jar6551 | `0x92c82e6DFd97e54c5f22bE866b863Ce71f26373f` |
-| Account             | `0x2EC5152cC1706Ba08DaA88FaD23D32f88Bd29988` |
-| Cookie Jar NFT      | `0xEA443B2ac5cDfa0357d92941a2F18d3B4C816b81` | -->
+| Safe Module Contracts    | Address                                                                                                                         |
+|--------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| Zodiac Baal Cookie Jar   | [`0xe44a0e469667e5ea677721746b0439fe70434b6f`](https://gnosisscan.io/address/0xe44a0e469667e5ea677721746b0439fe70434b6f) |
+| Zodiac ERC20 Cookie Jar  | [`0x008138711b2dff79d45e1ee8ad29b03c3c907b20`](https://gnosisscan.io/address/0x008138711b2dff79d45e1ee8ad29b03c3c907b20) |
+| Zodiac ERC721 Cookie Jar | [`0x997e3fd50a40ce41b68b2eb9d5d5c5cbd3d64f9c`](https://gnosisscan.io/address/0x997e3fd50a40ce41b68b2eb9d5d5c5cbd3d64f9c) |
+| Zodiac List Cookie Jar   | [`0x667afc73fbd1fdd2de327456a2473a48eee04e78`](https://gnosisscan.io/address/0x667afc73fbd1fdd2de327456a2473a48eee04e78) |
+| Zodiac Open Cookie Jar   | [`0x8b5e3f92a992752ddf270f43b35d8f8123560e03`](https://gnosisscan.io/address/0x8b5e3f92a992752ddf270f43b35d8f8123560e03) |
+| Zodiac Hats Cookie Jar   | [`0x7de5cc168dfee378c5c2a8ecaf529cbea0bb0768`](https://gnosisscan.io/address/0x7de5cc168dfee378c5c2a8ecaf529cbea0bb0768) |
 
-## Mainnet
-
-<!-- | Contract            | Address                                      |
-| ------------------- | -------------------------------------------- |
-| Baal Cookie Jar     | `0x0000000000000000000000000000000000000000` |
-| ERC20 Cookie Jar    | `0x0000000000000000000000000000000000000000` |
-| ERC721 Cookie Jar   | `0x0000000000000000000000000000000000000000` |
-| List Cookie Jar     | `0x0000000000000000000000000000000000000000` |
-| Open Cookie Jar     | `0x0000000000000000000000000000000000000000` |
-| Cookie Jar Factory  | `0x0000000000000000000000000000000000000000` |
-| List Cookie Jar6551 | `0x0000000000000000000000000000000000000000` |
-| Account             | `0x0000000000000000000000000000000000000000` |
-| Cookie Jar NFT      | `0x0000000000000000000000000000000000000000` | -->
 
 ## Optimism
 
-<!-- | Contract            | Address                                      |
-| ------------------- | -------------------------------------------- |
-| Baal Cookie Jar     | `0x7c1Db931F804271E39b04E68221b71Ca94E9AFa5` |
-| ERC20 Cookie Jar    | `0x85C60D0674e161B7f9d1d40A2A46e4b788E7F057` |
-| ERC721 Cookie Jar   | `0x15f06a6dB8eC8D79Eaa49659210C1c58975a4056` |
-| List Cookie Jar     | `0x226E0601aa8b8CC34519c76Be00A7a6a8a4d97d2` |
-| Open Cookie Jar     | `0x0C7F0fC0ddb95d7099ED97c10A2DE549c03E39F9` |
-| Cookie Jar Factory  | `0xD858ce60102BCEa272a6FA36B2E1770877B8Fa45` |
-| List Cookie Jar6551 | `0x226E0601aa8b8CC34519c76Be00A7a6a8a4d97d2` |
-| Account             | `0x2676e97a832F3b7a674732f5F4222b85eDEDD9Df` |
-| Cookie Jar NFT      | `0x2c500E43A070F6Fb6c72a41F3D6BcEB4De3FcCA1` | -->
+| Setup              | Address                                                                                                                         |
+|--------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| Cookie Jar Factory | [`0x4c941cafac0b6d67a6c4ee5399927aa889aab780`](https://optimistic.etherscan.io/address/0x4c941cafac0b6d67a6c4ee5399927aa889aab780) |
+
+| Contract          | Address                                                                                                                         |
+|-------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| NFT               | [`0xca1034ac73eb862fb6d436f9fe5954766243884c`](https://optimistic.etherscan.io/address/0xca1034ac73eb862fb6d436f9fe5954766243884c) |
+| Baal Cookie Jar   | [`0x8b1ac5a3fea9eebbece920c98171d19e0b048029`](https://optimistic.etherscan.io/address/0x8b1ac5a3fea9eebbece920c98171d19e0b048029) |
+| ERC20 Cookie Jar  | [`0x0b963b444adb4c0056647377149ea33ff2bdc077`](https://optimistic.etherscan.io/address/0x0b963b444adb4c0056647377149ea33ff2bdc077) |
+| ERC721 Cookie Jar | [`0xceb1a0695db4a521573439eabe76caacf82c90ed`](https://optimistic.etherscan.io/address/0xceb1a0695db4a521573439eabe76caacf82c90ed) |
+| List Cookie Jar   | [`0xc4a4e1f354f6b04a429c6436cdebb5fe0aa071fe`](https://optimistic.etherscan.io/address/0xc4a4e1f354f6b04a429c6436cdebb5fe0aa071fe) |
+| Open Cookie Jar   | [`0x6baf21f2179c98a503193d4f09ad3cb0c3bdb797`](https://optimistic.etherscan.io/address/0x6baf21f2179c98a503193d4f09ad3cb0c3bdb797) |
+| Hats Cookie Jar   | [`0x2b5a30b2e626ba38f2a910cb4fc20e12522eb76a`](https://optimistic.etherscan.io/address/0x2b5a30b2e626ba38f2a910cb4fc20e12522eb76a) |
+
+| Safe Module Contracts    | Address                                                                                                                         |
+|--------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| Zodiac Baal Cookie Jar   | [`0xe44a0e469667e5ea677721746b0439fe70434b6f`](https://optimistic.etherscan.io/address/0xe44a0e469667e5ea677721746b0439fe70434b6f) |
+| Zodiac ERC20 Cookie Jar  | [`0x008138711b2dff79d45e1ee8ad29b03c3c907b20`](https://optimistic.etherscan.io/address/0x008138711b2dff79d45e1ee8ad29b03c3c907b20) |
+| Zodiac ERC721 Cookie Jar | [`0x997e3fd50a40ce41b68b2eb9d5d5c5cbd3d64f9c`](https://optimistic.etherscan.io/address/0x997e3fd50a40ce41b68b2eb9d5d5c5cbd3d64f9c) |
+| Zodiac List Cookie Jar   | [`0x667afc73fbd1fdd2de327456a2473a48eee04e78`](https://optimistic.etherscan.io/address/0x667afc73fbd1fdd2de327456a2473a48eee04e78) |
+| Zodiac Open Cookie Jar   | [`0x8b5e3f92a992752ddf270f43b35d8f8123560e03`](https://optimistic.etherscan.io/address/0x8b5e3f92a992752ddf270f43b35d8f8123560e03) |
+| Zodiac Hats Cookie Jar   | [`0x7de5cc168dfee378c5c2a8ecaf529cbea0bb0768`](https://optimistic.etherscan.io/address/0x7de5cc168dfee378c5c2a8ecaf529cbea0bb0768) |
+
 
 ## Sepolia
 
 | Setup              | Address                                                                                                                         |
 |--------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| Cookie Jar Factory | [`0xA4Bd15948B9cAFfd8DE8a2be59893F2395c9C780`](https://sepolia.etherscan.io/address/0xA4Bd15948B9cAFfd8DE8a2be59893F2395c9C780) |
+| Cookie Jar Factory | [`0x4c941cafac0b6d67a6c4ee5399927aa889aab780`](https://sepolia.etherscan.io/address/0x4c941cafac0b6d67a6c4ee5399927aa889aab780) |
 
 | Contract          | Address                                                                                                                         |
 |-------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| Account           | [`0xfd8ee663fA65CAcCf4B488252074B07834D82882`](https://sepolia.etherscan.io/address/0xfd8ee663fA65CAcCf4B488252074B07834D82882) |
-| Registry          | [`0x02101dfB77FDE026414827Fdc604ddAF224F0921`](https://sepolia.etherscan.io/address/0x02101dfB77FDE026414827Fdc604ddAF224F0921) |
-| NFT               | [`0xF427b9cc56552AaE45ffCe75CE656723a9C22ac6`](https://sepolia.etherscan.io/address/0xF427b9cc56552AaE45ffCe75CE656723a9C22ac6) |
-| Baal Cookie Jar   | [`0xc672529A93D8010CAc796c76f9Aae7b2d8250357`](https://sepolia.etherscan.io/address/0xc672529A93D8010CAc796c76f9Aae7b2d8250357) |
-| ERC20 Cookie Jar  | [`0x9e4F0a6FE048264ad612B0c9094649dE0AD81a6C`](https://sepolia.etherscan.io/address/0x9e4F0a6FE048264ad612B0c9094649dE0AD81a6C) |
-| ERC721 Cookie Jar | [`0x92564a3A1030883F4081487Cb4c61d567E52ebFE`](https://sepolia.etherscan.io/address/0x92564a3A1030883F4081487Cb4c61d567E52ebFE) |
-| List Cookie Jar   | [`0x4A72b05E2577114c887Fd7A5606AA5E1147463cB`](https://sepolia.etherscan.io/address/0x4A72b05E2577114c887Fd7A5606AA5E1147463cB) |
-| Open Cookie Jar   | [`0xf24DB58d03f26A5daEEFCe825a19136e2582ad49`](https://sepolia.etherscan.io/address/0xf24DB58d03f26A5daEEFCe825a19136e2582ad49) |
-| Hats Cookie Jar   | [`0xfC30B3bB071632B031f4Fd3036316F3a37959FF7`](https://sepolia.etherscan.io/address/0xfC30B3bB071632B031f4Fd3036316F3a37959FF7) |
+| NFT               | [`0x02a79751c926e4172d715b7bcee2c7710fc0ad71`](https://sepolia.etherscan.io/address/0x02a79751c926e4172d715b7bcee2c7710fc0ad71) |
+| Baal Cookie Jar   | [`0x8b1ac5a3fea9eebbece920c98171d19e0b048029`](https://sepolia.etherscan.io/address/0x8b1ac5a3fea9eebbece920c98171d19e0b048029) |
+| ERC20 Cookie Jar  | [`0x0b963b444adb4c0056647377149ea33ff2bdc077`](https://sepolia.etherscan.io/address/0x0b963b444adb4c0056647377149ea33ff2bdc077) |
+| ERC721 Cookie Jar | [`0xceb1a0695db4a521573439eabe76caacf82c90ed`](https://sepolia.etherscan.io/address/0xceb1a0695db4a521573439eabe76caacf82c90ed) |
+| List Cookie Jar   | [`0xc4a4e1f354f6b04a429c6436cdebb5fe0aa071fe`](https://sepolia.etherscan.io/address/0xc4a4e1f354f6b04a429c6436cdebb5fe0aa071fe) |
+| Open Cookie Jar   | [`0x6baf21f2179c98a503193d4f09ad3cb0c3bdb797`](https://sepolia.etherscan.io/address/0x6baf21f2179c98a503193d4f09ad3cb0c3bdb797) |
+| Hats Cookie Jar   | [`0x2b5a30b2e626ba38f2a910cb4fc20e12522eb76a`](https://sepolia.etherscan.io/address/0x2b5a30b2e626ba38f2a910cb4fc20e12522eb76a) |
 
 | Safe Module Contracts    | Address                                                                                                                         |
 |--------------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| Zodiac Baal Cookie Jar   | [`0xF7A3E320bb11e3111Ae0E8b708DCa292c1dE636F`](https://sepolia.etherscan.io/address/0xF7A3E320bb11e3111Ae0E8b708DCa292c1dE636F) |
-| Zodiac ERC20 Cookie Jar  | [`0xDa21A3eC5815E68a7D58496f3a06Fb61A139Ce50`](https://sepolia.etherscan.io/address/0xDa21A3eC5815E68a7D58496f3a06Fb61A139Ce50) |
-| Zodiac ERC721 Cookie Jar | [`0x1f56e3b81eAED75c08A2f85290D489600aC64b6b`](https://sepolia.etherscan.io/address/0x1f56e3b81eAED75c08A2f85290D489600aC64b6b) |
-| Zodiac List Cookie Jar   | [`0xeA1bA9FCEDbaD5C3914B8a9AAadF977B0d056CE1`](https://sepolia.etherscan.io/address/0xeA1bA9FCEDbaD5C3914B8a9AAadF977B0d056CE1) |
-| Zodiac Open Cookie Jar   | [`0x5A3257b373d2816108918107D9262C6ac8eA127D`](https://sepolia.etherscan.io/address/0x5A3257b373d2816108918107D9262C6ac8eA127D) |
-| Zodiac Hats Cookie Jar   | [`0xe70af4E292701099Ea43aCc67a6A7c9Af04dBFCa`](https://sepolia.etherscan.io/address/0xe70af4E292701099Ea43aCc67a6A7c9Af04dBFCa) |
+| Zodiac Baal Cookie Jar   | [`0xe44a0e469667e5ea677721746b0439fe70434b6f`](https://sepolia.etherscan.io/address/0xe44a0e469667e5ea677721746b0439fe70434b6f) |
+| Zodiac ERC20 Cookie Jar  | [`0x008138711b2dff79d45e1ee8ad29b03c3c907b20`](https://sepolia.etherscan.io/address/0x008138711b2dff79d45e1ee8ad29b03c3c907b20) |
+| Zodiac ERC721 Cookie Jar | [`0x997e3fd50a40ce41b68b2eb9d5d5c5cbd3d64f9c`](https://sepolia.etherscan.io/address/0x997e3fd50a40ce41b68b2eb9d5d5c5cbd3d64f9c) |
+| Zodiac List Cookie Jar   | [`0x667afc73fbd1fdd2de327456a2473a48eee04e78`](https://sepolia.etherscan.io/address/0x667afc73fbd1fdd2de327456a2473a48eee04e78) |
+| Zodiac Open Cookie Jar   | [`0x8b5e3f92a992752ddf270f43b35d8f8123560e03`](https://sepolia.etherscan.io/address/0x8b5e3f92a992752ddf270f43b35d8f8123560e03) |
+| Zodiac Hats Cookie Jar   | [`0x7de5cc168dfee378c5c2a8ecaf529cbea0bb0768`](https://sepolia.etherscan.io/address/0x7de5cc168dfee378c5c2a8ecaf529cbea0bb0768) |
 
 ## 6551 Tokenbound Registry
 
@@ -149,6 +194,7 @@ The Tokenbound Registry for 6551 tokens is deployed on the following chains:
 | Chain    | Address                                      |
 |----------|----------------------------------------------|
 | Arbitrum | `0x02101dfB77FDE026414827Fdc604ddAF224F0921` |
+| Base     | `0x02101dfB77FDE026414827Fdc604ddAF224F0921` |
 | Gnosis   | `0x02101dfB77FDE026414827Fdc604ddAF224F0921` |
 | Optimism | `0x02101dfB77FDE026414827Fdc604ddAF224F0921` |
 | Sepolia  | `0x02101dfB77FDE026414827Fdc604ddAF224F0921` |
@@ -161,9 +207,24 @@ address(0) and `donationAmount` = 0;
 
 | Chain    | Address                                      |
 |----------|----------------------------------------------|
+| Arbitrum | `0x1cE42BA793BA1E9Bf36c8b3f0aDDEe6c89D9a9fc` |
+| Base     | `0x1cE42BA793BA1E9Bf36c8b3f0aDDEe6c89D9a9fc` |
 | Gnosis   | `0x1cE42BA793BA1E9Bf36c8b3f0aDDEe6c89D9a9fc` |
 | Mainnet  | `0x1cE42BA793BA1E9Bf36c8b3f0aDDEe6c89D9a9fc` |
 | Optimism | `0x1cE42BA793BA1E9Bf36c8b3f0aDDEe6c89D9a9fc` |
+
+## Module Proxy Factory
+
+The Module Proxy Factory is deployed on the following chains:
+
+| Chain    | Address                                      |
+|----------|----------------------------------------------|
+| Arbitrum | `0xC22834581EbC8527d974F8a1c97E1bEA4EF910BC` |
+| Base     | `0xC22834581EbC8527d974F8a1c97E1bEA4EF910BC` |
+| Gnosis   | `0xC22834581EbC8527d974F8a1c97E1bEA4EF910BC` |
+| Mainnet  | `0xC22834581EbC8527d974F8a1c97E1bEA4EF910BC` |
+| Optimism | `0xC22834581EbC8527d974F8a1c97E1bEA4EF910BC` |
+| Sepolia  | `0xC22834581EbC8527d974F8a1c97E1bEA4EF910BC` |
 
 ## Installation
 

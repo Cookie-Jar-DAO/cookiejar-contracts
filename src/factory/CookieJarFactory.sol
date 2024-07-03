@@ -12,7 +12,8 @@ import { CALL_FAILED } from "src/lib/Errors.sol";
 
 contract CookieJarFactory is Ownable {
     ModuleProxyFactory internal moduleProxyFactory;
-
+    
+    event ModuleProxyFactorySet(address moduleProxyFactory);
     event SummonCookieJar(address cookieJar, bytes initializer, string details);
     event DonationReceived(address donationToken, uint256 donationAmount);
 
@@ -25,6 +26,7 @@ contract CookieJarFactory is Ownable {
     // must be called after deploy to set libraries
     function setProxyFactory(address _moduleProxyFactory) public onlyOwner {
         moduleProxyFactory = ModuleProxyFactory(_moduleProxyFactory);
+        emit ModuleProxyFactorySet(_moduleProxyFactory);
     }
 
     //Cookie Jar init params
