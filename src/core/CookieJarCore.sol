@@ -2,8 +2,8 @@
 pragma solidity 0.8.19;
 
 import { ICookieJar } from "src/interfaces/ICookieJar.sol";
-import { OwnableUpgradeable } from "@openzeppelin/contracts-upgradeable/contracts/access/OwnableUpgradeable.sol";
-import { Initializable } from "@openzeppelin/contracts-upgradeable/contracts/proxy/utils/Initializable.sol";
+import { OwnableUpgradeable } from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import { Initializable } from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import { CookieUtils } from "src/lib/CookieUtils.sol";
 import { GiverBase } from "src/core/givers/GiverBase.sol";
 
